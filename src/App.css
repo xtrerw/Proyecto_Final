@@ -10,7 +10,6 @@ header{
 }
 .topJugador,section{
   background-image: url("../src/img/fondo.png");
-
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -26,7 +25,8 @@ section{
 .letra{
   font-size: 100px;
 }
-main{
+/* top jugador */
+.topJugador{
   height: 100vh;
   overflow: hidden;
   position: relative;
@@ -80,4 +80,22 @@ main{
 }
 .introJugador>p,.introJugador>h1,.introJugador>h3{
   margin: 30px 40px;
+}
+/* noticia */
+.noticiaJugador{
+  overflow: hidden;
+  height: 100vh;
+}
+.noticias{
+  width: 125vw;
+  padding: 30px 0;
+
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+}
+.noticia{
+  width: 25vw;
+  height: 50vh;
+  background-size: cover;
 }

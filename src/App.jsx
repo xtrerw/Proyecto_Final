@@ -13,13 +13,12 @@ import player5 from '../src/img/player5.png';
 
 function App() {
   gsap.registerPlugin(ScrollTrigger);
-  // const container = useRef();
   
   useGSAP(() => {
+    //top jugadores
     //animacion de carta
     ScrollTrigger.create({
-      markers:true,
-        trigger:"main",
+        trigger:".topJugador",
         start:"0% 50%",
         end:"0% 50%",
         toggleActions:"play none reverse none",
@@ -38,15 +37,34 @@ function App() {
     })
     //animación de introducción
     ScrollTrigger.create({
-      markers:true,
-        trigger:"main",
+        trigger:".topJugador",
         start:"30% 50%",
         end:"30% 50%",
         toggleActions:"play none reverse none",
         animation:
         gsap.timeline()
         .fromTo(".introJugador",{opacity:0,x:100},{opacity:1,x:0,borderRadius:20})
-    })
+    });
+    //animación de notícia
+    ScrollTrigger.create({
+        trigger:".noticiaJugador",
+        start:"-10% 50%",
+        end:"25% 50%",
+        toggleActions:"play none reverse none",
+        scrub:true,
+        animation:
+        gsap.timeline()
+        .fromTo(".noticias",{scale:1},{scale:0.8,width:"100vw"},"")
+        .fromTo(".noticia",{},{
+          borderRadius:20,
+        },"")
+        .fromTo(".noticia0",{},{
+          width:"0",
+        },"")
+        .fromTo(".noticia4",{},{
+          width:"0",
+        },"")
+    });
   });
   
   const titulo="Champions eLeague";
@@ -82,7 +100,7 @@ function App() {
         </motion.h1>
       </section>
       <main className='topJugador'>
-        <h2 className='tituloJugador'>Top <br /> Jugadores</h2>
+        <h2 className='tituloJugador'>Top <br/> Jugadores</h2>
         <div className='jugadores'>
           {imgs.map((img,index)=>(
           <motion.div 
@@ -98,7 +116,20 @@ function App() {
           </div>
         </div>
       </main>
-      <main></main>
+      <main className='noticiaJugador'>
+        <div className='noticias'>
+        {imgs.map((img,index)=>(
+          <motion.div 
+          key={index}
+          className={`noticia noticia${index}`}
+          style={{backgroundImage: `url(${img})`}}
+          whileHover={{
+            scale:0.9,
+          }}>
+          </motion.div>
+          ))}
+        </div>
+      </main>
     </>
   )
 }
