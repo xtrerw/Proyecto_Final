@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gsap/react": "^2.1.0",
+    "boxicons": "^2.1.4",
     "framer-motion": "^11.0.23",
     "mangodb": "^1.0.0",
     "mongodb": "^6.5.0",

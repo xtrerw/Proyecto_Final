@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
-import { color, motion, useAnimation, useAnimationControls, useScroll } from "framer-motion"
-import { useRef } from "react";
+import { AnimatePresence, motion} from "framer-motion"
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -28,7 +27,7 @@ function App() {
           opacity:1,
           borderRadius:20,
         })
-        .fromTo(".tituloJugador",{opacity:0,x:10},{opacity:1,x:0})//titulo jugadores
+        .fromTo(".tituloJugador",{opacity:0,x:-100},{opacity:1,x:0})//titulo jugadores
         .to(".jugador0",{borderRadius:20},"")//top jugador1
         .fromTo(".jugador1",{x:0},{x:-200,borderRadius:20},"")//top jugador2
         .fromTo(".jugador2",{x:0},{x:200,borderRadius:20},"")//top jugadore3
@@ -47,6 +46,7 @@ function App() {
     });
     //animación de notícia
     ScrollTrigger.create({
+        markers:true,
         trigger:".noticiaJugador",
         start:"-10% 50%",
         end:"25% 50%",
@@ -65,6 +65,17 @@ function App() {
           width:"0",
         },"")
     });
+    //animaci'on de t'itulo
+    ScrollTrigger.create({
+      markers:true,
+      trigger:".noticiaJugador",
+      start:"25% 50%",
+      end:"25% 50%",
+      toggleActions:"play none reverse none",
+      animation:
+      gsap.timeline()
+      .fromTo(".noticiaJugador>h1",{x:-100,opacity:0},{x:0,opacity:1})
+  });
   });
   
   const titulo="Champions eLeague";
@@ -89,8 +100,11 @@ function App() {
       filter: "drop-shadow(10px 10px 1px orange)",
     }
   };
-
+  //array de imagenes
   const imgs=[player1,player2,player3,player4,player5]
+  //array de noticias
+  const noticias1=[player1,player2,player3,player4,player5];
+  const [idNoticia,setNoticia]= useState(null);
   return (
     <>
       <header></header>
@@ -117,18 +131,40 @@ function App() {
         </div>
       </main>
       <main className='noticiaJugador'>
+        <h1>Noticias</h1>
         <div className='noticias'>
-        {imgs.map((img,index)=>(
-          <motion.div 
-          key={index}
-          className={`noticia noticia${index}`}
-          style={{backgroundImage: `url(${img})`}}
-          whileHover={{
-            scale:0.9,
-          }}>
-          </motion.div>
+          {/* inserta cada imagen de noticia a las divisiones */}
+          {noticias1.map((noticia,index)=>(
+            <motion.div
+            layoutId={index} 
+            onClick={()=>setNoticia(index)}
+            className={`noticia noticia${index}`}
+            style={{backgroundImage: `url(${noticia})`}}
+            whileHover={{scale:0.98,filter:"none"}}>
+              <motion.h1>
+                wtf
+              </motion.h1>
+              <motion.h2>
+                holy shot
+              </motion.h2>
+            </motion.div>
           ))}
         </div>
+        {/* animación ampliada en caso de seleccionar las noticias a trav'es de AnimatePresencee */}
+        <AnimatePresence>
+            {/* confirma si ya configura id */}
+            {idNoticia && (
+              <motion.div layoutId={idNoticia} className='clicNoticia'>
+                <motion.img src={`${noticias1[idNoticia]}`}/>
+                <motion.button onClick={() => setNoticia(null)}>
+                  <i class='bx bxs-x-circle'></i>
+                </motion.button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div>
+              
+          </div>
       </main>
     </>
   )
