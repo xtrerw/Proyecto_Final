@@ -1,13 +1,38 @@
 .how{
     background: var(--defect-color2);
     color: var(--secondary-color);
-
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+.procesos{
+    display: flex;
+    gap: 10%;
+    margin-top: 100px;
+}
 .proceso{
+    width: 450px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 5px;
+    background-color: var(--defect-color);
+    cursor: pointer;
+    box-shadow: var(--boxshadow);
+    text-align: center;
+}
+.proceso>img{
     width: 200px;
-    height: 200px;
+    height: 170px;
+}
+.proceso>h3{
+    margin: 30px 0;
+}
+.proceso>p{
+    font-size: 15px;
+    margin: 0 30px;
 }

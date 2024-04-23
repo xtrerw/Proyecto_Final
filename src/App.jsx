@@ -11,6 +11,7 @@ function App() {
       <Header/>
       <Titulo/>
       <How/>
+      
       <Noticias/>
       <Footer/>
     </>

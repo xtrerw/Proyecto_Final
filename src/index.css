@@ -5,6 +5,7 @@
   --defect-color: #fff;
   --gradiented-color:linear-gradient(to top,var(--secondary-color),var(--main-color));
   --defect-color2:#F8F9FA;
+  --boxshadow:2px 2px 4px rgb(183, 183, 183);
 }
 html,body{
   margin: 0;
