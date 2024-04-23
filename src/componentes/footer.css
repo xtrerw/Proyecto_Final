@@ -1,0 +1,48 @@
+footer{background: #000;}
+footer i{
+    font-size: 40px;
+    margin-right: 10px;
+}
+footer p{
+    font-size: 1rem;
+}
+.principal{
+    height: 400px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.informacion{
+    display: flex;
+    gap: 150px;
+    align-items: baseline;
+}
+.informacion>div{
+    width: 300px;
+}
+.informacion>div p{
+    margin: 10px 0;
+}
+.pegi12{
+    display: flex;
+    gap: 10px;
+}
+.pegi12>div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    border-radius: 10px;
+}
+.principal+hr{
+    margin: 0;
+}
+.politica{
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.politica>p{
+    margin: 0 1rem;
+}

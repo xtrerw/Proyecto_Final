@@ -1,9 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+:root{
+  --main-color:#BE1717;
+  --secondary-color:#000;
+  --defect-color: #fff;
+  --gradiented-color:linear-gradient(to top,var(--secondary-color),var(--main-color));
+  --defect-color2:#F8F9FA;
+}
 html,body{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Zen Dots", sans-serif;
-  color: white;
+  color: var(--defect-color);
   cursor: default;
 }

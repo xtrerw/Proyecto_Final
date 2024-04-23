@@ -1,0 +1,13 @@
+.how{
+    background: var(--defect-color2);
+    color: var(--secondary-color);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.proceso{
+    width: 200px;
+    height: 200px;
+}
