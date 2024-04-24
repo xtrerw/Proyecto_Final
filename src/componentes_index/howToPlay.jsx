@@ -39,7 +39,7 @@ function How() {
             <div className="procesos">
                 {imgs.map((img,index)=>(
                 <motion.div key={index} className= {`proceso p${index}`} whileHover={{
-                    scale:1.1,
+                    marginTop: "-10px",
                     boxShadow:"2px 2px 5px grey"
                 }}>
                     <img src={img} alt="" />

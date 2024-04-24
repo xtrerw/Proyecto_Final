@@ -19,8 +19,9 @@
     justify-content: center;
     align-items: center;
 
-    border-radius: 5px;
-    background-color: var(--defect-color);
+    border: 5px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--default-color);
     cursor: pointer;
     box-shadow: var(--boxshadow);
     text-align: center;
