@@ -5,13 +5,14 @@ import Footer from "../src/componentes/footer";
 import Titulo from "./componentes_index/titulo";
 import How from './componentes_index/howToPlay';
 import Noticias from './componentes_index/noticias';
+// import ParallaxComponent from './componentes_index/test';
 function App() {
   return (
     <>
       <Header/>
       <Titulo/>
       <How/>
-      
+      {/* <ParallaxComponent/> */}
       <Noticias/>
       <Footer/>
     </>

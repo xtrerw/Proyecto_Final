@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 :root{
   --main-color:#BE1717;
-  --secondary-color:#000;
-  --defect-color: #fff;
+  --secondary-color:#000000;
+  --default-color: #fff;
   --gradiented-color:linear-gradient(to top,var(--secondary-color),var(--main-color));
-  --defect-color2:#F8F9FA;
+  --default-color2:#F8F9FA;
   --boxshadow:2px 2px 4px rgb(183, 183, 183);
 }
 html,body{
@@ -12,6 +12,16 @@ html,body{
   padding: 0;
   box-sizing: border-box;
   font-family: "Zen Dots", sans-serif;
-  color: var(--defect-color);
+  color: var(--default-color);
   cursor: default;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+::-webkit-scrollbar-track {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  display: none;
 }

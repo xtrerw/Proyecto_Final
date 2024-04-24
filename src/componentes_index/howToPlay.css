@@ -1,5 +1,5 @@
 .how{
-    background: var(--defect-color2);
+    background: var(--default-color2);
     color: var(--secondary-color);
     display: flex;
     flex-direction: column;

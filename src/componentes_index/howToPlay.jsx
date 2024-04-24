@@ -11,7 +11,7 @@ function How() {
     useGSAP(()=>{
         ScrollTrigger.create({
             trigger: ".how",
-            markers: true,
+            // markers: true,
             start: "40% 70%",
             end: "40% 70%",
             toggleActions: "restart none reverse",

@@ -7,7 +7,7 @@ function Noticias() {
     useGSAP(()=>{
         ScrollTrigger.create({
             trigger: ".noticias",
-            markers: true,
+            // markers: true,
             start: "0% 70%",
             end: "50% 70%",
             scrub:true,
