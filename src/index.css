@@ -5,6 +5,7 @@
   --default-color: #fff;
   --gradiented-color:linear-gradient(to top,var(--secondary-color),var(--main-color));
   --default-color2:#F8F9FA;
+  --default-color3:#c0c0c0;
   --boxshadow:2px 2px 4px rgb(183, 183, 183);
 }
 html,body{
