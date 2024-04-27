@@ -5,7 +5,7 @@ import img2 from "../img/join.png";
 import img3 from "../img/rewards.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import {ScrollTrigger} from "gsap/ScrollTrigger";
+import {ScrollTrigger} from "gsap/src/ScrollTrigger";
 function How() {
     gsap.registerPlugin(ScrollTrigger);
     useGSAP(()=>{
@@ -17,13 +17,13 @@ function How() {
             toggleActions: "restart none reverse",
             animation: 
             gsap.timeline().fromTo(".p0",{
-                y: 200,opacity: 0
+                y: 50,opacity: 0
             },{y:0,opacity:1})
             .fromTo(".p1",{
-                y: 200,opacity: 0
+                y: 50,opacity: 0
             },{y:0,opacity:1})
             .fromTo(".p2",{
-                y: 200,opacity: 0
+                y: 50,opacity: 0
             },{y:0,opacity:1})
         })
         return () => {

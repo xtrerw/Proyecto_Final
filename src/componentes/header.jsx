@@ -5,7 +5,7 @@ function Header() {
         <header>
             <img src="" alt="" />
             <div>
-                <div><a href="">Games</a></div>
+                <div><a href="src\Games.jsx">Games</a></div>
                 <div><a href="">Tienda</a></div>
                 <div><a href="">Clasificación y Noticias</a></div>
                 <div><a href="">Torneos</a></div>

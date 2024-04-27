@@ -1,0 +1,24 @@
+.our-games{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.our-games>h1{
+    color: var(--secondary-color);
+}
+.games{
+    position: relative;
+    width: 500px;
+    height: 300px;
+}
+.games>img{
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+}

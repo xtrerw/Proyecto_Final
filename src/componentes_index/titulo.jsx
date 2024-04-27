@@ -10,7 +10,7 @@ function Titulo() {
   useGSAP(()=>{
     ScrollTrigger.create({
       trigger: ".parte-titulo",
-      markers: true,
+      // markers: true,
       start:"100% 100%",
       end:"150% 100%",
       scrub: true,

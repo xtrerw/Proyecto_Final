@@ -1,0 +1,10 @@
+.scrolltext{
+    width: max-content;
+    background: #000;
+
+}
+.scrolltext>span{
+    background: #000;
+    font-size: 64px;
+    margin: 0 30px;
+}
