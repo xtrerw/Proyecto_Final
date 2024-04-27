@@ -9,7 +9,7 @@ ScrollProps.propTypes = {
 function ScrollProps({titulo,v=100}) {
     const baseX=useMotionValue(0);
     const totalW=600;  
-    const x = useTransform(baseX,(v)=>`${wrap(-totalW*2*100/3000,-totalW*1*100/3000,v)}%`);
+    const x = useTransform(baseX,(v)=>`${wrap(0,-totalW*100/3000,v)}%`);
     useAnimationFrame((t,delta)=>{
         let move= v * delta/1000;//unidad de delta es ms a unidad segundo
         baseX.set(baseX.get()+move);

@@ -39,11 +39,10 @@ function Titulo() {
                 opacity: 0,
                 marginRight: "0",
               }}
-              animate={{
-                display: span==" " ? "inline" : "inline-block",
+              animate={{  
                 x: 0,
                 opacity: 1,
-                filter:"drop-shadow(5px 5px orange)",
+                filter:"drop-shadow(5px 5px black)",
                 marginRight: "2px",
                 transition:{
                   delay: index/10,

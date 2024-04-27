@@ -1,69 +1,50 @@
-
-import { useGSAP } from '@gsap/react';
 import './game.css';
-import gsap from "gsap";
-import {ScrollTrigger} from "gsap/src/ScrollTrigger";
+import { useState } from 'react';
 function OurGames() {
-    gsap.registerPlugin(ScrollTrigger);
+    const images = [
+        "src/img/lol.png",
+        "src/img/tft.png",
+        "src/img/valorant.png"
+      ];
+      const [img, cambioPos] = useState(1);
+    
+      const next = () => {
+        cambioPos((index) => (index + 1) % images.length);
+      };
+    
+      const back = () => {
+        cambioPos((index) => (index - 1 + images.length) % images.length);
+      };
+      console.log(img);
+      console.log(images.length);
 
-    useGSAP(() => {
-        let iteration = 0;
-        const spacing = 0.2,
-            cards = gsap.utils.toArray('.games>img');
-            gsap.set('.games>img',{scale:1,opacity:1,xPercent:200})
-        const animateFunc = (element) => {
-            const tl = gsap.timeline();
-            
-            tl.fromTo(element, {scale: 0, opacity: 0}, {scale: 1, opacity: 1, duration: 0.5, yoyo: true, repeat: 1, ease: "power1.in", immediateRender: false})
-            .fromTo(element, { xPercent: 100 }, { xPercent: -100, duration: 1, ease: "none" },0);
-            return tl;
-        };
-    
-        const seamlessLoop = buildSeamlessLoop(cards, spacing, animateFunc);
-    
-        ScrollTrigger.create({
-            trigger: ".our-games",
-            pin: ".our-games",
-            markers: true,
-            start: "0 20%",
-            end: "200% 50%",
-            repeat: -1,
-            onUpdate(self) {
-                seamlessLoop.time(iteration + self.progress);
-            }
-        });
-    
-        function buildSeamlessLoop(items, spacing, animateFunc) {
-            let rawSequence = gsap.timeline({ paused: true }),
-                seamlessLoop = gsap.timeline({ paused: true });
-    
-            items.concat(items).forEach((item, i) => {
-                let anim = animateFunc(items[i % items.length]);
-                rawSequence.add(anim, (i) * spacing);
-            });
-    
-            seamlessLoop.fromTo(rawSequence, {
-                time: 0
-            }, {
-                time: "+=" + rawSequence.duration(),
-                duration: rawSequence.duration()
-            });
-    
-            return seamlessLoop;
-        }
-    });
-    
 
-    return(
+      return (
         <main className='our-games'>
-            <h1>Our Games</h1>
-            <div className='games'>
-                <img src="src\img\lol.png" alt="" />
-                <img src="src\img\tft.png" alt="" />
-                <img src="src\img\valorant.png" alt="" />
-            </div>
-        </main>        
-    )
+          <h1>Our Games</h1>
+          <div className='games'>
+            {images.map((src, index) => (
+              <img
+                key={index}
+                src={src}
+                style={{
+                  transform: `translateX(${index-img==2 ? 100*(index-images.length) : 
+                    index-img==-2 ? 100*(index+1):100 * (index-img)}%) 
+                  scale(${index == img ? 1.2 : 1})`,
+                  zIndex: index>img ? -2: index<img ? -3:-1,
+                  opacity: index==img ? 1:0.2,
+                  transition: 'transform 1s ease',
+                  scale:1
+                }}
+              />
+            ))}
+          </div>
+          <div className='btn-our-games'>
+            <button onClick={back} className="back"><i class='bx bxs-chevron-left' ></i></button>
+            <button onClick={next} className="next"><i class='bx bxs-chevron-right' ></i></button>
+          </div>
+        </main>
+      );
 }
 
 export default OurGames;

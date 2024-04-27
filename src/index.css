@@ -17,6 +17,12 @@ html,body{
   cursor: default;
   overflow-x: hidden;
 }
+button{
+  border: 0;
+  background: none;
+  font-family: "Zen Dots", sans-serif;
+  cursor: pointer;
+}
 ::-webkit-scrollbar {
   display: none;
 }

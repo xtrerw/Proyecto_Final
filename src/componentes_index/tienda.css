@@ -1,0 +1,27 @@
+.tienda{
+    height: 450px;
+    width: 100vw;
+    background: var(--main-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tienda-titulo{
+    text-align: center;
+    padding: 0 20px;
+}
+.tienda-titulo>p{
+    margin-top: 2rem;
+}
+.tienda-img{
+    background: var(--default-color);
+    width: 80%;
+    height: 100%;
+    clip-path: polygon(100% 0,100% 100%,25% 100%,0 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.tienda-img>img{
+    height: 80%;
+}
