@@ -40,8 +40,8 @@ function OurGames() {
             ))}
           </div>
           <div className='btn-our-games'>
-            <button onClick={back} className="back"><i class='bx bxs-chevron-left' ></i></button>
-            <button onClick={next} className="next"><i class='bx bxs-chevron-right' ></i></button>
+            <button onClick={back} className="back"><i className='bx bxs-chevron-left' ></i></button>
+            <button onClick={next} className="next"><i className='bx bxs-chevron-right' ></i></button>
           </div>
         </main>
       );
