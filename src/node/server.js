@@ -1,13 +1,13 @@
 import mongoose from 'mongoose';
 
 const user = encodeURIComponent("root");//usuario de mangoDB Altas
-const password = encodeURIComponent("v0ygQSivswUWfNza");//contraseña del usuario
+const password = encodeURIComponent("root");//contraseña del usuario
 const nombreBD = "OnlyGG";//nombre de base de datos
-const uri = `mongodb+srv://${user}:${password}@cluster0.3emmgzn.mongodb.net/${nombreBD}`;
+const url = `mongodb+srv://${user}:${password}@cluster0.3emmgzn.mongodb.net/${nombreBD}`;
 //link de conexión a servidor
 
 //crea una conexión
-mongoose.connect(uri)
+mongoose.connect(url)
     .then(() => {
         console.log("Conexión con éxito y mantenga conectado");
     })
@@ -166,5 +166,7 @@ const docNoticias=[
 //inserta los datos
 NoticiasModulo.create(docNoticias).then(resulta=>{console.log("noticias",resulta);}).catch(err=>{console.log('error',err);});
 
+// Juegos
 
-// export default JugadorModulo;
+
+export default {JugadorModulo,NoticiasModulo,TorneosModulo};
