@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Button from "./Button";
 import menuItems from "./MenuItems";
 import "./Navbar.css";
+import { Link, Route, Routes } from "react-router-dom";
+import Games from "../PageJuegos";
 
 const Navbar = () => {
   const [active, setActive] = useState(false);
@@ -12,9 +14,9 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      <h1 className="navbar-logo">
-        OnlyGG<i className="fab fa-react"></i>
-      </h1>
+      <Link to={'/'} className="navbar-logo">
+        OnlyGG
+      </Link>
       <div className="menu-icon" onClick={handleClick}>
         <i className={active ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
@@ -22,14 +24,20 @@ const Navbar = () => {
         {menuItems.map((item, index) => {
           return (
             <li key={index}>
-              <a href={item.url} className={item.cName}>
+              <Link to={`/${item.title}`} className={item.cName}>
                 {item.title}
-              </a>
+              </Link>
             </li>
           );
         })}
       </ul>
-      <Button>SIGN UP</Button>
+      
+        <Link to={'/Registro'}>
+          <Button>
+            SIGN UP
+          </Button>
+        </Link>
+      
     </nav>
   );
 };

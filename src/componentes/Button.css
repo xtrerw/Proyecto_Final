@@ -13,9 +13,16 @@
 
 .btn:hover {
   padding: 8px 20px;
-  color: #6568f4;
+  box-shadow: 1px 1px 10px #ff0000;
   transition: 250ms;
-}   
+  background: #ff0000;
+}
+.btn:active {
+  transition: 250ms;
+  background: #fff;
+  color: #ff0000;
+  box-shadow: none;
+}  
 
 .btn-primary {
   background-color: var(--primary);

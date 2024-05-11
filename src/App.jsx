@@ -1,26 +1,21 @@
 
 import './App.css'
 import Footer from "../src/componentes/footer";
-import Titulo from "./componentes_index/titulo";
-import How from './componentes_index/howToPlay';
-import Noticias from './componentes_index/noticias';
-import OurGames from './componentes_index/game';
-import Tienda from './componentes_index/tienda';
 import Navbar from './componentes/Navbar';
-// import { Routes,Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Juegos from './PageJuegos';
+import Home from './PageHome';
+import Torneos from './PageTorneos';
 function App() {
   return (
     <>
       <Navbar/>
-      <Titulo/>
-      <How/>
-      <OurGames/>
-      <Tienda/>
-      <Noticias/>
+      <Routes>
+        <Route path='/' element={<Home/>}/>
+        <Route path="/Juegos" element={<Juegos/>}/>
+        <Route path="/Home" element={<Torneos/>}/>
+      </Routes>
       <Footer/>
-      {/* <Routes>
-        <Route path='/header' element={<Header/>}/>
-      </Routes> */}
     </>
   )
 }

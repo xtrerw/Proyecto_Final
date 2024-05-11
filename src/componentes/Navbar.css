@@ -11,7 +11,7 @@
     font-size: 1.2rem;
     position: fixed;
     z-index: 1000;
-    width: 100vw;
+    width: 100%;
   }
   
   .navbar-logo {
@@ -19,6 +19,7 @@
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
+    font-size: 40px;
   }
   
   .fa-react {
