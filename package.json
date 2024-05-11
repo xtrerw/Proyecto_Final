@@ -13,6 +13,8 @@
     "@gsap/react": "^2.1.0",
     "@motionone/utils": "^10.17.0",
     "boxicons": "^2.1.4",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
     "framer-motion": "^11.0.23",
     "mangodb": "^1.0.0",
     "mongodb": "^6.5.0",

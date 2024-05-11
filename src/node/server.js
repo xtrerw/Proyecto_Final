@@ -129,7 +129,7 @@ var imgNoticias=["src/img/noticias1.png","src/img/noticias2.png","src/img/notici
 //crear los documentos de jugadores
 const docNoticias=[
     {img:imgNoticias[0],
-    titulo: "Equipo Thunderstrike gana el campeonato mundial de League of Legends",
+    titulo: "Equipo Thunderstrike gana el campeonato de League of Legends",
     contenido: "En un emocionante giro de eventos, el equipo Thunderstrike se coronó campeón del mundo tras derrotar al equipo rival en una serie de partidos que mantuvieron a los fans al borde de sus asientos. El jugador MVP, 'ShadowMaster', logró una jugada decisiva que aseguró la victoria.",
     tipoJuego: "League of Legends",
     fecha: "2024-04-25"
@@ -143,10 +143,10 @@ const docNoticias=[
     },
     {
         img: imgNoticias[2],
-        titulo: "Nueva actualización de Counter-Strike revoluciona la estrategia de juego",
-        contenido: "Valve ha lanzado una nueva actualización para Counter-Strike: Global Offensive, que introduce cambios significativos en el mapa Dust II, ajustes en las armas y mejoras en la mecánica del juego, prometiendo una renovada experiencia competitiva.",
-        tipoJuego: "Counter-Strike: Global Offensive",
-        fecha: "2024-03-15"
+        titulo: "Masters de Valorant: Final emocionante en Río de Janeiro",
+        contenido: "Con el apoyo entusiasta de los espectadores, la final del Masters de Valorant concluyó en Río de Janeiro. Los equipos de élite se enfrentaron en una batalla intensa, demostrando estrategias y habilidades de alto nivel. Esta actualización introduce un nuevo mapa y contenido exclusivo para la temporada, mejorando la experiencia de juego y ajustando el equilibrio del sistema de armas.",
+        tipoJuego: "Valorant",
+        fecha: "2024-05-20"
     },
     {
         img: imgNoticias[4],
@@ -169,4 +169,4 @@ NoticiasModulo.create(docNoticias).then(resulta=>{console.log("noticias",resulta
 // Juegos
 
 
-export default {JugadorModulo,NoticiasModulo,TorneosModulo};
+export default {JugadorModulo,EquiposModulo,NoticiasModulo,TorneosModulo};

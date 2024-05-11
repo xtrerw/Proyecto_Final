@@ -1,20 +1,35 @@
 import "./noticias.css"
-import { motion } from "framer-motion";
+import { useState,useEffect } from "react";
 import ScrollProps from "./scrolltext";
 function Noticias() {
-    const divs=Array(4).fill(0);
+  //sacar las noticias desde servidor node.
+  const [news, setNews] = useState([]);// configurar array principal de noticias.
+  //cambiar los datos de noticias dinamicamente
+    useEffect(() => {
+        //crear un petición API que indica al servidor de node que creamos en api.js 
+        fetch('http://localhost:3001/noticias')
+            .then(response => response.json())
+            .then(noticias => {
+                setNews(noticias.slice(0,4));//conseguir los 4 primeros noticias
+            })
+            .catch(error => {
+                console.error('error:', error);
+            });
+    }, []);
     return (
       <main className="noticias">
         <ScrollProps v={-1} titulo={'Noticias 뉴스 News ニュース Notizie 新聞 Новини'}/>
         <section className="noticias-parte">
           <h1 className="noticias-titulo">Últimas Noticias</h1>
           <div className="noticia">
-            {divs.map((index)=>(
-            <motion.div key={index} className="noticia-contenido">
-              <img src="" alt="" />
-              <p>artículo</p>
-              <h3>Estado del juego: esports de LoL en 2024</h3>
-            </motion.div>))}
+          {/* muestra las noticias */}
+          {news.map(item => (
+                    <div key={item._id} className="noticia-contenido">
+                        <img src={item.img} alt={item.titulo} />
+                        <p>{item.tipoJuego}</p>
+                        <h3>{item.titulo}</h3>
+                    </div>
+                ))}
           </div>
           <ScrollProps v={1} titulo={'Noticias 뉴스 News ニュース Notizie 新聞 Новини'}/>
         </section>
