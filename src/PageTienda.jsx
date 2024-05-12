@@ -4,7 +4,7 @@ import "./PageTienda.css";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-
+import { Link, Route, Routes } from 'react-router-dom';
 const Tienda = () => {
     const state={img:'src/img/bg2.png',title:"Tienda",description:"Nuestros regalos van más allá tu pensamiento"};
 
@@ -17,12 +17,11 @@ const Tienda = () => {
             console.error('error:', error);
         });
     },[]);
-    tienda.length
     gsap.registerPlugin(ScrollTrigger);
     useGSAP(()=>{
       ScrollTrigger.create({
         trigger:".page-tienda",
-        markers:true,
+        // markers:true,
         start:"0 80%",
         end:"0 80%",
         toggleActions: "restart none reverse",
@@ -41,16 +40,17 @@ const Tienda = () => {
     <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
     <main className='page-tienda'>
         <div className='productos'>
-        {tienda.map(item => (
-                    <div key={item._id} className='producto'>
-                        <div className='precio'>
-                          <p>{item.precio} ptos</p>
-                        </div>
-                        <img src={item.img} />
-                        <h3>{item.nombre}</h3>
-                    </div>
-                ))}
+          {tienda.map(item => (
+            <Link to={`${item._id}`} key={item._id} className='producto'>
+                <div className='precio'>
+                  <p>{item.precio} ptos</p>
+                </div>
+                <img src={item.img} />
+                <h3>{item.nombre}</h3>
+            </Link>
+            ))}
         </div>
+        
     </main>
     </>
     
