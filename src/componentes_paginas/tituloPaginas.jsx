@@ -23,11 +23,11 @@ function tituloPaginas(props){
               scale: 0.9,
               duration: 2,
               ease: "expo.inOut"
-            }).fromTo(".texto-props",{
-              y:200,
+            }).fromTo(".clip>h1,.clip>p",{
+              y:100,
               opacity: 0
             },{
-              y:2,
+              y:0,
               opacity: 1,
               duration: 2,
               ease: "expo.inOut"
@@ -36,7 +36,6 @@ function tituloPaginas(props){
     });
   return (
     <main className="titulo-paginas">
-      {/* <img src={props.img} alt="" /> */}
       <div style={{
         backgroundImage:`url(${props.img})`,
       }} className="bg-props">
