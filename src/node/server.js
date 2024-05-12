@@ -4,144 +4,147 @@ import mongoose from 'mongoose';
 const user = encodeURIComponent("root"); // Usuario de MongoDB Atlas
 const password = encodeURIComponent("root"); // Contraseña del usuario
 const nombreBD = "OnlyGG"; // Nombre de la base de datos
-const url = `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority`;
+const url = `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(url, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 }).then(() => {
-  console.log("Conexión exitosa con MongoDB Atlas");
+    console.log("Conexión exitosa con MongoDB Atlas");
 }).catch(err => {
-  console.error("Error de conexión:", err);
+    console.error("Error de conexión:", err);
 });
 
-// Definir esquemas y modelos
-const Schema = mongoose.Schema;
+// Función para agregar un documento a una colección solo si no existe
+const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
+    return Modelo.findOne({ nombre: nuevoDocumento.nombre })
+        .then((documentoExistente) => {
+            if (!documentoExistente) {
+                // El documento no existe, se puede agregar
+                return Modelo.create(nuevoDocumento);
+            } else {
+                console.log(`El documento ${nuevoDocumento.nombre} ya existe en la base de datos.`);
+                return null;
+            }
+        })
+        .then((resultado) => {
+            if (resultado) {
+                console.log(`Nuevo documento agregado correctamente a la colección ${Modelo.modelName}.`);
+            }
+        })
+        .catch((error) => {
+            console.error(`Error al agregar documento a la colección ${Modelo.modelName}:`, error);
+        });
+};
 
-// Esquema para los jugadores
-const jugadorSchema = new Schema({
-  nombre: String,
-  apellidos: String,
-  año: Number,
-  nacionalidad: String
+// Definir esquemas y modelos para todas las colecciones
+
+// Jugadores
+const jugadoresSchema = new mongoose.Schema({
+    nombre: String,
+    apellidos: String,
+    año: Number,
+    nacionalidad: String
+});
+const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
+
+// Equipos
+const equiposSchemas = new mongoose.Schema({
+    equipo: String,
+    jugador: [String],
+    tipoJuego: String
+});
+const EquiposModulo = mongoose.model("equipos", equiposSchemas);
+
+// Torneos
+const torneosSchemas = new mongoose.Schema({
+    equipos: [String],
+    tipoJuego: String,
+    fecha: String,
+    tipoTorneo: String
+});
+const TorneosModulo = mongoose.model("torneos", torneosSchemas);
+
+// Noticias
+const noticiasSchemas = new mongoose.Schema({
+    img: String,
+    titulo: String,
+    contenido: String,
+    tipoJuego: String,
+    fecha: String,
+});
+const NoticiasModulo = mongoose.model("noticias", noticiasSchemas);
+
+// Tienda
+const tiendaSchemas = new mongoose.Schema({
+    nombre: String,
+    img: String,
+    precio: Number,
+    caracteristica: String,
+    tipoJuego: String,
+    clasificacion: String,
+    altura: Number,
+    anchura: Number,
+    profundidad: Number,
+    size: String,
+});
+const TiendaModulo = mongoose.model('tienda', tiendaSchemas);
+
+// Juegos
+const juegoSchema = new mongoose.Schema({
+    nombre: String,
+    imagen: String,
+});
+const JuegoModelo = mongoose.model('Juego', juegoSchema);
+
+// Ejemplo de uso para todas las colecciones
+
+agregarDocumentoSiNoExiste(JugadorModulo, {
+    nombre: 'Nuevo Jugador',
+    apellidos: 'Apellido Nuevo',
+    año: 25,
+    nacionalidad: 'Nueva Nacionalidad',
 });
 
-// Esquema para los equipos
-const equipoSchema = new Schema({
-  equipo: String,
-  jugador: [String], // Debido a que un equipo puede tener muchos jugadores
-  tipoJuego: String
+agregarDocumentoSiNoExiste(EquiposModulo, {
+    equipo: 'Nuevo Equipo',
+    jugador: ['Jugador 1', 'Jugador 2'],
+    tipoJuego: 'Nuevo Tipo de Juego',
 });
 
-// Esquema para los torneos
-const torneoSchema = new Schema({
-  equipos: [String], // Debido a que un torneo puede tener 2 o más equipos
-  tipoJuego: String,
-  fecha: String,
-  tipoTorneo: String
+agregarDocumentoSiNoExiste(NoticiasModulo, {
+    img: 'ruta/de/imagen/para/nueva-noticia.jpg',
+    titulo: 'Nueva Noticia',
+    contenido: 'Contenido de la nueva noticia.',
+    tipoJuego: 'Nuevo Tipo de Juego',
+    fecha: '2024-05-12',
 });
 
-// Esquema para las noticias
-const noticiaSchema = new Schema({
-  img: String,
-  titulo: String,
-  contenido: String,
-  tipoJuego: String,
-  fecha: String
+agregarDocumentoSiNoExiste(TorneosModulo, {
+    equipos: ['Equipo 1', 'Equipo 2'],
+    tipoJuego: 'Nuevo Tipo de Juego',
+    fecha: '2024-05-12',
+    tipoTorneo: 'Nuevo Tipo de Torneo',
 });
 
-// Esquema para la tienda
-const tiendaSchema = new Schema({
-  nombre: String,
-  img: String,
-  precio: Number,
-  caracteristica: String,
-  tipoJuego: String,
-  clasificacion: String,
-  altura: Number,
-  anchura: Number,
-  profundidad: Number,
-  size: String
+agregarDocumentoSiNoExiste(TiendaModulo, {
+    nombre: 'Nuevo Producto',
+    img: 'ruta/de/imagen/para/nuevo-producto.jpg',
+    precio: 50,
+    caracteristica: 'Nueva Característica',
+    tipoJuego: 'Nuevo Tipo de Juego',
+    clasificacion: 'Nueva Clasificación',
+    altura: 10,
+    anchura: 20,
+    profundidad: 5,
+    size: 'M',
 });
 
-// Esquema para los juegos
-const juegoSchema = new Schema({
-  nombre: String,
-  imagen: String
+// Agregar un nuevo juego
+agregarDocumentoSiNoExiste(JuegoModelo, {
+    nombre: 'Nuevo Juego',
+    imagen: 'ruta/de/imagen/para/nuevo-juego.jpg',
 });
-
-// Modelos
-const Jugador = mongoose.model("Jugador", jugadorSchema);
-const Equipo = mongoose.model("Equipo", equipoSchema);
-const Torneo = mongoose.model("Torneo", torneoSchema);
-const Noticia = mongoose.model("Noticia", noticiaSchema);
-const Tienda = mongoose.model("Tienda", tiendaSchema);
-const Juego = mongoose.model("Juego", juegoSchema);
-
-// Insertar datos solo si no existen registros previos
-async function insertarDatosSiNoExisten(modelo, datos) {
-  try {
-    const count = await modelo.countDocuments();
-    if (count === 0) {
-      await modelo.insertMany(datos);
-      console.log(`${datos.length} registros insertados en ${modelo.collection.name}`);
-    } else {
-      console.log(`Ya existen datos en ${modelo.collection.name}. No se realizaron cambios.`);
-    }
-  } catch (error) {
-    console.error(`Error al insertar datos en ${modelo.collection.name}:`, error);
-  }
-}
-
-// Datos a insertar
-const jugadores = [
-    { nombre: "Gabriel", apellidos: "Rodriguez", año: 23, nacionalidad: "Español" },
-    { nombre: "Santiago", apellidos: "Daza", año: 19, nacionalidad: "UK" },
-    // Agrega más documentos de jugadores aquí
-];
-const equipos = [
-    { equipo: "Dragonslayer Legion", jugador: ["Gabriel", "Wei", "Santiago", "Sherik", "Franch"], tipoJuego: "League of Legends" },
-    { equipo: "Rogue Synapse", jugador: ["Makoto", "Min-soo", "Leon", "Mundo", "José"], tipoJuego: "League of Legends" },
-    // Agrega más documentos de equipos aquí
-];
-const torneos = [
-    { equipos: ["Dragonslayer Legion", "Rogue Synapse"], tipoJuego: "League of Legends", fecha: "2024-05-01", tipoTorneo: "Playoffs" },
-    { equipos: ["Neon Ninja", "Neko Neko"], tipoJuego: "TFT", fecha: "2024-05-03", tipoTorneo: "Playoffs" },
-    // Agrega más documentos de torneos aquí
-  
-];
-const noticias = [
-    { img: "ruta/de/imagen1.jpg", titulo: "Título de noticia 1", contenido: "Contenido de noticia 1", tipoJuego: "League of Legends", fecha: "2024-05-01" },
-    { img: "ruta/de/imagen2.jpg", titulo: "Título de noticia 2", contenido: "Contenido de noticia 2", tipoJuego: "TFT", fecha: "2024-05-03" },
-    // Agrega más documentos de noticias aquí
-];
-const tienda = [
-    { nombre: "Figura de Aatrox", img: "ruta/de/imagen3.jpg", precio: 100, caracteristica: "Efectos de iluminación led", tipoJuego: "League of Legends", clasificacion: "Figura de acción", altura: 46, anchura: 37.6, profundidad: 32.2 },
-    { nombre: "Camiseta de Tahm Kench", img: "ruta/de/imagen4.jpg", precio: 20, caracteristica: "100% algodón", tipoJuego: "League of Legends", clasificacion: "Ropa", size: "M" },
-    // Agrega más documentos de tienda aquí
-];
-const juegos = [
-  {
-    nombre: 'League of Legends',
-    imagen: 'ruta/de/imagen/para/league-of-legends.jpg'
-  },
-  {
-    nombre: 'Valorant',
-    imagen: 'ruta/de/imagen/para/valorant.jpg'
-  },
-  {
-    nombre: 'Teamfight Tactics',
-    imagen: 'ruta/de/imagen/para/tft.jpg'
-  }
-];
-
-// Insertar datos si no existen
-insertarDatosSiNoExisten(Jugador, jugadores);
-insertarDatosSiNoExisten(Equipo, equipos);
-insertarDatosSiNoExisten(Torneo, torneos);
-insertarDatosSiNoExisten(Noticia, noticias);
-insertarDatosSiNoExisten(Tienda, tienda);
-insertarDatosSiNoExisten(Juego, juegos);
 
 // Exportar modelos si es necesario
 export { Jugador, Equipo, Torneo, Noticia, Tienda, Juego };
