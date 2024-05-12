@@ -10,6 +10,7 @@ function App() {
   return (
     <>
       <Navbar/>
+      {/* Solamente actualizar una parte cuando recarga la navegación para mejorar rendimiento */}
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path="/Juegos" element={<Juegos/>}/>

@@ -21,6 +21,7 @@ const Navbar = () => {
         <i className={active ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
       <ul className={active ? "nav-menu active" : "nav-menu"}>
+        {/* hago que los routers funcionen bien mediante la etiqueta de Link */}
         {menuItems.map((item, index) => {
           return (
             <li key={index}>
