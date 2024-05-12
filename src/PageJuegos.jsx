@@ -6,23 +6,6 @@ import Card from './componentes_index/gameCard'; // Importa el componente de Car
 
 export default function Games(){
   const state={img:'src/img/bg3.png',title:"Our Games",description:"Descubre tu potencial en los juegos"};
-
-  // Aquí puedes definir las URLs de tus imágenes para las cartas
-  const cards = [
-    { id: 1, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 3, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 1, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 3, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-  ];
-
   return (
     <div>
       <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
