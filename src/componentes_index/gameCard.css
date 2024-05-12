@@ -1,0 +1,50 @@
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 50px;
+   
+  }
+  
+  .card {
+    width: 270px; /* Reducimos el ancho */
+    height: 370px; /* Aumentamos la altura */
+    margin: 20px;
+    border: 1px solid ;
+    border-radius: 14px;
+    transition: transform 0.3s ease; /* Transición suave para el cambio de tamaño */
+    overflow: hidden;
+  }
+  .card:hover {
+    transform: scale(1.05); /* Escala ligeramente la tarjeta al hacer hover */
+  }
+
+  .card img {
+    width: 100%; /* Ocupa todo el ancho disponible de la tarjeta */
+    height: 100%; /* Ocupa todo el alto disponible de la tarjeta */
+   
+  }
+  
+  .card-search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px; /* Ajusta según sea necesario */
+    margin-top: 20px;
+  }
+  
+  .card-search input[type="text"] {
+    width: 300px; /* Ajusta el ancho del input según sea necesario */
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* Hace los bordes más redondeados */
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: width 0.3s ease, background-color 0.3s ease; /* Agrega transiciones suaves */
+  }
+  
+  .card-search input[type="text"]:focus {
+    width: 400px; /* Ancho aumentado al enfocar */
+    background-color: #f5f5f5; /* Cambia el color de fondo al enfocar */
+  }
+  
