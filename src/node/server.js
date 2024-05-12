@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+
 const user = encodeURIComponent("root");//usuario de mangoDB Altas
 const password = encodeURIComponent("root");//contraseña del usuario
 const nombreBD = "OnlyGG";//nombre de base de datos
@@ -166,7 +167,96 @@ const docNoticias=[
 //inserta los datos
 NoticiasModulo.create(docNoticias).then(resulta=>{console.log("noticias",resulta);}).catch(err=>{console.log('error',err);});
 
-// Juegos
+// tienda
+var tiendaSchemas= new schema({
+    nombre: String,
+    img: String,
+    precio: Number,
+    caracteristica: String,
+    tipoJuego: String,
+    clasificacion: String,
+    altura: Number,
+    anchura: Number,
+    profundidad: Number,
+    size: String,
+});
+var TiendaModulo = mongoose.model('tienda', tiendaSchemas);
+var imgTienda=["src/img/producto1.png","src/img/producto2.png","src/img/producto3.png","src/img/producto4.png","src/img/producto5.png"];
+const docTienda=[
+    {
+        nombre:"Figura de Aatrox a escala 1/6 de Jimei Palace",
+        img: imgTienda[0],
+        precio:100,
+        caracteristica:"Efectos de iluminación led en la espada, los ojos",
+        altura:46,
+        anchura:37.6,
+        profundidad:32.2,
+        size:null,
+        tipoJuego:"League of legends",
+        clasificacion:"Figura de accióna de acción"
+    },
+    {
+        nombre:"Alfombrilla para el ratón XL de Renekton sacamuelas",
+        img: imgTienda[1],
+        precio:100,
+        caracteristica:"Ilustración del campeón Renekton sacamuelas.Estampado en licra.Borde con doble puntada que no se deshilacha.Base de goma antideslizante",
+        altura:30,
+        anchura:80,
+        profundidad:null,
+        size:null,
+        tipoJuego:"League of legends",
+        clasificacion:"Periféricos"
+    },
+    {
+        nombre:"Camiseta de Tahm Kench maestro chef",
+        img: imgTienda[2],
+        precio:100,
+        caracteristica:"100 % algodón. Diseño serigrafiado",
+        altura:null,
+        anchura:null,
+        profundidad:null,
+        size: "M",
+        tipoJuego:"League of legends",
+        clasificacion:"Ropa"
+    },
+    {
+        nombre:"Conjunto de figuras de PureArts de Vi y Jinx a escala 1/6",
+        img: imgTienda[3],
+        precio:200,
+        caracteristica:"Cohete y misil con iluminación led (Jinx). Guanteletes Atlas con iluminación led (Vi). Base de diorama que se puede unir a otra figura",
+        altura:46,
+        anchura:40,
+        profundidad:35,
+        size:null,
+        tipoJuego:"League of legends",
+        clasificacion:"Figura de accióna de acción"
+    },
+    {
+        nombre:"Figura Myethos de Ahri florecer espiritual a escala 1/7",
+        img: imgTienda[4],
+        precio:300,
+        caracteristica:"Sentada entre flores de loto, Ahri florecer espiritual está rodeada de algunos zorros de un tono azul traslúcido que brillan en la oscuridad, ¡igual que las nueve colas de Ahri!",
+        altura:26.9,
+        anchura:20,
+        profundidad:20,
+        size:null,
+        tipoJuego:"League of legends",
+        clasificacion:"Figura de accióna de acción"
+    },
+    {
+        nombre:"Secretlab TITAN Evo",
+        img: imgTienda[5],
+        precio:500,
+        caracteristica:"Más comodidad. Mayor personalización. Durabilidad excepcional. Con innovaciones de diseño respaldadas por la investigación y pensadas para un rendimiento sin igual, la Secretlab TITAN Evo es la primera silla gamer de su clase. Mejore su experiencia gaming con una ergonomía de nivel profesional: la elección de los mejores gamers y profesionales de todo el mundo.",
+        altura:null,
+        anchura:null,
+        profundidad:null,
+        size:"M",
+        tipoJuego:"League of legends",
+        clasificacion:"Periféricos"
+    },
+]
+TiendaModulo.create(docTienda).then(resulta=>{console.log("noticias",resulta);}).catch(err=>{console.log('error',err);});
 
 
-export default {JugadorModulo,EquiposModulo,NoticiasModulo,TorneosModulo};
+export default {JugadorModulo,EquiposModulo,NoticiasModulo,TorneosModulo,TiendaModulo};
