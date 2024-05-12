@@ -5,10 +5,20 @@ import cors from "cors";
 const app = express();//crear una instancia de la Express y almacena en la "app"
 app.use(cors());//permiten intercambio de los datos entre diferentes dominios
 app.use(express.json()); //analizar cuerpo de las solicitudes, lo analizar'a como json 
+//api de noticias
 app.get('/noticias', async (req, res) => {
   try {
       const noticias = await ServerMod.NoticiasModulo.find({});
       res.json(noticias);
+  } catch (error) {
+      res.status(500).json({ message: 'error', error: error.toString() });
+  }
+});
+//api de tienda
+app.get('/tienda', async (req, res) => {
+  try {
+      const tienda= await ServerMod.TiendaModulo.find();
+      res.json(tienda);
   } catch (error) {
       res.status(500).json({ message: 'error', error: error.toString() });
   }

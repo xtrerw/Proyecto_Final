@@ -256,7 +256,7 @@ const docTienda=[
         clasificacion:"Periféricos"
     },
 ]
-TiendaModulo.create(docTienda).then(resulta=>{console.log("noticias",resulta);}).catch(err=>{console.log('error',err);});
+TiendaModulo.create(docTienda).then(resulta=>{console.log("tienda",resulta);}).catch(err=>{console.log('error',err);});
 
 
 export default {JugadorModulo,EquiposModulo,NoticiasModulo,TorneosModulo,TiendaModulo};
