@@ -9,9 +9,12 @@ import Torneos from './PageTorneos';
 import Tienda from './PageTienda';
 import Noticias from './PageNoticias';
 import Registro from './PageRegistro';
+import Producto from './Producto';
+import ScrollToTop from './ScrollToTop';
 function App() {
   return (
     <>
+      <ScrollToTop/>
       <Navbar/>
       {/* Solamente actualizar una parte cuando recarga la navegación para mejorar rendimiento */}
       <Routes>
@@ -20,7 +23,8 @@ function App() {
         <Route path="/Torneos" element={<Torneos/>}/>
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
-        <Route path="/Registro" element={<Registro/>}/>
+        <Route path="/Registro" element={<Registro/>}/>  
+        <Route path="/Tienda/:id" element={<Producto/>}/>            
       </Routes>
       <Footer/>
     </>
