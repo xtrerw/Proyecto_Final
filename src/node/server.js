@@ -181,7 +181,7 @@ var tiendaSchemas= new schema({
     size: String,
 });
 var TiendaModulo = mongoose.model('tienda', tiendaSchemas);
-var imgTienda=["src/img/producto1.png","src/img/producto2.png","src/img/producto3.png","src/img/producto4.png","src/img/producto5.png"];
+var imgTienda=["src/img/producto1.png","src/img/producto2.png","src/img/producto3.png","src/img/producto4.png","src/img/producto5.png","src/img/producto6.png"];
 const docTienda=[
     {
         nombre:"Figura de Aatrox a escala 1/6 de Jimei Palace",

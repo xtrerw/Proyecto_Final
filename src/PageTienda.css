@@ -1,0 +1,16 @@
+.page-tienda{
+    height: auto;
+}
+.productos{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
+.producto{
+    width: 300px;
+    height: 400px;
+    box-shadow: 5px 5px 5px #000;
+    color: #000;
+}
+.producto>img{
+    width: 250px;
+}
