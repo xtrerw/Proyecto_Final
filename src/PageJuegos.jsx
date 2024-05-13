@@ -2,6 +2,7 @@ import React from "react";
 import './componentes_index/gameCard.css';
 import TituloPaginas from './componentes_paginas/tituloPaginas';
 import CardSearch from "./componentes_index/cardSearch";
+
 import Card from './componentes_index/gameCard'; // Importa el componente de Card
 
 export default function Games(){

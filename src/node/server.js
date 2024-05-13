@@ -226,19 +226,19 @@ nuevosProductos.forEach((producto) => {
 const nuevosJuegos = [
     {
         nombre: 'Dota 2',
-        imagen: 'ruta/de/imagen/para/nuevo-juego-1.jpg',
+        imagen: 'src/img/lol.png',
     },
     {
         nombre: 'Free Fire',
-        imagen: 'ruta/de/imagen/para/nuevo-juego-2.jpg',
+        imagen: 'src/img/lol.png',
     },
     {
         nombre: 'League of Legends',
-        imagen: 'ruta/de/imagen/para/nuevo-juego-2.jpg',
+        imagen: 'src/img/lol.png',
     },
     {
         nombre: 'Valorant',
-        imagen: 'ruta/de/imagen/para/nuevo-juego-2.jpg',
+        imagen: 'src/img/lol.png',
     },
     // Agrega más juegos aquí si es necesario
 ];
