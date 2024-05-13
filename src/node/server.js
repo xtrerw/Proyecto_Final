@@ -1,3 +1,4 @@
+// Importa mongoose y otras dependencias necesarias
 import mongoose from 'mongoose';
 
 // Conexión a la base de datos MongoDB Atlas
@@ -29,7 +30,7 @@ const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
         })
         .then((resultado) => {
             if (resultado) {
-                console.log(`Nuevo documento agregado correctamente a la colección ${Modelo.modelName}.`);
+                console.log(`documento ${nuevoDocumento.nombre} agregado correctamente a la colección ${Modelo.modelName}.`);
             }
         })
         .catch((error) => {
@@ -99,52 +100,153 @@ const JuegoModelo = mongoose.model('Juego', juegoSchema);
 
 // Ejemplo de uso para todas las colecciones
 
-agregarDocumentoSiNoExiste(JugadorModulo, {
-    nombre: 'Nuevo Jugador',
-    apellidos: 'Apellido Nuevo',
-    año: 25,
-    nacionalidad: 'Nueva Nacionalidad',
+// Array de documentos a agregar para Jugadores
+const nuevosJugadores = [
+    {
+        nombre: 'Nuevo Jugador',
+        apellidos: 'Apellido Nuevo',
+        año: 25,
+        nacionalidad: 'Nueva Nacionalidad',
+    },
+    {
+        nombre: 'Nuevo Jugador 2',
+        apellidos: 'Apellido Nuevo 2',
+        año: 22,
+        nacionalidad: 'Nueva Nacionalidad 2',
+    },
+    // Agrega más jugadores aquí si es necesario
+];
+
+// Agregar múltiples jugadores
+nuevosJugadores.forEach((jugador) => {
+    agregarDocumentoSiNoExiste(JugadorModulo, jugador);
 });
 
-agregarDocumentoSiNoExiste(EquiposModulo, {
-    equipo: 'Nuevo Equipo',
-    jugador: ['Jugador 1', 'Jugador 2'],
-    tipoJuego: 'Nuevo Tipo de Juego',
+const nuevosEquipos = [
+    {
+        equipo: 'Nuevo Equipo 1',
+        jugador: ['Jugador A', 'Jugador B'],
+        tipoJuego: 'Nuevo Tipo de Juego 1',
+    },
+    {
+        equipo: 'Nuevo Equipo 2',
+        jugador: ['Jugador C', 'Jugador D'],
+        tipoJuego: 'Nuevo Tipo de Juego 2',
+    },
+    // Agrega más equipos aquí si es necesario
+];
+
+// Agregar múltiples equipos
+nuevosEquipos.forEach((equipo) => {
+    agregarDocumentoSiNoExiste(EquiposModulo, equipo);
 });
 
-agregarDocumentoSiNoExiste(NoticiasModulo, {
-    img: 'ruta/de/imagen/para/nueva-noticia.jpg',
-    titulo: 'Nueva Noticia',
-    contenido: 'Contenido de la nueva noticia.',
-    tipoJuego: 'Nuevo Tipo de Juego',
-    fecha: '2024-05-12',
+
+// Array de documentos a agregar para Noticias
+const nuevasNoticias = [
+    {
+        img: 'ruta/de/imagen/para/nueva-noticia-1.jpg',
+        titulo: 'Nueva Noticia 1',
+        contenido: 'Contenido de la nueva noticia 1.',
+        tipoJuego: 'Nuevo Tipo de Juego 1',
+        fecha: '2024-05-12',
+    },
+    {
+        img: 'ruta/de/imagen/para/nueva-noticia-2.jpg',
+        titulo: 'Nueva Noticia 2',
+        contenido: 'Contenido de la nueva noticia 2.',
+        tipoJuego: 'Nuevo Tipo de Juego 2',
+        fecha: '2024-05-13',
+    },
+    // Agrega más noticias aquí si es necesario
+];
+
+// Agregar múltiples noticias
+nuevasNoticias.forEach((noticia) => {
+    agregarDocumentoSiNoExiste(NoticiasModulo, noticia);
 });
 
-agregarDocumentoSiNoExiste(TorneosModulo, {
-    equipos: ['Equipo 1', 'Equipo 2'],
-    tipoJuego: 'Nuevo Tipo de Juego',
-    fecha: '2024-05-12',
-    tipoTorneo: 'Nuevo Tipo de Torneo',
+// Array de documentos a agregar para Torneos
+const nuevosTorneos = [
+    {
+        equipos: ['Equipo A', 'Equipo B'],
+        tipoJuego: 'Nuevo Tipo de Juego 1',
+        fecha: '2024-05-15',
+        tipoTorneo: 'Nuevo Tipo de Torneo 1',
+    },
+    {
+        equipos: ['Equipo C', 'Equipo D'],
+        tipoJuego: 'Nuevo Tipo de Juego 2',
+        fecha: '2024-05-20',
+        tipoTorneo: 'Nuevo Tipo de Torneo 2',
+    },
+    // Agrega más torneos aquí si es necesario
+];
+
+// Agregar múltiples torneos
+nuevosTorneos.forEach((torneo) => {
+    agregarDocumentoSiNoExiste(TorneosModulo, torneo);
 });
 
-agregarDocumentoSiNoExiste(TiendaModulo, {
-    nombre: 'Nuevo Producto',
-    img: 'ruta/de/imagen/para/nuevo-producto.jpg',
-    precio: 50,
-    caracteristica: 'Nueva Característica',
-    tipoJuego: 'Nuevo Tipo de Juego',
-    clasificacion: 'Nueva Clasificación',
-    altura: 10,
-    anchura: 20,
-    profundidad: 5,
-    size: 'M',
+// Array de documentos a agregar para Tienda
+const nuevosProductos = [
+    {
+        nombre: 'Nuevo Producto 1',
+        img: 'ruta/de/imagen/para/nuevo-producto-1.jpg',
+        precio: 50,
+        caracteristica: 'Nueva Característica 1',
+        tipoJuego: 'Nuevo Tipo de Juego 1',
+        clasificacion: 'Nueva Clasificación 1',
+        altura: 10,
+        anchura: 20,
+        profundidad: 5,
+        size: 'M',
+    },
+    {
+        nombre: 'Nuevo Producto 2',
+        img: 'ruta/de/imagen/para/nuevo-producto-2.jpg',
+        precio: 70,
+        caracteristica: 'Nueva Característica 2',
+        tipoJuego: 'Nuevo Tipo de Juego 2',
+        clasificacion: 'Nueva Clasificación 2',
+        altura: 15,
+        anchura: 25,
+        profundidad: 6,
+        size: 'L',
+    },
+    // Agrega más productos aquí si es necesario
+];
+
+// Agregar múltiples productos a la tienda
+nuevosProductos.forEach((producto) => {
+    agregarDocumentoSiNoExiste(TiendaModulo, producto);
 });
 
-// Agregar un nuevo juego
-agregarDocumentoSiNoExiste(JuegoModelo, {
-    nombre: 'Nuevo Juego',
-    imagen: 'ruta/de/imagen/para/nuevo-juego.jpg',
-});
+//si quieres añadir mas cosas la añades al array wei
+const nuevosJuegos = [
+    {
+        nombre: 'Dota 2',
+        imagen: 'ruta/de/imagen/para/nuevo-juego-1.jpg',
+    },
+    {
+        nombre: 'Free Fire',
+        imagen: 'ruta/de/imagen/para/nuevo-juego-2.jpg',
+    },
+    {
+        nombre: 'League of Legends',
+        imagen: 'ruta/de/imagen/para/nuevo-juego-2.jpg',
+    },
+    {
+        nombre: 'Valorant',
+        imagen: 'ruta/de/imagen/para/nuevo-juego-2.jpg',
+    },
+    // Agrega más juegos aquí si es necesario
+];
 
+// Agregar múltiples juegos
+nuevosJuegos.forEach((juego) => {
+    agregarDocumentoSiNoExiste(JuegoModelo, juego);
+});
+  
 // Exportar modelos si es necesario
-export { Jugador, Equipo, Torneo, Noticia, Tienda, Juego };
+export { JugadorModulo, EquiposModulo, NoticiasModulo, TorneosModulo, TiendaModulo, JuegoModelo };
