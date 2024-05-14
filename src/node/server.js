@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 const user = encodeURIComponent("root"); // Usuario de MongoDB Atlas
 const password = encodeURIComponent("root"); // Contraseña del usuario
 const nombreBD = "OnlyGG"; // Nombre de la base de datos
-const url = `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;
+const url = `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose.connect(url, {
     useNewUrlParser: true,
@@ -240,6 +240,15 @@ const nuevosJuegos = [
         nombre: 'Valorant',
         imagen: 'src/img/lol.png',
     },
+    {
+        nombre: 'TFT',
+        imagen: 'src/img/tft.png',
+    },
+    {
+        nombre: 'hola',
+        imagen: 'src/img/tft.png',
+    },
+    
     // Agrega más juegos aquí si es necesario
 ];
 
@@ -249,4 +258,4 @@ nuevosJuegos.forEach((juego) => {
 });
   
 // Exportar modelos si es necesario
-export default { JugadorModulo, EquiposModulo, NoticiasModulo, TorneosModulo, TiendaModulo, JuegoModelo };
+export default { JugadorModulo, EquiposModulo, NoticiasModulo, TorneosModulo, TiendaModulo, JuegoModelo};

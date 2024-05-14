@@ -1,36 +1,58 @@
-import React from "react";
-import './componentes_index/gameCard.css';
+import React, { useEffect, useState } from 'react';
+import "./componentes_index/gameCard.css";
 import TituloPaginas from './componentes_paginas/tituloPaginas';
 import CardSearch from "./componentes_index/cardSearch";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-import Card from './componentes_index/gameCard'; // Importa el componente de Card
+const Juegos = () => {
+    const state = { img: 'src/img/bg1.png', title: "Our Games", description: "Descubre tu potencial en los juegos" };
+    const [juegos, setJuegos] = useState([]);
 
-export default function Games(){
-  // Aquí puedes definir las URLs de tus imágenes para las cartas
-  const cards = [
-    { id: 1, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 3, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 1, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 3, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 2, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-    { id: 4, imageUrl: 'src/img/lol.png', to: '/pagina-de-destino-1' },
-  ];
-  const state={img:'src/img/bg1.png',title:"Our Games",description:"Descubre tu potencial en los juegos"};
-  return (
-    <div>
-      <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
-      <CardSearch /> {/* Aquí se incorpora el componente de búsqueda */}
-      <div className="card-container">
-        {cards.map(card => (
-          <Card key={card.id} imageUrl={card.imageUrl} />
-        ))}
-      </div>
-    </div>
-  );
+    useEffect(()=>{
+        fetch('http://localhost:3001/juegos')
+        .then(response => response.json())
+        .then(juegos =>{setJuegos(juegos)})
+        .catch(error => {
+            console.error('error:', error);
+        });
+    },[]);
+    
+
+    gsap.registerPlugin(ScrollTrigger);
+    useGSAP(() => {
+        ScrollTrigger.create({
+            trigger: ".page-juegos",
+            start: "0 80%",
+            end: "0 80%",
+            toggleActions: "restart none reverse",
+            animation: gsap.timeline().fromTo(".card-container", {
+                y: 100,
+            }, {
+                y: 0,
+                duration: 2,
+                ease: "expo.inOut",
+            }),
+        });
+    });
+
+    return (
+        <>
+            <TituloPaginas img={state.img} titulo={state.title} des={state.description} />
+            <CardSearch />
+            <main className='page-juegos'>
+                <div className="card-container">
+                    {juegos.map(juego => (
+                        // <Card key={juego._id} imageUrl={juego.imageUrl} />
+                        <div className="card">
+                          <img key={juego._id} src={`${juego.imagen}`} alt="Card" />
+                        </div>
+                    ))} 
+                </div>
+            </main>
+        </>
+    );
 }
+
+export default Juegos;

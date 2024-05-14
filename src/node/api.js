@@ -1,4 +1,4 @@
-import { JuegoModelo } from "./server.js";
+
 import ServerMod from "./server.js";
 import express from "express";
 import cors from "cors";
@@ -26,6 +26,16 @@ app.get('/noticias', async (req, res) => {
       }
   });
   
+  app.get('/juegos', async (req, res) => {
+    try {
+        const juegos = await ServerMod.JuegoModelo.find({}); // Assuming it returns a cursor
+        res.json(juegos);
+    } catch (error) {
+        console.error('Error de juegos:', error);
+        res.status(500).json({ error: 'Servidor error' });
+    }
+});
+
   
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001

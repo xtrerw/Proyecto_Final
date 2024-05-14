@@ -1,8 +1,12 @@
+.page-juegos{
+  height: auto;
+}
 .card-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     margin-bottom: 50px;
+
    
   }
   
