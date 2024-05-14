@@ -10,7 +10,7 @@
     gap: 30px;
 }
 .producto{
-    /* opacity: 0; */
+    opacity: 0;
     width: 300px;
     height: 400px;
     box-shadow: var(--boxshadow);
@@ -52,4 +52,13 @@
 .precio>p{
     font-size: 15px;
     color: #fff;
+}
+.top-premios{
+    background: var(--default-color2);
+    color: var(--main-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

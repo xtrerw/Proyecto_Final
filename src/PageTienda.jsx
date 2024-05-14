@@ -1,4 +1,4 @@
-  import React, { useEffect, useState } from 'react';
+  import React, { useEffect, useRef, useState } from 'react';
   import TituloPaginas from './componentes_paginas/tituloPaginas';
   import "./PageTienda.css";
   import { useGSAP } from "@gsap/react";
@@ -17,32 +17,40 @@
               console.error('error:', error);
           });
       },[]);
+      // console.log(tienda);
+      // animacion de los premios
+      // crear refs
+      const container=useRef();
+      // animacion de gsap
       gsap.registerPlugin(ScrollTrigger);
-      useGSAP(()=>{
-        ScrollTrigger.create({
-          trigger:".page-tienda",
-          // markers:true,
-          start:"0 80%",
-          end:"0 80%",
-          toggleActions: "restart none reverse",
-          animation:
-          gsap.timeline().fromTo(".productos",{
-            y:100,
-          },{
-            y:0,
-            duration:2,
-            ease: "expo.inOut",
-          }),
-        });
-      })
+      useEffect(() => {
+        if (tienda.length > 0) { 
+            gsap.fromTo(".producto", {
+                y: 100,
+                opacity: 0
+            }, {
+                y: 0,
+                opacity: 1,
+                stagger: 0.2,
+                scrollTrigger: {
+                    trigger: container.current,
+                    // markers: true,
+                    start: "0% 80%",
+                    end: "0% 80%",
+                    toggleActions: "restart none reverse none",
+                },
+            });
+        }
+    }, [tienda]);
+
     return (
       <>
       <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
-      <main className='page-tienda'>
-          <div className='productos'>
-            {tienda.map(item => (
-              <Link to={`${item._id}`} key={item._id} className='producto'>
-                  <div className='precio'>
+      <main className="page-tienda">
+          <div className="productos" ref={container}>
+            {tienda.map((item) => (
+              <Link to={`${item._id}`} key={item._id} className="producto">
+                  <div className="precio">
                     <p>{item.precio} ptos</p>
                   </div>
                   <img src={item.img} />
@@ -50,7 +58,9 @@
               </Link>
               ))}
           </div>
-          
+      </main>
+      <main className='top-premios'>
+        <h1>Top Premios</h1>
       </main>
       </>
       

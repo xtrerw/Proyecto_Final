@@ -9,7 +9,7 @@ function tituloPaginas(props){
     useGSAP(()=>{
         ScrollTrigger.create({
             trigger: ".titulo-paginas",
-            markers: true,
+            // markers: true,
             start:"0% 10%",
             end:"30% 10%",
             // scrub: true,

@@ -8,7 +8,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url = `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url, {
+mongoose.connect(url2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -252,7 +252,7 @@ const nuevosProductos = [
         size: null,
     },
     {
-        nombre: 'Figura Myethos de Ahri florecer espiritual a escala 1/7',
+        nombre: 'Secretlab TITAN Evo',
         img: 'src/img/producto6.png',
         precio: 200,
         caracteristica: 'Más comodidad. Mayor personalización. Durabilidad excepcional. Con innovaciones de diseño respaldadas por la investigación y pensadas para un rendimiento sin igual, la Secretlab TITAN Evo es la primera silla gamer de su clase. Mejore su experiencia gaming con una ergonomía de nivel profesional: la elección de los mejores gamers y profesionales de todo el mundo.',
@@ -260,6 +260,42 @@ const nuevosProductos = [
         clasificacion: 'Periféricos',
         altura: 160,
         anchura: 100,
+        profundidad: 100,
+        size: 'M',
+    },
+    {
+        nombre: 'Figura de Kindred florecer espiritual',
+        img: 'src/img/top1.png',
+        precio: 300,
+        caracteristica: 'Dos cabezas para Cordera (con y sin máscara).',
+        tipoJuego: 'League of Legends',
+        clasificacion: 'Figura de acción',
+        altura: 37,
+        anchura: 28,
+        profundidad: 28,
+        size: null,
+    },
+    {
+        nombre: 'Dim Mak x Teamfight Tactics - Camiseta de B Llota',
+        img: 'src/img/top2.png',
+        precio: 250,
+        caracteristica: 'Hecha en un 100 % de algodón. Lavar en frío en lavadora y secar colgada o extendida. No lavar en seco. Serigrafiado en Los Ángeles con amor.',
+        tipoJuego: 'Teamfight Tactics ',
+        clasificacion: 'Ropa',
+        altura: null,
+        anchura: null,
+        profundidad: null,
+        size: 'M',
+    },
+    {
+        nombre: 'PcCom Custom',
+        img: 'src/img/top3.png',
+        precio: 400,
+        caracteristica: 'AMD Ryzen 7 7800X3D / 64GB / 2TB SSD / RTX 4080 Super 16GB + Windows 11 Home',
+        tipoJuego: 'valorant',
+        clasificacion: 'Periféricos',
+        altura: 50,
+        anchura: 40,
         profundidad: 100,
         size: 'M',
     },
