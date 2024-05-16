@@ -15,8 +15,6 @@ function OurGames() {
       const back = () => {
         cambioPos((index) => (index - 1 + images.length) % images.length);
       };
-      console.log(img);
-      console.log(images.length);
 
 
       return (

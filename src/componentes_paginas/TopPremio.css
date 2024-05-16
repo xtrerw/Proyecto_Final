@@ -1,0 +1,40 @@
+.top-premios{
+    background: var(--default-color2);
+    color: var(--main-color);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10%;
+
+    position: relative;
+}
+.top-premio-parte{
+    display: flex;
+}
+.top-premio{
+    height: 50vh;
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.top-premio>img{
+    width: 600px;
+}
+.btn-top-back,.btn-top-next{
+    position: absolute;
+    top: 50%;
+    font-size: 64px;
+    color: var(--default-color3);
+}
+.btn-top-back:hover,.btn-top-next:hover{
+    color: var(--main-color);
+}
+.btn-top-back{
+    left: 40px;
+}
+.btn-top-next{
+    right: 40px;
+}
