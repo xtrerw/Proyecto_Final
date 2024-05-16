@@ -57,8 +57,23 @@
     background: var(--default-color2);
     color: var(--main-color);
     text-align: center;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+    gap: 10%;
+    height: 400vh;
+}
+.top-premio-parte{
+    display: flex;
+    /* width: 100vw; */
+    height: 100vh;
+}
+.top-premio{
+    width: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.top-premio>img{
+    width: 600px;
 }
