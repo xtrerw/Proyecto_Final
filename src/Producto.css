@@ -22,13 +22,14 @@
     width: 500px;
     height: 600px;
     background: var(--secondary-color);
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 20px 30px;
+    
+    position: relative;
 }
 .producto-detalle>h2{
     margin: 10px 0px;
     font-size: 30px;
-
 }
 .producto-detalle>h3{
     margin-top: 30px;
@@ -40,4 +41,29 @@ hr{background: var(--default-color3);}
     font-size: 18px;
     color: var(--default-color3);
     margin: 20px 0 10px 0;
+}
+.btn-canejar{
+    width: 150px;
+    height: 50px;
+    background: var(--main-color);
+    color: #fff;
+    border-radius: 5px;
+
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+}
+.exhibicion{
+    background: var(--default-color2);
+    height: 150vh;
+    
+}
+.exhibicion-set{
+    display: flex;
+    padding: 10% 0;
+}
+.exhibicion-img{
+    /* width: 100vw; */
+    /* height: 40vh; */
+    background-size: cover;
 }
