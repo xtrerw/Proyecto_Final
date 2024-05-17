@@ -89,6 +89,7 @@ const tiendaSchemas = new mongoose.Schema({
     anchura: Number,
     profundidad: Number,
     size: String,
+    apartados: [String],
 });
 const TiendaModulo = mongoose.model('tienda', tiendaSchemas);
 
@@ -202,6 +203,7 @@ const nuevosProductos = [
         anchura: 37.9,
         profundidad: 32.2,
         size: null,
+        apartados:['src/img/producto1.png','src/img/producto1_p1.png','src/img/producto1_p2.png','src/img/producto1_p3.png','src/img/producto1_p4.png'],
     },
     {
         nombre: 'Alfombrilla para el ratón XL de Renekton sacamuelas',
@@ -214,6 +216,7 @@ const nuevosProductos = [
         anchura: 30,
         profundidad: null,
         size: null,
+        apartados:['src/img/producto2.png','src/img/producto2_p1.png','src/img/producto2_p2.png','src/img/producto2_p3.png'],
     },
     {
         nombre: 'Camiseta de Tahm Kench maestro chef',
@@ -226,6 +229,7 @@ const nuevosProductos = [
         anchura: null,
         profundidad: null,
         size: 'M',
+        apartados:['src/img/producto3.png','src/img/producto3_p1.png','src/img/producto3_p2.png','src/img/producto3_p3.png','src/img/producto3_p4.png'],
     },
     {
         nombre: 'Conjunto de figuras de PureArts de Vi y Jinx a escala 1/6',
@@ -238,6 +242,7 @@ const nuevosProductos = [
         anchura: 50,
         profundidad: 50,
         size: null,
+        apartados:['src/img/producto4.png','src/img/producto4_p1.png','src/img/producto4_p2.png','src/img/producto4_p3.png','src/img/producto4_p4.png'],
     },
     {
         nombre: 'Figura Myethos de Ahri florecer espiritual a escala 1/7',
@@ -250,6 +255,7 @@ const nuevosProductos = [
         anchura: 20,
         profundidad: 20,
         size: null,
+        apartados:['src/img/producto5.png','src/img/producto5_p1.png','src/img/producto5_p2.png','src/img/producto5_p3.png','src/img/producto5_p4.png'],
     },
     {
         nombre: 'Secretlab TITAN Evo',
@@ -262,6 +268,7 @@ const nuevosProductos = [
         anchura: 100,
         profundidad: 100,
         size: 'M',
+        apartados:['src/img/producto6.png','src/img/producto6_p1.png','src/img/producto6_p2.png','src/img/producto6_p3.png','src/img/producto6_p4.png'],
     },
     {
         nombre: 'Figura de Kindred florecer espiritual',
@@ -274,6 +281,7 @@ const nuevosProductos = [
         anchura: 28,
         profundidad: 28,
         size: null,
+        apartados:['src/img/top1.png','src/img/top1_p1.png','src/img/top1_p2.png','src/img/top1_p3.png','src/img/top1_p4.png']
     },
     {
         nombre: 'Dim Mak x Teamfight Tactics - Camiseta de B Llota',
@@ -286,6 +294,7 @@ const nuevosProductos = [
         anchura: null,
         profundidad: null,
         size: 'M',
+        apartados:['src/img/top2.png','src/img/top2_p1.png','src/img/top2_p2.png','src/img/top2_p3.png']
     },
     {
         nombre: 'PcCom Custom',
@@ -298,6 +307,7 @@ const nuevosProductos = [
         anchura: 40,
         profundidad: 100,
         size: 'M',
+        apartados:['src/img/top3.png','src/img/top3_p1.png','src/img/top3_p2.png']
     },
     // Agrega más productos aquí si es necesario
 ];
