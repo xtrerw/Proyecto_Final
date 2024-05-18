@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import { AnimatePresence } from 'framer-motion'
 
 const Producto = () => {
   const {id}=useParams();

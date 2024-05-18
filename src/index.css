@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 :root{
   --main-color:#BE1717;
+  --main-color2:#841111;
   --secondary-color:#000000;
   --default-color: #fff;
   --gradiented-color:linear-gradient(to top,var(--secondary-color),var(--main-color));

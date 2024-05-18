@@ -44,8 +44,12 @@
     color: var(--default-color3);
     font-weight: lighter;
 }
-.noticia-contenido>h3{
+.noticia-contenido>a>h3{
     margin: 5px 0 5px 10px;
     font-size: 15px;
     font-weight: normal;
+    color: #fff;
+}
+.noticia-contenido>a>h3:hover{
+    text-decoration: underline;
 }

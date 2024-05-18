@@ -1,6 +1,7 @@
 import "./noticias.css"
 import { useState,useEffect } from "react";
 import ScrollProps from "./scrolltext";
+import { Link } from "react-router-dom";
 function Noticias() {
   //sacar las noticias desde servidor node.
   const [news, setNews] = useState([]);// configurar array principal de noticias.
@@ -27,7 +28,9 @@ function Noticias() {
                     <div key={item._id} className="noticia-contenido">
                         <img src={`../${item.img}`} alt={item.titulo} />
                         <p>{item.tipoJuego}</p>
-                        <h3>{item.titulo}</h3>
+                        <Link to={`/Noticias/${item._id}`}>
+                          <h3>{item.titulo}</h3>
+                        </Link>
                     </div>
                 ))}
           </div>
