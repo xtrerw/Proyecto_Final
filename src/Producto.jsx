@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
+import { AnimatePresence } from 'framer-motion'
 
 const Producto = () => {
   const {id}=useParams();
@@ -38,54 +39,56 @@ const Producto = () => {
   //animacion de exhibición de las imagenes
   gsap.registerPlugin(ScrollTrigger);
   const gsapImgs= gsap.utils.toArray('.exhibicion-img');
-  useGSAP(()=>{
+  useEffect(()=>{
     ScrollTrigger.create({
       trigger: '.exhibicion',
-      scrub:true,
+      scrub:4,
       markers:true,
       start:"-20% 0%",
       end:"10% 0%",
       toggleActions: "restart none reverse none",
       // pin:true,
       animation:
-      gsap.timeline().fromTo('.exhibicion',{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-      },{
-        width:'100%',
-      },"<")
-      .fromTo('.exhibicion-set',{
+      gsap.timeline()
+      .fromTo('.scroll-left',{
+        x: "-60%",
         width: '500%',
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3,1fr)',
-        gap: '0px'
+        gap: '0.5%',
       },
       {
-        width:"80%",
-        display:'grid',
-      gridTemplateColumns: 'repeat(3,1fr)',
-      gap:'10px'
+        x:"-20%",
+        width:"200%",
+        gap: '2%',
       },"<")
       .fromTo(gsapImgs,{
-        width:'100%',
-        height: '100%',
-        borderRadius:'0%',
+        borderRadius:'0px',
+        width:'100vw',
+        height: '100vh',
       },
       {
-        width:'90%',
-        height: '90%',
-        borderRadius:'2%',
+        width:'50vw',
+        height: '50vh',
+        borderRadius:'20px',
 
       },"<")
+      .fromTo('.scroll-right',{
+        x: "-20%",
+        width: '500%',
+        gap: '0.5%'
+      },
+      {
+        x:"-30%",
+        width:"200%",
+        gap: '2%'
+      },"<")
     });
-  })
+  },[gsapImgs])
   return (
     <>
       <main className='detalle'>
-      <motion.div className='producto-conjunto' initial={{x:-30,opacity:0}} animate={{x:0,opacity:1}} transition={{delay:1,duration:2}}>
+      <div className='producto-conjunto' >
         {apartados.map((apartado,index)=>(
-          <motion.div onClick={()=>{yaClick(apartado)}} key={index} className="producto-apartado" 
+          <motion.div onClick={()=>{yaClick(apartado)}} key={index} className="producto-apartado" layoutId={apartado}
           animate={{
             backgroundImage: `url(../${apartado})`,
             boxShadow: clickIndex==apartado ? "0px 0px 1px 2px var(--main-color)" : "none",
@@ -93,9 +96,32 @@ const Producto = () => {
             >
           </motion.div>
         ))}
-      </motion.div>
+      </div>
       <div className='producto-img'>
-        {imgParte && <motion.img initial={{scale:0.5}} animate={{scale:1}} transition={{duration:1}} src={`/${imgParte}`}/>}
+        <AnimatePresence>
+          {imgParte && <motion.div 
+          key={imgParte}
+          layoutId={imgParte} 
+          initial={{
+            // opacity:0,
+            y:-100,
+            scale:0,
+          }} 
+          animate={{
+            // opacity:1,
+            y:0,
+            scale: 1,
+            
+          }} 
+          exit={{ 
+            // opacity: 0,
+            y:-100, 
+            scale:0
+          }}
+          style={{backgroundImage: `url(../${imgParte})`,}}
+          transition={{duration:1}}
+          ></motion.div>}
+        </AnimatePresence>
       </div> 
       <motion.div className='producto-detalle' 
       initial={{
@@ -124,7 +150,16 @@ const Producto = () => {
       </motion.div>
     </main>
     <main className='exhibicion'>
-      <div className='exhibicion-set'>
+      <div className='exhibicion-set scroll-left'>
+      {apartados.map((apartado,index)=>(
+          <div  key={index} className="exhibicion-img " 
+          style={{
+            backgroundImage: `url(../${apartado})`,
+            }}>
+          </div>
+        ))}
+      </div>
+      <div className='exhibicion-set scroll-right'>
       {apartados.map((apartado,index)=>(
           <div  key={index} className="exhibicion-img" 
           style={{

@@ -15,8 +15,10 @@
     background-size: cover;
     cursor: pointer;
 }
-.producto-img>img{
+.producto-img>div{
     width: 500px;
+    height: 500px;
+    background-size: cover;
 }
 .producto-detalle{
     width: 500px;
@@ -55,15 +57,19 @@ hr{background: var(--default-color3);}
 }
 .exhibicion{
     background: var(--default-color2);
-    height: 150vh;
-    
+    height: 100vh;
+    padding: 10% 0;
 }
 .exhibicion-set{
     display: flex;
-    padding: 10% 0;
+    height: 50vh;
+    display: flex;
+    gap: 30px;
 }
 .exhibicion-img{
-    /* width: 100vw; */
-    /* height: 40vh; */
     background-size: cover;
+    
+}
+.scroll-left{
+    margin-bottom: 5%;
 }
