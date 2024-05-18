@@ -15,11 +15,6 @@ const menuItems = [
       cName: "nav-links"
     },
     {
-      title: "Torneos",
-      url: "#",
-      cName: "nav-links"
-    },
-    {
       title: "Sign up",
       url: "#",
       cName: "nav-links-mobile"

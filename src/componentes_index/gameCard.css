@@ -14,7 +14,7 @@
     width: 270px; /* Reducimos el ancho */
     height: 370px; /* Aumentamos la altura */
     margin: 20px;
-    border: 1px solid ;
+    border: 1px solid #000;
     border-radius: 14px;
     transition: transform 0.3s ease; /* Transición suave para el cambio de tamaño */
     overflow: hidden;

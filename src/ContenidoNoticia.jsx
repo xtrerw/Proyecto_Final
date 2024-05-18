@@ -21,6 +21,7 @@ const ContenidoNoticia = () => {
         .catch(error=>console.error("Error de conseguir API"+ error));
     },[id]);
     console.log(noticia);
+    const texts=noticia.contenido || [];
   return (
     <>
         <main className='contenido'>
@@ -83,7 +84,7 @@ const ContenidoNoticia = () => {
         >
             <h3>{noticia.fecha} - POR ONLYGG ESPORT STAFF</h3>
             <h2>{noticia.titulo}</h2>
-            <p>{noticia.contenido}</p>
+            {texts.map((articulo,index)=>(<p key={index}>{articulo}</p>))}
         </motion.main>
     </>
     

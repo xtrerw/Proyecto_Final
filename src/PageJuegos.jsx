@@ -5,6 +5,7 @@ import CardSearch from "./componentes_index/cardSearch";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from 'react-router-dom';
 
 const Juegos = () => {
     const state = { img: 'src/img/bg1.png', title: "Our Games", description: "Descubre tu potencial en los juegos" };
@@ -43,11 +44,10 @@ const Juegos = () => {
             <CardSearch />
             <main className='page-juegos'>
                 <div className="card-container">
-                    {juegos.map(juego => (
-                        // <Card key={juego._id} imageUrl={juego.imageUrl} />
-                        <div className="card">
-                          <img key={juego._id} src={`${juego.imagen}`} alt="Card" />
-                        </div>
+                    {juegos.map((juego,index) => (
+                        <Link to={`${juego.nombre}`} key={index} className="card">
+                          <img  src={`../${juego.imagen}`} alt="Card" />
+                        </Link>
                     ))} 
                 </div>
             </main>
