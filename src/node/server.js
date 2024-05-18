@@ -349,7 +349,7 @@ const nuevosJuegos = [
     },
     {
         nombre: 'Free Fire',
-        imagen: 'src/img/lol.png',
+        imagen: 'src/img/ff.png',
     },
     {
         nombre: 'League of Legends',

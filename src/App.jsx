@@ -10,6 +10,7 @@ import Tienda from './PageTienda';
 import Noticias from './PageNoticias';
 import Registro from './PageRegistro';
 import Producto from './Producto';
+import ContenidoNoticia from './ContenidoNoticia';
 import ScrollToTop from './ScrollToTop';
 function App() {
   return (
@@ -24,7 +25,8 @@ function App() {
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/>  
-        <Route path="/Tienda/:id" element={<Producto/>}/>            
+        <Route path="/Tienda/:id" element={<Producto/>}/>       
+        <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
       </Routes>
       <Footer/>
     </>

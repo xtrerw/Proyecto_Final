@@ -1,0 +1,51 @@
+.contenido{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 70vh;
+}
+.bg-contenido{
+    background-image: url("../src/img/bg-contenido.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    /* height: 50vh; */
+    width: 100vw;
+}
+.bg-contenido2{
+    position: absolute;
+    width: 50vw;
+    height: 50vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: 25%;
+}
+.articulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    color: #000;
+}
+.articulo>h3{
+    color: var(--default-color3);
+    text-align: center;
+    width: 60%;
+    font-size: 24px;
+    font-weight: 100;
+    margin: 50px 0;
+}
+.articulo>h2{
+    margin: 30px 0;
+    text-align: center;
+    width: 60%;
+}
+.articulo>p{
+    width: 60%;
+    font-weight: 100;
+    color: rgb(113, 112, 112);
+    margin-top: 30px;
+    margin-bottom: 20%;
+}
