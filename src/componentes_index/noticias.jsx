@@ -25,7 +25,7 @@ function Noticias() {
           {/* muestra las noticias */}
           {news.map(item => (
                     <div key={item._id} className="noticia-contenido">
-                        <img src={item.img} alt={item.titulo} />
+                        <img src={`../${item.img}`} alt={item.titulo} />
                         <p>{item.tipoJuego}</p>
                         <h3>{item.titulo}</h3>
                     </div>

@@ -19,6 +19,7 @@
     width: 500px;
     height: 500px;
     background-size: cover;
+    transition: all 1s ease-in-out;
 }
 .producto-detalle{
     width: 500px;
@@ -72,4 +73,5 @@ hr{background: var(--default-color3);}
 }
 .scroll-left{
     margin-bottom: 5%;
+    
 }

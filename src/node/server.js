@@ -147,19 +147,43 @@ nuevosEquipos.forEach((equipo) => {
 // Array de documentos a agregar para Noticias
 const nuevasNoticias = [
     {
-        img: 'ruta/de/imagen/para/nueva-noticia-1.jpg',
-        titulo: 'Nueva Noticia 1',
-        contenido: 'Contenido de la nueva noticia 1.',
-        tipoJuego: 'Nuevo Tipo de Juego 1',
-        fecha: '2024-05-12',
+        img: "src/img/noticias1.png",
+        titulo: "Los Dragones de Fuego conquistan a los Guerreros del Trueno en una épica batalla en la LLA",
+        contenido: "En una de las partidas más emocionantes de la temporada, los Dragones de Fuego se enfrentaron a los Guerreros del Trueno en la Liga Latinoamérica de League of Legends (LLA). El encuentro fue una montaña rusa de emociones y estrategias que mantuvo a los aficionados al borde de sus asientos.\n\nPrimer Juego: Dominio de los Dragones de Fuego\nDesde el comienzo, los Dragones de Fuego demostraron su superioridad táctica. Con una composición centrada en el control del mapa y la presión en las líneas, lograron asegurar la primera sangre y varios objetivos tempranos. El jungla 'Fénix' jugó un papel crucial con Lee Sin, facilitando la expansión de su equipo. A pesar de los esfuerzos defensivos de los Guerreros del Trueno, liderados por 'Rayo' con Gnar, los Dragones cerraron el primer juego en menos de 30 minutos.\n\nSegundo Juego: La Resistencia de los Guerreros del Trueno\nEl segundo juego fue diferente. Los Guerreros del Trueno ajustaron su estrategia y seleccionaron una composición más defensiva, con 'Tempestad' brillando con Aphelios. A medida que el juego avanzaba, las peleas por equipos se volvieron más intensas. Gracias a las iniciaciones de 'Tormenta' con Rakan, los Guerreros lograron capitalizar en una pelea por el Barón Nashor y empujar hasta la base enemiga, igualando la serie.\n\nJuego Decisivo: Una Batalla Épica\nEl último juego fue el clímax perfecto. Ambos equipos optaron por composiciones agresivas, lo que resultó en un juego lleno de acción desde el primer minuto. 'Dragón' destacó con su LeBlanc, mientras que 'Trueno' mostró gran habilidad con Kha'Zix. Sin embargo, la coordinación de los Dragones de Fuego prevaleció. Una última pelea en el pozo del Dragón Ancestral decidió el destino del juego, con los Dragones de Fuego asegurando el objetivo y, con él, la victoria final.\n\nConclusión: Una Serie para Recordar\nLa serie entre los Dragones de Fuego y los Guerreros del Trueno será recordada como una de las más intensas de la LLA. Ambos equipos demostraron un alto nivel de habilidad y estrategia, pero al final, los Dragones de Fuego se alzaron como los vencedores. Los aficionados ya están ansiosos por ver qué les deparará el futuro a estos talentosos equipos.",
+        tipoJuego: "League of Legends",
+        fecha: "2024-05-18"
     },
     {
-        img: 'ruta/de/imagen/para/nueva-noticia-2.jpg',
-        titulo: 'Nueva Noticia 2',
-        contenido: 'Contenido de la nueva noticia 2.',
-        tipoJuego: 'Nuevo Tipo de Juego 2',
-        fecha: '2024-05-13',
+        img: "src/img/noticias2.png",
+        titulo: "Relámpago Digital se corona campeón del Torneo Mundial de Rainbow Six Siege",
+        contenido: "En un evento que quedará grabado en la historia de los deportes electrónicos, el equipo Relámpago Digital se coronó campeón del prestigioso Torneo Mundial de Rainbow Six Siege, llevándose a casa el gran premio y consolidándose como uno de los mejores equipos del mundo.\n\nEl torneo, celebrado en París, Francia, reunió a los mejores equipos de Rainbow Six Siege de todo el mundo. La competencia fue feroz, pero Relámpago Digital destacó por su increíble coordinación y habilidad táctica. Su camino hacia la victoria incluyó emocionantes enfrentamientos contra los favoritos del torneo, mostrando una resiliencia y determinación impresionantes.\n\nLa gran final fue un espectáculo inolvidable. Relámpago Digital se enfrentó a los temidos Titanes del Trueno, en una serie que se extendió hasta el último mapa. Con jugadas maestras y una defensa impenetrable, Relámpago Digital logró asegurar la victoria con un marcador final de 3-2. El MVP del torneo, 'Flash', se destacó con su excepcional desempeño, particularmente en el mapa decisivo donde sus eliminaciones estratégicas fueron clave para asegurar la victoria.\n\nEste triunfo no solo les ha otorgado el premio monetario y el trofeo del campeonato, sino que también ha fortalecido su reputación en la escena global de los deportes electrónicos. Los aficionados y analistas elogian la disciplina y la innovación estratégica del equipo, prediciendo que Relámpago Digital seguirá dominando en futuros torneos.\n\n'Estamos extremadamente orgullosos de este logro', declaró el capitán del equipo, 'Rayo'. 'Hemos trabajado muy duro para llegar aquí y esta victoria es un testimonio de nuestra dedicación y trabajo en equipo.'",
+        tipoJuego: "Rainbow Six",
+        fecha: "2024-05-18"
     },
+    {
+        img: "src/img/noticias3.png",
+        titulo: "Sorpresa en el Campeonato: Los Titanes de Neón caen ante los Lobos de Sombra en un partido decisivo de Valorant",
+        contenido: "En un giro inesperado de eventos, los Titanes de Neón, considerados uno de los equipos más fuertes de la escena competitiva de Valorant, fueron derrotados por los Lobos de Sombra en un partido crucial del Campeonato Internacional de Valorant. El encuentro, que tuvo lugar anoche, dejó a los aficionados y analistas sorprendidos por el resultado.\n\nEl primer mapa, Ascent, comenzó con una ventaja temprana para los Titanes de Neón, gracias a la impresionante precisión de su duelist 'Electro' con Jett. Sin embargo, los Lobos de Sombra rápidamente ajustaron su estrategia y, liderados por su capitán 'Sombra', lograron equilibrar el marcador. La partida se mantuvo reñida hasta los últimos minutos, pero una brillante jugada de 'Sombra' con Omen aseguró el mapa para su equipo con un marcador de 13-11.\n\nEn el segundo mapa, Bind, los Lobos de Sombra dominaron desde el principio. 'Fénix', su entry fragger, mostró una actuación excepcional con Phoenix, ganando varias rondas cruciales para su equipo. A pesar de los esfuerzos de los Titanes de Neón por recuperar el control, los Lobos de Sombra mantuvieron su dominio y cerraron el mapa con un contundente 13-7.\n\nLa derrota de los Titanes de Neón en este partido los deja en una posición difícil para avanzar en el torneo, mientras que los Lobos de Sombra avanzan con confianza hacia las finales. Esta sorpresa demuestra que en el mundo de los deportes electrónicos, nada está garantizado, y cualquier equipo puede lograr la victoria con la estrategia y la ejecución adecuadas.\n\n'Estamos decepcionados con el resultado, pero aprenderemos de esta experiencia y volveremos más fuertes', comentó 'Electro', el capitán de los Titanes de Neón. Por otro lado, 'Sombra', el capitán de los Lobos de Sombra, expresó su orgullo por el desempeño de su equipo y su entusiasmo por las próximas rondas del campeonato.",
+        tipoJuego: "Valorant",
+        fecha: "2024-05-18"
+    },
+    {
+        img: "src/img/noticias4.png",
+        titulo: "Escándalo en el Torneo Internacional: Los Guardianes de la Tormenta descalificados por hacer trampa en Dota 2",
+        contenido: "En un escándalo que ha sacudido la comunidad de Dota 2, los Guardianes de la Tormenta, uno de los equipos más renombrados del circuito competitivo, han sido descalificados del Torneo Internacional tras ser descubiertos haciendo trampa durante un partido de calificación crucial.\n\nEl incidente ocurrió durante las eliminatorias de ayer, cuando se detectaron irregularidades en el comportamiento del equipo durante el partido contra los Dragones de Hielo. La organización del torneo, tras una investigación exhaustiva, confirmó que los Guardianes de la Tormenta utilizaron software no autorizado para obtener una ventaja injusta sobre sus oponentes.\n\nLa noticia de la descalificación se anunció oficialmente esta mañana, provocando una ola de reacciones en la comunidad de esports. Los Dragones de Hielo, que fueron perjudicados por las acciones de los Guardianes de la Tormenta, avanzarán automáticamente a la siguiente ronda de la competición.\n\n'Estamos profundamente decepcionados por el comportamiento de los Guardianes de la Tormenta', declaró el organizador del torneo en un comunicado. 'La integridad y la equidad son pilares fundamentales de nuestra competición, y cualquier violación de estas normas será castigada severamente.'\n\nLos Guardianes de la Tormenta han emitido una disculpa pública a través de sus redes sociales, reconociendo su culpa y aceptando la descalificación. 'Lamentamos profundamente nuestras acciones y aceptamos la decisión de los organizadores del torneo. Nos comprometemos a aprender de este error y a mejorar como equipo y como individuos', declaró el capitán del equipo, 'Trueno'.\n\nEste escándalo ha generado un intenso debate sobre la ética y la integridad en los deportes electrónicos, y muchos piden sanciones más severas y medidas preventivas para evitar futuros incidentes. Mientras tanto, los aficionados esperan ansiosos el desarrollo del torneo sin la presencia de los Guardianes de la Tormenta, que ahora deberán enfrentar las consecuencias de sus acciones.",
+        tipoJuego: "Dota 2",
+        fecha: "2024-05-18"
+    },
+    {
+        img: "src/img/noticias5.png",
+        titulo: "Wei y Daza de OnlyGG anuncian la expansión del torneo a escala internacional",
+        contenido: "En una emocionante conferencia de prensa celebrada ayer, Wei y Daza, los carismáticos anfitriones del popular canal de esports OnlyGG, anunciaron la expansión de su torneo anual a una escala internacional. Este ambicioso movimiento promete llevar la competencia a nuevos niveles y atraer a equipos de todo el mundo para participar en uno de los eventos más esperados del año en el mundo de los videojuegos.\n\n'Estamos encantados de anunciar que nuestro próximo torneo tendrá una escala internacional', declaró Wei, visiblemente emocionado. 'Hemos estado trabajando arduamente para hacer realidad este sueño, y finalmente podemos compartir esta noticia con todos nuestros seguidores y la comunidad de esports.'\n\nDaza añadió: 'La respuesta de la comunidad ha sido increíble, y estamos comprometidos a ofrecer la mejor experiencia posible. Este torneo no solo será una competencia de alto nivel, sino también una celebración de la diversidad y el talento de jugadores de todos los rincones del mundo.'\n\nEl torneo, que tradicionalmente ha contado con equipos de la región, ahora abrirá sus puertas a participantes internacionales, ofreciendo una plataforma más grande y prestigiosa. Se espera que el evento atraiga a los mejores equipos de juegos como League of Legends, Valorant, Dota 2 y otros títulos populares, aumentando así la competitividad y la emoción.\n\nLa expansión del torneo incluye premios más grandes, mejores infraestructuras y una cobertura mediática más amplia, lo que asegura que tanto los jugadores como los espectadores vivan una experiencia inolvidable. Además, se ha confirmado que habrá varias fases clasificatorias en diferentes regiones para garantizar que los mejores equipos tengan la oportunidad de participar.\n\n'Queremos agradecer a todos nuestros seguidores y patrocinadores por su apoyo continuo', concluyó Wei. 'Estamos ansiosos por ver cómo este torneo se convierte en un evento verdaderamente global y esperamos ofrecerles un espectáculo increíble.'\n\nEl anuncio ha sido recibido con entusiasmo por la comunidad de esports, y muchos ya están anticipando lo que promete ser uno de los eventos más emocionantes del próximo año. Con Wei y Daza al mando, la expansión de OnlyGG sin duda elevará el estándar de los torneos de esports a nivel mundial.",
+        tipoJuego: "General",
+        fecha: "2024-05-18"
+    }
+    
+    
+    
     // Agrega más noticias aquí si es necesario
 ];
 
@@ -321,7 +345,7 @@ nuevosProductos.forEach((producto) => {
 const nuevosJuegos = [
     {
         nombre: 'Dota 2',
-        imagen: 'src/img/lol.png',
+        imagen: 'src/img/dota.png',
     },
     {
         nombre: 'Free Fire',
@@ -333,15 +357,15 @@ const nuevosJuegos = [
     },
     {
         nombre: 'Valorant',
-        imagen: 'src/img/lol.png',
+        imagen: 'src/img/valorant.png',
     },
     {
         nombre: 'TFT',
         imagen: 'src/img/tft.png',
     },
     {
-        nombre: 'hola',
-        imagen: 'src/img/tft.png',
+        nombre: 'Rainbow Six',
+        imagen: 'src/img/rainbow.png',
     },
     
     // Agrega más juegos aquí si es necesario

@@ -98,30 +98,7 @@ const Producto = () => {
         ))}
       </div>
       <div className='producto-img'>
-        <AnimatePresence>
-          {imgParte && <motion.div 
-          key={imgParte}
-          layoutId={imgParte} 
-          initial={{
-            // opacity:0,
-            y:-100,
-            scale:0,
-          }} 
-          animate={{
-            // opacity:1,
-            y:0,
-            scale: 1,
-            
-          }} 
-          exit={{ 
-            // opacity: 0,
-            y:-100, 
-            scale:0
-          }}
-          style={{backgroundImage: `url(../${imgParte})`,}}
-          transition={{duration:1}}
-          ></motion.div>}
-        </AnimatePresence>
+        {imgParte && <div style={{backgroundImage: `url(../${imgParte})`}}></div>}
       </div> 
       <motion.div className='producto-detalle' 
       initial={{
