@@ -16,6 +16,7 @@ function App() {
   return (
     <>
       <ScrollToTop/>
+      {/* cada vez actualizar la página,llagará a cabecera de la página */}
       <Navbar/>
       {/* Solamente actualizar una parte cuando recarga la navegación para mejorar rendimiento */}
       <Routes>

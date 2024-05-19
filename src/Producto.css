@@ -15,11 +15,14 @@
     background-size: cover;
     cursor: pointer;
 }
+.producto-img{position: relative;
+    width: 500px;
+    height: 500px;}
 .producto-img>div{
+    position: absolute;
     width: 500px;
     height: 500px;
     background-size: cover;
-    transition: all 1s ease-in-out;
 }
 .producto-detalle{
     width: 500px;

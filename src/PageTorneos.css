@@ -1,0 +1,28 @@
+.torneos{
+    background: #000;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+article>div,aside>div{
+    border: 2px solid var(--default-color3);
+    color: var(--default-color4);
+}
+article{
+    grid-column:1/2;
+}
+aside{
+    grid-column:2/4;
+}
+article>div,aside>div{
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+aside>div>h3{
+    margin: 0 30px;
+}
+.grafico-partido{
+    height: 70%;
+}

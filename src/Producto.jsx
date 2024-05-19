@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-
+import { AnimatePresence } from 'framer-motion'
 const Producto = () => {
   const {id}=useParams();
   console.log(id);
@@ -30,6 +30,7 @@ const Producto = () => {
   console.log(producto);
   const apartados = producto.apartados || [];//si producto es null, volve a array de espacio
   console.log(apartados);
+  console.log(clickIndex);
   const yaClick = (apartado) => {
     setImg(apartado);
     setClickIndex(apartado); 
@@ -87,18 +88,40 @@ const Producto = () => {
       <main className='detalle'>
       <div className='producto-conjunto' >
         {apartados.map((apartado,index)=>(
-          <motion.div onClick={()=>{yaClick(apartado)}} key={index} className="producto-apartado" layoutId={apartado}
+          <motion.div onClick={()=>{yaClick(apartado)}} key={index} className="producto-apartado"
           animate={{
             backgroundImage: `url(../${apartado})`,
-            boxShadow: clickIndex==apartado ? "0px 0px 1px 2px var(--main-color)" : "none",
-            }}
+            boxShadow: apartado==clickIndex ? "0px 0px 1px 2px var(--main-color)" : "none",
+            }}//si ya ha elegido elemento actual , pues aparezca la animación
             >
           </motion.div>
         ))}
       </div>
       <div className='producto-img'>
-        {imgParte && <div style={{backgroundImage: `url(../${imgParte})`}}></div>}
-      </div> 
+        <AnimatePresence>
+          <motion.div 
+            initial={{
+              y:20,
+              opacity:0,
+            }}
+            animate={{
+              opacity:1,
+              y:0,
+              backgroundImage: imgParte?  `url(../${imgParte})`:'none'
+            }} 
+            exit={{
+              opacity:0,
+              y:-20
+            }}
+            transition={{
+              duration:1,
+              ease: 'easeInOut',
+            }}
+            className='producto-img'
+            key={imgParte? imgParte:""}//cambiar la imagen por elegir elemento de menu
+          ></motion.div>
+        </AnimatePresence>
+      </div>
       <motion.div className='producto-detalle' 
       initial={{
         opacity:0,
