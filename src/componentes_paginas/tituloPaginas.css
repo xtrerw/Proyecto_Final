@@ -23,5 +23,5 @@
     height: 100px;
     background: #000;
     padding: 10px 0;
-    clip-path: path("M 80,0 Q 50,5 40,30 L 0,122 L 700,122 L 660,30 Q 650,5 620,0 Z");    
+    clip-path: path("M 80,0 Q 50,5 40,30 L 0,122 L 700,122 L 660,30 Q 650,5 620,0 Z");/* M,Z son los puntos inicial y terminado,L es un linea que conecta 2 puntos, Q es curva que 3 puntos o multiples puntos, por ejemplo desde pto inicial [80,0] pasa a [50,5] hasta [40,30]  */    
 }

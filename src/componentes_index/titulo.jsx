@@ -57,7 +57,7 @@ function Titulo() {
               transition={{
                 duration:0.5,
                 delay: index/2,
-                ease:[0,0.3, 0.7, 2]
+                ease:"easeInOut"
               }}
             >{texto}</motion.p>))}
         </div>
@@ -66,7 +66,7 @@ function Titulo() {
         animate={{x:0,y:0}}
         transition={{
           duration:1,
-          ease:[0,0.3, 0.7,1]
+          ease:"easeInOut"
         }}
         src="src\img\imgTitulo.png" alt="" />
       </section>
