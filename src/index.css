@@ -9,6 +9,7 @@
   --default-color3:#c0c0c0;
   --default-color4:#7B7B7B;
   --boxshadow:2px 2px 4px rgb(183, 183, 183);
+  --hoverbtn:#ff0000;
 }
 html,body{
   margin: 0;

@@ -14,7 +14,7 @@
     flex-direction: column;
     align-items: center;
     clip-path: path('M 20,0 0,50 L 0,600 L 760,600 800,500 800,0 Z');
-    background: #000;
+    background: #252525;
     position: relative;
 }
 .tabla-seleccion{
@@ -65,6 +65,7 @@
 .tabla-user>div>label{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
     margin: 10px;
 }
@@ -77,13 +78,62 @@
 .ptos{
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     position: absolute;
-    bottom: 20%;
+    top: 15%;
 }
 .pto-usuario{
 
     width: 50px;
     height: 10px;
     background: #fff;
+}
+.registro{
+    width: 200px;
+    height: 50px;
+    background: var(--main-color);
+    color: #fff;
+    margin-top: 20px;
+    clip-path: path('M 20,0 L 0,20 0,50 L 180,50 200,30 200,0 Z');
+    font-size: 1rem;
+    position: relative;
+}
+.registro:active{
+    background: #fff;
+    color: var(--hoverbtn);
+}
+.under-linea,.up-linea,.left-linea,.right-linea{
+    background: goldenrod;
+    position: absolute;
+    border: none;
+}
+.under-linea{
+    bottom: -5px;
+}
+.up-linea{
+    top: -5px;
+    right: 5px;
+}
+.left-linea{
+    bottom: -5px;
+    left: 5px;
+}
+.right-linea{
+    top: -5px;
+    right: 5px;
+}
+.advertencia{
+    font-size: 10px;
+    color: red;
+    font-weight: lighter;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.advertencia>.bx-x-circle{
+    font-size: 12px;
+    margin-right: 5px;
+}
+.bx-arrow-back{
+    font-size: 40px;
 }

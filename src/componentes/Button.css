@@ -13,14 +13,14 @@
 
 .btn:hover {
   padding: 8px 20px;
-  box-shadow: 1px 1px 10px #ff0000;
+  box-shadow: 1px 1px 10px var(--hoverbtn);
   transition: 250ms;
-  background: #ff0000;
+  background: var(--hoverbtn);
 }
 .btn:active {
   transition: 250ms;
   background: #fff;
-  color: #ff0000;
+  color: var(--hoverbtn);
   box-shadow: none;
 }  
 
