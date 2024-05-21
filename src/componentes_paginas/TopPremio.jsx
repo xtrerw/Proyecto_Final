@@ -45,7 +45,7 @@ const topPremio = () => {
         <div className='top-premio-parte'>
           {tienda.map((item,index)=>(
               <Link to={`${item._id}`} key={index} style={{
-                backgroundImage:`url(src/img/premio${index+1}.png)`,
+                backgroundImage:`url(${item.imgBg})`,
                 transform: `translateX(${-pos*100}%)
                 scale(${index == pos+1 ? 0.8 : 0.6})`,
                 transition: 'transform 2s ease',

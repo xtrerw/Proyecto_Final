@@ -90,6 +90,7 @@ const tiendaSchemas = new mongoose.Schema({
     profundidad: Number,
     size: String,
     apartados: [String],
+    imgBg: String,
 });
 const TiendaModulo = mongoose.model('tienda', tiendaSchemas);
 
@@ -305,7 +306,8 @@ const nuevosProductos = [
         anchura: 28,
         profundidad: 28,
         size: null,
-        apartados:['src/img/top1.png','src/img/top1_p1.png','src/img/top1_p2.png','src/img/top1_p3.png','src/img/top1_p4.png']
+        apartados:['src/img/top1.png','src/img/top1_p1.png','src/img/top1_p2.png','src/img/top1_p3.png','src/img/top1_p4.png'],
+        imgBg:"../src/img/premio1.png",
     },
     {
         nombre: 'Dim Mak x Teamfight Tactics - Camiseta de B Llota',
@@ -318,7 +320,8 @@ const nuevosProductos = [
         anchura: null,
         profundidad: null,
         size: 'M',
-        apartados:['src/img/top2.png','src/img/top2_p1.png','src/img/top2_p2.png','src/img/top2_p3.png']
+        apartados:['src/img/top2.png','src/img/top2_p1.png','src/img/top2_p2.png','src/img/top2_p3.png'],
+        imgBg:"../src/img/premio2.png",
     },
     {
         nombre: 'PcCom Custom',
@@ -331,7 +334,8 @@ const nuevosProductos = [
         anchura: 40,
         profundidad: 100,
         size: 'M',
-        apartados:['src/img/top3.png','src/img/top3_p1.png','src/img/top3_p2.png']
+        apartados:['src/img/top3.png','src/img/top3_p1.png','src/img/top3_p2.png'],
+        imgBg:"../src/img/premio3.png",
     },
     // Agrega más productos aquí si es necesario
 ];
