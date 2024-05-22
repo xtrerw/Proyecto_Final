@@ -5,7 +5,9 @@ import { motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
 const Registro = () => {
+  //pasa los propiedades a componente TituloPaginas
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
+    //
     const items=["usuario","administrador"];
     const txtInform=["nombre","apellidos",];
     const emails=["correo electrónico","confirma correo"]
@@ -74,19 +76,23 @@ const Registro = () => {
     const fecha=moment(formData.fechaN)//conseguir la fecha de nacimiento
     const diff = hoy.diff(fecha, 'years');//obtener la edad de usuario
 
+    //actualizar la formulario
     const handleChange = (e) => {
+      //conseguir los elementos de formulario,name se refiere a nombreUsuario,nombre,etc, value se refiere a los valores que introduce
         const { name, value } = e.target;
+        //actualizar los valores de formData
         setFormData({
             ...formData,
             [name]: value,
         });
     };
-  
+
     const submit = async (e) => {
       e.preventDefault()
       if (diff<18 || formData.correo!=formData.confirmaCorreo || formData.contraseña!=formData.confirmaContraseña) {
         return console.log('condiciones sin válidos');
       }
+      //si no introduce los datos o introduce sin válidos, no va a envivar los datos
         
         try {
             const response = await fetch('http://localhost:3001/jugador', {
