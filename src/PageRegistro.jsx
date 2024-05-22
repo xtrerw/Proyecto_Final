@@ -3,6 +3,7 @@ import TituloPaginas from './componentes_paginas/tituloPaginas'
 import "./PageRegistro.css"
 import { motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
+import moment from 'moment'
 const Registro = () => {
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
     const items=["usuario","administrador"];
@@ -27,6 +28,7 @@ const Registro = () => {
     const [clickAdmin,setClickAdimn]=useState(pasosAdmin[0]);
     //animacion de hover btn
     const [hover,setHover]=useState(false)
+    //variants de tocar btn submit
     const lineaUpDown={
       sinHover:{
       width: '0px',
@@ -52,21 +54,25 @@ const Registro = () => {
     },
     }
 
-    const [valor,setValor]=useState();
+    // const [valor,setValor]=useState();
 
   // click btn para enviar los datos
-  const [btn,clickBtn]=useState(false)
+  // const [btn,clickBtn]=useState(false)
       // Form data state
       const [formData, setFormData] = useState({
+        nombreUsuario: '',
         nombre: '',
         apellidos: '',
+        fechaN: new Date(),
         correo: '',
-        contrasena: '',
-        userName: ''
+        confirmaCorreo: '',
+        contraseña: '',
+        confirmaContraseña: '',
     });
-    const [confirmaCorreo, setConfirmaCorreo] = useState(null);
-    const [confirmaContrasena, setConfirmaContrasena] = useState(null);
 
+    const hoy =moment();//conseguir fecha de hoy
+    const fecha=moment(formData.fechaN)//conseguir la fecha de nacimiento
+    const diff = hoy.diff(fecha, 'years');//obtener la edad de usuario
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -75,37 +81,40 @@ const Registro = () => {
             [name]: value,
         });
     };
-
-
-    const handleConfirmaCorreoChange = (e) => {
-      setConfirmaCorreo(e.target.value);
-  };
-
-  const handleConfirmaContrasenaChange = (e) => {
-      setConfirmaContrasena(e.target.value);
-  };
   
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         const response = await fetch('http://localhost:3001/registro', {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             body: JSON.stringify(formData),
-    //         });
-    //         const result = await response.json();
-    //         console.log('Success:', result);
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //     }
-    // };
+    const submit = async (e) => {
+      e.preventDefault()
+      if (diff<18 || formData.correo!=formData.confirmaCorreo || formData.contraseña!=formData.confirmaContraseña) {
+        return console.log('condiciones sin válidos');
+      }
+        
+        try {
+            const response = await fetch('http://localhost:3001/jugador', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                //hago así debido a que no quiero enviar los datos de confirma correo y contraseña
+                body: JSON.stringify({
+                  nombreUsuario: formData.nombreUsuario,
+                  nombre: formData.nombre,
+                  apellidos: formData.apellidos,
+                  fechaN: formData.fechaN,
+                  correo: formData.correo,
+                  contraseña: formData.contraseña
+              }),
+            });
+            const result = await response.json();
+            console.log('Success:', 'Enviar con éxito'+result);
+        } catch (error) {
+            console.error('Error:', 'Enviar erro '+error);
+        }
+    };
   return (
     <>
       <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
       <main className='tabla-registro'>
-        <section className='tabla'>
+        <form className='tabla' onSubmit={submit}>
           <div className='tabla-seleccion'>
             {/* secciones de cabecera de formulario, items que tiene usuario y administrador */}
             {items.map((item, index) =>(
@@ -140,19 +149,31 @@ const Registro = () => {
                     animate='quedamos'
                     exit='nosvamos'
                     >
+                      <label htmlFor="fecha">
+                        <p>fecha de nacimiento</p>
+                        <input type="date" name='fechaN' value={formData.fechaN} onChange={handleChange}/>
+                      </label>
                       <label htmlFor="nombreUser">
                         <p>nombre de usuario</p>
-                        <input type="text" />
+                        <input type="text" name='nombreUsuario' value={formData.nombreUsuario} onChange={handleChange}/>
                       </label>
+                      <p className='advertencia'>
+                        {/* comprobar los usuario si es menor de edad o si ya introduce al campo */}
+                        {(diff <18 || !formData.nombreUsuario) && (<i className='bx bx-x-circle' ></i>)}
+                        {diff <18? 'No permite que el menor de edad participan en la torneo. ':''}
+                        {!formData.nombreUsuario? 'Introduce el nombre de usuario.':''}
+                      </p>
+                      {/* btn al siguiente */}
                       <motion.button className='registro'
                       onHoverStart={()=>setHover(true)}
                       onHoverEnd={()=>setHover(false)}
                       onClick={()=>setClickUser(pasosUser[1])}//al siguiente campo
-                      type='submit'
+                      type='button'
                       animate={{
                         boxShadow:hover? '1px 1px 10px var(--hoverbtn)':'none',
-                        backgroundColor:hover? 'var(--hoverbtn)':'var(--main-color)',
+                        backgroundColor:(diff<18 || !formData.nombreUsuario)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
                       }}
+                      disabled={(diff<18 || !formData.nombreUsuario)? true:false}
                       >
                         <motion.i 
                         initial={{
@@ -161,7 +182,7 @@ const Registro = () => {
                           // opacity:1
                         }}
                         animate={{
-                          x:hover? 200:10,
+                          x:(diff<18 || !formData.nombreUsuario)? 10:hover? 200:10,
                           // opacity:hover? 0:1
                         }}
                         transition={{
@@ -176,7 +197,7 @@ const Registro = () => {
                           // opacity:0
                         }}
                         animate={{
-                          x:hover? -10:-200,
+                          x:(diff<18 || !formData.nombreUsuario)? -200:hover? -29:-200,
                           // opacity:hover? 1:0
                         }}
                         transition={{
@@ -199,18 +220,23 @@ const Registro = () => {
                     {txtInform.map((input,index)=>
                       <label htmlFor={input} key={index}>
                         <p>{input}</p>
-                        <input type="text"/>
+                        <input type="text" name={input} value={index==0? formData.nombre: formData.apellidos} onChange={handleChange}/>
                       </label>
                     )}
+                    <p className='advertencia'>
+                    {(!formData.apellidos || !formData.nombre) && (<i className='bx bx-x-circle' ></i>)}
+                        {(!formData.apellidos || !formData.nombre)? 'Introduce el nombre y apellidos':''}
+                    </p>
                     <motion.button className='registro'
                       onHoverStart={()=>setHover(true)}
                       onHoverEnd={()=>setHover(false)}
                       onClick={()=>setClickUser(pasosUser[2])}//al siguiente campo
-                      type='submit'
+                      type='button'
                       animate={{
                         boxShadow:hover? '1px 1px 10px var(--hoverbtn)':'none',
-                        backgroundColor:hover? 'var(--hoverbtn)':'var(--main-color)',
+                        backgroundColor:(!formData.apellidos || !formData.nombre)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
                       }}
+                      disabled={(!formData.apellidos || !formData.nombre)? true:false}
                       >
                         <motion.i 
                         initial={{
@@ -219,7 +245,7 @@ const Registro = () => {
                           // opacity:1
                         }}
                         animate={{
-                          x:hover? 200:10,
+                          x:(!formData.apellidos || !formData.nombre)? 10:hover? 200:10,
                           // opacity:hover? 0:1
                         }}
                         transition={{
@@ -234,7 +260,7 @@ const Registro = () => {
                           // opacity:0
                         }}
                         animate={{
-                          x:hover? -10:-200,
+                          x:(!formData.apellidos || !formData.nombre)? -200:hover? -29:-200,
                           // opacity:hover? 1:0
                         }}
                         transition={{
@@ -257,23 +283,24 @@ const Registro = () => {
                         (
                         <label key={index} htmlFor={email}>
                           <p>{email}</p>
-                          <input type="email" />
+                          <input type="email" name={index==0? 'correo':'confirmaCorreo'} value={index==0? formData.correo:formData.confirmaCorreo} onChange={handleChange}/>
                         </label>)
                       )}
                       {/* Advertencia de correo */}
                       <p className='advertencia'>
-                        {formData.contrasena !== confirmaContrasena && (<i className='bx bx-x-circle' ></i>)}
-                        {formData.correo !== confirmaCorreo? 'Los correos no coinciden':''}
+                        {(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo) && (<i className='bx bx-x-circle' ></i>)}
+                        {(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? 'Los correos no coinciden o no introduce el correo':''}
                       </p>
                       <motion.button className='registro'
                       onHoverStart={()=>setHover(true)}
                       onHoverEnd={()=>setHover(false)}
                       onClick={()=>setClickUser(pasosUser[3])}//al siguiente campo
-                      type='submit'
+                      type='button'
                       animate={{
                         boxShadow:hover? '1px 1px 10px var(--hoverbtn)':'none',
-                        backgroundColor:hover? 'var(--hoverbtn)':'var(--main-color)',
+                        backgroundColor:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
                       }}
+                      disabled={(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? true:false}
                       >
                         <motion.i 
                         initial={{
@@ -282,7 +309,7 @@ const Registro = () => {
                           // opacity:1
                         }}
                         animate={{
-                          x:hover? 200:10,
+                          x:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? 10:hover? 200:10,
                           // opacity:hover? 0:1
                         }}
                         transition={{
@@ -297,7 +324,7 @@ const Registro = () => {
                           // opacity:0
                         }}
                         animate={{
-                          x:hover? -10:-200,
+                          x:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? -200:hover? -29:-200,
                           // opacity:hover? 1:0
                         }}
                         transition={{
@@ -319,47 +346,48 @@ const Registro = () => {
                         (
                         <label key={index} htmlFor={pwd}>
                           <p>{pwd}</p>
-                          <input type="password" />
+                          <input type="password" name={index==0? 'contraseña':'confirmaContraseña'} value={index==0? formData.contraseña:formData.confirmaContraseña} onChange={handleChange} />
                         </label>
                       ))}
                       {/* Advertencia de contraseña */}
                       <p className='advertencia'>
-                        {formData.contrasena !== confirmaContrasena && (<i className='bx bx-x-circle' ></i>)}
-                        {formData.contrasena !== confirmaContrasena? "Las contraseñas no coinciden":""}
+                        {(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña) && (<i className='bx bx-x-circle' ></i>)}
+                        {(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? "Las contraseñas no coinciden o la contraseña es vácio":""}
                       </p>
-                      {/* btn registro */}
+                      {/* btn submit */}
                       <motion.button className='registro'
                       onHoverStart={()=>setHover(true)}
                       onHoverEnd={()=>setHover(false)}
-                      onClick={()=>clickBtn(true)}
+                      // onClick={()=>clickBtn(true)}
                       type='submit'
                       animate={{
-                        color:hover? 'orange': '#fff',
+                        color:(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':hover? 'orange': '#fff',
                         boxShadow:hover? '1px 1px 10px var(--hoverbtn)':'none',
-                        backgroundColor:hover? 'var(--hoverbtn)':'var(--main-color)',
+                        backgroundColor:(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
                       }}
+                      disabled={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? true:false}
                       >
                         {/* tranferir la variant que establecemos */}
                         <motion.hr className='up-linea'
                       variants={lineaUpDown}
                       initial='sinHover'
-                      animate='hover'
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                       <motion.hr className='right-linea'
                       variants={lineaRightLeft}
                       initial='sinHover'
-                      animate='hover'
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                         Registrar
                         <motion.hr className='left-linea'
                       variants={lineaRightLeft}
                       initial='sinHover'
-                      animate='hover'
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                       <motion.hr className='under-linea'
                       variants={lineaUpDown}
                       initial='sinHover'
-                      animate='hover'
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                       </motion.button>
                       </motion.div>
@@ -415,7 +443,7 @@ const Registro = () => {
                 }
             </motion.div>
           </AnimatePresence>
-        </section>
+        </form>
       </main>
     </>
   )

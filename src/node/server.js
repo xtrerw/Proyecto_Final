@@ -43,10 +43,14 @@ const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
 
 // Jugadores
 const jugadoresSchema = new mongoose.Schema({
+    nombreUsuario:String,
     nombre: String,
     apellidos: String,
-    año: Number,
-    nacionalidad: String
+    fechaN: {
+        format: Date,
+    },//fecha de nacimiento
+    correo: String,
+    contraseña: String,
 });
 const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 
@@ -106,19 +110,56 @@ const JuegoModelo = mongoose.model('Juego', juegoSchema);
 // Array de documentos a agregar para Jugadores
 const nuevosJugadores = [
     {
-        nombre: 'Nuevo Jugador',
-        apellidos: 'Apellido Nuevo',
-        año: 25,
-        nacionalidad: 'Nueva Nacionalidad',
+        nombreUsuario: 'NoobGG',
+        nombre: 'Luis',
+        apellidos: 'Garcia',
+        fechaN: new Date(1985, 3, 7),  // 1985-04-07
+        correo: 'noob@gmail.es',
+        contraseña: '12345'
     },
     {
-        nombre: 'Nuevo Jugador 2',
-        apellidos: 'Apellido Nuevo 2',
-        año: 22,
-        nacionalidad: 'Nueva Nacionalidad 2',
+        nombreUsuario: 'ProGamer21',
+        nombre: 'Javier',
+        apellidos: 'Martinez',
+        fechaN: new Date(1993, 9, 15),  // 1993-10-15
+        correo: 'javier@gmail.es',
+        contraseña: '12345'
     },
-    // Agrega más jugadores aquí si es necesario
+    {
+        nombreUsuario: 'SpeedyGonzales',
+        nombre: 'Maria',
+        apellidos: 'Lopez',
+        fechaN: new Date(1987, 6, 22),  // 1987-07-22
+        correo: 'maria@gmail.es',
+        contraseña: '12345'
+    },
+    {
+        nombreUsuario: 'MasterChief92',
+        nombre: 'Juan',
+        apellidos: 'Hernandez',
+        fechaN: new Date(1992, 11, 10),  // 1992-12-10
+        correo: 'juan@gmail.es',
+        contraseña: '12345'
+    },
+    {
+        nombreUsuario: 'NinjaWarrior',
+        nombre: 'Andrea',
+        apellidos: 'Rodriguez',
+        fechaN: new Date(1989, 2, 28),  // 1989-03-28
+        correo: 'andrea@gmail.es',
+        contraseña: '12345'
+    },
+    {
+        nombreUsuario: 'GoldenSnitch',
+        nombre: 'Sara',
+        apellidos: 'Fernandez',
+        fechaN: new Date(1996, 7, 14),  // 1996-08-14
+        correo: 'sara@gmail.es',
+        contraseña: '12345'
+    }
 ];
+
+
 
 // Agregar múltiples jugadores
 nuevosJugadores.forEach((jugador) => {

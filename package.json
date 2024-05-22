@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "framer-motion": "^11.0.23",
     "mangodb": "^1.0.0",
+    "moment": "^2.30.1",
     "mongodb": "^6.6.1",
     "mongoose": "^8.3.4",
     "prop-types": "^15.8.1",

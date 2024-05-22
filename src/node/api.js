@@ -36,18 +36,26 @@ app.get('/noticias', async (req, res) => {
     }
 });
 
-// API para manejar el registro
+// API de tramito del registro
 app.post('/jugador', async (req, res) => {
     try {
-        const { nombre, apellidos, correo, confirmaCorreo, contrasena, confirmaContrasena, userName } = req.body;
+        //conseguir los datos de la cuerpo de petición enviado desde la pageRegistro
+        const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña} = req.body
+        //crear nuevo modelo por el de los jugadores
+        const nuevoJugador=new ServerMod.JugadorModulo({
+            nombreUsuario,
+            nombre,
+            apellidos,
+            fechaN,
+            correo,
+            contraseña
+        })
 
-        // Aquí puedes agregar lógica para almacenar estos datos en tu base de datos
-        // Ejemplo:
-        // const nuevoUsuario = new UsuarioModelo({ nombre, apellidos, correo, contrasena, userName });
-        // await nuevoUsuario.save();
+        await nuevoJugador.save()//guardar los datos a modelo de los jugadores
 
         res.status(200).json({ message: 'Registro exitoso' });
     } catch (error) {
+        //muestra error
         console.error('Error de registro:', error);
         res.status(500).json({ error: 'Error en el servidor' });
     }
