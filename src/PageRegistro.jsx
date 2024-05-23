@@ -8,12 +8,12 @@ const Registro = () => {
   //pasa los propiedades a componente TituloPaginas
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
     //
-    const items=["usuario","administrador"];
+    const items=["iniciar","registrar"];
     const txtInform=["nombre","apellidos",];
     const emails=["correo electrónico","confirma correo"]
     const pwds=["contraseña","confirma contraseña"]
     const ptoRegistro=[0,1,2,3]
-    const ptoAdmin=[0,1,2,3,4]
+
     //elegir usuario o administrador
     const [click,setClick]=useState(items[0]);
     //los pasos de registro
@@ -25,9 +25,6 @@ const Registro = () => {
     //pasos de usuario
     const pasosUser=["userName","txtInform","emails","pwds"]//para carrusel de los inputs
     const [clickUser,setClickUser]=useState(pasosUser[0]);
-    //pasos de administrador
-    const pasosAdmin=["dasdsa","dqwewqe","ewqeqw","cxzc","jtyht"]//hay que modificar los pasos de registro o inicial sessión de administrador
-    const [clickAdmin,setClickAdimn]=useState(pasosAdmin[0]);
     //animacion de hover btn
     const [hover,setHover]=useState(false)
     //variants de tocar btn submit
@@ -55,13 +52,10 @@ const Registro = () => {
       opacity:hover? 1:0,
     },
     }
-
-    // const [valor,setValor]=useState();
-
-  // click btn para enviar los datos
-  // const [btn,clickBtn]=useState(false)
       // Form data state
       const [formData, setFormData] = useState({
+        nombreIS:'',
+        contraseñaIS:'',
         nombreUsuario: '',
         nombre: '',
         apellidos: '',
@@ -71,6 +65,8 @@ const Registro = () => {
         contraseña: '',
         confirmaContraseña: '',
     });
+    const [message, setMessage] = useState(''); 
+    const [message2, setMessage2] = useState(''); 
 
     const hoy =moment();//conseguir fecha de hoy
     const fecha=moment(formData.fechaN)//conseguir la fecha de nacimiento
@@ -89,12 +85,10 @@ const Registro = () => {
 
     const submit = async (e) => {
       e.preventDefault()
-      if (diff<18 || formData.correo!=formData.confirmaCorreo || formData.contraseña!=formData.confirmaContraseña) {
-        return console.log('condiciones sin válidos');
-      }
       //si no introduce los datos o introduce sin válidos, no va a envivar los datos
         
         try {
+          //conecta servidor virtual creado
             const response = await fetch('http://localhost:3001/jugador', {
                 method: 'POST',
                 headers: {
@@ -110,12 +104,40 @@ const Registro = () => {
                   contraseña: formData.contraseña
               }),
             });
+
             const result = await response.json();
             console.log('Success:', 'Enviar con éxito'+result);
+
+            //manda nombre y contrase;a de usuario que iniciar sesi'on
+            const response2 = await fetch('http://localhost:3001/confirma',{
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                nombreIS:formData.nombreIS,
+                contraseñaIS:formData.contraseñaIS,
+              }),
+
+            });
+
+            const result2=await response2.json()
+            //si la verificacion bien, se sale la msg con 'exito
+            if (response2.ok) {
+              console.log('Success:', 'Enviar para comprobar', result2);
+              setMessage('Verificación exitosa');
+          } else {
+              console.error('Error:', 'Error en la verificación', result2);
+              setMessage('Error en la verificación: ' + result2.error);
+          }
+
+
         } catch (error) {
             console.error('Error:', 'Enviar erro '+error);
         }
     };
+
+    // parte html
   return (
     <>
       <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
@@ -123,29 +145,114 @@ const Registro = () => {
         <form className='tabla' onSubmit={submit}>
           <div className='tabla-seleccion'>
             {/* secciones de cabecera de formulario, items que tiene usuario y administrador */}
-            {items.map((item, index) =>(
+            {items.map((seccion, index) =>(
               <motion.div 
               key={index}
               whileHover={{
-                backgroundColor:item==click? 'var(--main-color2)':'var(--main-color)',
+                backgroundColor:seccion==click? 'var(--main-color2)':'var(--main-color)',
               }}
               animate={{
-                backgroundColor:item==click? 'var(--main-color)':'#000',
+                backgroundColor:seccion==click? 'var(--main-color)':'#000',
                 cursor:"pointer"
               }}
-              className={item}
-              onClick={()=>setClick(item)}
+              className={seccion}
+              onClick={()=>setClick(seccion)}
               >
-                <p>{item}</p>
+                <p>{seccion=='iniciar'? 'INICIAR SESIÓN':'REGISTRO'}</p>
               </motion.div>
             ))}
           </div>
+          
             {/* si elija la selección usuario, aparece su tabla */}
-          {click==items[0]?
-            <AnimatePresence>
+          {click=='iniciar' && !message?
+          //parte de iniciar sesión
+          <AnimatePresence>
+          <motion.div className='tabla-user'>
+            <motion.div
+          variants={inputUser}
+          initial='vamos'
+          animate='quedamos'
+          exit='nosvamos'>
+            <label htmlFor="Nombre de usuario">
+              <p>usuario</p>
+              <input type="text" name='nombreIS' value={formData.nombreIS} onChange={handleChange}/>
+            </label>
+            <label htmlFor="pwd">
+              <p>contraseña</p>
+              <input type="password" name='contraseñaIS' value={formData.contraseñaIS} onChange={handleChange} />
+            </label>
+            {/* no tienes cuenta */}
+            <p className='recordatorio' 
+            onMouseEnter={()=>setHover(true)}
+            onMouseLeave={()=>setHover(false)} 
+            onClick={()=>{setClick('registrar')}}
+            >
+              ¿ no tienes cuenta ?
+            </p>
+              {/* btn de iniciar sesi'on */}
+            <motion.button className='registro'
+            onHoverStart={()=>setHover(true)}
+            onHoverEnd={()=>setHover(false)}
+            type='submit'
+            animate={{
+              color:(!formData.nombreIS || !formData.contraseñaIS)? '':hover? 'orange': '#fff',
+              boxShadow:hover? '1px 1px 10px var(--hoverbtn)':'none',
+              backgroundColor:(!formData.nombreIS || !formData.contraseñaIS)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
+            }}
+            disabled={(!formData.nombreIS || !formData.contraseñaIS)? true:false}
+            >
+              {/* tranferir la variant que establecemos */}
+              <motion.hr className='up-linea'
+            variants={lineaUpDown}
+            initial='sinHover'
+            animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
+            ></motion.hr>
+            <motion.hr className='right-linea'
+            variants={lineaRightLeft}
+            initial='sinHover'
+            animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
+            ></motion.hr>
+              Iniciar Sessión
+              <motion.hr className='left-linea'
+            variants={lineaRightLeft}
+            initial='sinHover'
+            animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
+            ></motion.hr>
+            <motion.hr className='under-linea'
+            variants={lineaUpDown}
+            initial='sinHover'
+            animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
+            ></motion.hr>
+            </motion.button>
+            </motion.div>
+          </motion.div>
+        </AnimatePresence> : 
+        // mensaje de iniciar con 'existos
+        click=='iniciar' && message? 
+        <AnimatePresence>
+        <motion.div className='tabla-user'>
+          <motion.div
+        variants={inputUser}
+        initial='vamos'
+        animate='quedamos'
+        exit='nosvamos'>
+          <motion.p className='exito' onClick={()=>setMessage('')}
+          variants={inputUser}
+          initial='vamos'
+          animate='quedamos'
+          exit='nosvamos'
+          >{message}</motion.p>
+          </motion.div>
+        </motion.div>
+      </AnimatePresence> :
+            //parte de registro
+         click=='registrar' && !message2?
+        <AnimatePresence>
               <motion.div className='tabla-user'>
-                {/* se aparezca los campos si elige los correspondientes pasos */}
-                  { clickUser==pasosUser[0]? 
+                  {/* si teine cuenta, iniciar sesi'on */}
+                  { 
+                  /* se aparezca los campos si elige los correspondientes pasos */
+                  clickUser==pasosUser[0]? 
                   <AnimatePresence>
                     {/* 1º input */}
                     <motion.div 
@@ -154,7 +261,7 @@ const Registro = () => {
                     initial='vamos'
                     animate='quedamos'
                     exit='nosvamos'
-                    >
+                    > 
                       <label htmlFor="fecha">
                         <p>fecha de nacimiento</p>
                         <input type="date" name='fechaN' value={formData.fechaN} onChange={handleChange}/>
@@ -357,8 +464,8 @@ const Registro = () => {
                       ))}
                       {/* Advertencia de contraseña */}
                       <p className='advertencia'>
-                        {(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña) && (<i className='bx bx-x-circle' ></i>)}
-                        {(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? "Las contraseñas no coinciden o la contraseña es vácio":""}
+                        {(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña) && (<i className='bx bx-x-circle' ></i>)}
+                        {(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? "Las contraseñas no coinciden o la contraseña es vácio":""}
                       </p>
                       {/* btn submit */}
                       <motion.button className='registro'
@@ -367,33 +474,33 @@ const Registro = () => {
                       // onClick={()=>clickBtn(true)}
                       type='submit'
                       animate={{
-                        color:(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':hover? 'orange': '#fff',
+                        color:(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? '':hover? 'orange': '#fff',
                         boxShadow:hover? '1px 1px 10px var(--hoverbtn)':'none',
-                        backgroundColor:(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
+                        backgroundColor:(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? 'var(--disabled-btn)':hover? 'var(--hoverbtn)':'var(--main-color)',
                       }}
-                      disabled={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? true:false}
+                      disabled={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? true:false}
                       >
                         {/* tranferir la variant que establecemos */}
                         <motion.hr className='up-linea'
                       variants={lineaUpDown}
                       initial='sinHover'
-                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                       <motion.hr className='right-linea'
                       variants={lineaRightLeft}
                       initial='sinHover'
-                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                         Registrar
                         <motion.hr className='left-linea'
                       variants={lineaRightLeft}
                       initial='sinHover'
-                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                       <motion.hr className='under-linea'
                       variants={lineaUpDown}
                       initial='sinHover'
-                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña ||formData.confirmaContraseña)? '':'hover'}
+                      animate={(formData.contraseña !== formData.confirmaContraseña || !formData.contraseña || !formData.confirmaContraseña)? '':'hover'}
                       ></motion.hr>
                       </motion.button>
                       </motion.div>
@@ -401,10 +508,9 @@ const Registro = () => {
                   }
                 
               </motion.div>
-          </AnimatePresence>:
-          <AnimatePresence></AnimatePresence>
+        </AnimatePresence> : null
           }
-          {/* los punto si elige */}
+          {/* los punto de carrusel si elige */}
           <AnimatePresence>
             <motion.div className='ptos' 
             initial={{
@@ -415,14 +521,11 @@ const Registro = () => {
               x:0,
               opacity:1,
             }}
-            exit={{
-              x:-100,
-              opacity:0
-            }}
             key={click? click:""}//si ya pongamos click de usuario o administrador, aparece animaci'on
             >
-              {/* ptos en la usuario */}
-                {click=='usuario'?
+              {/* si no hay cuenta, se aparezca los ptos */}
+                {click=='iniciar'?  '': 
+                  // ptos en registro
                   ptoRegistro.map(pto=>
                     <motion.div key={pto} className='pto-usuario' onClick={()=>setClickUser(pasosUser[pto])} 
                     whileHover={{
@@ -430,18 +533,6 @@ const Registro = () => {
                     }}
                     animate={{
                       background:pasosUser[pto]==clickUser? 'var(--main-color)':'',
-                      cursor:'pointer'
-                    }}
-                    ></motion.div>
-                  ) : 
-                  // ptos en la administrador
-                  ptoAdmin.map(pto=>
-                    <motion.div key={pto} className='pto-usuario' onClick={()=>setClickAdimn(pasosAdmin[pto])}
-                    whileHover={{
-                      background:pasosAdmin[pto]==clickAdmin? 'var(--main-color2)':'var(--main-color)'
-                    }}
-                    animate={{
-                      background:pasosAdmin[pto]==clickAdmin? 'var(--main-color)':'',
                       cursor:'pointer'
                     }}
                     ></motion.div>

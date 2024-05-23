@@ -60,8 +60,17 @@ app.post('/jugador', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
-
-  
+//comprobar usuario que iniciar sesión
+  app.post('/confirma', async(req, res)=>{
+    try {
+        const {nombreIS,contraseñaIS}=req.body
+        //encontrar el usuario en modelo de jugador
+        const confirmar = await ServerMod.JugadorModulo.findOne({nombreIS,contraseñaIS})
+        res.json(confirmar)
+    } catch (error) {
+        res.status(500).json({error:'Error del servidor'})
+    }
+  })
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

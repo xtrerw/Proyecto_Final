@@ -8,12 +8,12 @@
 }
 .tabla{
     width: 800px;
-    height: 600px;
+    height: 700px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    clip-path: path('M 20,0 0,50 L 0,600 L 760,600 800,500 800,0 Z');
+    clip-path: path('M 20,0 0,50 L 0,700 L 760,700 800,500 800,0 Z');
     background: #252525;
     position: relative;
 }
@@ -22,21 +22,21 @@
     height: 50px;
     position: relative;
 }
-.usuario{
+.iniciar{
     width: 53%;
     clip-path: path('M 20,0 L 0,50 L 400,50 420,0 Z');
     left: 0;
     top: 0;
     z-index: 0;
 }
-.administrador{
+.registrar{
     width: 50%;
     clip-path: path('M 20,0 L 0,50 L 400,50 400,0 Z');
     right: 0;
     z-index: 100;
     top: 0;
 }
-.usuario,.administrador{
+.iniciar,.registrar{
     position: absolute;
     background: #000;
     height: 50px;
@@ -52,7 +52,7 @@
 /* centrar los divs entradas */
 .tabla-user{
     width: 100%;
-    height: 70%;
+    height: 100%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -69,12 +69,27 @@
     gap: 20px;
     margin: 10px;
 }
+/* input y p de label */
+.tabla-user>div>label>p{
+    text-transform: uppercase;
+}
 .tabla-user>div>label>input{
     height: 50px;
     width: 300px;
     font-size: 30px;
     padding: 5px 10px;
 }
+/* tienes cuentas */
+.recordatorio{
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 25px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* pto de carrusel */
 .ptos{
     display: flex;
     justify-content: center;
@@ -136,4 +151,9 @@
 }
 .bx-arrow-back{
     font-size: 40px;
+}
+/* iniciar sesión con éxito */
+.exito{
+    color: green;
+    font-size: 12px;
 }
