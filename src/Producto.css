@@ -15,14 +15,18 @@
     background-size: cover;
     cursor: pointer;
 }
-.producto-img{position: relative;
-    width: 500px;
-    height: 500px;}
-.producto-img>div{
-    position: absolute;
+.producto-img{
+    position: relative;
     width: 500px;
     height: 500px;
+}
+.producto-img>div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .producto-detalle{
     width: 500px;
@@ -82,4 +86,35 @@ hr{background: var(--default-color3);}
 .scroll-left{
     margin-bottom: 5%;
     
+}
+@media (max-width:1300px) {
+    .detalle{
+        height: 150vh;
+    }
+    .producto-img{
+        width: 450px;
+        height: 450px;
+    }
+    .producto-img>div{
+        background-size: 50%;
+    }
+    .producto-detalle{
+        width: 400px;
+        height: 300px;
+    }
+    .producto-detalle>h2{
+        font-size: 20px;
+    }
+    .producto-detalle>h3{
+        font-size: 15px;
+    }
+    .producto-detalle>p{
+        font-size: 10px;
+        margin: 10px 0 5px 0;
+    }
+    .btn-canejar{
+        width: 100px;
+        height: 30px;
+        font-size: 8px;
+    }
 }

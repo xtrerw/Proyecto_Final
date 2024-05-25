@@ -53,3 +53,16 @@
     font-size: 15px;
     color: #fff;
 }
+@media (max-width:1300px) {
+    .productos{
+        grid-template-columns: repeat(3,auto);
+    }
+    .producto{
+        width: 250px;
+        height: 300px;
+    }
+    .producto>img{
+        width: 150px;
+        height: auto;
+    }
+}

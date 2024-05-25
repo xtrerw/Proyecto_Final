@@ -157,3 +157,79 @@
     color: green;
     font-size: 12px;
 }
+/* responsive */
+@media (max-width:1300px) {
+    /* establece los textos */
+    .tabla p{
+        font-size: 10px;
+    }
+    .bx-arrow-back{
+        font-size: 20px;
+    }
+    .tabla-registro{
+        height: 150vh;
+    }
+    .tabla{
+        width: 300px;
+        height: 400px;
+        clip-path: path('M 30,0 0,30 L 0,400 L 260,400 300,360 300,0 Z');
+    }
+    .iniciar,.registrar{
+        height: 30px;
+    }
+    .iniciar{
+        width: 60%;
+        clip-path: path('M 30,0 L 0,30 L 150,30 180,0 Z');
+        left: 0;
+        top: 0;
+        z-index: 0;
+    }
+    .registrar{
+        width: 50%;
+        clip-path: path('M 30,0 L 0,30 L 150,30 150,0 Z');
+        right: 0;
+        z-index: 100;
+        top: 0;
+    }
+    .tabla-user>div{
+        top: 10%;
+        text-align: center;
+    }
+    
+    .tabla-user>div>label>input{
+        height: 30px;
+        width: 150px;
+        font-size: 1rem;
+        padding: 5px 10px;
+    }
+    .registro{
+        font-size: 10px;
+        width: 150px;
+        height: 30px;
+        margin-top: 0px;
+        clip-path: path('M 10,0 L 0,10 0,30 L 140,30 150,20 150,0 Z');
+    }
+    .recordatorio{
+        margin: 20px 0;
+    }
+    .under-linea,.up-linea,.left-linea,.right-linea{
+        display: none;
+    }
+    .pto-usuario{
+        width: 20px;
+        height: 2px;
+    }
+    .tabla-seleccion{
+        width: 100%;
+        height: 20px;
+        position: relative;
+    }
+    .ptos{
+        top: 10%;
+    }
+    .advertencia{
+        width: 250px;
+        font-size: 10px;
+        margin: 20px;
+    }
+}
