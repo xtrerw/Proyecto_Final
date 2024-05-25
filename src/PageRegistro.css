@@ -151,6 +151,9 @@
 }
 .bx-arrow-back{
     font-size: 40px;
+    position: absolute;
+    right: calc(45%);
+    top: 20%;
 }
 /* iniciar sesión con éxito */
 .exito{

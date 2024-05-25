@@ -300,12 +300,12 @@ const Registro = () => {
                       >
                         <motion.i 
                         initial={{
-                          x:10,
+                          x:0,
                           rotate:"180deg",
                           // opacity:1
                         }}
                         animate={{
-                          x:(diff<18 || !formData.nombreUsuario)? 10:hover? 200:10,
+                          x:(diff<18 || !formData.nombreUsuario)? 0:hover? 200:0,
                           // opacity:hover? 0:1
                         }}
                         transition={{
@@ -320,7 +320,7 @@ const Registro = () => {
                           // opacity:0
                         }}
                         animate={{
-                          x:(diff<18 || !formData.nombreUsuario)? -200:hover? -29:-200,
+                          x:(diff<18 || !formData.nombreUsuario)? -200:hover? 0:-200,
                           // opacity:hover? 1:0
                         }}
                         transition={{
@@ -363,12 +363,12 @@ const Registro = () => {
                       >
                         <motion.i 
                         initial={{
-                          x:10,
+                          x:0,
                           rotate:"180deg",
                           // opacity:1
                         }}
                         animate={{
-                          x:(!formData.apellidos || !formData.nombre)? 10:hover? 200:10,
+                          x:(!formData.apellidos || !formData.nombre)? 0:hover? 200:0,
                           // opacity:hover? 0:1
                         }}
                         transition={{
@@ -383,7 +383,7 @@ const Registro = () => {
                           // opacity:0
                         }}
                         animate={{
-                          x:(!formData.apellidos || !formData.nombre)? -200:hover? -29:-200,
+                          x:(!formData.apellidos || !formData.nombre)? -200:hover? 0:-200,
                           // opacity:hover? 1:0
                         }}
                         transition={{
@@ -427,12 +427,12 @@ const Registro = () => {
                       >
                         <motion.i 
                         initial={{
-                          x:10,
+                          x:0,
                           rotate:"180deg",
                           // opacity:1
                         }}
                         animate={{
-                          x:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? 10:hover? 200:10,
+                          x:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? 0:hover? 200:0,
                           // opacity:hover? 0:1
                         }}
                         transition={{
@@ -447,7 +447,7 @@ const Registro = () => {
                           // opacity:0
                         }}
                         animate={{
-                          x:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? -200:hover? -29:-200,
+                          x:(formData.correo !== formData.confirmaCorreo || !formData.correo || !formData.confirmaCorreo)? -200:hover? 0:-200,
                           // opacity:hover? 1:0
                         }}
                         transition={{
