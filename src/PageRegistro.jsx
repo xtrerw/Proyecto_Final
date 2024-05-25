@@ -83,33 +83,14 @@ const Registro = () => {
         });
     };
 
-    const submit = async (e) => {
+    const submitIS = async (e) => {
       e.preventDefault()
       //si no introduce los datos o introduce sin válidos, no va a envivar los datos
         
         try {
-          //conecta servidor virtual creado
-            const response = await fetch('http://localhost:3001/jugador', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                //hago así debido a que no quiero enviar los datos de confirma correo y contraseña
-                body: JSON.stringify({
-                  nombreUsuario: formData.nombreUsuario,
-                  nombre: formData.nombre,
-                  apellidos: formData.apellidos,
-                  fechaN: formData.fechaN,
-                  correo: formData.correo,
-                  contraseña: formData.contraseña
-              }),
-            });
-
-            const result = await response.json();
-            console.log('Success:', 'Enviar con éxito'+result);
-
             //manda nombre y contrase;a de usuario que iniciar sesi'on
-            const response2 = await fetch('http://localhost:3001/confirma',{
+            //conecta el servidor virtual que creamos
+            const response = await fetch('http://localhost:3001/iniciar',{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -121,28 +102,57 @@ const Registro = () => {
 
             });
 
-            const result2=await response2.json()
+            const result=await response.json()
             //si la verificacion bien, se sale la msg con 'exito
-            if (response2.ok) {
-              console.log('Success:', 'Enviar para comprobar', result2);
+            if (response.ok) {
+              console.log('Enviar para comprobar', result);
               setMessage('Verificación exitosa');
           } else {
-              console.error('Error:', 'Error en la verificación', result2);
-              setMessage('Error en la verificación: ' + result2.error);
+              console.error('Error en la verificación', result);
+              setMessage('Error en la verificación: ' + result.error);
           }
 
 
-        } catch (error) {
-            console.error('Error:', 'Enviar erro '+error);
+       } catch (error) {
+           console.error('Error:', 'Enviar erro '+error);
         }
     };
-
+    //enviar el formulario de registro
+    const submitRegistro= async(e) => {
+      e.preventDefault();
+      try {
+        const respone=await fetch('http://localhost:3001/registro',{
+          method: 'POST',
+          headers:{
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            nombreUsuario: formData.nombreUsuario,
+            nombre: formData.nombre,
+            apellidos: formData.apellidos,
+            fechaN: formData.fechaN,
+            correo: formData.correo,
+            contraseña: formData.contraseña
+          })
+        });
+        const result=await respone.json();
+        if (respone.ok) {
+          console.log('Registro con éxito'+result);
+          setMessage2('Ya registra usted');
+        }else{
+          console.error('Error en la verificación'+result);
+          setMessage2('Existe error de registro');
+        } 
+      } catch (error) {
+        console.error('Error de enviar',error)
+      }
+    };
     // parte html
   return (
     <>
       <TituloPaginas img={state.img} titulo={state.title} des={state.description}/>
       <main className='tabla-registro'>
-        <form className='tabla' onSubmit={submit}>
+        <div className='tabla'>
           <div className='tabla-seleccion'>
             {/* secciones de cabecera de formulario, items que tiene usuario y administrador */}
             {items.map((seccion, index) =>(
@@ -167,7 +177,7 @@ const Registro = () => {
           {click=='iniciar' && !message?
           //parte de iniciar sesión
           <AnimatePresence>
-          <motion.div className='tabla-user'>
+          <motion.form className='tabla-user' onSubmit={submitIS}>
             <motion.div
           variants={inputUser}
           initial='vamos'
@@ -225,12 +235,12 @@ const Registro = () => {
             ></motion.hr>
             </motion.button>
             </motion.div>
-          </motion.div>
+          </motion.form>
         </AnimatePresence> : 
         // mensaje de iniciar con 'existos
         click=='iniciar' && message? 
         <AnimatePresence>
-        <motion.div className='tabla-user'>
+        <motion.form className='tabla-user' onSubmit={submitRegistro}>
           <motion.div
         variants={inputUser}
         initial='vamos'
@@ -243,7 +253,7 @@ const Registro = () => {
           exit='nosvamos'
           >{message}</motion.p>
           </motion.div>
-        </motion.div>
+        </motion.form>
       </AnimatePresence> :
             //parte de registro
          click=='registrar' && !message2?
@@ -540,7 +550,7 @@ const Registro = () => {
                 }
             </motion.div>
           </AnimatePresence>
-        </form>
+        </div>
       </main>
     </>
   )

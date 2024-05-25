@@ -37,7 +37,7 @@ app.get('/noticias', async (req, res) => {
 });
 
 // API de tramito del registro
-app.post('/jugador', async (req, res) => {
+app.post('/registro', async (req, res) => {
     try {
         //conseguir los datos de la cuerpo de petición enviado desde la pageRegistro
         const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña} = req.body
@@ -61,7 +61,7 @@ app.post('/jugador', async (req, res) => {
     }
 });
 //comprobar usuario que iniciar sesión
-  app.post('/confirma', async(req, res)=>{
+  app.post('/iniciar', async(req, res)=>{
     try {
         const {nombreIS,contraseñaIS}=req.body
         //encontrar el usuario en modelo de jugador
