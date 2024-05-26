@@ -37,7 +37,7 @@ app.get('/noticias', async (req, res) => {
 });
 
 // API de tramito del registro
-app.post('/jugador', async (req, res) => {
+app.post('/registro', async (req, res) => {
     try {
         //conseguir los datos de la cuerpo de petición enviado desde la pageRegistro
         const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña} = req.body
@@ -60,8 +60,17 @@ app.post('/jugador', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
-
-  
+//comprobar usuario que iniciar sesión
+  app.post('/iniciar', async(req, res)=>{
+    try {
+        const {nombreIS,contraseñaIS}=req.body
+        //encontrar el usuario en modelo de jugador
+        const confirmar = await ServerMod.JugadorModulo.findOne({nombreIS,contraseñaIS})
+        res.json(confirmar)
+    } catch (error) {
+        res.status(500).json({error:'Error del servidor'})
+    }
+  })
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

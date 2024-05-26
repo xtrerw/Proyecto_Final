@@ -140,7 +140,7 @@
       transition: 250ms;
     }
   
-    Button {
+    nav Button {
       display: none;
     }
   }

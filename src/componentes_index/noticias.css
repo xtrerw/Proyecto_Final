@@ -53,3 +53,19 @@
 .noticia-contenido>a>h3:hover{
     text-decoration: underline;
 }
+@media (max-width:1300px) {
+    .noticias{
+        height: 180vh;
+    }
+    .noticias-parte{
+        justify-content: center;
+        gap: 50px;
+    }
+    .noticia-contenido{
+        width: 350px;
+        height: 300px;
+    }
+    .noticia-contenido>img{
+        height: 200px;
+    }
+}

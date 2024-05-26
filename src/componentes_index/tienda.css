@@ -26,3 +26,8 @@
 .tienda-img>img{
     height: 80%;
 }
+@media (max-width: 1300px){
+    .tienda-img>img{
+        height: 60%;
+    }
+}

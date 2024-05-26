@@ -8,3 +8,12 @@
     font-size: 64px;
     margin: 0 30px;
 }
+@media (max-width:1300px) {
+    .scrolltext{
+        display: flex;
+    }
+    .scrolltext>span{
+        font-size: 32px;
+        margin: 10px;
+    }
+}
