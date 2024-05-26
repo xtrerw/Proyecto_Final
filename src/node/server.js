@@ -5,10 +5,10 @@ import mongoose from 'mongoose';
 const user = encodeURIComponent("root"); // Usuario de MongoDB Atlas
 const password = encodeURIComponent("root"); // Contraseña del usuario
 const nombreBD = "OnlyGG"; // Nombre de la base de datos
-const url = `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
+const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url2, {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
