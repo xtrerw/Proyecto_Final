@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import TituloPaginas from './componentes_paginas/tituloPaginas'
 import "./PageRegistro.css"
-import { motion } from 'framer-motion'
+import { color, motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
 const Registro = () => {
   //pasa los propiedades a componente TituloPaginas
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
     //
+    const scrollbg=['../src/img/scroll1.png', '../src/img/scroll2.png', '../src/img/scroll3.png', '../src/img/scroll4.png', '../src/img/scroll5.png'];
     const items=["iniciar","registrar"];
     const txtInform=["nombre","apellidos",];
     const emails=["correo electrónico","confirma correo"]
@@ -51,6 +52,23 @@ const Registro = () => {
       height:hover? '25px':'0px',
       opacity:hover? 1:0,
     },
+    }
+    //animacion de path icon con éxito
+    const iconExito={
+      sinExito:{
+        // border de path de estado inicial y el ancho de esto son 0
+        pathLength:0,
+        strokeWidth:0,
+      },
+      exito:{
+        // establece animación y su tiempo
+        pathLength:2,
+        strokeWidth:2,
+        transition:{
+          duration:2,
+          delay:0.2
+        }
+      },
     }
       // Form data state
       const [formData, setFormData] = useState({
@@ -111,8 +129,6 @@ const Registro = () => {
               console.error('Error en la verificación', result);
               setMessage('Error en la verificación: ' + result.error);
           }
-
-
        } catch (error) {
            console.error('Error:', 'Enviar erro '+error);
         }
@@ -240,25 +256,40 @@ const Registro = () => {
         // mensaje de iniciar con 'existos
         click=='iniciar' && message? 
         <AnimatePresence>
-        <motion.form className='tabla-user' onSubmit={submitRegistro}>
           <motion.div
+          className='msg-registro'
+          onClick={()=>setMessage('')}
+
         variants={inputUser}
         initial='vamos'
         animate='quedamos'
         exit='nosvamos'>
-          <motion.p className='exito' onClick={()=>setMessage('')}
+           {/* icon éxito */}
+           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#90f1e9" strokeWidth="" strokeLinecap="round" strokeLinejoin="round">
+                <motion.path
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+                d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></motion.path>
+                <motion.polyline
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+                points="22 4 12 14.01 9 11.01"></motion.polyline>
+                </svg>
+          <motion.p 
+          className='exito' 
           variants={inputUser}
           initial='vamos'
           animate='quedamos'
           exit='nosvamos'
           >{message}</motion.p>
-          </motion.div>
-        </motion.form>
+        </motion.div>
       </AnimatePresence> :
             //parte de registro
          click=='registrar' && !message2?
         <AnimatePresence>
-              <motion.div className='tabla-user'>
+              <motion.form className='tabla-user' onSubmit={submitRegistro}>
                   {/* si teine cuenta, iniciar sesi'on */}
                   { 
                   /* se aparezca los campos si elige los correspondientes pasos */
@@ -516,9 +547,39 @@ const Registro = () => {
                       </motion.div>
                     </AnimatePresence>
                   }
-                
+              </motion.form>
+        </AnimatePresence> :
+          // msg con éxitos
+          click=='registrar' && message2? 
+          <AnimatePresence>
+            <motion.div
+            className='msg-registro'
+            variants={inputUser}
+            initial='vamos'
+            animate='quedamos'
+            exit='nosvamos'>
+              {/* icon éxito */}
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#90f1e9" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                <motion.path
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+                d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></motion.path>
+                <motion.polyline 
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+                points="22 4 12 14.01 9 11.01"></motion.polyline>
+                </svg>
+              {/* recordatorio */}
+              <motion.p className='exito' onClick={()=>setMessage2('')}
+              variants={inputUser}
+              initial='vamos'
+              animate='quedamos'
+              exit='nosvamos'
+              >{message2}</motion.p>
               </motion.div>
-        </AnimatePresence> : null
+          </AnimatePresence>: null
           }
           {/* los punto de carrusel si elige */}
           <AnimatePresence>
@@ -533,8 +594,8 @@ const Registro = () => {
             }}
             key={click? click:""}//si ya pongamos click de usuario o administrador, aparece animaci'on
             >
-              {/* si no hay cuenta, se aparezca los ptos */}
-                {click=='iniciar'?  '': 
+              {/* si no hay cuenta y no tramita registro, se aparezca los ptos */}
+                {(click=='registrar' && !message2)?   
                   // ptos en registro
                   ptoRegistro.map(pto=>
                     <motion.div key={pto} className='pto-usuario' onClick={()=>setClickUser(pasosUser[pto])} 
@@ -545,8 +606,8 @@ const Registro = () => {
                       background:pasosUser[pto]==clickUser? 'var(--main-color)':'',
                       cursor:'pointer'
                     }}
-                    ></motion.div>
-                  ) 
+                    ></motion.div> 
+                  ) : null
                 }
             </motion.div>
           </AnimatePresence>

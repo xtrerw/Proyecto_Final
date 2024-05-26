@@ -157,7 +157,7 @@
 }
 /* iniciar sesión con éxito */
 .exito{
-    color: green;
+    color: #90f1e9;
     font-size: 12px;
 }
 /* responsive */
@@ -176,6 +176,7 @@
         width: 300px;
         height: 400px;
         clip-path: path('M 30,0 0,30 L 0,400 L 260,400 300,360 300,0 Z');
+        
     }
     .iniciar,.registrar{
         height: 30px;
@@ -224,7 +225,7 @@
     }
     .tabla-seleccion{
         width: 100%;
-        height: 20px;
+        height: 30px;
         position: relative;
     }
     .ptos{
@@ -233,6 +234,19 @@
     .advertencia{
         width: 250px;
         font-size: 10px;
+        margin: 20px;
+    }
+    .msg-registro{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .msg-registro>svg{
+        width: 40px;
+        height: 40px;
         margin: 20px;
     }
 }
