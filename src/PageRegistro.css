@@ -165,13 +165,13 @@
     align-items: center;
 }
 .msg-registro>svg{
-    width: 40px;
-    height: 40px;
-    margin: 20px;
+    width: 100px;
+    height: 100px;
+    margin: 30px;
 }
 .exito{
     color: #90f1e9;
-    font-size: 12px;
+    font-size: 30px;
 }
 /* responsive */
 @media (max-width:1300px) {
