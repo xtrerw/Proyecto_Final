@@ -65,10 +65,21 @@ app.post('/registro', async (req, res) => {
     try {
         const {nombreIS,contraseñaIS}=req.body
         //encontrar el usuario en modelo de jugador
-        const confirmar = await ServerMod.JugadorModulo.findOne({nombreIS,contraseñaIS})
-        res.json(confirmar)
+        const confirmar = await ServerMod.JugadorModulo.findOne({
+            nombreUsuario:nombreIS,
+            contraseña:contraseñaIS
+        })
+        
+        console.log(confirmar);
+        if (confirmar) {
+            console.log(confirmar);
+            res.status(200).json(confirmar)
+        }else{
+            console.log(confirmar);
+            res.status(401).json({ error: '404 NOt found'});
+        }
     } catch (error) {
-        res.status(500).json({error:'Error del servidor'})
+        res.json({error:'Error del servidor'})
     }
   })
 // eslint-disable-next-line no-undef
