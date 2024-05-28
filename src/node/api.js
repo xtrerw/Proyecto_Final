@@ -76,7 +76,7 @@ app.post('/registro', async (req, res) => {
             res.status(200).json(confirmar)
         }else{
             console.log(confirmar);
-            res.status(401).json({ error: '404 NOt found'});
+            res.status(401).json({ error: '401 la petición (request) no ha sido ejecutada'});
         }
     } catch (error) {
         res.json({error:'Error del servidor'})
