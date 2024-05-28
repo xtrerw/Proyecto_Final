@@ -93,6 +93,22 @@ app.use(session({
         res.json({error:'Error del servidor'})
     }
   })
+  //cuando el usuario ya iniciar sesión, realizar la peticion de conseguir informacion de este usuario a base de datos
+  app.get('/perfil',async(req,res)=>{
+    try {
+        const idUser=req.query.id
+        const jugador= await ServerMod.JugadorModulo.findOne({
+            _id:idUser,
+        });
+        console.log(jugador);
+        if (jugador) {
+            console.log(jugador);
+            res.status(200).send(jugador);
+        }
+    } catch (error) {
+        res.json({error:'Error del servidor'})
+    }
+  })
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

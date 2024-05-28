@@ -51,6 +51,8 @@ const jugadoresSchema = new mongoose.Schema({
     },//fecha de nacimiento
     correo: String,
     contraseña: String,
+    ptos:Number,
+    img: String,
 });
 const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 
@@ -115,7 +117,9 @@ const nuevosJugadores = [
         apellidos: 'Garcia',
         fechaN: new Date(1985, 3, 7),  // 1985-04-07
         correo: 'noob@gmail.es',
-        contraseña: '12345'
+        contraseña: '12345',
+        img:'src/img/jugador1.png',
+        ptos:300
     },
     {
         nombreUsuario: 'ProGamer21',
@@ -123,7 +127,9 @@ const nuevosJugadores = [
         apellidos: 'Martinez',
         fechaN: new Date(1993, 9, 15),  // 1993-10-15
         correo: 'javier@gmail.es',
-        contraseña: '12345'
+        contraseña: '12345',
+        img:'src/img/jugador2.png',
+        ptos:500
     },
     {
         nombreUsuario: 'SpeedyGonzales',
@@ -131,7 +137,9 @@ const nuevosJugadores = [
         apellidos: 'Lopez',
         fechaN: new Date(1987, 6, 22),  // 1987-07-22
         correo: 'maria@gmail.es',
-        contraseña: '12345'
+        contraseña: '12345',
+        img:'src/img/jugador3.png',
+        ptos:800,
     },
     {
         nombreUsuario: 'MasterChief92',
@@ -139,23 +147,29 @@ const nuevosJugadores = [
         apellidos: 'Hernandez',
         fechaN: new Date(1992, 11, 10),  // 1992-12-10
         correo: 'juan@gmail.es',
-        contraseña: '12345'
+        contraseña: '12345',
+        img:'src/img/jugador4.png',
+        ptos:800,
     },
     {
-        nombreUsuario: 'NinjaWarrior',
-        nombre: 'Andrea',
-        apellidos: 'Rodriguez',
+        nombreUsuario: 'RocketWarrior',
+        nombre: 'Katyusha',
+        apellidos: 'Katherin',
         fechaN: new Date(1989, 2, 28),  // 1989-03-28
-        correo: 'andrea@gmail.es',
-        contraseña: '12345'
+        correo: 'kat@gmail.es',
+        contraseña: '12345',
+        img:'src/img/jugador5.png',
+        ptos:1000,
     },
     {
-        nombreUsuario: 'GoldenSnitch',
+        nombreUsuario: 'TerracottaArmy ',
         nombre: 'Sara',
-        apellidos: 'Fernandez',
+        apellidos: 'Rocio',
         fechaN: new Date(1996, 7, 14),  // 1996-08-14
         correo: 'sara@gmail.es',
-        contraseña: '12345'
+        contraseña: '12345',
+        img:'src/img/jugador6.png',
+        ptos:1000,
     }
 ];
 
