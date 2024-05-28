@@ -2,6 +2,8 @@
 import ServerMod from "./server.js";
 import express from "express";
 import cors from "cors";
+import session from "express-session";
+
 const app = express();//crear una instancia de la Express y almacena en la "app"
 app.use(cors());//permiten intercambio de los datos entre diferentes dominios
 app.use(express.json()); //analizar cuerpo de las solicitudes, lo analizar'a como json 
@@ -60,6 +62,13 @@ app.post('/registro', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+//session
+app.use(session({
+    secret:'12345',//para guardar id de usuario verificado
+    resave:false,//guardar cuando id se cambia
+    saveUninitialized:false,//seguir el id
+    cookie:{ secure:false },//asegurar la seguridad por https
+}))
 //comprobar usuario que iniciar sesión
   app.post('/iniciar', async(req, res)=>{
     try {
@@ -73,10 +82,12 @@ app.post('/registro', async (req, res) => {
         console.log(confirmar);
         if (confirmar) {
             console.log(confirmar);
-            res.status(200).json(confirmar)
+            //estabelecer el ID del usuario en la sesion
+            req.session.userID=confirmar._id
+            res.status(200).send(req.session.userID);
         }else{
             console.log(confirmar);
-            res.status(401).json({ error: '401 la petición (request) no ha sido ejecutada'});
+            res.status(401).send({ error: '401 la petición (request) no ha sido ejecutada'});
         }
     } catch (error) {
         res.json({error:'Error del servidor'})

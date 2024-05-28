@@ -4,6 +4,7 @@ import "./PageRegistro.css"
 import { color, motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
+import { Navigate,useNavigate } from 'react-router-dom'
 const Registro = () => {
   //pasa los propiedades a componente TituloPaginas
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
@@ -100,7 +101,8 @@ const Registro = () => {
             [name]: value,
         });
     };
-
+    //para enviar id de usuario verificado
+    const nav=useNavigate()
     const submitIS = async (e) => {
       e.preventDefault()
       //si no introduce los datos o introduce sin válidos, no va a envivar los datos
@@ -121,10 +123,13 @@ const Registro = () => {
             });
 
             const result=await response.json()
-            //si la verificacion bien, se sale la msg con 'exito
+            //si la verificacion bien, se sale la msg con 'exito, o sea el código response es 200
             if (response.ok) {
               console.log('Enviar para comprobar', result);
               setMessage('Verificación exitosa');
+              //navegar a la p'agina principal y manda id a all'i
+              //manda id a la página que quiera
+              nav('/',{state:{userID:result}})
           } else {
               console.error('Error en la verificación', result);
               setMessage('Carece de credenciales válidas');

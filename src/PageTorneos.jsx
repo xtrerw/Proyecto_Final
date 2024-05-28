@@ -17,7 +17,7 @@ const Torneos = () => {
         if(adimins.length>0){
             ScrollTrigger.create({
                 trigger:".torneos",
-                markers:true,
+                markers:false,
                 start:"0 50%",
                 end:"20% 50%",
                 scrub:4,

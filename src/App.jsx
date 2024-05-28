@@ -12,7 +12,11 @@ import Registro from './PageRegistro';
 import Producto from './Producto';
 import ContenidoNoticia from './ContenidoNoticia';
 import ScrollToTop from './ScrollToTop';
+import { useLocation } from 'react-router-dom';
 function App() {
+  //conseguir id de usuario desde la pagina registro
+  const idUser=useLocation().state?.userID;
+  console.log(idUser);
   return (
     <>
       <ScrollToTop/>
