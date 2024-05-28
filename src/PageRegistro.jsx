@@ -127,7 +127,7 @@ const Registro = () => {
               setMessage('Verificación exitosa');
           } else {
               console.error('Error en la verificación', result);
-              setMessage('Error en la verificación: ' + result.error);
+              setMessage('Carece de credenciales válidas');
           }
        } catch (error) {
            console.error('Error:', 'Enviar erro '+error);
@@ -254,7 +254,7 @@ const Registro = () => {
           </motion.form>
         </AnimatePresence> : 
         // mensaje de iniciar con 'existos
-        click=='iniciar' && message? 
+        click=='iniciar' && message=='Verificación exitosa'? 
         <AnimatePresence>
           <motion.div
           className='msg-registro'
@@ -286,6 +286,47 @@ const Registro = () => {
           >{message}</motion.p>
         </motion.div>
       </AnimatePresence> :
+      // si usuario q introduce no está en base de datos
+      click=='iniciar' && message=='Carece de credenciales válidas'? 
+      
+        <AnimatePresence>
+          <motion.div
+          className='msg-registro'
+          onClick={()=>setMessage('')}
+
+          variants={inputUser}
+          initial='vamos'
+          animate='quedamos'
+          exit='nosvamos'>
+          {/* icon éxito */}
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#f93434" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <motion.circle cx="12" cy="12" r="10"
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+              ></motion.circle>
+              <motion.line x1="15" y1="9" x2="9" y2="15"
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+              ></motion.line>
+              <motion.line x1="9" y1="9" x2="15" y2="15"
+                variants={iconExito}
+                initial='sinExito'
+                animate='exito'
+              ></motion.line>
+            </svg>
+            <motion.p 
+            className='error' 
+            variants={inputUser}
+            initial='vamos'
+            animate='quedamos'
+            exit='nosvamos'
+            >{message}</motion.p>
+          </motion.div>
+        </AnimatePresence>
+      
+      :
             //parte de registro
          click=='registrar' && !message2?
         <AnimatePresence>

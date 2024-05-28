@@ -173,6 +173,10 @@
     color: #90f1e9;
     font-size: 30px;
 }
+.error{
+    font-size: 30px;
+    color: #f93434;
+}
 /* responsive */
 @media (max-width:1300px) {
     /* establece los textos */
