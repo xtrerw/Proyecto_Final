@@ -13,15 +13,31 @@ import Producto from './Producto';
 import ContenidoNoticia from './ContenidoNoticia';
 import ScrollToTop from './ScrollToTop';
 import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 function App() {
   //conseguir id de usuario desde la pagina registro
-  const idUser=useLocation().state?.userID;
-  console.log(idUser);
+  //session
+  const userID=useLocation().state?.userID
+  //pedir la img o nombre de usuario
+  const [perfil,setPerfil]=useState({});
+  useEffect(()=>{
+    if (userID) {
+      //para enviar id a node js
+      fetch(`http://localhost:3001/perfil?id=${userID}`)
+      .then(response => response.json())
+      .then((dato)=>{
+        setPerfil(dato);
+      }
+    )
+      .catch((error) => console.error(error))
+    }
+  },[userID])
+  console.log(userID);
   return (
     <>
       <ScrollToTop/>
       {/* cada vez actualizar la página,llagará a cabecera de la página */}
-      <Navbar/>
+      <Navbar img={perfil.img} ptos={perfil.ptos} nombre={perfil.nombre}/>
       {/* Solamente actualizar una parte cuando recarga la navegación para mejorar rendimiento */}
       <Routes>
         <Route path='/' element={<Home/>}/>

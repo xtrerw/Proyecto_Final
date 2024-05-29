@@ -7,30 +7,23 @@ import Games from "../PageJuegos";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (propsNavbar) => {
+  console.log(propsNavbar);
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
     setActive(!active);
   };
 
-    //session
-    const userID=useLocation().state?.userID
-    //pedir la img o nombre de usuario
-    const [perfil,setPerfil]=useState({});
+    
+    //animaci'on de ptos de usuarios
+    const [contar,setContar]=useState(0)
     useEffect(()=>{
-      if (userID) {
-        //para enviar id a node js
-        fetch(`http://localhost:3001/perfil?id=${userID}`)
-        .then(response => response.json())
-        .then((dato)=>{
-          setPerfil(dato);
-          console.log(dato);
-        }
-      )
-        .catch((error) => console.error(error))
+      if (propsNavbar && propsNavbar.ptos!=undefined && contar<propsNavbar.ptos) {
+        const time= setTimeout(()=>{setContar(contar+1)},2)
+        return ()=>{clearTimeout(time)}
       }
-    },[])
+    },[contar, propsNavbar])
   return (
     <nav className="navbar">
       <Link to={'/'} className="navbar-logo">
@@ -51,8 +44,8 @@ const Navbar = () => {
           );
         })}
       </ul>
-      
-      {userID? 
+      {/* si ya pone props que pasa desde la pagina home, se aparece la información de usuario */}
+      {propsNavbar && propsNavbar.nombre!=undefined? 
       <div className="perfil">
         <motion.div 
       className='img-perfil'
@@ -60,20 +53,18 @@ const Navbar = () => {
         scale: [1, 1.2, 1, 1.2, 1],
         rotate: [0, -360, 360, 360, 0],
         borderRadius: ["50%", "30%", "20%", "10%", "50%"],
-        backgroundImage: `url(../${perfil.img})`,
-        boxShadow: ['inset 0 0 1px 5px rebeccapurple','inset 0 0 1px 5px var(--main-color)','inset 0 0 1px 5px burlywood','inset 0 0 1px 5px palevioletred'],
+        backgroundImage: `url(../${propsNavbar.img})`,
+        boxShadow: ['inset 0 0 1px 5px rebeccapurple','inset 0 0 1px 3px palevioletred','inset 0 0 1px 3px burlywood','inset 0 0 1px 3px var(--main-color)'],
       }}
       transition={{
-        duration:2,
-        repeat:Infinity,
-        repeatDelay:1,
+        duration:5,
         ease: "anticipate",
       }}
       ></motion.div>
       <motion.p>
-        {perfil.nombre}
+        {propsNavbar.nombre}
         <br />
-        {perfil.ptos} ptos
+        {contar} ptos
       </motion.p>
       </div>
        :

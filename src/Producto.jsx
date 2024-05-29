@@ -43,7 +43,7 @@ const Producto = () => {
     ScrollTrigger.create({
       trigger: '.exhibicion',
       scrub:4,
-      markers:true,
+      markers:false,
       start:"-20% 0%",
       end:"10% 0%",
       toggleActions: "restart none reverse none",
