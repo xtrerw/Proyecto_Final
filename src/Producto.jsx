@@ -140,7 +140,7 @@ const Producto = () => {
         <h3>Descripción</h3>
         <hr />
         <p>{producto.descripcion}</p>
-        <p>Precio: {producto.precio}</p>
+        <p>Precio: {producto.precio} ptos</p>
         <p>Características: {producto.caracteristica}</p>
         <p>Tipo de Juego: {producto.tipoJuego}</p>
         <p>Clasificación: {producto.clasificacion}</p>

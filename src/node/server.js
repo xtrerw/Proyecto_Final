@@ -132,7 +132,7 @@ const nuevosJugadores = [
         ptos:500
     },
     {
-        nombreUsuario: 'SpeedyGonzales',
+        nombreUsuario: 'DamnBro',
         nombre: 'Maria',
         apellidos: 'Lopez',
         fechaN: new Date(1987, 6, 22),  // 1987-07-22
@@ -142,7 +142,7 @@ const nuevosJugadores = [
         ptos:800,
     },
     {
-        nombreUsuario: 'MasterChief92',
+        nombreUsuario: 'ChiefNoob',
         nombre: 'Juan',
         apellidos: 'Hernandez',
         fechaN: new Date(1992, 11, 10),  // 1992-12-10
@@ -162,7 +162,7 @@ const nuevosJugadores = [
         ptos:1000,
     },
     {
-        nombreUsuario: 'TerracottaArmy ',
+        nombreUsuario: 'CuteBunny',
         nombre: 'Sara',
         apellidos: 'Rocio',
         fechaN: new Date(1996, 7, 14),  // 1996-08-14

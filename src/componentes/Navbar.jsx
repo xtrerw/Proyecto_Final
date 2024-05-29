@@ -20,8 +20,10 @@ const Navbar = (propsNavbar) => {
     const [contar,setContar]=useState(0)
     useEffect(()=>{
       if (propsNavbar && propsNavbar.ptos!=undefined && contar<propsNavbar.ptos) {
-        const time= setTimeout(()=>{setContar(contar+1)},2)
-        return ()=>{clearTimeout(time)}
+        //establece el tiempo de aumentar 1 a 1
+        //acerelador increible
+        const time= setTimeout(()=>{setContar(contar+1)},20)
+        return ()=>clearTimeout(time)
       }
     },[contar, propsNavbar])
   return (
@@ -46,7 +48,7 @@ const Navbar = (propsNavbar) => {
       </ul>
       {/* si ya pone props que pasa desde la pagina home, se aparece la información de usuario */}
       {propsNavbar && propsNavbar.nombre!=undefined? 
-      <div className="perfil">
+      <Link to={'/modifica'} className="perfil">
         <motion.div 
       className='img-perfil'
       animate={{
@@ -54,7 +56,7 @@ const Navbar = (propsNavbar) => {
         rotate: [0, -360, 360, 360, 0],
         borderRadius: ["50%", "30%", "20%", "10%", "50%"],
         backgroundImage: `url(../${propsNavbar.img})`,
-        boxShadow: ['inset 0 0 1px 5px rebeccapurple','inset 0 0 1px 3px palevioletred','inset 0 0 1px 3px burlywood','inset 0 0 1px 3px var(--main-color)'],
+        boxShadow: ['inset 0 0 1px 5px var(--main-color)','inset 0 0 1px 3px orange','inset 0 0 1px 3px burlywood','inset 0 0 1px 3px #fff'],
       }}
       transition={{
         duration:5,
@@ -66,7 +68,7 @@ const Navbar = (propsNavbar) => {
         <br />
         {contar} ptos
       </motion.p>
-      </div>
+      </Link>
        :
         <Link to={'/Registro'}>
           <Button>
