@@ -6,9 +6,9 @@ import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import { AnimatePresence } from 'framer-motion'
-const Producto = () => {
+import { useLocation } from 'react-router-dom'
+const Producto = (propsPerfil) => {
   const {id}=useParams();
-  console.log(id);
   const[producto, setProducto]=useState([]);
   const [imgParte, setImg]=useState();//la imagen se muestra cuando elegido la imagen del menú
   const [clickIndex, setClickIndex]=useState();//agregar diseño de la figura elegido actualmente
@@ -27,14 +27,41 @@ const Producto = () => {
       });
   },[id]);//actualizar componente de producto a través de id
 
-  console.log(producto);
   const apartados = producto.apartados || [];//si producto es null, volve a array de espacio
-  console.log(apartados);
-  console.log(clickIndex);
   const yaClick = (apartado) => {
     setImg(apartado);
     setClickIndex(apartado); 
   };//
+
+  //canejar los premios
+  //realizar canejo y actualiza de los datos en node js 
+  const [resto,setResto]=useState(propsPerfil.ptos);
+  // console.log(resto);
+  const canejar=async()=>{
+    setResto(propsPerfil.ptos-producto.precio)
+    //metodo put para actualizar
+    try {
+      const response = await fetch('http://localhost:3001/canejo',{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          id:propsPerfil,
+          ptos:resto,
+        }),
+      })
+      const resulta= response.json()
+      if (response.ok) {
+        console.log(resulta);
+        console.log('actualiza éxito'+resulta);
+      }else{
+        console.log('No encuentro usuario');
+      }
+
+    } catch (error) {
+      console.error('Error actualizar los puntos'+error)
+    }
+  }
+
 
   //animacion de exhibición de las imagenes
   gsap.registerPlugin(ScrollTrigger);
@@ -145,7 +172,8 @@ const Producto = () => {
         <p>Tipo de Juego: {producto.tipoJuego}</p>
         <p>Clasificación: {producto.clasificacion}</p>
         <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
-        <button className='btn-canejar'>Canejar ahora</button>
+        {/* realiza canejo */}
+        <button className='btn-canejar' onClick={canejar}>Canejar ahora</button>
       </motion.div>
     </main>
     <main className='exhibicion'>

@@ -96,7 +96,9 @@ app.use(session({
   //cuando el usuario ya iniciar sesión, realizar la peticion de conseguir informacion de este usuario a base de datos
   app.get('/perfil',async(req,res)=>{
     try {
+        //conseguir id de usuario quien ya iniciar sesión
         const idUser=req.query.id
+        //consulta informacion de este usuario y lo devolve a react
         const jugador= await ServerMod.JugadorModulo.findOne({
             _id:idUser,
         });
@@ -107,6 +109,26 @@ app.use(session({
         }
     } catch (error) {
         res.json({error:'Error del servidor'})
+    }
+  })
+
+  //actualizar los ptos de usuarios
+  app.put('/canejo',async(req,res)=>{
+    try {
+        const {id,ptos}=req.body
+        const actualiza= await ServerMod.JugadorModulo.replaceOne({
+             _id: id,
+            ptos: ptos 
+        });
+        if (actualiza) {
+            console.log(actualiza);
+            res.status(200).send(actualiza)
+        }else{
+            console.log(actualiza);
+            res.status(500).send({ error: 'actualizar fallado' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
     }
   })
 // eslint-disable-next-line no-undef
