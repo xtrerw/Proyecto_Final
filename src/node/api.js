@@ -1,6 +1,6 @@
 
 import ServerMod from "./server.js";
-import express from "express";
+import express, { Router } from "express";
 import cors from "cors";
 import session from "express-session";
 
@@ -70,7 +70,7 @@ app.use(session({
     cookie:{ secure:false },//asegurar la seguridad por https
 }))
 //comprobar usuario que iniciar sesión
-  app.post('/iniciar', async(req, res)=>{
+  const iniciar= async(req, res)=>{
     try {
         const {nombreIS,contraseñaIS}=req.body
         //encontrar el usuario en modelo de jugador
@@ -83,8 +83,8 @@ app.use(session({
         if (confirmar) {
             console.log(confirmar);
             //estabelecer el ID del usuario en la sesion
-            req.session.userID=confirmar._id
-            res.status(200).send(req.session.userID);
+            req.session.userObj=confirmar
+            res.status(200).send(req.session.userObj);
         }else{
             console.log(confirmar);
             res.status(401).send({ error: '401 la petición (request) no ha sido ejecutada'});
@@ -92,45 +92,32 @@ app.use(session({
     } catch (error) {
         res.json({error:'Error del servidor'})
     }
-  })
-  //cuando el usuario ya iniciar sesión, realizar la peticion de conseguir informacion de este usuario a base de datos
-  app.get('/perfil',async(req,res)=>{
-    try {
-        //conseguir id de usuario quien ya iniciar sesión
-        const idUser=req.query.id
-        //consulta informacion de este usuario y lo devolve a react
-        const jugador= await ServerMod.JugadorModulo.findOne({
-            _id:idUser,
-        });
-        console.log(jugador);
-        if (jugador) {
-            console.log(jugador);
-            res.status(200).send(jugador);
-        }
-    } catch (error) {
-        res.json({error:'Error del servidor'})
-    }
-  })
+  }
 
   //actualizar los ptos de usuarios
-  app.put('/canejo',async(req,res)=>{
+  const actualizarPtos= async(req,res)=>{
     try {
         const {id,ptos}=req.body
-        const actualiza= await ServerMod.JugadorModulo.replaceOne({
-             _id: id,
-            ptos: ptos 
-        });
+        const actualiza= await ServerMod.JugadorModulo.findByIdAndUpdate(
+            id,
+            {ptos: ptos},
+            {new :true}
+        );
         if (actualiza) {
             console.log(actualiza);
             res.status(200).send(actualiza)
         }else{
             console.log(actualiza);
-            res.status(500).send({ error: 'actualizar fallado' });
+            res.status(401).send({ error: 'actualizar fallado' });
         }
     } catch (error) {
         res.status(500).json({ error: 'Error del servidor' });
     }
-  })
+  }
+  
+  app.route('/')
+    .post(iniciar)
+    .put(actualizarPtos)
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

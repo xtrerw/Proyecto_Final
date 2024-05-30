@@ -110,7 +110,7 @@ const Registro = () => {
         try {
             //manda nombre y contrase;a de usuario que iniciar sesi'on
             //conecta el servidor virtual que creamos
-            const response = await fetch('http://localhost:3001/iniciar',{
+            const response = await fetch(`http://localhost:3001/`,{
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
@@ -129,7 +129,7 @@ const Registro = () => {
               setMessage('Verificación exitosa');
               //navegar a la p'agina principal y manda id a all'i
               //manda id a la página que quiera
-              nav('/',{state:{userID:result}})
+              nav(`/`,{state:{user:result}})
           } else {
               console.error('Error en la verificación', result);
               setMessage('Carece de credenciales válidas');

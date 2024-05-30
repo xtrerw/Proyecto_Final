@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import "./Producto.css"
 import { motion } from 'framer-motion'
@@ -6,7 +6,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import { AnimatePresence } from 'framer-motion'
-import { useLocation } from 'react-router-dom'
+
 const Producto = (propsPerfil) => {
   const {id}=useParams();
   const[producto, setProducto]=useState([]);
@@ -36,23 +36,24 @@ const Producto = (propsPerfil) => {
   //canejar los premios
   //realizar canejo y actualiza de los datos en node js 
   const [resto,setResto]=useState(propsPerfil.ptos);
-  // console.log(resto);
+  //para navegar resto a navbar
   const canejar=async()=>{
-    setResto(propsPerfil.ptos-producto.precio)
+    const newResto=resto-producto.precio
+    setResto(newResto)
     //metodo put para actualizar
     try {
-      const response = await fetch('http://localhost:3001/canejo',{
+      const response = await fetch(`http://localhost:3001/`,{
         method: 'PUT',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          id:propsPerfil,
-          ptos:resto,
+          id:propsPerfil.id,
+          ptos:newResto,
         }),
       })
-      const resulta= response.json()
+      const resulta= await response.json()
       if (response.ok) {
-        console.log(resulta);
-        console.log('actualiza éxito'+resulta);
+        console.log('actualiza éxito'+resulta.ptos);
+        setResto(newResto);
       }else{
         console.log('No encuentro usuario');
       }
@@ -62,6 +63,7 @@ const Producto = (propsPerfil) => {
     }
   }
 
+  
 
   //animacion de exhibición de las imagenes
   gsap.registerPlugin(ScrollTrigger);

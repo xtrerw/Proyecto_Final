@@ -8,27 +8,25 @@ import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 
 const Navbar = (propsNavbar) => {
-  console.log(propsNavbar);
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
     setActive(!active);
   };
 
-    
     //animaci'on de ptos de usuarios
     const [contar,setContar]=useState(0)
     useEffect(()=>{
-      if (propsNavbar && propsNavbar.ptos!=undefined && contar<propsNavbar.ptos) {
+      if (propsNavbar && propsNavbar!=undefined && contar<propsNavbar.ptos) {
         //establece el tiempo de aumentar 1 a 1
         //acerelador increible
-        const time= setTimeout(()=>{setContar(contar+1)},20)
+        const time= setTimeout(()=>{setContar(contar+1)},2)
         return ()=>clearTimeout(time)
       }
     },[contar, propsNavbar])
   return (
     <nav className="navbar">
-      <Link to={'/'} className="navbar-logo">
+      <Link to={`/`} className="navbar-logo">
         OnlyGG
       </Link>
       <div className="menu-icon" onClick={handleClick}>
@@ -74,7 +72,8 @@ const Navbar = (propsNavbar) => {
           <Button>
             SIGN UP
           </Button>
-        </Link>}
+        </Link>
+      }
       
     </nav>
   );

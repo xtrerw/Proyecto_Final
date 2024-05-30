@@ -15,24 +15,18 @@ import ScrollToTop from './ScrollToTop';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 function App() {
-  //conseguir id de usuario desde la pagina registro
+  //conseguir id de usuario desde la pagina registro 
   //session
-  const userID=useLocation().state?.userID
-  //pedir la img o nombre de usuario
-  const [perfil,setPerfil]=useState({});
+  const user=useLocation().state?.user
+  const [perfil,setPerfil]=useState({})
   useEffect(()=>{
-    if (userID) {
-      //para enviar id a node js
-      fetch(`http://localhost:3001/perfil?id=${userID}`)
-      .then(response => response.json())
-      .then((dato)=>{
-        setPerfil(dato);
-      }
-    )
-      .catch((error) => console.error(error))
+    if (user) {
+      setPerfil(user)
     }
-  },[userID])
-  console.log(userID);
+  },[user])
+
+  // img={perfil.img} ptos={perfil.ptos} nombre={perfil.nombre}
+  // ptos={perfil.ptos} id={perfil._id}
   return (
     <>
       <ScrollToTop/>
@@ -46,7 +40,7 @@ function App() {
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/>  
-        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} />}/>       
+        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} />}/>       
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
       </Routes>
       <Footer/>
