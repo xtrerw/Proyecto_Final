@@ -1,7 +1,9 @@
 
 import ServerMod from "./server.js";
-import express from "express";
+import express, { Router } from "express";
 import cors from "cors";
+import session from "express-session";
+
 const app = express();//crear una instancia de la Express y almacena en la "app"
 app.use(cors());//permiten intercambio de los datos entre diferentes dominios
 app.use(express.json()); //analizar cuerpo de las solicitudes, lo analizar'a como json 
@@ -60,17 +62,62 @@ app.post('/registro', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+//session
+app.use(session({
+    secret:'12345',//para guardar id de usuario verificado
+    resave:false,//guardar cuando id se cambia
+    saveUninitialized:false,//seguir el id
+    cookie:{ secure:false },//asegurar la seguridad por https
+}))
 //comprobar usuario que iniciar sesión
-  app.post('/iniciar', async(req, res)=>{
+  const iniciar= async(req, res)=>{
     try {
         const {nombreIS,contraseñaIS}=req.body
         //encontrar el usuario en modelo de jugador
-        const confirmar = await ServerMod.JugadorModulo.findOne({nombreIS,contraseñaIS})
-        res.json(confirmar)
+        const confirmar = await ServerMod.JugadorModulo.findOne({
+            nombreUsuario:nombreIS,
+            contraseña:contraseñaIS
+        })
+        
+        console.log(confirmar);
+        if (confirmar) {
+            console.log(confirmar);
+            //estabelecer el ID del usuario en la sesion
+            req.session.userObj=confirmar
+            res.status(200).send(req.session.userObj);
+        }else{
+            console.log(confirmar);
+            res.status(401).send({ error: '401 la petición (request) no ha sido ejecutada'});
+        }
     } catch (error) {
-        res.status(500).json({error:'Error del servidor'})
+        res.json({error:'Error del servidor'})
     }
-  })
+  }
+
+  //actualizar los ptos de usuarios
+  const actualizarPtos= async(req,res)=>{
+    try {
+        const {id,ptos}=req.body
+        const actualiza= await ServerMod.JugadorModulo.findByIdAndUpdate(
+            id,
+            {ptos: ptos},
+            {new :true}
+        );
+        if (actualiza) {
+            console.log(actualiza);
+            res.status(200).send(actualiza)
+        }else{
+            console.log(actualiza);
+            res.status(401).send({ error: 'actualizar fallado' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Error del servidor' });
+    }
+  }
+  
+  app.route('/')
+    .post(iniciar)
+    .put(actualizarPtos)
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

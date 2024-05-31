@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
 import "./Producto.css"
 import { motion } from 'framer-motion'
@@ -6,9 +6,9 @@ import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import { AnimatePresence } from 'framer-motion'
-const Producto = () => {
+
+const Producto = (propsPerfil) => {
   const {id}=useParams();
-  console.log(id);
   const[producto, setProducto]=useState([]);
   const [imgParte, setImg]=useState();//la imagen se muestra cuando elegido la imagen del menú
   const [clickIndex, setClickIndex]=useState();//agregar diseño de la figura elegido actualmente
@@ -27,14 +27,43 @@ const Producto = () => {
       });
   },[id]);//actualizar componente de producto a través de id
 
-  console.log(producto);
   const apartados = producto.apartados || [];//si producto es null, volve a array de espacio
-  console.log(apartados);
-  console.log(clickIndex);
   const yaClick = (apartado) => {
     setImg(apartado);
     setClickIndex(apartado); 
   };//
+
+  //canejar los premios
+  //realizar canejo y actualiza de los datos en node js 
+  const [resto,setResto]=useState(propsPerfil.ptos);
+  //para navegar resto a navbar
+  const canejar=async()=>{
+    const newResto=resto-producto.precio
+    setResto(newResto)
+    //metodo put para actualizar
+    try {
+      const response = await fetch(`http://localhost:3001/`,{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          id:propsPerfil.id,
+          ptos:newResto,
+        }),
+      })
+      const resulta= await response.json()
+      if (response.ok) {
+        console.log('actualiza éxito'+resulta.ptos);
+        setResto(newResto);
+      }else{
+        console.log('No encuentro usuario');
+      }
+
+    } catch (error) {
+      console.error('Error actualizar los puntos'+error)
+    }
+  }
+
+  
 
   //animacion de exhibición de las imagenes
   gsap.registerPlugin(ScrollTrigger);
@@ -43,7 +72,7 @@ const Producto = () => {
     ScrollTrigger.create({
       trigger: '.exhibicion',
       scrub:4,
-      markers:true,
+      markers:false,
       start:"-20% 0%",
       end:"10% 0%",
       toggleActions: "restart none reverse none",
@@ -140,12 +169,13 @@ const Producto = () => {
         <h3>Descripción</h3>
         <hr />
         <p>{producto.descripcion}</p>
-        <p>Precio: {producto.precio}</p>
+        <p>Precio: {producto.precio} ptos</p>
         <p>Características: {producto.caracteristica}</p>
         <p>Tipo de Juego: {producto.tipoJuego}</p>
         <p>Clasificación: {producto.clasificacion}</p>
         <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
-        <button className='btn-canejar'>Canejar ahora</button>
+        {/* realiza canejo */}
+        <button className='btn-canejar' onClick={canejar}>Canejar ahora</button>
       </motion.div>
     </main>
     <main className='exhibicion'>
