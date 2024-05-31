@@ -2,12 +2,16 @@ import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import menuItems from "./MenuItems";
 import "./Navbar.css";
-import { Link, Route, Routes } from "react-router-dom";
-import Games from "../PageJuegos";
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
+//hook de redux
+import { useSelector } from "react-redux";
+
 
 const Navbar = (propsNavbar) => {
+  //gestion estado de Redux
+  const resultaPtos=useSelector((state)=>state)
+  //
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
@@ -16,14 +20,22 @@ const Navbar = (propsNavbar) => {
 
     //animaci'on de ptos de usuarios
     const [contar,setContar]=useState(0)
+    //para realizar animacion inicial de aumento una vez
+    const [animaInicio,iniciarAnima]=useState(false);
     useEffect(()=>{
-      if (propsNavbar && propsNavbar!=undefined && contar<propsNavbar.ptos) {
+      if ( propsNavbar!=undefined && contar<propsNavbar.ptos && !animaInicio) {
         //establece el tiempo de aumentar 1 a 1
         //acerelador increible
+
         const time= setTimeout(()=>{setContar(contar+1)},2)
         return ()=>clearTimeout(time)
+      } else if (resultaPtos>=0 && contar>resultaPtos) {
+        //reducir los ptos hasta igual que el resto 
+        iniciarAnima(true)
+        const time= setTimeout(()=>{setContar(contar-1)},20)
+        return ()=>clearTimeout(time)
       }
-    },[contar, propsNavbar])
+    },[animaInicio, contar, propsNavbar, resultaPtos])
   return (
     <nav className="navbar">
       <Link to={`/`} className="navbar-logo">

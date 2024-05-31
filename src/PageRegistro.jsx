@@ -5,7 +5,9 @@ import { color, motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
 import { Navigate,useNavigate } from 'react-router-dom'
+
 const Registro = () => {
+
   //pasa los propiedades a componente TituloPaginas
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
     //

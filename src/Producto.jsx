@@ -6,8 +6,14 @@ import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import { AnimatePresence } from 'framer-motion'
+//hook redux y metodo de action
+import { useDispatch } from 'react-redux'
+import { enviarPtos } from './actions/action'
 
 const Producto = (propsPerfil) => {
+  //Redux
+  const dispatch = useDispatch();
+  //conseguir id de producto
   const {id}=useParams();
   const[producto, setProducto]=useState([]);
   const [imgParte, setImg]=useState();//la imagen se muestra cuando elegido la imagen del menú
@@ -36,9 +42,16 @@ const Producto = (propsPerfil) => {
   //canejar los premios
   //realizar canejo y actualiza de los datos en node js 
   const [resto,setResto]=useState(propsPerfil.ptos);
-  //para navegar resto a navbar
+  //no tiene suficientes ptos
+  const [pobre,setPobre]=useState('')
+  //para actualizar los puntos en bd
   const canejar=async()=>{
     const newResto=resto-producto.precio
+    // asegurar que el usuario no consuma más de lo que tiene
+    if (newResto < 0) {
+      setPobre("No tienes suficientes puntos para canejar. Pobrecito");
+      return;
+  }
     setResto(newResto)
     //metodo put para actualizar
     try {
@@ -54,6 +67,9 @@ const Producto = (propsPerfil) => {
       if (response.ok) {
         console.log('actualiza éxito'+resulta.ptos);
         setResto(newResto);
+        //tramitar las acciones de enviar ptos de resto
+        dispatch(enviarPtos(newResto))
+        //luego vam a navbar
       }else{
         console.log('No encuentro usuario');
       }
@@ -176,6 +192,15 @@ const Producto = (propsPerfil) => {
         <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
         {/* realiza canejo */}
         <button className='btn-canejar' onClick={canejar}>Canejar ahora</button>
+        <motion.p
+      className='pobre'
+        animate={{
+          opacity:1,
+          color:'var(--main-color)',
+          y:0,
+          fontSize:"10px",
+        }}
+        >{pobre}</motion.p>
       </motion.div>
     </main>
     <main className='exhibicion'>

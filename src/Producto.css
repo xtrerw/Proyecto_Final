@@ -68,6 +68,13 @@ hr{background: var(--default-color3);}
     transition: 0.5s ease-in-out;
     text-decoration: underline;
 }
+/* si no tiene suficiente ptos */
+.pobre{
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: -30px;
+}
 .exhibicion{
     background: var(--default-color2);
     height: 100vh;

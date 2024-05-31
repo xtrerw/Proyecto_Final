@@ -14,7 +14,11 @@ import ContenidoNoticia from './ContenidoNoticia';
 import ScrollToTop from './ScrollToTop';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+//hook de redux
+import { useSelector } from "react-redux";
 function App() {
+  //utilizando redux, conseguir ptos de usuarios actualizado
+  const resultaPtos=useSelector((state)=>state)
   //conseguir id de usuario desde la pagina registro 
   //session
   const user=useLocation().state?.user
@@ -25,8 +29,15 @@ function App() {
     }
   },[user])
 
-  // img={perfil.img} ptos={perfil.ptos} nombre={perfil.nombre}
-  // ptos={perfil.ptos} id={perfil._id}
+  //si resultaPtos se establece,perfil.ptos será igaul q ellos. si no, perfil no se va cambiar
+  useEffect(() => {
+    if (resultaPtos && perfil.ptos !== resultaPtos) {
+      setPerfil((prevPerfil) => ({
+        ...prevPerfil,
+        ptos: resultaPtos
+      }));
+    }
+  }, [perfil.ptos, resultaPtos]);
   return (
     <>
       <ScrollToTop/>
