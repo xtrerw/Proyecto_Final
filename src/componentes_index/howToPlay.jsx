@@ -6,6 +6,7 @@ import img3 from "../img/rewards.png";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/src/ScrollTrigger";
+import { Link } from "react-router-dom";
 function How() {
     gsap.registerPlugin(ScrollTrigger);
     useGSAP(()=>{
@@ -30,6 +31,7 @@ function How() {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     });
+    const links=['/Administrador','/Juegos','/Tienda'];
     const imgs=[img1,img2,img3];
     const titulo = ["1. Team Up","2. Team Down","3. Rewards"];
     const p=["Reune a tus amigos y crea un equipo","Unete a un torneo y lucha por la victoria","Canjea premios con los puntos que ganes en los torneos"];
@@ -38,14 +40,17 @@ function How() {
             <h1>How To Play</h1>
             <div className="procesos">
                 {imgs.map((img,index)=>(
-                <motion.div key={index} className= {`proceso p${index}`} whileHover={{
+                    <Link to={`${links[index]}`} key={index}>
+                    <motion.div  className= {`proceso p${index}`} whileHover={{
                     marginTop: "-10px",
                     boxShadow:"2px 2px 5px grey"
                 }}>
-                    <img src={img} alt="" />
-                    <h3>{titulo[index]}</h3>
-                    <p>{p[index]}</p>
-                </motion.div>))}
+                        <img src={img} alt="" />
+                        <h3>{titulo[index]}</h3>
+                        <p>{p[index]}</p>
+                    </motion.div>
+                    </Link>
+                ))}
             </div>
         </main>
     )

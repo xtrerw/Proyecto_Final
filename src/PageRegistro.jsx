@@ -10,8 +10,6 @@ const Registro = () => {
 
   //pasa los propiedades a componente TituloPaginas
     const state={img:'src/img/bg5.png',title:"Registro",description:"Únete a los Mejores, Compite con Pasión"};
-    //
-    const scrollbg=['../src/img/scroll1.png', '../src/img/scroll2.png', '../src/img/scroll3.png', '../src/img/scroll4.png', '../src/img/scroll5.png'];
     const items=["iniciar","registrar"];
     const txtInform=["nombre","apellidos",];
     const emails=["correo electrónico","confirma correo"]
