@@ -23,6 +23,30 @@ article>div,aside>div{
 aside>div>h3{
     margin: 0 30px;
 }
-.grafico-partido{
-    height: 70%;
-}
+
+
+/* Estilos para el contenedor del gráfico de partido */
+.grafico-partido {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* Estilos para los cuadros de los partidos */
+  .cuadro {
+    position: absolute;
+    width: 100px;
+    height: 50px;
+    background-color: #fff;
+    border: 2px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Estilos para las líneas de conexión */
+  .linea {
+    position: absolute;
+    border: 1px solid #ffffff;
+  } 
+  

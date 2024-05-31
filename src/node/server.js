@@ -216,6 +216,7 @@ const nuevasNoticias = [
         tipoJuego: "Rainbow Six",
         fecha: "2024-05-18"
     },
+    
     {
         img: "src/img/noticias3.png",
         titulo: "Sorpresa en el Campeonato: Los Titanes de Neón caen ante los Lobos de Sombra en un partido decisivo de Valorant",
