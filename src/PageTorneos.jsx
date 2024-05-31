@@ -65,36 +65,28 @@ const Torneos = () => {
                     </motion.div>
                     ))}
                 </article>
-                <aside>
-                    <div>
-                        <h3>Fase:</h3>
-                        <motion.h3 
-                        layout
-                        whileHover={{
-                            color:click2=='P'? 'var(--main-color)':'#fff',//si est'a pulsado, mantenga el color rojo
-                            cursor:'pointer'
-                        }}
-                        animate={{
-                            color:click2=='P'? 'var(--main-color)':''//el color será rojo en caso de seleccionado
-                        }}
-                        onClick={()=>{setClick2("P")}}
-                        >PLAYOFF</motion.h3>
-                        <motion.h3 
-                        layout
-                        whileHover={{
-                            color:click2=='T'? 'var(--main-color)': '#fff',
-                            cursor:'pointer'
-                        }} 
-                        animate={{
-                            color:click2=='T'? 'var(--main-color)': ''
-                        }}
-                        onClick={()=>{setClick2("T")}}
-                        >TEMPORADA REGULAR</motion.h3>
-                    </div>
-                    <div className="grafico-partido">
-                        
-                    </div>
-                </aside>
+                 <aside className="grafico-partido">
+                   {/* Cuadros de los partidos */}
+                   <div className="cuadro cuadro-cuartos-1" style={{left: '15%', top: '5%'}}>Equipo 1</div>
+                    <div className="cuadro cuadro-cuartos-2" style={{left: '15%', top: '15%'}}>Equipo 2</div>
+                    <div className="cuadro cuadro-cuartos-3" style={{left: '15%', top: '50%'}}>Equipo 3</div>
+                    <div className="cuadro cuadro-cuartos-4" style={{left: '15%', top: '40%'}}>Equipo 4</div>
+
+                    <div className="cuadro cuadro-semis-1" style={{left: '29%', top: '24%'}}>Ganador 1 </div>
+                    <div className="cuadro cuadro-semis-2" style={{left: '29%', top: '32%'}}>Ganador 2</div>
+                    
+                    <div className="cuadro cuadro-final" style={{left: '45%', top: '20%'}}>Final</div>
+                    
+                    {/* Líneas de conexión */}
+                   
+                    <div className="linea linea-cuartos" style={{left: '25%', top: '13%', width: '10%', height: '1px', transform: 'translateY(-50%)'}}></div>
+                    <div className="linea linea-cuartos" style={{left: '35%', top: '13%', width: '1px', height: '10%', transform: 'translateX(-50%)'}}></div>
+                    
+                    <div className="linea linea-semis" style={{left: '25%', top: '48%', width: '10%', height: '1px', transform: 'translateY(-50%)'}}></div>
+                    <div className="linea linea-semis" style={{left: '35%', top: '39%', width: '1px', height: '9%', transform: 'translateX(-50%)'}}></div>
+                    <div className="linea linea-final" style={{left: '0', top: '57.5%', width: '50%', height: '1px', transform: 'translateY(-50%)'}}></div>
+                    <div className="linea linea-final" style={{right: '0', top: '57.5%', width: '50%', height: '1px', transform: 'translateY(0.5em) translateY(-50%)'}}></div>
+                    </aside>
             </main>
         </>
     )
