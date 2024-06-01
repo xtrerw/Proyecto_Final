@@ -28,11 +28,13 @@ const ContenidoNoticia = () => {
             <motion.div 
             initial={{
                 height:"100vh",
-                opacity: 0
+                opacity: 0,
+                scale:1.2,
             }} 
             animate={{
                 height:"50vh",
-                opacity: 1
+                opacity: 1,
+                scale:1,
             }} 
             transition={{
                 duration: 2,

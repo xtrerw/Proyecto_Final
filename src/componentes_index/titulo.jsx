@@ -33,41 +33,29 @@ function Titulo() {
         <div className='titulo'>
             <h1>
               {splite.map((span,index)=>(<motion.span key={index}
-              initial={{
-                x: -10,
-                filter:"drop-shadow(0px 0px #fd9a9a)",
-                opacity: 0,
-                marginRight: "0",
-              }}
               animate={{  
-                x: 0,
-                opacity: 1,
-                filter:"drop-shadow(5px 5px black)",
-                marginRight: "2px",
-                transition:{
-                  delay: index/10,
-                  duration: 0.25,
-                }
+                opacity: [0,1,0,1],
+                margin: ["5px","15px","5px","2px"],
+                color: ["#06ced4", "#e22020", "#1996f7", "#fff"]
+              }}
+              transition={{
+                delay: index/10,
+                duration: 5,
+                ease: 'anticipate',
               }}
               >{span}</motion.span>))}
             </h1>
             {p1.map((texto,index)=>(<motion.p key={index}
-              initial={{x:-30,opacity:0}}
-              animate={{x:0,opacity:1}}
+              initial={{y:-50,opacity:0}}
+              animate={{y:0,opacity:1}}
               transition={{
                 duration:0.5,
-                delay: index/2,
+                delay: 5+index/2,
                 ease:"easeInOut"
               }}
             >{texto}</motion.p>))}
         </div>
         <motion.img 
-        initial={{x:500,y:0}}
-        animate={{x:0,y:0}}
-        transition={{
-          duration:1,
-          ease:"easeInOut"
-        }}
         src="src\img\imgTitulo.png" alt="" />
       </section>
     )
