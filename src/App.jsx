@@ -10,6 +10,7 @@ import Torneos from './PageTorneos';
 import Tienda from './PageTienda';
 import Noticias from './PageNoticias';
 import Registro from './PageRegistro';
+import Usuario from './PageUsuario';
 import Producto from './Producto';
 import ContenidoNoticia from './ContenidoNoticia';
 import ScrollToTop from './ScrollToTop';
@@ -52,7 +53,8 @@ function App() {
         <Route path="/Juegos/:id" element={<Torneos/>}/>
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
-        <Route path="/Registro" element={<Registro/>}/>  
+        <Route path="/Registro" element={<Registro/>}/> 
+        <Route path="/modifica" element={<Usuario/>}/>  
         <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombre} />}/>       
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
       </Routes>

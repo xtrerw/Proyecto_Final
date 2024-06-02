@@ -134,7 +134,7 @@ const Producto = (propsPerfil) => {
   },[gsapImgs])
   //animacion de factura parece a la maquina
   const y=[];
-  for (let i =500; i>=0 ; i=i-50) {
+  for (let i =300; i>=0 ; i=i-50) {
     y.push(i)    
   }
 
