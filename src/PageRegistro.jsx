@@ -206,27 +206,12 @@ const Registro = () => {
           exit='nosvamos'>
             <label htmlFor="Nombre de usuario">
               <p>usuario</p>
-              <input type="text" name='nombreIS' value={formData.nombreIS} onChange={handleChange}/>
+              <input type="text" name='nombreIS' value={formData.nombreIS} onChange={handleChange} placeholder='Introduce tu nombre del usuario'/>
             </label>
             <label htmlFor="pwd">
               <p>contraseña</p>
-              <input type="password" name='contraseñaIS' value={formData.contraseñaIS} onChange={handleChange} />
+              <input type="password" name='contraseñaIS' value={formData.contraseñaIS} onChange={handleChange} placeholder='Introduce tu contraseña'/>
             </label>
-            {/* eres administrador */}
-            <Link to={'/Administrador'} style={{color:'#fff'}}>
-              <p className='admin' 
-              >
-                ¿ eres administrador ?
-              </p>
-            </Link>
-            {/* no tienes cuenta */}
-            <p className='recordatorio' 
-            onMouseEnter={()=>setHover(true)}
-            onMouseLeave={()=>setHover(false)}
-            onClick={()=>{setClick('registrar')}}
-            >
-              ¿ no tienes cuenta ?
-            </p>
               {/* btn de iniciar sesi'on */}
             <motion.button className='registro'
             onHoverStart={()=>setHover(true)}
@@ -250,7 +235,7 @@ const Registro = () => {
             initial='sinHover'
             animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
             ></motion.hr>
-              Iniciar Sessión
+              Iniciar Sesión
               <motion.hr className='left-linea'
             variants={lineaRightLeft}
             initial='sinHover'
@@ -262,6 +247,21 @@ const Registro = () => {
             animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
             ></motion.hr>
             </motion.button>
+            {/* eres administrador */}
+            <Link to={'/Administrador'} style={{color:'#fff'}}>
+              <p className='admin' 
+              >
+                ¿ eres administrador ?
+              </p>
+            </Link>
+            {/* no tienes cuenta */}
+            <p className='recordatorio' 
+            onMouseEnter={()=>setHover(true)}
+            onMouseLeave={()=>setHover(false)}
+            onClick={()=>{setClick('registrar')}}
+            >
+              ¿ no tienes cuenta ?
+            </p>
             </motion.div>
           </motion.form>
         </AnimatePresence> : 
@@ -357,12 +357,12 @@ const Registro = () => {
                     exit='nosvamos'
                     > 
                       <label htmlFor="fecha">
-                        <p>fecha de nacimiento</p>
-                        <input type="date" name='fechaN' value={formData.fechaN} onChange={handleChange}/>
+                        <p>fecha del nacimiento</p>
+                        <input type="date" name='fechaN' value={formData.fechaN} placeholder='Introduce la fecha de nacimiento' onChange={handleChange}/>
                       </label>
                       <label htmlFor="nombreUser">
-                        <p>nombre de usuario</p>
-                        <input type="text" name='nombreUsuario' value={formData.nombreUsuario} onChange={handleChange}/>
+                        <p>nombre del usuario</p>
+                        <input type="text" name='nombreUsuario' placeholder='Introduce tu nombre' value={formData.nombreUsuario} onChange={handleChange}/>
                       </label>
                       <p className='advertencia'>
                         {/* comprobar los usuario si es menor de edad o si ya introduce al campo */}
@@ -427,7 +427,7 @@ const Registro = () => {
                     {txtInform.map((input,index)=>
                       <label htmlFor={input} key={index}>
                         <p>{input}</p>
-                        <input type="text" name={input} value={index==0? formData.nombre: formData.apellidos} onChange={handleChange}/>
+                        <input type="text" name={input} value={index==0? formData.nombre: formData.apellidos} onChange={handleChange} placeholder={`Introduce tu ${input}`}/>
                       </label>
                     )}
                     <p className='advertencia'>
@@ -490,7 +490,7 @@ const Registro = () => {
                         (
                         <label key={index} htmlFor={email}>
                           <p>{email}</p>
-                          <input type="email" name={index==0? 'correo':'confirmaCorreo'} value={index==0? formData.correo:formData.confirmaCorreo} onChange={handleChange}/>
+                          <input type="email" name={index==0? 'correo':'confirmaCorreo'} value={index==0? formData.correo:formData.confirmaCorreo} onChange={handleChange} placeholder={`${email}`}/>
                         </label>)
                       )}
                       {/* Advertencia de correo */}
@@ -553,7 +553,7 @@ const Registro = () => {
                         (
                         <label key={index} htmlFor={pwd}>
                           <p>{pwd}</p>
-                          <input type="password" name={index==0? 'contraseña':'confirmaContraseña'} value={index==0? formData.contraseña:formData.confirmaContraseña} onChange={handleChange} />
+                          <input type="password" name={index==0? 'contraseña':'confirmaContraseña'} value={index==0? formData.contraseña:formData.confirmaContraseña} onChange={handleChange} placeholder={`${pwd}`}/>
                         </label>
                       ))}
                       {/* Advertencia de contraseña */}
