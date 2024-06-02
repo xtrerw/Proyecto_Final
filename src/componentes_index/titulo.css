@@ -22,6 +22,9 @@
   .titulo>h1{
     margin: 30px;
   }
+  .titulo>h1>span{
+    margin: 2px;
+  }
   .titulo>p{
     width: 600px;
     color: var(--default-color);

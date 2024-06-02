@@ -34,13 +34,12 @@ function Titulo() {
             <h1>
               {splite.map((span,index)=>(<motion.span key={index}
               animate={{  
-                opacity: [0,1,0,1],
-                margin: ["5px","15px","5px","2px"],
-                color: ["#06ced4", "#e22020", "#1996f7", "#fff"]
+                opacity: [0,1],
+                color: [ "#1996f7", "#fff"]
               }}
               transition={{
                 delay: index/10,
-                duration: 5,
+                duration: 0.5,
                 ease: 'anticipate',
               }}
               >{span}</motion.span>))}
@@ -50,7 +49,7 @@ function Titulo() {
               animate={{y:0,opacity:1}}
               transition={{
                 duration:0.5,
-                delay: 5+index/2,
+                delay: 2+index/2,
                 ease:"easeInOut"
               }}
             >{texto}</motion.p>))}

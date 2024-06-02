@@ -79,15 +79,20 @@
     font-size: 30px;
     padding: 5px 10px;
 }
-/* tienes cuentas */
-.recordatorio{
+/* tienes cuentas y eres administrador */
+.admin,.recordatorio{
     font-size: 12px;
     cursor: pointer;
-    margin-top: 25px;
     width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.admin{
+    margin-top: 25px;
+}
+.recordatorio{
+    margin-top: 5px;
 }
 /* pto de carrusel */
 .ptos{
@@ -230,8 +235,11 @@
         margin-top: 0px;
         clip-path: path('M 10,0 L 0,10 0,30 L 140,30 150,20 150,0 Z');
     }
-    .recordatorio{
+    .admin{
         margin: 20px 0;
+    }
+    .recordatorio{
+        margin: 5px 0;
     }
     .under-linea,.up-linea,.left-linea,.right-linea{
         display: none;

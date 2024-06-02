@@ -44,6 +44,8 @@ const Producto = (propsPerfil) => {
   const [resto,setResto]=useState(propsPerfil.ptos);
   //no tiene suficientes ptos
   const [pobre,setPobre]=useState('')
+  //sale factura
+  const [factura,setFactura]=useState(false);
   //para actualizar los puntos en bd
   const canejar=async()=>{
     const newResto=resto-producto.precio
@@ -70,6 +72,8 @@ const Producto = (propsPerfil) => {
         //tramitar las acciones de enviar ptos de resto
         dispatch(enviarPtos(newResto))
         //luego vam a navbar
+        //sale factura
+        setFactura(true);
       }else{
         console.log('No encuentro usuario');
       }
@@ -128,6 +132,12 @@ const Producto = (propsPerfil) => {
       },"<")
     });
   },[gsapImgs])
+  //animacion de factura parece a la maquina
+  const y=[];
+  for (let i =500; i>=0 ; i=i-50) {
+    y.push(i)    
+  }
+
   return (
     <>
       <main className='detalle'>
@@ -184,16 +194,18 @@ const Producto = (propsPerfil) => {
         <h2>{producto.nombre}</h2>
         <h3>Descripción</h3>
         <hr />
-        <p>{producto.descripcion}</p>
         <p>Precio: {producto.precio} ptos</p>
         <p>Características: {producto.caracteristica}</p>
         <p>Tipo de Juego: {producto.tipoJuego}</p>
         <p>Clasificación: {producto.clasificacion}</p>
         <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
         {/* realiza canejo */}
-        <button className='btn-canejar' onClick={canejar}>Canejar ahora</button>
+        <button className='btn-canejar' onClick={()=>{
+          canejar();
+          setFactura(false);
+        }}>Canejar ahora</button>
         <motion.p
-      className='pobre'
+        className='pobre'
         animate={{
           opacity:1,
           color:'var(--main-color)',
@@ -202,6 +214,48 @@ const Producto = (propsPerfil) => {
         }}
         >{pobre}</motion.p>
       </motion.div>
+      {factura? 
+      <div className='factura-maquina'>
+        <motion.div className='factura'
+        animate={{
+          opacity:1,
+          y:y
+        }}
+        transition={{
+          duration:2,
+          ease:'anticipate',
+        }}
+        >
+          <i className='bx bx-x-circle' onClick={()=>{setFactura(false)}} ></i>
+          <div className='factura-contenido'>
+            <h1 className='factura-titulo'>Factura de Premio</h1>
+            <p className='factura-infor'>Usuario: {propsPerfil.nombre}</p>
+            <hr />
+            <p className='factura-infor'>Premio:</p>
+            <section className='factura-flex'>
+              <p className='factura-infor factura-nombre'>{producto.nombre }</p>
+              <p className='factura-infor'>{producto.precio} ptos</p>
+            </section>
+            <hr />
+            <section className='factura-flex'>
+              <p className='factura-infor'>Tus puntos actuales:</p>
+              <p className='factura-infor'>{resto} ptos</p>
+            </section>
+          </div>
+        </motion.div> 
+        <motion.div className='maquina'
+        animate={{
+          borderTop:["0px solid var(--main-color)","10px solid var(--main-color)","0px solid var(--main-color)"],
+          opacity:[1,1,0],
+        }}
+        transition={{
+          duration: 3,
+          ease:"anticipate",
+        }}
+        ></motion.div>
+      </div>
+      :''}
+      
     </main>
     <main className='exhibicion'>
       <div className='exhibicion-set scroll-left'>

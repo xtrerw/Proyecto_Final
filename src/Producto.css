@@ -46,7 +46,7 @@
     font-size: 22px;
     color: var(--default-color3);
 }
-hr{background: var(--default-color3);}
+.producto-detalle>hr{background: var(--default-color3);}
 .producto-detalle>p{
     font-size: 18px;
     color: var(--default-color3);
@@ -67,6 +67,63 @@ hr{background: var(--default-color3);}
     background: var(--main-color2);
     transition: 0.5s ease-in-out;
     text-decoration: underline;
+}
+/* factura desp'ues de comprar */
+.factura-maquina{
+    position: absolute;
+    width: 300px;
+    height: 400px;
+}
+.factura{
+    width: 300px;
+    height: 400px;
+    background-color: #dfdcdc;
+    border-top: 30px solid var(--main-color);
+    clip-path: path("M 0,0 L 0,400 L 30,370 L 60,400 L 90,370 L 120,400 L 150,370 L 180,400 L 210,370 L 240,400 L 270,370 L 300,400 L 300,0 Z");
+}
+.maquina{
+    width: 300px;
+    height: 400px;
+    background: #fff;
+    position: absolute;
+    z-index: 100;
+}
+.factura>.bx-x-circle{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #000;
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.factura>.bx-x-circle:hover{
+    color: var(--main-color);
+}
+.factura-contenido{
+    margin: 20px;
+}
+.factura-contenido>hr{
+    background: #5a5a5a;
+    height: 3px;
+    border: none;
+}
+.factura-titulo{
+    color: #000;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+.factura-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.factura-infor{
+    color: #000;
+    font-size: 10px;
+}
+.factura-nombre{
+    width: 200px;
 }
 /* si no tiene suficiente ptos */
 .pobre{

@@ -32,7 +32,7 @@ const Navbar = (propsNavbar) => {
       } else if (resultaPtos>=0 && contar>resultaPtos) {
         //reducir los ptos hasta igual que el resto 
         iniciarAnima(true)
-        const time= setTimeout(()=>{setContar(contar-1)},20)
+        const time= setTimeout(()=>{setContar(contar-1)},2)
         return ()=>clearTimeout(time)
       }
     },[animaInicio, contar, propsNavbar, resultaPtos])

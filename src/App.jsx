@@ -53,7 +53,7 @@ function App() {
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/>  
-        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} />}/>       
+        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombre} />}/>       
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
       </Routes>
       <Footer/>

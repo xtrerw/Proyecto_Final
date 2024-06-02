@@ -4,7 +4,7 @@ import "./PageRegistro.css"
 import { color, motion } from 'framer-motion'
 import { AnimatePresence } from 'framer-motion'
 import moment from 'moment'
-import { Navigate,useNavigate } from 'react-router-dom'
+import { Link, Navigate,useNavigate } from 'react-router-dom'
 
 const Registro = () => {
 
@@ -212,10 +212,17 @@ const Registro = () => {
               <p>contraseña</p>
               <input type="password" name='contraseñaIS' value={formData.contraseñaIS} onChange={handleChange} />
             </label>
+            {/* eres administrador */}
+            <Link to={'/Administrador'} style={{color:'#fff'}}>
+              <p className='admin' 
+              >
+                ¿ eres administrador ?
+              </p>
+            </Link>
             {/* no tienes cuenta */}
             <p className='recordatorio' 
             onMouseEnter={()=>setHover(true)}
-            onMouseLeave={()=>setHover(false)} 
+            onMouseLeave={()=>setHover(false)}
             onClick={()=>{setClick('registrar')}}
             >
               ¿ no tienes cuenta ?

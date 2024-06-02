@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { motion,AnimatePresence, delay } from 'framer-motion'
+import { motion} from 'framer-motion'
 import '/src/PageAdmin.css'
 const Admin = () => {
     
@@ -29,7 +29,30 @@ const Admin = () => {
     //hover input
     const[hover1,setHover1]=useState(false);
     const[hover2,setHover2]=useState(false);
-
+    //administrador iniciar sesion 
+    const[admin,setAdmin]=useState({
+        us:'',
+        pwd:'',
+    });
+    //introducir los datos a parametro admin cuando enviar el formulario
+    const submitDatos=(evento)=>{
+        const {nombre, valor}=evento.targets;
+        setAdmin({
+            ...admin,
+            [nombre]:valor,
+        })
+    };
+    useEffect(()=>{
+        fetch('http://localhost:3001/admin',{
+            method:'POST',
+            headers:{
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                
+            }),
+        });
+    })
   return (
     <main className='bg-admin'>
         <motion.video className="bg-video"
@@ -40,10 +63,11 @@ const Admin = () => {
             height:"100%",
         }}
         animate={{
-            opacity:[1,1,1,1],
-            width:["80%","100%","70%","80%"],
-            height:["80%","100%","70%","80%"],
-            borderRadius:["100px","20px","100px","20px"],
+            opacity:1,
+            width:"80%",
+            height:"80%",
+            borderRadius:20,
+            boxShadow:"inset 0 0 10px 1px #000"
         }}
         transition={{
             delay:3,
@@ -52,9 +76,9 @@ const Admin = () => {
         }}
         >
             
-                <source src="../src/img/bg-admin.mp4" type="video/mp4"/>
+            <source src="../src/img/bg-admin.mp4" type="video/mp4"/>
         </motion.video>
-         <form className="admin-form">
+         <form className="admin-form" onSubmit={submitDatos}>
             {/* border de form */}
             <motion.svg className='admin-border' fill='#fff'
             >
