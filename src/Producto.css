@@ -71,22 +71,20 @@
 /* factura desp'ues de comprar */
 .factura-maquina{
     position: absolute;
-    width: 300px;
-    height: 410px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0000008e;
 }
 .factura{
     width: 300px;
     height: 320px;
     background-color: #dfdcdc;
-    border-top: 30px solid var(--main-color);
+    border-top: 10px solid var(--main-color);
     clip-path: path("M 0,0 L 0,320 L 30,310 L 60,320 L 90,310 L 120,320 L 150,310 L 180,320 L 210,310 L 240,320 L 270,310 L 300,320 L 300,0 Z");
-}
-.maquina{
-    width: 300px;
-    height: 300px;
-    background: #fff;
-    position: absolute;
-    z-index: 10;
+    position: relative;
 }
 .factura>.bx-x-circle{
     position: absolute;

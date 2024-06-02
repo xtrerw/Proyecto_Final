@@ -132,11 +132,6 @@ const Producto = (propsPerfil) => {
       },"<")
     });
   },[gsapImgs])
-  //animacion de factura parece a la maquina
-  const y=[];
-  for (let i =300; i>=0 ; i=i-50) {
-    y.push(i)    
-  }
 
   return (
     <>
@@ -215,14 +210,22 @@ const Producto = (propsPerfil) => {
         >{pobre}</motion.p>
       </motion.div>
       {factura? 
-      <div className='factura-maquina'>
+      <motion.div className='factura-maquina'
+      animate={{
+        opacity:[0,1],
+      }}
+      transition={{
+        duration:1,
+        ease:'anticipate',
+      }}
+      >
         <motion.div className='factura'
         animate={{
-          opacity:1,
-          y:y
+          opacity:[0,1],
+          y:[10,0]
         }}
         transition={{
-          duration:2,
+          duration:1,
           ease:'anticipate',
         }}
         >
@@ -243,17 +246,7 @@ const Producto = (propsPerfil) => {
             </section>
           </div>
         </motion.div> 
-        <motion.div className='maquina'
-        animate={{
-          borderTop:["0px solid var(--main-color)","10px solid var(--main-color)","0px solid var(--main-color)"],
-          opacity:[1,1,0],
-        }}
-        transition={{
-          duration: 3,
-          ease:"anticipate",
-        }}
-        ></motion.div>
-      </div>
+      </motion.div>
       :''}
       
     </main>
