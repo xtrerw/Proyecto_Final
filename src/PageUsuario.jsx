@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./PageUsuario.css"
-import { color, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 const PageUsuario = (propsUser) => {
     //conseguir los quipos que user tiene
     const[equipos,setEquipos]=useState([])
@@ -39,7 +39,6 @@ const PageUsuario = (propsUser) => {
             color:error? 'var(--hoverbtn)':'none',
         }
     } 
-    console.log(propsUser.id);
     const submitUser = async(e)=>{
         e.preventDefault();
         setError(false)
@@ -64,6 +63,7 @@ const PageUsuario = (propsUser) => {
                 })
             })
             const resulta=await response.json()
+
             if (response.ok) {
                 console.log(resulta);
             }
