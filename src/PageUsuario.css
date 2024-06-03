@@ -77,13 +77,6 @@
     cursor: pointer;
 }
 /* estabelecer nueva contraseña */
-.tus-datos p{
-    color: #fff;
-    filter: drop-shadow(0 0 1px #000);
-    text-transform: lowercase;
-    font-size: 10px;
-    cursor: pointer;
-}
 .usuario-iniciar{
     width: 300px;
     height: 50px;
@@ -141,10 +134,15 @@
 .equipo-img{
     width: 100px;
     height: 100px;
-    border: 2px solid #fff;
     background-size: cover;
     border-radius: 50%;
     border: 5px solid #fff;
+    margin: 10px;
+    box-shadow: 0 0 5px #000;
+}
+.equipo-img>p{
+    font-size: 10px;
+    color: darkcyan;
 }
 .usuario-infor2{
     display: flex;

@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import "./PageUsuario.css"
-import { motion } from 'framer-motion'
+import { color, motion } from 'framer-motion'
 const PageUsuario = (propsUser) => {
+    //conseguir los quipos que user tiene
     const[equipos,setEquipos]=useState([])
     useEffect(()=>{
-        if (propsUser.equipos) {
+        if (Array.isArray(propsUser.equipos)) {
             setEquipos(propsUser.equipos)
+        }else {
+            setEquipos([]); 
         }
-    },[propsUser.equipos])
-    console.log("equipo que tiene es ");
-    console.log(equipos);
+    },[propsUser])
+    //cambiar los icones a lo largo de elegir el equipo
+    const[team,setTeam]=useState()
     //introduce informaciones de nuevo
     const[form,setForma]=useState({
         email:propsUser.email,
         user:propsUser.user,
         pwd: propsUser.pwd,
-        pwdConfirma: propsUser.pwd
+        pwdConfirma: propsUser.pwd,
     })
     //introduce input
     const handleChange = (e) => {
@@ -25,6 +28,48 @@ const PageUsuario = (propsUser) => {
             ...form,
             [name]:value,
         })
+    }
+    //funcion de submit
+    //si encuentra los error
+    const [error,setError]=useState(false)
+    // pondrá los borders rojo de input
+    const errorBorder={
+        tieneError:{
+            border:error? '2px solid var(--hoverbtn)':'none',
+            color:error? 'var(--hoverbtn)':'none',
+        }
+    } 
+    console.log(propsUser.id);
+    const submitUser = async(e)=>{
+        e.preventDefault();
+        setError(false)
+        //si condiciones de modificar los datos sin válida
+        if (form.pwd!=form.pwdConfirma || !form.pwd || !form.pwdConfirma)  {
+            return setError(true);
+        } else if (!form.email) {
+            return alert('error email')
+        } else if (!form.user) {
+            return alert('error user');
+        }
+        try {
+            const response=await fetch('http://localhost:3001/modifica',{
+            //uso metodo de PUT
+            method: 'PUT',
+            headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    id:propsUser.id,//para actualizar los datos según id
+                    email:form.email,
+                    user:form.user,
+                    pwd:form.pwd,
+                })
+            })
+            const resulta=await response.json()
+            if (response.ok) {
+                console.log(resulta);
+            }
+        } catch (error) {
+            console.error('error de submit'+error);
+        }
     }
     //quieres estabelecer contraseña de nuevo
     const itemMenu=['mis datos','contraseña','mis equipos']
@@ -93,7 +138,7 @@ const PageUsuario = (propsUser) => {
                         ))}
                 </div>
                 {/* formulario de modifica */}
-                <form className='tus-datos'>
+                <form className='tus-datos' onSubmit={submitUser}>
                     
                     {menu=='mis datos'? 
                         <div className='item-usuario'>
@@ -114,24 +159,51 @@ const PageUsuario = (propsUser) => {
                              <h2>
                                 {menu}
                             </h2>
-                            <div className='usuario-iniciar'>
+                            <motion.div className='usuario-iniciar'
+                             // si hay error, llamará a variente de estilo de error
+                                variants={errorBorder}
+                                animate='tieneError'
+                            >
                                 <i className='bx bx-lock'></i>
                                 <input type='password' name='pwd' value={form.pwd} onChange={handleChange} placeholder='Estabelece tu contraseña nueva'/>
-                            </div>
-                            <div className='usuario-iniciar'>
+                            </motion.div>
+                            <motion.div className='usuario-iniciar'
+                            // si hay error, llamará a variente de estilo de error
+                                variants={errorBorder}
+                                animate='tieneError'
+                            >
                                 <i className='bx bx-lock'></i>
-                                <input type='password' name='pwdConfirma' value={form.pwdConfirma} onChange={handleChange} placeholder='Confirma tu contraseña'/>
-                            </div>
+                                <input type='password' name='pwdConfirma' value={form.pwdConfirma} onChange={handleChange} placeholder='Confirma tu contraseña'
+                                />
+                            </motion.div>
                         </div> :
                          menu=='mis equipos'?
                          <div className='item-usuario'>
                              <h2>
                                 {menu}
                             </h2>
-                            <div className='usuario-iniciar'>
-                                <i className='bx bx-envelope'></i>
-                                <p>Mis equipos</p>
-                            </div>
+                            {equipos.map((t,index)=>
+                            <motion.div key={index} className='usuario-iniciar'
+                                whileHover={{
+                                    cursor: 'pointer',
+                                    color: '#fff',
+                                    backgroundColor:team==t.equipo?  'var(--main-color)':'var(--hoverbtn)',
+                                }}
+                                onClick={()=>{
+                                    if (team==t.equipo) {
+                                        setTeam(null)
+                                    }else{
+                                        setTeam(t.equipo); 
+                                    }
+                                }}
+                                animate={{
+                                    color:team==t.equipo? '#fff':'var(--hoverbtn)',
+                                    backgroundColor:team==t.equipo? 'var(--hoverbtn)':'#fff',
+                                }}
+                            >
+                                <i class='bx bx-group'></i>
+                                {t.equipo}
+                            </motion.div>)}
                         </div> : null}
                     
                     <div className='usuario-btns'>
@@ -152,11 +224,18 @@ const PageUsuario = (propsUser) => {
                 }}
                 ></motion.div>
                 {equipos.map((eq,index)=>
-                    <div className='equipo-img' key={index}
+                    <motion.div className='equipo-img' key={index}
                         style={{
                             backgroundImage: `url(../${eq.img})`
                         }}
-                    ></div>
+                        initial={{
+                            scale: 1,
+                        }}
+                        animate={{
+                            scale:eq.equipo==team? 1.2:1,
+                            rotate:eq.equipo==team? 360:0,
+                        }}
+                    ></motion.div>
                 )}
             </motion.div>
         </section>
@@ -170,7 +249,7 @@ const PageUsuario = (propsUser) => {
                 borderRadius:"50%"
             }}
             >
-                <p>{propsUser.ptos} Ptos</p>
+                <p>{propsUser.ptos} <br /> Ptos</p>
             </motion.div>
             <motion.div className='usuario-ptos'
             variants={itemRight}

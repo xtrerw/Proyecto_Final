@@ -100,7 +100,9 @@ app.use(session({
   //actualizar los ptos de usuarios
   const actualizarPtos= async(req,res)=>{
     try {
+        //conseguir cuerpo de peticiones
         const {id,ptos}=req.body
+        //actualizar objetivo correspondiente por id
         const actualiza= await ServerMod.JugadorModulo.findByIdAndUpdate(
             id,
             {ptos: ptos},
@@ -108,6 +110,7 @@ app.use(session({
         );
         if (actualiza) {
             console.log(actualiza);
+            //devolver los actualizados a front-end
             res.status(200).send(actualiza)
         }else{
             console.log(actualiza);
@@ -117,10 +120,34 @@ app.use(session({
         res.status(500).json({ error: 'Error del servidor' });
     }
   }
-  
+  //construye route para que no crea api repetidamente
   app.route('/')
     .post(iniciar)
     .put(actualizarPtos)
+  //api para modificar los datos de usuarios
+  app.put('/modifica',async(req,res)=>{
+    try {
+        //conseguir el cuerpo de petición
+        const{id,email,user,pwd}=req.body;
+        //actualizar los datos de usuarios
+        const actualiza=await ServerMod.JugadorModulo.findByIdAndUpdate(
+            id,
+            {
+                correo:email,
+                nombreUsuario:user,
+                contraseña:pwd
+            },
+            {new:true},
+        )
+        if (actualiza) {
+            res.status(200).send(actualiza)
+        }else{
+            res.status(401).send("actualizar fallado")
+        }
+    } catch (error) {
+        res.status(500).send('error de servidor')
+    }
+  })
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.
