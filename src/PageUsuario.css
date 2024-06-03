@@ -36,12 +36,45 @@
     flex-direction: column;
     align-items: center;
 }
-.tus-datos>h2{
-    color: #ff0000;
+.item-usuario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.item-usuario>h2{
+    color: var(--hoverbtn);
     filter: drop-shadow(0 0 1px);
     font-weight: bolder;
     text-transform: uppercase;
     font-size: 20px;
+}
+/* menu */
+.menu{
+    position: absolute;
+    top: 15px;
+    right: 170px;
+    width: 300px;
+    height: 45px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 5px 5px 5px #3e3e3e;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+/* item */
+.item{
+    width: 80px;
+    height: 30px;
+    border-radius: 5px;
+    background: var(--default-color2);
+    color: var(--hoverbtn);
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
 /* estabelecer nueva contraseña */
 .tus-datos p{
@@ -64,17 +97,54 @@
     gap: 10px;
     padding: 0 10px;
 }
+.usuario-iniciar>input{
+    outline: none;
+    border: none;
+    width: 100%;
+    font-size: 15px;
+}
+/* btn submit */
+.usuario-btns{
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+.usuario-btns>button{
+    width: 120px;
+    height: 40px;
+    border-radius: 10px;
+    background: var(--main-color);
+    font-size: 10px;
+    color: #fff;
+    text-transform: capitalize;
+}
+.usuario-btns>button:hover{
+    background: var(--hoverbtn);
+}
+.usuario-btns>button:active{
+    background: var(--default-color2);
+    color: var(--hoverbtn);
+}
 /* img de perfil */
 .usuario-img{
     width: 100px;
     height: 100px;
     background-size: cover;
     position: absolute;
-    right: 50px;
-    top: 50px;
+    right: 15px;
+    top: 15px;
     border-radius: 20px;
     border: 5px solid #fff;
     box-shadow:0px 0px 5px #fff;
+}
+/* img de equipos */
+.equipo-img{
+    width: 100px;
+    height: 100px;
+    border: 2px solid #fff;
+    background-size: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
 }
 .usuario-infor2{
     display: flex;

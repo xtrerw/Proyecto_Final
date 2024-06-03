@@ -82,9 +82,13 @@ app.use(session({
         console.log(confirmar);
         if (confirmar) {
             console.log(confirmar);
+            const equipo=await ServerMod.EquiposModulo.find({
+                jugador:{$in:[nombreIS]},
+            })
             //estabelecer el ID del usuario en la sesion
             req.session.userObj=confirmar
-            res.status(200).send(req.session.userObj);
+            req.session.equipoObj=equipo
+            res.status(200).send({user:req.session.userObj,equipo:req.session.equipoObj});
         }else{
             console.log(confirmar);
             res.status(401).send({ error: '401 la petición (request) no ha sido ejecutada'});
@@ -93,7 +97,6 @@ app.use(session({
         res.json({error:'Error del servidor'})
     }
   }
-
   //actualizar los ptos de usuarios
   const actualizarPtos= async(req,res)=>{
     try {

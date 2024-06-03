@@ -129,7 +129,7 @@ const Registro = () => {
               setMessage('Verificación exitosa');
               //navegar a la p'agina principal y manda id a all'i
               //manda id a la página que quiera
-              nav(`/`,{state:{user:result}})
+              nav(`/`,{state:{userEquipo:result}})
           } else {
               console.error('Error en la verificación', result);
               setMessage('Carece de credenciales válidas');

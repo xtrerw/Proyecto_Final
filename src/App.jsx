@@ -19,18 +19,26 @@ import { useEffect, useState } from 'react';
 //hook de redux
 import { useSelector } from "react-redux";
 function App() {
-  //utilizando redux, conseguir ptos de usuarios actualizado
-  const resultaPtos=useSelector((state)=>state)
   //conseguir id de usuario desde la pagina registro 
   //session
-  const user=useLocation().state?.user
+  const user=useLocation().state?.userEquipo.user
   const [perfil,setPerfil]=useState({})
   useEffect(()=>{
     if (user) {
       setPerfil(user)
     }
   },[user])
-
+  //encuentra los equipos que los usuarios tienen
+  const equipos=useLocation().state?.userEquipo.equipo
+  const [equiposTienen,setEquipos]=useState({})
+  useEffect(()=>{
+    if (equipos) {
+      setEquipos(equipos)
+    }
+  },[equipos])
+  console.log(equiposTienen);
+   //utilizando redux, conseguir ptos de usuarios actualizado
+   const resultaPtos=useSelector((state)=>state)
   //si resultaPtos se establece,perfil.ptos será igaul q ellos. si no, perfil no se va cambiar
   useEffect(() => {
     if (resultaPtos && perfil.ptos !== resultaPtos) {
@@ -40,6 +48,7 @@ function App() {
       }));
     }
   }, [perfil.ptos, resultaPtos]);
+
   return (
     <>
       <ScrollToTop/>
@@ -54,7 +63,7 @@ function App() {
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/> 
-        <Route path="/modifica" element={<Usuario nombre={perfil.nombre} apellidos={perfil.apellidos} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos}/>}/>  
+        <Route path="/modifica" element={<Usuario nombre={perfil.nombre} apellidos={perfil.apellidos} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} equipos={equiposTienen}/>}/>  
         <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombre} />}/>       
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
       </Routes>

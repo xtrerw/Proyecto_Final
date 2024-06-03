@@ -1,9 +1,34 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./PageUsuario.css"
 import { motion } from 'framer-motion'
 const PageUsuario = (propsUser) => {
-    //estabelece nueva contraseña
-    const[olvidado,isOlvidado]=useState(false)
+    const[equipos,setEquipos]=useState([])
+    useEffect(()=>{
+        if (propsUser.equipos) {
+            setEquipos(propsUser.equipos)
+        }
+    },[propsUser.equipos])
+    console.log("equipo que tiene es ");
+    console.log(equipos);
+    //introduce informaciones de nuevo
+    const[form,setForma]=useState({
+        email:propsUser.email,
+        user:propsUser.user,
+        pwd: propsUser.pwd,
+        pwdConfirma: propsUser.pwd
+    })
+    //introduce input
+    const handleChange = (e) => {
+        const {name,value}=e.target
+
+        setForma({
+            ...form,
+            [name]:value,
+        })
+    }
+    //quieres estabelecer contraseña de nuevo
+    const itemMenu=['mis datos','contraseña','mis equipos']
+    const [menu,setItem]=useState(itemMenu[0])
     //variantes de item derecho
     //padre variantes
     const container={
@@ -51,23 +76,69 @@ const PageUsuario = (propsUser) => {
                 duration:2,
                 ease:"backInOut"
             }}>
-                <div className='tus-datos'>
-                    <h2>
-                        tus datos
-                    </h2>
-                    <div className='usuario-iniciar'>
-                        <i className='bx bx-user' ></i>
-                        {propsUser.user}
-                    </div>
-                    <div className='usuario-iniciar'>
-                        <i className='bx bx-envelope'></i>
-                        {propsUser.email}
-                    </div>
-                    
-                    {olvidado?
-                    <input className='usuario-iniciar' type='password' placeholder='Estabelece tu contraseña nueva'/>
-                    : <p onClick={()=>isOlvidado(true)}>Se ha olvidado tu contraseña</p>}
+                <div className='menu'>
+                    {itemMenu.map((item,index)=>(
+                        <motion.div key={index} className='item' onClick={()=>{setItem(item)}}
+                        animate={{
+                            background: menu==item? 'var(--main-color)':'var(--default-color2)',
+                            color:menu==item?  '#fff':'var(--hoverbtn)',
+                        }}
+                        whileHover={{
+                            background: menu==item? 'var(--main-color2)':'var(--main-color)',
+                            color: '#fff'
+                        }}
+                        >
+                            {item}
+                        </motion.div>
+                        ))}
                 </div>
+                {/* formulario de modifica */}
+                <form className='tus-datos'>
+                    
+                    {menu=='mis datos'? 
+                        <div className='item-usuario'>
+                            <h2>
+                                {menu}
+                            </h2>
+                            <div className='usuario-iniciar'>
+                                <i className='bx bx-user' ></i>
+                                <input type="text" name='user' value={form.user} onChange={handleChange} />
+                            </div>
+                            <div className='usuario-iniciar'>
+                                <i className='bx bx-envelope'></i>
+                                <input type="email" name='email' value={form.email} onChange={handleChange}/>
+                            </div>
+                        </div> :
+                        menu=='contraseña'?
+                        <div className='item-usuario'>
+                             <h2>
+                                {menu}
+                            </h2>
+                            <div className='usuario-iniciar'>
+                                <i className='bx bx-lock'></i>
+                                <input type='password' name='pwd' value={form.pwd} onChange={handleChange} placeholder='Estabelece tu contraseña nueva'/>
+                            </div>
+                            <div className='usuario-iniciar'>
+                                <i className='bx bx-lock'></i>
+                                <input type='password' name='pwdConfirma' value={form.pwdConfirma} onChange={handleChange} placeholder='Confirma tu contraseña'/>
+                            </div>
+                        </div> :
+                         menu=='mis equipos'?
+                         <div className='item-usuario'>
+                             <h2>
+                                {menu}
+                            </h2>
+                            <div className='usuario-iniciar'>
+                                <i className='bx bx-envelope'></i>
+                                <p>Mis equipos</p>
+                            </div>
+                        </div> : null}
+                    
+                    <div className='usuario-btns'>
+                        <button type="submit" className='guardar'>Guardar</button>
+                        <button type="submit" className='cancelar'>cerrar cuenta</button>
+                    </div>
+                </form>
                 <motion.div className='usuario-img' 
                 style={{
                     backgroundImage: `url(${propsUser.img})`    
@@ -80,6 +151,13 @@ const PageUsuario = (propsUser) => {
                     duration:3,                  
                 }}
                 ></motion.div>
+                {equipos.map((eq,index)=>
+                    <div className='equipo-img' key={index}
+                        style={{
+                            backgroundImage: `url(../${eq.img})`
+                        }}
+                    ></div>
+                )}
             </motion.div>
         </section>
         <motion.section className='usuario-infor2'

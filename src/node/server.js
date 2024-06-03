@@ -60,7 +60,8 @@ const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 const equiposSchemas = new mongoose.Schema({
     equipo: String,
     jugador: [String],
-    tipoJuego: String
+    tipoJuego: String,
+    img: String,
 });
 const EquiposModulo = mongoose.model("equipos", equiposSchemas);
 
@@ -132,7 +133,7 @@ const nuevosJugadores = [
         ptos:500
     },
     {
-        nombreUsuario: 'DamnBro',
+        nombreUsuario: '23333',
         nombre: 'Maria',
         apellidos: 'Lopez',
         fechaN: new Date(1987, 6, 22),  // 1987-07-22
@@ -152,7 +153,7 @@ const nuevosJugadores = [
         ptos:800,
     },
     {
-        nombreUsuario: 'RocketWarrior',
+        nombreUsuario: 'nooblol',
         nombre: 'Katyusha',
         apellidos: 'Katherin',
         fechaN: new Date(1989, 2, 28),  // 1989-03-28
@@ -170,6 +171,156 @@ const nuevosJugadores = [
         contraseña: '12345',
         img:'src/img/jugador6.png',
         ptos:1000,
+    },
+    {
+        nombreUsuario: 'SpeedyGonzales',
+        nombre: 'Carlos',
+        apellidos: 'Perez',
+        fechaN: new Date(1990, 4, 3),  // 1990-05-03
+        correo: 'carlos@gmail.es',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 600
+    },
+    {
+        nombreUsuario: 'SilentKiller',
+        nombre: 'Ana',
+        apellidos: 'Sanchez',
+        fechaN: new Date(1988, 1, 25),  // 1988-02-25
+        correo: 'ana@gmail.es',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 750
+    },
+    {
+        nombreUsuario: 'MasterMind',
+        nombre: 'Fernando',
+        apellidos: 'Rodriguez',
+        fechaN: new Date(1984, 11, 13),  // 1984-12-13
+        correo: 'fernando@gmail.es',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 850
+    },
+    {
+        nombreUsuario: 'HappyFeet',
+        nombre: 'Gloria',
+        apellidos: 'Mendoza',
+        fechaN: new Date(1991, 5, 20),  // 1991-06-20
+        correo: 'gloria@gmail.es',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 920
+    },
+    {
+        nombreUsuario: 'TechGuru',
+        nombre: 'Miguel',
+        apellidos: 'Silva',
+        fechaN: new Date(1995, 10, 5),  // 1995-11-05
+        correo: 'miguel@gmail.es',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 700
+    },
+    {
+        nombreUsuario: 'GamingQueen',
+        nombre: 'Sophia',
+        apellidos: 'Smith',
+        fechaN: new Date(1994, 2, 12),  // 1994-03-12
+        correo: 'sophia@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 450
+    },
+    {
+        nombreUsuario: 'CyberWarrior',
+        nombre: 'James',
+        apellidos: 'Johnson',
+        fechaN: new Date(1992, 6, 19),  // 1992-07-19
+        correo: 'james@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 520
+    },
+    {
+        nombreUsuario: 'PixelMaster',
+        nombre: 'Emma',
+        apellidos: 'Williams',
+        fechaN: new Date(1985, 8, 30),  // 1985-09-30
+        correo: 'emma@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 670
+    },
+    {
+        nombreUsuario: 'DragonSlayer',
+        nombre: 'Liam',
+        apellidos: 'Brown',
+        fechaN: new Date(1991, 10, 8),  // 1991-11-08
+        correo: 'liam@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 720
+    },
+    {
+        nombreUsuario: 'MagicWand',
+        nombre: 'Olivia',
+        apellidos: 'Jones',
+        fechaN: new Date(1986, 4, 21),  // 1986-05-21
+        correo: 'olivia@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 580
+    },
+    {
+        nombreUsuario: 'StormBringer',
+        nombre: 'Noah',
+        apellidos: 'Garcia',
+        fechaN: new Date(1993, 11, 14),  // 1993-12-14
+        correo: 'noah@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 640
+    },
+    {
+        nombreUsuario: 'CyberPunk',
+        nombre: 'Isabella',
+        apellidos: 'Miller',
+        fechaN: new Date(1995, 5, 2),  // 1995-06-02
+        correo: 'isabella@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 710
+    },
+    {
+        nombreUsuario: 'NeoNinja',
+        nombre: 'Ethan',
+        apellidos: 'Davis',
+        fechaN: new Date(1989, 6, 25),  // 1989-07-25
+        correo: 'ethan@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 530
+    },
+    {
+        nombreUsuario: 'StarGazer',
+        nombre: 'Ava',
+        apellidos: 'Martinez',
+        fechaN: new Date(1997, 8, 17),  // 1997-09-17
+        correo: 'ava@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 680
+    },
+    {
+        nombreUsuario: 'QuantumLeap',
+        nombre: 'Alexander',
+        apellidos: 'Hernandez',
+        fechaN: new Date(1990, 9, 29),  // 1990-10-29
+        correo: 'alexander@gmail.com',
+        contraseña: '12345',
+        img: 'src/img/defecto.png',
+        ptos: 490
     }
 ];
 
@@ -182,14 +333,124 @@ nuevosJugadores.forEach((jugador) => {
 
 const nuevosEquipos = [
     {
-        equipo: 'Nuevo Equipo 1',
-        jugador: ['Jugador A', 'Jugador B'],
-        tipoJuego: 'Nuevo Tipo de Juego 1',
+        equipo: 'Team Phoenix',
+        jugador: [nuevosJugadores[3].nombreUsuario, nuevosJugadores[4].nombreUsuario],
+        tipoJuego: 'TFT',
+        img: 'src/img/equipo1.png',
     },
     {
-        equipo: 'Nuevo Equipo 2',
-        jugador: ['Jugador C', 'Jugador D'],
-        tipoJuego: 'Nuevo Tipo de Juego 2',
+        equipo: 'Team Thunder',
+        jugador: [nuevosJugadores[0].nombreUsuario, nuevosJugadores[1].nombreUsuario],
+        tipoJuego: 'TFT',
+        img: 'src/img/equipo2.png',
+    },
+    {
+        equipo: 'Team Eclipse',
+        jugador: [nuevosJugadores[2].nombreUsuario, nuevosJugadores[5].nombreUsuario],
+        tipoJuego: 'TFT',
+        img: 'src/img/equipo3.png',
+    },
+    {
+        equipo: 'Team Titan',
+        jugador: [nuevosJugadores[6].nombreUsuario, nuevosJugadores[8].nombreUsuario],
+        tipoJuego: 'TFT',
+        img: 'src/img/equipo4.png',
+    },
+    {
+        equipo: 'Team Floria',
+        jugador: [
+            nuevosJugadores[6].nombreUsuario,
+            nuevosJugadores[8].nombreUsuario,
+            nuevosJugadores[16].nombreUsuario,
+            nuevosJugadores[18].nombreUsuario,
+            nuevosJugadores[19].nombreUsuario
+        ],
+        tipoJuego: 'League of Legends',
+        img: 'src/img/equipo5.png'
+    },
+    {
+        equipo: 'Team Nova',
+        jugador: [
+            nuevosJugadores[0].nombreUsuario,
+            nuevosJugadores[2].nombreUsuario,
+            nuevosJugadores[7].nombreUsuario,
+            nuevosJugadores[9].nombreUsuario,
+            nuevosJugadores[10].nombreUsuario
+        ],
+        tipoJuego: 'League of Legends',
+        img: 'src/img/equipo6.png'
+    },
+    {
+        equipo: 'Team Vortex',
+        jugador: [
+            nuevosJugadores[4].nombreUsuario,
+            nuevosJugadores[5].nombreUsuario,
+            nuevosJugadores[13].nombreUsuario,
+            nuevosJugadores[15].nombreUsuario,
+            nuevosJugadores[17].nombreUsuario
+        ],
+        tipoJuego: 'League of Legends',
+        img: 'src/img/equipo7.png'
+    },
+    {
+        equipo: 'Team Inferno',
+        jugador: [
+            nuevosJugadores[1].nombreUsuario,
+            nuevosJugadores[3].nombreUsuario,
+            nuevosJugadores[11].nombreUsuario,
+            nuevosJugadores[12].nombreUsuario,
+            nuevosJugadores[14].nombreUsuario
+        ],
+        tipoJuego: 'League of Legends',
+        img: 'src/img/equipo8.png'
+    },
+    {
+        equipo: 'Team Valor',
+        jugador: [
+            nuevosJugadores[3].nombreUsuario,
+            nuevosJugadores[4].nombreUsuario,
+            nuevosJugadores[7].nombreUsuario,
+            nuevosJugadores[9].nombreUsuario,
+            nuevosJugadores[11].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
+    {
+        equipo: 'Team Vanguard',
+        jugador: [
+            nuevosJugadores[0].nombreUsuario,
+            nuevosJugadores[2].nombreUsuario,
+            nuevosJugadores[10].nombreUsuario,
+            nuevosJugadores[12].nombreUsuario,
+            nuevosJugadores[14].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
+    {
+        equipo: 'Team Fury',
+        jugador: [
+            nuevosJugadores[2].nombreUsuario,
+            nuevosJugadores[5].nombreUsuario,
+            nuevosJugadores[13].nombreUsuario,
+            nuevosJugadores[15].nombreUsuario,
+            nuevosJugadores[17].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
+    {
+        equipo: 'Team Blaze',
+        jugador: [
+            nuevosJugadores[6].nombreUsuario,
+            nuevosJugadores[8].nombreUsuario,
+            nuevosJugadores[16].nombreUsuario,
+            nuevosJugadores[18].nombreUsuario,
+            nuevosJugadores[19].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
     },
     // Agrega más equipos aquí si es necesario
 ];
