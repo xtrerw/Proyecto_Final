@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import "./PageUsuario.css"
 import { motion } from 'framer-motion'
+import { actualizarDatos } from './actions/action'
+import { useDispatch } from 'react-redux'
 const PageUsuario = (propsUser) => {
     //conseguir los quipos que user tiene
     const[equipos,setEquipos]=useState([])
@@ -39,6 +41,8 @@ const PageUsuario = (propsUser) => {
             color:error? 'var(--hoverbtn)':'none',
         }
     } 
+    //REDUX desp'ues de importar acción
+    const dispatch=useDispatch()
     const submitUser = async(e)=>{
         e.preventDefault();
         setError(false)
@@ -66,6 +70,8 @@ const PageUsuario = (propsUser) => {
 
             if (response.ok) {
                 console.log(resulta);
+                //inserta los datos 
+                dispatch(actualizarDatos(resulta))
             }
         } catch (error) {
             console.error('error de submit'+error);
@@ -201,7 +207,7 @@ const PageUsuario = (propsUser) => {
                                     backgroundColor:team==t.equipo? 'var(--hoverbtn)':'#fff',
                                 }}
                             >
-                                <i class='bx bx-group'></i>
+                                <i className='bx bx-group'></i>
                                 {t.equipo}
                             </motion.div>)}
                         </div> : null}

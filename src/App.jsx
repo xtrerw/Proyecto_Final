@@ -48,7 +48,14 @@ function App() {
       }));
     }
   }, [perfil.ptos, resultaPtos]);
-
+  //REDUX para actualizar los datos de perfil
+  //recibir estado
+  const resultaActualizaDatos=useSelector((state)=>state)
+  useEffect(() => {
+    if (resultaActualizaDatos) {
+      setPerfil(resultaActualizaDatos)
+    }
+  }, [resultaActualizaDatos]);
   return (
     <>
       <ScrollToTop/>

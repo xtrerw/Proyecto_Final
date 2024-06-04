@@ -139,7 +139,9 @@ app.use(session({
             },
             {new:true},
         )
+        console.log(actualiza);
         if (actualiza) {
+
             res.status(200).send(actualiza)
         }else{
             res.status(401).send("actualizar fallado")

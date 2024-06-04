@@ -7,3 +7,11 @@ export const enviarPtos =(puntos) => {
         payload: puntos
     }
 };
+export const actualizarDatos =(datosPersona) => {
+    return {
+        //nombre de acción
+        type: 'DATOS',
+         //parametros de acción
+        datos: datosPersona
+    }
+};
