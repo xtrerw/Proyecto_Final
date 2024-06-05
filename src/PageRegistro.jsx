@@ -83,6 +83,7 @@ const Registro = () => {
         confirmaCorreo: '',
         contraseña: '',
         confirmaContraseña: '',
+        img:'src/img/defecto.png',
     });
     const [message, setMessage] = useState(''); 
     const [message2, setMessage2] = useState(''); 
@@ -153,7 +154,8 @@ const Registro = () => {
             apellidos: formData.apellidos,
             fechaN: formData.fechaN,
             correo: formData.correo,
-            contraseña: formData.contraseña
+            contraseña: formData.contraseña,
+            img:formData.img,
           })
         });
         const result=await respone.json();

@@ -41,6 +41,7 @@ const PageUsuario = (propsUser) => {
             color:error? 'var(--hoverbtn)':'none',
         }
     } 
+    const [cerrar,setCerrar]=useState(false)
     //REDUX desp'ues de importar acción
     const dispatch=useDispatch()
     const submitUser = async(e)=>{
@@ -69,9 +70,14 @@ const PageUsuario = (propsUser) => {
             const resulta=await response.json()
 
             if (response.ok) {
-                console.log(resulta);
-                //inserta los datos 
-                dispatch(actualizarDatos(resulta))
+                if (!cerrar) {
+                     //inserta los datos y los pasa a app.jsx
+                     dispatch(actualizarDatos(resulta))
+                }else{
+                    console.log(resulta);
+                    dispatch(actualizarDatos(resulta.id==null))
+                }
+                
             }
         } catch (error) {
             console.error('error de submit'+error);
@@ -102,6 +108,7 @@ const PageUsuario = (propsUser) => {
             }
         },
     }
+    console.log(equipos);
   return (
     <main className='usuario'>
         <section className='usuario-tarjeta'>
@@ -128,7 +135,8 @@ const PageUsuario = (propsUser) => {
                 ease:"backInOut"
             }}>
                 <div className='menu'>
-                    {itemMenu.map((item,index)=>(
+                    {equipos.length>0?
+                    itemMenu.map((item,index)=>(
                         <motion.div key={index} className='item' onClick={()=>{setItem(item)}}
                         animate={{
                             background: menu==item? 'var(--main-color)':'var(--default-color2)',
@@ -141,7 +149,21 @@ const PageUsuario = (propsUser) => {
                         >
                             {item}
                         </motion.div>
-                        ))}
+                        )): itemMenu.map((item,index)=>
+                            index<2 &&
+                            
+                            (<motion.div key={index} className='item' onClick={()=>{setItem(item)}}
+                            animate={{
+                                background: menu==item? 'var(--main-color)':'var(--default-color2)',
+                                color:menu==item?  '#fff':'var(--hoverbtn)',
+                            }}
+                            whileHover={{
+                                background: menu==item? 'var(--main-color2)':'var(--main-color)',
+                                color: '#fff'
+                            }}
+                            >
+                                {item}
+                            </motion.div> ))}
                 </div>
                 {/* formulario de modifica */}
                 <form className='tus-datos' onSubmit={submitUser}>
@@ -214,7 +236,7 @@ const PageUsuario = (propsUser) => {
                     
                     <div className='usuario-btns'>
                         <button type="submit" className='guardar'>Guardar</button>
-                        <button type="submit" className='cancelar'>cerrar cuenta</button>
+                        <button type="submit" className='cancelar'onClick={()=>setCerrar(true)}>cerrar cuenta</button>
                     </div>
                 </form>
                 <motion.div className='usuario-img' 
@@ -229,7 +251,8 @@ const PageUsuario = (propsUser) => {
                     duration:3,                  
                 }}
                 ></motion.div>
-                {equipos.map((eq,index)=>
+                {equipos.length>0?
+                equipos.map((eq,index)=>
                     <motion.div className='equipo-img' key={index}
                         style={{
                             backgroundImage: `url(../${eq.img})`
@@ -242,7 +265,20 @@ const PageUsuario = (propsUser) => {
                             rotate:eq.equipo==team? 360:0,
                         }}
                     ></motion.div>
-                )}
+                ):
+                <div className='sin-equipo'>
+                    <motion.p
+                    whileHover={{
+                        scale:1.1,
+                        borderBottom:'2px solid',
+                    }}
+                    transition={{
+                        duration:0.3,
+                        ease:'circInOut',
+                    }}
+                    >No tienes equipos<i class='bx bx-right-arrow-alt'></i></motion.p>    
+                </div> 
+                }
             </motion.div>
         </section>
         <motion.section className='usuario-infor2'
@@ -255,7 +291,7 @@ const PageUsuario = (propsUser) => {
                 borderRadius:"50%"
             }}
             >
-                <p>{propsUser.ptos} <br /> Ptos</p>
+                <p>{propsUser.ptos? propsUser.ptos:0} <br /> Ptos</p>
             </motion.div>
             <motion.div className='usuario-ptos'
             variants={itemRight}

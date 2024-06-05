@@ -49,7 +49,7 @@ function App() {
     }
   }, [perfil.ptos, resultaPtos]);
   //REDUX para actualizar los datos de perfil
-  //recibir estado
+  //recibir perfil modificado
   const resultaActualizaDatos=useSelector((state)=>state)
   useEffect(() => {
     if (resultaActualizaDatos) {
