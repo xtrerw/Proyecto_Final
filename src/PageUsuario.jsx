@@ -291,7 +291,7 @@ const PageUsuario = (propsUser) => {
                 borderRadius:"50%"
             }}
             >
-                <p>{propsUser.ptos? propsUser.ptos:0} <br /> Ptos</p>
+                <p>{propsUser.ptos} <br /> Ptos</p>
             </motion.div>
             <motion.div className='usuario-ptos'
             variants={itemRight}
