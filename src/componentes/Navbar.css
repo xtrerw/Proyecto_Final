@@ -68,6 +68,7 @@
     gap: 20px;
   }
   .img-perfil{
+    background-color: #fff;
     background-size: cover;
     width: 50px;
     height: 50px;

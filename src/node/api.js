@@ -42,7 +42,7 @@ app.get('/noticias', async (req, res) => {
 app.post('/registro', async (req, res) => {
     try {
         //conseguir los datos de la cuerpo de petición enviado desde la pageRegistro
-        const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña} = req.body
+        const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña,img} = req.body
         //crear nuevo modelo por el de los jugadores
         const nuevoJugador=new ServerMod.JugadorModulo({
             nombreUsuario,
@@ -50,7 +50,8 @@ app.post('/registro', async (req, res) => {
             apellidos,
             fechaN,
             correo,
-            contraseña
+            contraseña,
+            img
         })
 
         await nuevoJugador.save()//guardar los datos a modelo de los jugadores
