@@ -8,7 +8,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url2, {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -38,6 +38,32 @@ const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
             console.error(`Error al agregar documento a la colección ${Modelo.modelName}:`, error);
         });
 };
+//funcion para agregar equipo a torneo
+const agregarEquipoATorneo = async (torneoId, equipoId) => {
+    try {
+        const torneo = await TorneosModulo.findById(torneoId);
+        if (!torneo) {
+            console.error(`Torneo con ID ${torneoId} no encontrado.`);
+            return;
+        }
+
+        const equipo = await EquiposModulo.findById(equipoId);
+        if (!equipo) {
+            console.error(`Equipo con ID ${equipoId} no encontrado.`);
+            return;
+        }
+
+        torneo.equipos.push(equipo._id);
+        await torneo.save();
+        console.log(`Equipo ${equipo.equipo} agregado correctamente al torneo ${torneoId}.`);
+    } catch (error) {
+        console.error('Error al agregar equipo al torneo:', error);
+    }
+}; 
+ //ejemplo de uso
+ // Ejemplo de uso const torneoId = 'ID_DEL_TORNEO';
+ // Ejemplo de uso const equipoId = 'ID_DEL_EQUIPO';
+ // Ejemplo de uso agregarEquipoATorneo(torneoId, equipoId);
 
 // Definir esquemas y modelos para todas las colecciones
 
@@ -67,7 +93,7 @@ const EquiposModulo = mongoose.model("equipos", equiposSchemas);
 
 // Torneos
 const torneosSchemas = new mongoose.Schema({
-    equipos: [String],
+    equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
     tipoJuego: String,
     fecha: String,
     tipoTorneo: String
@@ -513,13 +539,13 @@ nuevasNoticias.forEach((noticia) => {
 // Array de documentos a agregar para Torneos
 const nuevosTorneos = [
     {
-        equipos: ['Equipo A', 'Equipo B'],
+        equipos: [], // Deja vacío para agregar después
         tipoJuego: 'Nuevo Tipo de Juego 1',
         fecha: '2024-05-15',
         tipoTorneo: 'Nuevo Tipo de Torneo 1',
     },
     {
-        equipos: ['Equipo C', 'Equipo D'],
+        equipos: [],
         tipoJuego: 'Nuevo Tipo de Juego 2',
         fecha: '2024-05-20',
         tipoTorneo: 'Nuevo Tipo de Torneo 2',
