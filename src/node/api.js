@@ -153,7 +153,46 @@ app.use(session({
     }
   })
   //si no tiene equipos
+  //funciones
+  const conseguirEquipos= async(req,res)=>{
+    try {
+        const equipos=await ServerMod.EquiposModulo.find({});
+        res.status(200).json(equipos) 
+    } catch (error) {
+        res.status(500).json(console.error(error));
+    }
+  }
+  //actualizar equipos elegidos
+  const actualizarEquipos =async(req,res)=>{
+    //conseguir valores desde react
+    const { userId, equipos } = req.body;
+    try {
+        // confirma usuario
+        const user = await ServerMod.JugadorModulo.findById(userId);
+        if (!user) {
+            return res.status(401).send('User not found');
+        }
+        // traversar los elementos de el array equipos y encuentra los equipos elegidos
+        for (const equipo of equipos) {
+            const equipoActualizar = await ServerMod.EquiposModulo.findOne({ equipo: equipo.equipo });
+            if (equipoActualizar) {
+                // si usuario no está en el equipo, va a agregar este usuario
+                if (!equipoActualizar.jugador.includes(user.nombreUsuario)) {
+                    equipoActualizar.jugador.push(user.nombreUsuario);
+                    await equipoActualizar.save();
+                }
+            }
+        }
 
+        res.status(200).send('Equipos updated successfully');
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+  }
+  //route
+  app.route("/sinEquipos")
+  .get(conseguirEquipos)
+  .put(actualizarEquipos)
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

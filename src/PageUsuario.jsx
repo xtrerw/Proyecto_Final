@@ -80,7 +80,42 @@ const PageUsuario = (propsUser) => {
         // Redirigir a la página de inicio o de login
         window.location.href = '/Registro'; // Asegúrate de tener la ruta '/login' configurada en tu enrutador
     };
-    //quieres estabelecer contraseña de nuevo
+    //lista de equipos
+    //muestra equipos
+    const[sinEquipos,setSinEquipos]=useState([])
+    useEffect(()=>{
+        fetch("http://localhost:3001/sinEquipos")
+        .then(response => response.json())
+        .then(data=>{setSinEquipos(data)})
+        .catch(error => console.error(error))
+    },[])
+    //elegir equipos
+    const[elegir,setElegirEquipo]=useState([]);
+    const addEquipo = (element) => {
+        setElegirEquipo([...elegir, element]);
+    };
+    console.log(elegir);
+    //enviar los equipos elegidos
+    const enviarEquiposElegidos=async(e)=>{
+        e.preventDefault();
+        try {
+            const response=await fetch('http://localhost:3001/sinEquipos',{
+                method: 'PUT',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    userId: propsUser.id,
+                    equipos: elegir,
+                })
+            }) 
+            if (response.ok) {
+                console.log('success');
+            }
+        } catch (error) {
+            console.error('error', error)
+        }
+        
+    }
+    //item de menu
     const itemMenu=['mis datos','contraseña','mis equipos']
     const [menu,setItem]=useState(itemMenu[0])
     //variantes de item derecho
@@ -235,8 +270,8 @@ const PageUsuario = (propsUser) => {
                         </div> : null}
                     
                     <div className='usuario-btns'>
-                        <button type="submit" className='guardar'>Guardar</button>
-                        <button type="submit" className='cancelar'onClick={handleLogout}>cerrar sesión</button>
+                        <button type="submit" className='usuario-btn'>Guardar</button>
+                        <button type="submit" className='usuario-btn'onClick={handleLogout}>cerrar sesión</button>
                     </div>
                 </form>
                 <motion.div className='usuario-img' 
@@ -252,6 +287,7 @@ const PageUsuario = (propsUser) => {
                 }}
                 ></motion.div>
                 {equipos.length>0?
+                //si teienes equipos, se sale equipos
                 equipos.map((eq,index)=>
                     <motion.div className='equipo-img' key={index}
                         style={{
@@ -266,18 +302,36 @@ const PageUsuario = (propsUser) => {
                         }}
                     ></motion.div>
                 ):
-                <div className='sin-equipo'>
-                    <motion.p
-                    whileHover={{
-                        scale:1.1,
-                        borderBottom:'2px solid',
-                    }}
-                    transition={{
-                        duration:0.3,
-                        ease:'circInOut',
-                    }}
-                    >No tienes equipos<i className='bx bx-right-arrow-alt'></i></motion.p>    
-                </div> 
+                //si no tienes equipos, se sale lista de equipos
+                <form className='sin-equipo' onSubmit={enviarEquiposElegidos}>
+                    <div className='elegir-equipo'>
+                        {sinEquipos.map((equipo,index)=>
+                            <motion.div key={index} className='lista-equipo'
+                                whileHover={{
+                                    backgroundColor:'var(--main-color)',
+                                    color:'#fff'
+                                }}
+                                onClick={()=>{ 
+                                    if (elegir.find(item => item === equipo)) {
+                                        //cancelar el equipo elegido
+                                        setElegirEquipo(elegir.filter(item => item.equipo !== equipo.equipo))
+                                    }else{
+                                        //elegir el equipo
+                                        addEquipo(equipo)
+                                    }
+                                    }}
+                                animate={{
+                                    backgroundColor:elegir.find(item => item === equipo)? 'var(--main-color)':'#fff',
+                                    color:elegir.find(item => item === equipo)? '#fff':'var(--main-color)',
+                                }}
+                            >
+                                <img src={`../${equipo.img}`} alt="" />
+                                {equipo.equipo} / {equipo.tipoJuego}
+                            </motion.div>
+                        )}   
+                    </div> 
+                    <button type='submit' className='usuario-btn'>Confirma unirse</button>
+                </form> 
                 }
             </motion.div>
         </section>
