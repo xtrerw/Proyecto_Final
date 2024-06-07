@@ -18,8 +18,8 @@ const PageUsuario = (propsUser) => {
     //introduce informaciones de nuevo
     const[form,setForma]=useState({
         email:propsUser.email,
-        pwd: propsUser.pwd,
-        pwdConfirma: propsUser.pwd,
+        pwd: '',
+        pwdConfirma: '',
     })
     //introduce input
     const handleChange = (e) => {
@@ -46,12 +46,10 @@ const PageUsuario = (propsUser) => {
         e.preventDefault();
         setError(false)
         //si condiciones de modificar los datos sin válida
-        if (form.pwd!=form.pwdConfirma || !form.pwd || !form.pwdConfirma)  {
+        if (form.pwd!=form.pwdConfirma)  {
             return setError(true);
         } else if (!form.email) {
             return console.log('error email')
-        } else if (!form.user) {
-            return console.log('error user');
         }
         try {
             const response=await fetch('http://localhost:3001/modifica',{
@@ -67,6 +65,7 @@ const PageUsuario = (propsUser) => {
             const resulta=await response.json()
 
             if (response.ok) {
+                console.log('modificar los datos con éxito'+resulta);
                 //inserta los datos y los pasa a app.jsx
                 dispatch(actualizarDatos(resulta))                
             }

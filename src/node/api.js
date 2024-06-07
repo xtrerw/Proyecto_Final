@@ -3,10 +3,16 @@ import ServerMod from "./server.js";
 import express, { Router } from "express";
 import cors from "cors";
 import session from "express-session";
+import { createHash } from "crypto";
 
 const app = express();//crear una instancia de la Express y almacena en la "app"
 app.use(cors());//permiten intercambio de los datos entre diferentes dominios
 app.use(express.json()); //analizar cuerpo de las solicitudes, lo analizar'a como json 
+//Algoritmo Hash seguro de 256 bits
+const hashpwd=(pwd)=>{
+    //crear hash funcion para contrasña
+    return createHash('sha256').update(pwd).digest('hex')
+}
 //api de noticias
 app.get('/noticias', async (req, res) => {
       try {
@@ -50,7 +56,7 @@ app.post('/registro', async (req, res) => {
             apellidos,
             fechaN,
             correo,
-            contraseña,
+            contraseña:hashpwd(contraseña),
             img,
             ptos
         })
@@ -78,7 +84,7 @@ app.use(session({
         //encontrar el usuario en modelo de jugador
         const confirmar = await ServerMod.JugadorModulo.findOne({
             nombreUsuario:nombreIS,
-            contraseña:contraseñaIS
+            contraseña:hashpwd(contraseñaIS),
         })
         
         console.log(confirmar);
@@ -137,7 +143,7 @@ app.use(session({
             {
                 correo:email,
                 nombreUsuario:user,
-                contraseña:pwd
+                contraseña:hashpwd(pwd),
             },
             {new:true},
         )
