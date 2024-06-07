@@ -2,7 +2,7 @@
 const operacion = (state,action) => {
     //determinar tipo de la acci'on
   switch (action.type) {
-    //seg'un action devolver los parametro
+    //según action devolver los parametro
     case "ENVIARPTOS":
         return action.payload  
     case "DATOS":

@@ -42,7 +42,7 @@ app.get('/noticias', async (req, res) => {
 app.post('/registro', async (req, res) => {
     try {
         //conseguir los datos de la cuerpo de petición enviado desde la pageRegistro
-        const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña} = req.body
+        const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña,img,ptos} = req.body
         //crear nuevo modelo por el de los jugadores
         const nuevoJugador=new ServerMod.JugadorModulo({
             nombreUsuario,
@@ -50,7 +50,9 @@ app.post('/registro', async (req, res) => {
             apellidos,
             fechaN,
             correo,
-            contraseña
+            contraseña,
+            img,
+            ptos
         })
 
         await nuevoJugador.save()//guardar los datos a modelo de los jugadores
@@ -150,6 +152,8 @@ app.use(session({
         res.status(500).send('error de servidor')
     }
   })
+  //si no tiene equipos
+
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.

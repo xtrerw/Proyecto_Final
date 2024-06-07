@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./PageUsuario.css"
-import { motion } from 'framer-motion'
-import { actualizarDatos } from './actions/action'
+import { color, motion } from 'framer-motion'
+import { actualizarDatos} from './actions/action'
 import { useDispatch } from 'react-redux'
 const PageUsuario = (propsUser) => {
     //conseguir los quipos que user tiene
@@ -18,7 +18,6 @@ const PageUsuario = (propsUser) => {
     //introduce informaciones de nuevo
     const[form,setForma]=useState({
         email:propsUser.email,
-        user:propsUser.user,
         pwd: propsUser.pwd,
         pwdConfirma: propsUser.pwd,
     })
@@ -50,9 +49,9 @@ const PageUsuario = (propsUser) => {
         if (form.pwd!=form.pwdConfirma || !form.pwd || !form.pwdConfirma)  {
             return setError(true);
         } else if (!form.email) {
-            return alert('error email')
+            return console.log('error email')
         } else if (!form.user) {
-            return alert('error user');
+            return console.log('error user');
         }
         try {
             const response=await fetch('http://localhost:3001/modifica',{
@@ -62,21 +61,25 @@ const PageUsuario = (propsUser) => {
                 body: JSON.stringify({
                     id:propsUser.id,//para actualizar los datos según id
                     email:form.email,
-                    user:form.user,
                     pwd:form.pwd,
                 })
             })
             const resulta=await response.json()
 
             if (response.ok) {
-                console.log(resulta);
-                //inserta los datos 
-                dispatch(actualizarDatos(resulta))
+                //inserta los datos y los pasa a app.jsx
+                dispatch(actualizarDatos(resulta))                
             }
         } catch (error) {
             console.error('error de submit'+error);
         }
     }
+    //cerrar sesión
+    const handleLogout = () => {
+    
+        // Redirigir a la página de inicio o de login
+        window.location.href = '/Registro'; // Asegúrate de tener la ruta '/login' configurada en tu enrutador
+    };
     //quieres estabelecer contraseña de nuevo
     const itemMenu=['mis datos','contraseña','mis equipos']
     const [menu,setItem]=useState(itemMenu[0])
@@ -102,6 +105,7 @@ const PageUsuario = (propsUser) => {
             }
         },
     }
+    console.log(equipos);
   return (
     <main className='usuario'>
         <section className='usuario-tarjeta'>
@@ -128,7 +132,8 @@ const PageUsuario = (propsUser) => {
                 ease:"backInOut"
             }}>
                 <div className='menu'>
-                    {itemMenu.map((item,index)=>(
+                    {equipos.length>0?
+                    itemMenu.map((item,index)=>(
                         <motion.div key={index} className='item' onClick={()=>{setItem(item)}}
                         animate={{
                             background: menu==item? 'var(--main-color)':'var(--default-color2)',
@@ -141,7 +146,21 @@ const PageUsuario = (propsUser) => {
                         >
                             {item}
                         </motion.div>
-                        ))}
+                        )): itemMenu.map((item,index)=>
+                            index<2 &&
+                            
+                            (<motion.div key={index} className='item' onClick={()=>{setItem(item)}}
+                            animate={{
+                                background: menu==item? 'var(--main-color)':'var(--default-color2)',
+                                color:menu==item?  '#fff':'var(--hoverbtn)',
+                            }}
+                            whileHover={{
+                                background: menu==item? 'var(--main-color2)':'var(--main-color)',
+                                color: '#fff'
+                            }}
+                            >
+                                {item}
+                            </motion.div> ))}
                 </div>
                 {/* formulario de modifica */}
                 <form className='tus-datos' onSubmit={submitUser}>
@@ -153,7 +172,10 @@ const PageUsuario = (propsUser) => {
                             </h2>
                             <div className='usuario-iniciar'>
                                 <i className='bx bx-user' ></i>
-                                <input type="text" name='user' value={form.user} onChange={handleChange} />
+                                <input type="text" name='user'value={propsUser.user} style={{
+                                    color:"#000",
+                                    backgroundColor:"#fff",                                  
+                                }} disabled />
                             </div>
                             <div className='usuario-iniciar'>
                                 <i className='bx bx-envelope'></i>
@@ -214,7 +236,7 @@ const PageUsuario = (propsUser) => {
                     
                     <div className='usuario-btns'>
                         <button type="submit" className='guardar'>Guardar</button>
-                        <button type="submit" className='cancelar'>cerrar cuenta</button>
+                        <button type="submit" className='cancelar'onClick={handleLogout}>cerrar sesión</button>
                     </div>
                 </form>
                 <motion.div className='usuario-img' 
@@ -229,7 +251,8 @@ const PageUsuario = (propsUser) => {
                     duration:3,                  
                 }}
                 ></motion.div>
-                {equipos.map((eq,index)=>
+                {equipos.length>0?
+                equipos.map((eq,index)=>
                     <motion.div className='equipo-img' key={index}
                         style={{
                             backgroundImage: `url(../${eq.img})`
@@ -242,7 +265,20 @@ const PageUsuario = (propsUser) => {
                             rotate:eq.equipo==team? 360:0,
                         }}
                     ></motion.div>
-                )}
+                ):
+                <div className='sin-equipo'>
+                    <motion.p
+                    whileHover={{
+                        scale:1.1,
+                        borderBottom:'2px solid',
+                    }}
+                    transition={{
+                        duration:0.3,
+                        ease:'circInOut',
+                    }}
+                    >No tienes equipos<i className='bx bx-right-arrow-alt'></i></motion.p>    
+                </div> 
+                }
             </motion.div>
         </section>
         <motion.section className='usuario-infor2'

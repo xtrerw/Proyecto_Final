@@ -100,7 +100,7 @@
 .usuario-btns{
     display: flex;
     gap: 30px;
-    margin-top: 10px;
+    margin: 10px 30px;
 }
 .usuario-btns>button{
     width: 120px;
@@ -123,6 +123,7 @@
     width: 100px;
     height: 100px;
     background-size: cover;
+    background-color: #fff;
     position: absolute;
     right: 15px;
     top: 15px;
@@ -144,6 +145,22 @@
     font-size: 10px;
     color: darkcyan;
 }
+/* no tienes equipos */
+.sin-equipo{
+    margin: 10px;
+}
+.sin-equipo>p{
+    font-size: 20px;
+    color: var(--hoverbtn);
+    filter: drop-shadow(1px 1px 0.5px #000);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.bx-right-arrow-alt{
+    font-size: 20px;
+}
+/* item derecha */
 .usuario-infor2{
     display: flex;
     flex-direction: column;
@@ -161,4 +178,69 @@
 }
 .usuario-ptos>p{
     color: #fff;
+}
+/* responsive */
+@media (max-width: 1400px) {
+    /* tarjeta */
+    .usuario-infor{
+        width: 550px;
+        height: 300px;
+        clip-path: path("M 230,0 Q210,0 210,30 L210,30 Q210,45 195,50 L25,50 Q0,55 0,90 L0,500 L800,500 L800,0 Z");
+    }
+    .usuario-nombre{
+        font-size: 20px;
+        width: 200px;
+        height: 40px;
+    }
+    /* titulo */
+    .item-usuario>h2{
+        font-size: 10px;
+    }
+    /* input */
+    .usuario-iniciar{
+        width: 150px;
+        height: 30px;
+        font-size: 10px;
+        margin: 5px 30px;
+    }
+    .usuario-iniciar>input{
+        font-size: 10px;
+    }
+    /* btn */
+    .usuario-btns>button{
+        width: 70px;
+        height: 20px;
+        font-size: 6px;
+        border-radius: 5px;
+    }
+    /* menu y item de menu*/
+    .menu{
+        width: 200px;
+        height: 30px;
+        border-radius: 5px;
+        right: 120px;
+    }
+    .item{
+        width: 60px;
+        height: 25px;
+        font-size: 7px;
+    }
+    /* img de usuario */
+    .usuario-img{
+        width: 50px;
+        height: 50px;
+    }
+    /* img de equipos */
+    .equipo-img{
+        width: 50px;
+        height: 50px;
+    }
+    /* item de derecho */
+    .usuario-ptos{
+        width: 80px;
+        height: 80px;
+    }
+    .usuario-ptos>p{
+        font-size: 10px;
+    }
 }

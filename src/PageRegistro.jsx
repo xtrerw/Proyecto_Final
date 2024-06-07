@@ -153,7 +153,9 @@ const Registro = () => {
             apellidos: formData.apellidos,
             fechaN: formData.fechaN,
             correo: formData.correo,
-            contraseña: formData.contraseña
+            contraseña: formData.contraseña,
+            img:'src/img/defecto.png',
+            ptos:0
           })
         });
         const result=await respone.json();
