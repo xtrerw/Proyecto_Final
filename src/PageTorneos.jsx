@@ -67,19 +67,19 @@ const Torneos = () => {
                 </article>
                  <aside className="grafico-partido">
                    {/* Cuadros de los partidos */}
-                   <div className="cuadro-cuartos-1" style={{left: '15%', top: '5%'}}>Equipo 1</div>
-                    <div className="cuadro-cuartos-2" style={{left: '15%', top: '15%'}}>Equipo 2</div>
-                    <div className="cuadro-cuartos-4" style={{left: '15%', top: '50%'}}>Equipo 4</div>
-                    <div className="cuadro-cuartos-3" style={{left: '15%', top: '40%'}}>Equipo 3</div>
-                    <div className="cuadro-cuartos-5" style={{left: '75%', top: '40%'}}>Equipo 5</div>
-                    <div className="cuadro-cuartos-6" style={{left: '75%', top: '50%'}}>Equipo 6</div>
-                    <div className="cuadro-cuartos-7" style={{left: '75%', top: '5%'}}>Equipo 7</div>
-                    <div className="cuadro-cuartos-8" style={{left: '75%', top: '15%'}}>Equipo 8</div>
+                   <div className="cuadro cuadro-cuartos-1" style={{left: '15%', top: '5%'}}>Equipo 1</div>
+                    <div className="cuadro cuadro-cuartos-2" style={{left: '15%', top: '15%'}}>Equipo 2</div>
+                    <div className="cuadro cuadro-cuartos-4" style={{left: '15%', top: '50%'}}>Equipo 4</div>
+                    <div className="cuadro cuadro-cuartos-3" style={{left: '15%', top: '40%'}}>Equipo 3</div>
+                    <div className="cuadro cuadro-cuartos-5" style={{left: '75%', top: '40%'}}>Equipo 5</div>
+                    <div className="cuadro cuadro-cuartos-6" style={{left: '75%', top: '50%'}}>Equipo 6</div>
+                    <div className="cuadro cuadro-cuartos-7" style={{left: '75%', top: '5%'}}>Equipo 7</div>
+                    <div className="cuadro cuadro-cuartos-8" style={{left: '75%', top: '15%'}}>Equipo 8</div>
       
-                    <div className="cuadro-semis-1" style={{left: '29%', top: '24%'}}>Ganador 1 </div>
-                    <div className="cuadro-semis-1" style={{left: '29%', top: '32%'}}>Ganador 2</div>
-                    <div className="cuadro-semis-2" style={{left: '60%', top: '24%'}}>Ganador 3 </div>
-                    <div className="cuadro-semis-2" style={{left: '60%', top: '32%'}}>Ganador 4 </div>
+                    <div className="cuadro cuadro-semis-1" style={{left: '29%', top: '24%'}}>Ganador 1 </div>
+                    <div className="cuadro cuadro-semis-1" style={{left: '29%', top: '32%'}}>Ganador 2</div>
+                    <div className="cuadro cuadro-semis-2" style={{left: '60%', top: '24%'}}>Ganador 3 </div>
+                    <div className="cuadro cuadro-semis-2" style={{left: '60%', top: '32%'}}>Ganador 4 </div>
                    
                     
                     <div className="cuadro cuadro-final" style={{left: '45%', top: '33%'}}>Final</div>

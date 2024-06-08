@@ -38,32 +38,6 @@ const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
             console.error(`Error al agregar documento a la colección ${Modelo.modelName}:`, error);
         });
 };
-//funcion para agregar equipo a torneo
-const agregarEquipoATorneo = async (torneoId, equipoId) => {
-    try {
-        const torneo = await TorneosModulo.findById(torneoId);
-        if (!torneo) {
-            console.error(`Torneo con ID ${torneoId} no encontrado.`);
-            return;
-        }
-
-        const equipo = await EquiposModulo.findById(equipoId);
-        if (!equipo) {
-            console.error(`Equipo con ID ${equipoId} no encontrado.`);
-            return;
-        }
-
-        torneo.equipos.push(equipo._id);
-        await torneo.save();
-        console.log(`Equipo ${equipo.equipo} agregado correctamente al torneo ${torneoId}.`);
-    } catch (error) {
-        console.error('Error al agregar equipo al torneo:', error);
-    }
-}; 
- //ejemplo de uso
- // Ejemplo de uso const torneoId = 'ID_DEL_TORNEO';
- // Ejemplo de uso const equipoId = 'ID_DEL_EQUIPO';
- // Ejemplo de uso agregarEquipoATorneo(torneoId, equipoId);
 
 // Definir esquemas y modelos para todas las colecciones
 
@@ -94,7 +68,7 @@ const EquiposModulo = mongoose.model("equipos", equiposSchemas);
 // Torneos
 const torneosSchemas = new mongoose.Schema({
     equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
-    tipoJuego: String,
+    tipoJuego: { type: mongoose.Schema.Types.ObjectId, ref: 'Juego' }, // Referencia a la colección de juegos
     fecha: String,
     tipoTorneo: String
 });
@@ -537,26 +511,7 @@ nuevasNoticias.forEach((noticia) => {
 });
 
 // Array de documentos a agregar para Torneos
-const nuevosTorneos = [
-    {
-        equipos: [], // Deja vacío para agregar después
-        tipoJuego: 'Nuevo Tipo de Juego 1',
-        fecha: '2024-05-15',
-        tipoTorneo: 'Nuevo Tipo de Torneo 1',
-    },
-    {
-        equipos: [],
-        tipoJuego: 'Nuevo Tipo de Juego 2',
-        fecha: '2024-05-20',
-        tipoTorneo: 'Nuevo Tipo de Torneo 2',
-    },
-    // Agrega más torneos aquí si es necesario
-];
 
-// Agregar múltiples torneos
-nuevosTorneos.forEach((torneo) => {
-    agregarDocumentoSiNoExiste(TorneosModulo, torneo);
-});
 
 // Array de documentos a agregar para Tienda
 const nuevosProductos = [
@@ -722,6 +677,68 @@ const nuevosJuegos = [
 nuevosJuegos.forEach((juego) => {
     agregarDocumentoSiNoExiste(JuegoModelo, juego);
 });
-  
+
+const crearTorneosPorCadaJuego = async () => {
+    try {
+        const juegos = await JuegoModelo.find({});
+        if (juegos.length === 0) {
+            console.log("No hay juegos disponibles para crear torneos.");
+            return;
+        }
+
+        for (const juego of juegos) {
+            const torneoExistente = await TorneosModulo.findOne({ tipoJuego: juego._id });
+            if (!torneoExistente) {
+                const nuevoTorneo = {
+                    equipos: [], // Inicialmente sin equipos
+                    tipoJuego: juego._id, // Referencia al ID del juego
+                    fecha: new Date().toISOString().split('T')[0], // Fecha actual
+                    tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto, puedes cambiarlo si es necesario
+                };
+
+                await TorneosModulo.create(nuevoTorneo);
+                console.log(`Torneo para el juego ${juego.nombre} creado correctamente.`);
+            } else {
+                console.log(`Torneo para el juego ${juego.nombre} ya existe.`);
+            }
+        }
+    } catch (error) {
+        console.error("Error al crear torneos por cada juego:", error);
+    }
+};
+
+// Llamar a la función para crear torneos
+crearTorneosPorCadaJuego();
+
+const agregarEquipoATorneo = async (torneoId, equipoId) => {
+    try {
+        const torneo = await TorneosModulo.findById(torneoId);
+        if (!torneo) {
+            console.error(`Torneo con ID ${torneoId} no encontrado.`);
+            return;
+        }
+
+        const equipo = await EquiposModulo.findById(equipoId);
+        if (!equipo) {
+            console.error(`Equipo con ID ${equipoId} no encontrado.`);
+            return;
+        }
+
+        torneo.equipos.push(equipo._id);
+        await torneo.save();
+        console.log(`Equipo ${equipo.equipo} agregado correctamente al torneo ${torneoId}.`);
+    } catch (error) {
+        console.error('Error al agregar equipo al torneo:', error);
+    }
+};
+
 // Exportar modelos si es necesario
-export default { JugadorModulo, EquiposModulo, NoticiasModulo, TorneosModulo, TiendaModulo, JuegoModelo};
+export default { JugadorModulo, 
+    EquiposModulo, 
+    NoticiasModulo, 
+    TorneosModulo, 
+    TiendaModulo, 
+    JuegoModelo,
+    agregarDocumentoSiNoExiste,
+    agregarEquipoATorneo,
+    };
