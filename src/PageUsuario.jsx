@@ -75,7 +75,8 @@ const PageUsuario = (propsUser) => {
     }
     //cerrar sesión
     const handleLogout = () => {
-    
+        // quitar objeto de localStorage
+        localStorage.removeItem('user')
         // Redirigir a la página de inicio o de login
         window.location.href = '/Registro'; // Asegúrate de tener la ruta '/login' configurada en tu enrutador
     };

@@ -4,15 +4,15 @@ import express, { Router } from "express";
 import cors from "cors";
 import session from "express-session";
 import { createHash } from "crypto";
-
-const app = express();//crear una instancia de la Express y almacena en la "app"
-app.use(cors());//permiten intercambio de los datos entre diferentes dominios
-app.use(express.json()); //analizar cuerpo de las solicitudes, lo analizar'a como json 
 //Algoritmo Hash seguro de 256 bits
 const hashpwd=(pwd)=>{
     //crear hash funcion para contrasña
     return createHash('sha256').update(pwd).digest('hex')
 }
+const app = express();//crear una instancia de la Express y almacena en la "app"
+app.use(cors());//permiten intercambio de los datos entre diferentes dominios
+app.use(express.json()); //analizar cuerpo de las solicitudes, lo analizar'a como json 
+
 //api de noticias
 app.get('/noticias', async (req, res) => {
       try {
