@@ -18,8 +18,8 @@ const PageUsuario = (propsUser) => {
     //introduce informaciones de nuevo
     const[form,setForma]=useState({
         email:propsUser.email,
-        pwd: '',
-        pwdConfirma: '',
+        pwd: null,
+        pwdConfirma: null,
     })
     //introduce input
     const handleChange = (e) => {
@@ -51,16 +51,22 @@ const PageUsuario = (propsUser) => {
         } else if (!form.email) {
             return console.log('error email')
         }
+        //si no rellenar contraseña,solo manda correo
+        const param = {
+            id: propsUser.id, 
+            email: form.email, 
+        };
+        //manda la contraseña en caso de que ya la completa 
+        if (form.pwd !== null && form.pwd !== '') {
+            param.pwd = form.pwd;
+        }
+        //actualizar perfil
         try {
             const response=await fetch('http://localhost:3001/modifica',{
             //uso metodo de PUT
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    id:propsUser.id,//para actualizar los datos según id
-                    email:form.email,
-                    pwd:form.pwd,
-                })
+                body: JSON.stringify(param)
             })
             const resulta=await response.json()
 
@@ -271,7 +277,7 @@ const PageUsuario = (propsUser) => {
                     
                     <div className='usuario-btns'>
                         <button type="submit" className='usuario-btn'>Guardar</button>
-                        <button type="submit" className='usuario-btn'onClick={handleLogout}>cerrar sesión</button>
+                        <button type="button" className='usuario-btn'onClick={handleLogout}>cerrar sesión</button>
                     </div>
                 </form>
                 <motion.div className='usuario-img' 
