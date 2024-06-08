@@ -27,7 +27,7 @@ const Navbar = (propsNavbar) => {
         //establece el tiempo de aumentar 1 a 1
         //acerelador increible
 
-        const time= setTimeout(()=>{setContar(contar+1)},2)
+        const time= setTimeout(()=>{setContar(contar+1)},0.5)
         return ()=>clearTimeout(time)
       } else if (resultaPtos>=0 && contar>resultaPtos) {
         //reducir los ptos hasta igual que el resto 
