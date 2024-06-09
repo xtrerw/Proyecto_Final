@@ -2,26 +2,29 @@
 import { useEffect, useState } from "react";
 import "./PageTorneos.css"
 import TituloPaginas from './componentes_paginas/tituloPaginas';
-import { color, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useParams } from "react-router-dom";
 const Torneos = () => {
     const state={img:'../src/img/bg3.png',title:"Torneos",description:"Alcanza la victoria"};
     const [equipos, setEquipos]=useState([]);
+    const [torneos, setTorneos]=useState([]);
     //conseguir juego que user elegir
-    const {juego}=useParams();
+    const {idjuego}=useParams();
+    console.log('id de juegos');
+    console.log(idjuego);
     useEffect(()=>{
-        fetch('http://localhost:3001/sinEquipos')
+        fetch('http://localhost:3001/torneos')
         .then(response=>response.json())
         .then((data)=>{
-            setEquipos(data);
-            const nombres = data.map(equipo => equipo.equipo); // conseguir los nombre de equipos
-            setEquipos(nombres);
+
+            const nombres = data.find(torneo => torneo.tipoJuego == idjuego); // conseguir los nombre de equipos
+            setTorneos(nombres)
           })
         .catch((error)=>console.error("Error de conseguir los datos "+error));
-      },[])
-      console.log(equipos);
+      },[idjuego])
+    //   console.log(torneos);
     //animaci'on de click la carta de adiministrador
     const [click, setClick]=useState(equipos[0]);
     console.log(click);
