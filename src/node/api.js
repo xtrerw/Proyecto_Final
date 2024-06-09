@@ -43,7 +43,39 @@ app.get('/noticias', async (req, res) => {
         res.status(500).json({ error: 'Servidor error' });
     }
 });
+// API para obtener torneos
+app.get('/torneos', async (req, res) => {
+    try {
+        const torneos = await ServerMod.TorneoModulo.find({});
+        res.json(torneos);
+    } catch (error) {
+        console.error('Error obteniendo torneos:', error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+});
 
+// API para unirse a un torneo
+app.post('/unirseTorneo', async (req, res) => {
+    try {
+        const { torneoId, userId } = req.body;
+        const torneo = await ServerMod.TorneoModulo.findById(torneoId);
+        const user = await ServerMod.JugadorModulo.findById(userId);
+
+        if (!torneo || !user) {
+            return res.status(404).send('Torneo o usuario no encontrado');
+        }
+
+        if (!torneo.participantes.includes(userId)) {
+            torneo.participantes.push(userId);
+            await torneo.save();
+        }
+
+        res.status(200).send('Unido al torneo con éxito');
+    } catch (error) {
+        console.error('Error al unirse al torneo:', error);
+        res.status(500).json({ error: 'Error en el servidor' });
+    }
+});
 // API de tramito del registro
 app.post('/registro', async (req, res) => {
     try {
