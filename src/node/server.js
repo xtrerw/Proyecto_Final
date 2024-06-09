@@ -1,5 +1,7 @@
 // Importa mongoose y otras dependencias necesarias
 import mongoose from 'mongoose';
+import { createHash } from "crypto";
+
 
 // Conexión a la base de datos MongoDB Atlas
 const user = encodeURIComponent("root"); // Usuario de MongoDB Atlas
@@ -111,6 +113,12 @@ const JuegoModelo = mongoose.model('Juego', juegoSchema);
 // Ejemplo de uso para todas las colecciones
 
 // Array de documentos a agregar para Jugadores
+//Algoritmo Hash seguro de 256 bits
+const hashpwd=(pwd)=>{
+    //crear hash funcion para contrasña
+    return createHash('sha256').update(pwd).digest('hex')
+}
+//ejemplo de contraseña
 const nuevosJugadores = [
     {
         nombreUsuario: 'NoobGG',
@@ -118,7 +126,7 @@ const nuevosJugadores = [
         apellidos: 'Garcia',
         fechaN: new Date(1985, 3, 7),  // 1985-04-07
         correo: 'noob@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img:'src/img/jugador1.png',
         ptos:300
     },
@@ -128,7 +136,7 @@ const nuevosJugadores = [
         apellidos: 'Martinez',
         fechaN: new Date(1993, 9, 15),  // 1993-10-15
         correo: 'javier@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img:'src/img/jugador2.png',
         ptos:500
     },
@@ -138,7 +146,7 @@ const nuevosJugadores = [
         apellidos: 'Lopez',
         fechaN: new Date(1987, 6, 22),  // 1987-07-22
         correo: 'maria@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img:'src/img/jugador3.png',
         ptos:800,
     },
@@ -148,7 +156,7 @@ const nuevosJugadores = [
         apellidos: 'Hernandez',
         fechaN: new Date(1992, 11, 10),  // 1992-12-10
         correo: 'juan@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img:'src/img/jugador4.png',
         ptos:800,
     },
@@ -158,7 +166,7 @@ const nuevosJugadores = [
         apellidos: 'Katherin',
         fechaN: new Date(1989, 2, 28),  // 1989-03-28
         correo: 'kat@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img:'src/img/jugador5.png',
         ptos:1000,
     },
@@ -168,7 +176,7 @@ const nuevosJugadores = [
         apellidos: 'Rocio',
         fechaN: new Date(1996, 7, 14),  // 1996-08-14
         correo: 'sara@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img:'src/img/jugador6.png',
         ptos:1000,
     },
@@ -178,7 +186,7 @@ const nuevosJugadores = [
         apellidos: 'Perez',
         fechaN: new Date(1990, 4, 3),  // 1990-05-03
         correo: 'carlos@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 600
     },
@@ -188,7 +196,7 @@ const nuevosJugadores = [
         apellidos: 'Sanchez',
         fechaN: new Date(1988, 1, 25),  // 1988-02-25
         correo: 'ana@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 750
     },
@@ -198,7 +206,7 @@ const nuevosJugadores = [
         apellidos: 'Rodriguez',
         fechaN: new Date(1984, 11, 13),  // 1984-12-13
         correo: 'fernando@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 850
     },
@@ -208,7 +216,7 @@ const nuevosJugadores = [
         apellidos: 'Mendoza',
         fechaN: new Date(1991, 5, 20),  // 1991-06-20
         correo: 'gloria@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 920
     },
@@ -218,7 +226,7 @@ const nuevosJugadores = [
         apellidos: 'Silva',
         fechaN: new Date(1995, 10, 5),  // 1995-11-05
         correo: 'miguel@gmail.es',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 700
     },
@@ -228,7 +236,7 @@ const nuevosJugadores = [
         apellidos: 'Smith',
         fechaN: new Date(1994, 2, 12),  // 1994-03-12
         correo: 'sophia@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 450
     },
@@ -238,7 +246,7 @@ const nuevosJugadores = [
         apellidos: 'Johnson',
         fechaN: new Date(1992, 6, 19),  // 1992-07-19
         correo: 'james@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 520
     },
@@ -248,7 +256,7 @@ const nuevosJugadores = [
         apellidos: 'Williams',
         fechaN: new Date(1985, 8, 30),  // 1985-09-30
         correo: 'emma@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 670
     },
@@ -258,7 +266,7 @@ const nuevosJugadores = [
         apellidos: 'Brown',
         fechaN: new Date(1991, 10, 8),  // 1991-11-08
         correo: 'liam@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 720
     },
@@ -268,7 +276,7 @@ const nuevosJugadores = [
         apellidos: 'Jones',
         fechaN: new Date(1986, 4, 21),  // 1986-05-21
         correo: 'olivia@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 580
     },
@@ -278,7 +286,7 @@ const nuevosJugadores = [
         apellidos: 'Garcia',
         fechaN: new Date(1993, 11, 14),  // 1993-12-14
         correo: 'noah@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 640
     },
@@ -288,7 +296,7 @@ const nuevosJugadores = [
         apellidos: 'Miller',
         fechaN: new Date(1995, 5, 2),  // 1995-06-02
         correo: 'isabella@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 710
     },
@@ -298,7 +306,7 @@ const nuevosJugadores = [
         apellidos: 'Davis',
         fechaN: new Date(1989, 6, 25),  // 1989-07-25
         correo: 'ethan@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 530
     },
@@ -308,7 +316,7 @@ const nuevosJugadores = [
         apellidos: 'Martinez',
         fechaN: new Date(1997, 8, 17),  // 1997-09-17
         correo: 'ava@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 680
     },
@@ -318,7 +326,7 @@ const nuevosJugadores = [
         apellidos: 'Hernandez',
         fechaN: new Date(1990, 9, 29),  // 1990-10-29
         correo: 'alexander@gmail.com',
-        contraseña: '12345',
+        contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
         ptos: 490
     }

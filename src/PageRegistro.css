@@ -254,7 +254,7 @@
         position: relative;
     }
     .ptos{
-        top: 10%;
+        bottom: 10%;
     }
     .advertencia{
         width: 250px;
