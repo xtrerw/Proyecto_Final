@@ -9,22 +9,23 @@ import { useParams } from "react-router-dom";
 const Torneos = () => {
     const state={img:'../src/img/bg3.png',title:"Torneos",description:"Alcanza la victoria"};
     const [equipos, setEquipos]=useState([]);
-    const [torneos, setTorneos]=useState([]);
+    const [torneos, setTorneos]=useState({});
     //conseguir juego que user elegir
-    const {idjuego}=useParams();
-    console.log('id de juegos');
-    console.log(idjuego);
+    const {id}=useParams();
+
     useEffect(()=>{
         fetch('http://localhost:3001/torneos')
         .then(response=>response.json())
         .then((data)=>{
-
-            const nombres = data.find(torneo => torneo.tipoJuego == idjuego); // conseguir los nombre de equipos
-            setTorneos(nombres)
+            const nombres = data.find(torneo => torneo.tipoJuego.toString() === id); // conseguir los nombre de equipos
+            if (nombres) {
+                setTorneos(nombres); 
+                setEquipos(nombres.equipos); 
+            }
           })
         .catch((error)=>console.error("Error de conseguir los datos "+error));
-      },[idjuego])
-    //   console.log(torneos);
+      },[id])
+
     //animaci'on de click la carta de adiministrador
     const [click, setClick]=useState(equipos[0]);
     console.log(click);
@@ -83,14 +84,54 @@ const Torneos = () => {
                 </article>
                  <aside className="grafico-partido">
                    {/* Cuadros de los partidos */}
-                   <div className="cuadro cuadro-cuartos-1" style={{left: '15%', top: '5%'}}>Equipo 1</div>
-                    <div className="cuadro cuadro-cuartos-2" style={{left: '15%', top: '15%'}}>Equipo 2</div>
-                    <div className="cuadro cuadro-cuartos-4" style={{left: '15%', top: '50%'}}>Equipo 4</div>
-                    <div className="cuadro cuadro-cuartos-3" style={{left: '15%', top: '40%'}}>Equipo 3</div>
-                    <div className="cuadro cuadro-cuartos-5" style={{left: '75%', top: '40%'}}>Equipo 5</div>
-                    <div className="cuadro cuadro-cuartos-6" style={{left: '75%', top: '50%'}}>Equipo 6</div>
-                    <div className="cuadro cuadro-cuartos-7" style={{left: '75%', top: '5%'}}>Equipo 7</div>
-                    <div className="cuadro cuadro-cuartos-8" style={{left: '75%', top: '15%'}}>Equipo 8</div>
+                   <motion.div className="cuadro cuadro-cuartos-1" 
+                   animate={{
+                            boxShadow: equipos[0]==click? 'inset 10px 0 1px var(--main-color)':'',
+                            color: equipos[0]==click? 'var(--main-color)':'',
+                        }} 
+                    style={{left: '15%', top: '5%'}}>{equipos[0]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-2"
+                    animate={{
+                        boxShadow: equipos[1]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[1]==click? 'var(--main-color)':'',
+                    }}
+                     style={{left: '15%', top: '15%'}}>{equipos[1]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-4" 
+                     animate={{
+                        boxShadow: equipos[2]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[2]==click? 'var(--main-color)':'',
+                    }}
+                    style={{left: '15%', top: '50%'}}>{equipos[2]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-3" 
+                     animate={{
+                        boxShadow: equipos[3]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[3]==click? 'var(--main-color)':'',
+                    }}
+                    style={{left: '15%', top: '40%'}}>{equipos[3]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-5" 
+                     animate={{
+                        boxShadow: equipos[4]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[4]==click? 'var(--main-color)':'',
+                    }}
+                    style={{left: '75%', top: '40%'}}>{equipos[4]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-6" 
+                     animate={{
+                        boxShadow: equipos[5]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[5]==click? 'var(--main-color)':'',
+                    }}
+                    style={{left: '75%', top: '50%'}}>{equipos[5]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-7" 
+                     animate={{
+                        boxShadow: equipos[6]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[6]==click? 'var(--main-color)':'',
+                    }}
+                    style={{left: '75%', top: '5%'}}>{equipos[6]}</motion.div>
+                    <motion.div className="cuadro cuadro-cuartos-8" 
+                     animate={{
+                        boxShadow: equipos[7]==click? 'inset 10px 0 1px var(--main-color)':'',
+                        color: equipos[7]==click? 'var(--main-color)':'',
+                    }}
+                    style={{left: '75%', top: '15%'}}>{equipos[7]}</motion.div>
       
                     <div className="cuadro cuadro-semis-1" style={{left: '29%', top: '24%'}}>Ganador 1 </div>
                     <div className="cuadro cuadro-semis-1" style={{left: '29%', top: '32%'}}>Ganador 2</div>

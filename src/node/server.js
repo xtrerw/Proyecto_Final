@@ -69,7 +69,8 @@ const EquiposModulo = mongoose.model("equipos", equiposSchemas);
 
 // Torneos
 const torneosSchemas = new mongoose.Schema({
-    equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
+    // equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
+    equipos:[String],
     tipoJuego: { type: mongoose.Schema.Types.ObjectId, ref: 'Juego' }, // Referencia a la colección de juegos
     fecha: String,
     tipoTorneo: String
@@ -700,7 +701,7 @@ const crearTorneosPorCadaJuego = async () => {
             const equipos = await EquiposModulo.find({ tipoJuego: juego.nombre });
             if (!torneoExistente) {
                 const nuevoTorneo = {
-                    equipos: equipos.map(team => team._id), // Inicialmente sin equipos
+                    equipos: equipos.map(team => team.equipo), // Inicialmente sin equipos
                     tipoJuego: juego._id, // Referencia al ID del juego
                     fecha: new Date().toISOString().split('T')[0], // Fecha actual
                     tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto, puedes cambiarlo si es necesario
