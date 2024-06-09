@@ -46,7 +46,7 @@ app.get('/noticias', async (req, res) => {
 // API para obtener torneos
 app.get('/torneos', async (req, res) => {
     try {
-        const torneos = await ServerMod.TorneoModulo.find({});
+        const torneos = await ServerMod.TorneosModulo.find({});
         res.json(torneos);
     } catch (error) {
         console.error('Error obteniendo torneos:', error);
@@ -58,7 +58,7 @@ app.get('/torneos', async (req, res) => {
 app.post('/unirseTorneo', async (req, res) => {
     try {
         const { torneoId, userId } = req.body;
-        const torneo = await ServerMod.TorneoModulo.findById(torneoId);
+        const torneo = await ServerMod.TorneosModulo.findById(torneoId);
         const user = await ServerMod.JugadorModulo.findById(userId);
 
         if (!torneo || !user) {

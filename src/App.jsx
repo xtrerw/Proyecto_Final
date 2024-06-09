@@ -17,27 +17,24 @@ import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 //hook de redux
 import { useSelector } from "react-redux";
-import { loadUserData, saveUserData,saveEquiposData,loadEquiposData } from './funcion_session/session';
 function App() {
   //conseguir id de usuario desde la pagina registro 
   //session
   const user=useLocation().state?.userEquipo.user
-  const [perfil,setPerfil]=useState(()=>loadUserData()||{});
+  const [perfil,setPerfil]=useState({});
   useEffect(()=>{
     if (user) {
       //llama a función para guardar usuario
-      saveUserData(user)
       setPerfil(user)
     }
   },[user])
   console.log(perfil);
   //encuentra los equipos que los usuarios tienen
   const equipos=useLocation().state?.userEquipo.equipo
-  const [equiposTienen,setEquipos]=useState(() => loadEquiposData() || {});
+  const [equiposTienen,setEquipos]=useState({});
   useEffect(()=>{
     if (equipos) {
       setEquipos(equipos)
-      saveEquiposData(equipos); 
     }
   },[equipos])
    //utilizando redux, conseguir ptos de usuarios actualizado
@@ -50,14 +47,13 @@ function App() {
     ))}
   }, [ perfil.ptos,resultaPtos]);
   //REDUX para actualizar los datos de perfil
-  //recibir perfil modificado
-  const resultaActualizaDatos=useSelector((state)=>state)
-  useEffect(() => {
-    if (resultaActualizaDatos) {
-      setPerfil(resultaActualizaDatos)
-      saveUserData(resultaActualizaDatos);
-    }
-  }, [resultaActualizaDatos]);
+  // //recibir perfil modificado
+  // const resultaActualizaDatos=useSelector((state)=>state)
+  // useEffect(() => {
+  //   if (resultaActualizaDatos) {
+  //     setPerfil(resultaActualizaDatos)
+  //   }
+  // }, [resultaActualizaDatos]);
   return (
     <>
       <ScrollToTop/>

@@ -19,7 +19,7 @@ const Juegos = () => {
             console.error('error:', error);
         });
     },[]);
-    
+
 
     gsap.registerPlugin(ScrollTrigger);
     useGSAP(() => {
@@ -45,7 +45,7 @@ const Juegos = () => {
             <main className='page-juegos'>
                 <div className="card-container">
                     {juegos.map((juego,index) => (
-                        <Link to={`${juego.nombre}`} key={index} className="card">
+                        <Link to={`${juego._id}`} key={index} className="card">
                           <img  src={`../${juego.imagen}`} alt="Card" />
                         </Link>
                     ))} 

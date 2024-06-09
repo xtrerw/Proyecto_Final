@@ -10,7 +10,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url, {
+mongoose.connect(url2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -69,7 +69,8 @@ const EquiposModulo = mongoose.model("equipos", equiposSchemas);
 
 // Torneos
 const torneosSchemas = new mongoose.Schema({
-    equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
+    // equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
+    equipos:[String],
     tipoJuego: { type: mongoose.Schema.Types.ObjectId, ref: 'Juego' }, // Referencia a la colección de juegos
     fecha: String,
     tipoTorneo: String
@@ -696,9 +697,11 @@ const crearTorneosPorCadaJuego = async () => {
 
         for (const juego of juegos) {
             const torneoExistente = await TorneosModulo.findOne({ tipoJuego: juego._id });
+            //agregar equipos
+            const equipos = await EquiposModulo.find({ tipoJuego: juego.nombre });
             if (!torneoExistente) {
                 const nuevoTorneo = {
-                    equipos: [], // Inicialmente sin equipos
+                    equipos: equipos.map(team => team.equipo), // Inicialmente sin equipos
                     tipoJuego: juego._id, // Referencia al ID del juego
                     fecha: new Date().toISOString().split('T')[0], // Fecha actual
                     tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto, puedes cambiarlo si es necesario

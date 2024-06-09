@@ -8,6 +8,7 @@ article>div,aside>div{
     color: var(--default-color4);
 }
 article{
+    overflow: scroll;
     grid-column:1/2;
 }
 aside{
