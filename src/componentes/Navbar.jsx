@@ -38,7 +38,7 @@ const Navbar = (propsNavbar) => {
         OnlyGG
       </Link>
       <div className="menu-icon" onClick={handleClick}>
-       ||| <i className={active ? "fas fa-times" : "fas fa-bars"}></i>
+       |||<i className={active ? "fas fa-times" : "fas fa-bars"}></i>
       </div>
       <ul className={active ? "nav-menu active" : "nav-menu"}>
         {menuItems.map((item, index) => (
@@ -48,39 +48,43 @@ const Navbar = (propsNavbar) => {
             </Link>
           </li>
         ))}
+        {propsNavbar && propsNavbar.nombre !== undefined ? (
+          <li>
+            <Link to={"/modifica"} className="perfil">
+              <motion.div
+                className="img-perfil"
+                animate={{
+                  scale: [1, 1.2, 1, 1.2, 1],
+                  rotate: [0, -360, 360, 360, 0],
+                  borderRadius: ["50%", "30%", "20%", "10%", "50%"],
+                  backgroundImage: `url(../${propsNavbar.img})`,
+                  boxShadow: [
+                    "inset 0 0 1px 5px var(--main-color)",
+                    "inset 0 0 1px 3px orange",
+                    "inset 0 0 1px 3px burlywood",
+                    "inset 0 0 1px 3px #fff",
+                  ],
+                }}
+                transition={{
+                  duration: 5,
+                  ease: "anticipate",
+                }}
+              ></motion.div>
+              <motion.p>
+                {propsNavbar.nombre}
+                <br />
+                {contar} ptos
+              </motion.p>
+            </Link>
+          </li>
+        ) : (
+          <li>
+            <Link to={"/Registro"}>
+              <Button>SIGN UP</Button>
+            </Link>
+          </li>
+        )}
       </ul>
-      {propsNavbar && propsNavbar.nombre !== undefined ? (
-        <Link to={"/modifica"} className="perfil">
-          <motion.div
-            className="img-perfil"
-            animate={{
-              scale: [1, 1.2, 1, 1.2, 1],
-              rotate: [0, -360, 360, 360, 0],
-              borderRadius: ["50%", "30%", "20%", "10%", "50%"],
-              backgroundImage: `url(../${propsNavbar.img})`,
-              boxShadow: [
-                "inset 0 0 1px 5px var(--main-color)",
-                "inset 0 0 1px 3px orange",
-                "inset 0 0 1px 3px burlywood",
-                "inset 0 0 1px 3px #fff",
-              ],
-            }}
-            transition={{
-              duration: 5,
-              ease: "anticipate",
-            }}
-          ></motion.div>
-          <motion.p>
-            {propsNavbar.nombre}
-            <br />
-            {contar} ptos
-          </motion.p>
-        </Link>
-      ) : (
-        <Link to={"/Registro"}>
-          <Button>SIGN UP</Button>
-        </Link>
-      )}
     </nav>
   );
 };

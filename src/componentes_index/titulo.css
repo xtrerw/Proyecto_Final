@@ -1,31 +1,36 @@
-.parte-titulo{
-    height: calc(100vh - 100px);
-    padding-top: 100px;
-    background: black;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
- 
-  }
-  .parte-titulo>img{
-    height: 100%;
-  }
-  .titulo{
-    width: 60%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-  }
-  .titulo>h1{
-    margin: 30px;
-  }
-  .titulo>h1>span{
-    margin: 2px;
-  }
-  .titulo>p{
-    width: 600px;
-    color: var(--default-color);
-  }
+.parte-titulo {
+  height: calc(100vh - 100px);
+  padding-top: 100px;
+  background: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.parte-titulo > img {
+  height: 100%;
+}
+
+.titulo {
+  width: 60%; /* Puedes ajustar este valor según tus necesidades */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.titulo > h1 {
+  margin: 30px;
+  max-width: 90%; /* Ancho máximo del título ajustado */
+}
+
+.titulo > h1 > span {
+  margin: 2px;
+}
+
+.titulo > p {
+  max-width: 90%; /* Ancho máximo del párrafo ajustado */
+  color: var(--default-color);
+}
