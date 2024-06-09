@@ -81,6 +81,16 @@ const Torneos = () => {
                         <p>{equipo}</p>
                     </motion.div>
                     ))}
+                    <motion.div className="equipo"
+                     animate={{
+                        backgroundColor:  'var(--main-color)',
+                        color: '#fff',
+                        cursor: 'pointer'
+                    }}
+                    whileHover={{
+                        backgroundColor:'var(--main-color2)'
+                    }}
+                    >unirte con tu equipo</motion.div>
                 </article>
                  <aside className="grafico-partido">
                    {/* Cuadros de los partidos */}

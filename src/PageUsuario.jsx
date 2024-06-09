@@ -113,8 +113,9 @@ const PageUsuario = (propsUser) => {
                     equipos: elegir,
                 })
             }) 
+            const resulta=await response.json();
             if (response.ok) {
-                alert('Ya elijes equipos '+elegir);
+                alert(resulta);
             }
         } catch (error) {
             console.error('error', error)
@@ -354,14 +355,14 @@ const PageUsuario = (propsUser) => {
                 <p>{propsUser.ptos} <br /> Ptos</p>
             </motion.div>
             <motion.div className='usuario-ptos'
-            variants={itemRight}
+            // variants={itemRight}
             initial={{
                 borderRadius:"20%",
                 opacity:0
             }}
             ></motion.div>
             <motion.div className='usuario-ptos'
-            variants={itemRight}
+            // variants={itemRight}
             initial={{
                 borderRadius:"20%",
                 opacity:0

@@ -678,7 +678,6 @@ const nuevosJuegos = [
         nombre: 'Rainbow Six',
         imagen: 'src/img/rainbow.png',
     },
-    
     // Agrega más juegos aquí si es necesario
 ];
 
