@@ -1,4 +1,4 @@
-.how{
+.how {
     background: var(--default-color2);
     color: var(--secondary-color);
     display: flex;
@@ -6,19 +6,22 @@
     justify-content: center;
     align-items: center;
 }
-.procesos{
+
+.procesos {
     display: flex;
+    flex-wrap: wrap; /* Para que los elementos se envuelvan en pantallas pequeñas */
     gap: 30px;
     margin-top: 100px;
 }
-.proceso{
+
+.proceso {
     width: 400px;
-    height: 400px;
+    max-width: 90%; /* Para hacer que los elementos se ajusten al ancho máximo */
+    height: auto; /* Cambiado de 400px a auto */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     border: 5px solid var(--secondary-color);
     border-radius: 10px;
     background-color: var(--default-color);
@@ -27,24 +30,37 @@
     text-align: center;
     color: #000;
 }
-.proceso>img{
+
+.proceso > img {
     width: 200px;
-    height: 170px;
+    height: auto; /* Cambiado de 170px a auto */
 }
-.proceso>h3{
+
+.proceso > h3 {
     margin: 30px 0;
 }
-.proceso>p{
+
+.proceso > p {
     font-size: 15px;
     margin: 0 30px;
 }
-@media (max-width:1300px) {
-    .proceso{
+
+@media (max-width: 1300px) {
+    .proceso {
         width: 300px;
-        height: 250px;
+        height: auto; /* Cambiado de 250px a auto */
     }
-    .proceso>img{
+
+    .proceso > img {
         width: 50px;
-        height: auto;
+        height: auto; /* Cambiado de auto a auto */
+    }
+    
+    .proceso.p0{
+        margin-left: 50px;
+    }
+    .proceso.p2{
+        margin-left: 220px;
+
     }
 }
