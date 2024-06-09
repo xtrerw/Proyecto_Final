@@ -354,14 +354,14 @@ const PageUsuario = (propsUser) => {
                 <p>{propsUser.ptos} <br /> Ptos</p>
             </motion.div>
             <motion.div className='usuario-ptos'
-            variants={itemRight}
+            // variants={itemRight}
             initial={{
                 borderRadius:"20%",
                 opacity:0
             }}
             ></motion.div>
             <motion.div className='usuario-ptos'
-            variants={itemRight}
+            // variants={itemRight}
             initial={{
                 borderRadius:"20%",
                 opacity:0

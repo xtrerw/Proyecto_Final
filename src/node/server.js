@@ -678,7 +678,54 @@ const nuevosJuegos = [
         nombre: 'Rainbow Six',
         imagen: 'src/img/rainbow.png',
     },
-    
+    {
+        equipo: 'Team Shadow',
+        jugador: [
+            nuevosJugadores[0].nombreUsuario,
+            nuevosJugadores[3].nombreUsuario,
+            nuevosJugadores[7].nombreUsuario,
+            nuevosJugadores[10].nombreUsuario,
+            nuevosJugadores[13].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
+    {
+        equipo: 'Team Zenith',
+        jugador: [
+            nuevosJugadores[1].nombreUsuario,
+            nuevosJugadores[2].nombreUsuario,
+            nuevosJugadores[6].nombreUsuario,
+            nuevosJugadores[11].nombreUsuario,
+            nuevosJugadores[14].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
+    {
+        equipo: 'Team Nexus',
+        jugador: [
+            nuevosJugadores[4].nombreUsuario,
+            nuevosJugadores[5].nombreUsuario,
+            nuevosJugadores[8].nombreUsuario,
+            nuevosJugadores[12].nombreUsuario,
+            nuevosJugadores[15].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
+    {
+        equipo: 'Team Aether',
+        jugador: [
+            nuevosJugadores[9].nombreUsuario,
+            nuevosJugadores[10].nombreUsuario,
+            nuevosJugadores[16].nombreUsuario,
+            nuevosJugadores[17].nombreUsuario,
+            nuevosJugadores[19].nombreUsuario
+        ],
+        tipoJuego: 'Valorant',
+        img: 'src/img/defecto-team.png'
+    },
     // Agrega más juegos aquí si es necesario
 ];
 
