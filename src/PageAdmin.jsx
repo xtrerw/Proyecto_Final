@@ -5,10 +5,14 @@ const Admin = () => {
     
     //responsive de path
     const[pathDato,setPath]=useState('');
+    const[videoH,setVideoH]=useState('80%');
     useEffect(()=>{
         //si tamaño de windows mayor q 1400px
         if (window.innerWidth>1400) {
             setPath('M 20,0 0,50 L 0,600 L 460,600 500,500 500,0 Z');
+        }else if (window.innerWidth>1000){
+            setPath('M 20,0 0,50 L 0,300 L 260,300 300,260 300,0 Z');
+            setVideoH('70%')
         }
     },[])
     //animacion de titulo de formulario
@@ -65,7 +69,7 @@ const Admin = () => {
         animate={{
             opacity:1,
             width:"80%",
-            height:"80%",
+            height:videoH,
             borderRadius:20,
             boxShadow:"inset 0 0 10px 1px #000"
         }}

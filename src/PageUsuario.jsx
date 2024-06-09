@@ -113,8 +113,9 @@ const PageUsuario = (propsUser) => {
                     equipos: elegir,
                 })
             }) 
+            const resulta=await response.json();
             if (response.ok) {
-                alert('Ya elijes equipos '+elegir);
+                alert(resulta);
             }
         } catch (error) {
             console.error('error', error)

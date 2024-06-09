@@ -76,3 +76,39 @@
     text-transform: uppercase;
     color: #fff;
 }
+/* responsive */
+@media (min-width: 1000px) {
+    .bg-admin{
+        height: 120vh;
+    }
+    .bg-video{
+        top: 20%;
+    }
+    .admin-border{
+        width: 300px;
+        height: 300px;
+    }
+    .admin-titulo{
+        font-size: 15px;
+    }
+    .admin-form{
+        width: 300px;
+        height: 200px;
+        gap: 5px;
+    }
+    .admin-form>label{
+        font-size: 10px;
+    }
+    .admin-form>label>input{
+        font-size: 15px;
+        height: 20px;
+        width: 200px;
+        padding: 5px 10px;
+    }
+    .btn-admin{
+        font-size: 10px;
+        width: 130px;
+        height: 20px;
+        clip-path: path('M 10,0 L 0,10 0,20 L 120,20 130,10 130,0 Z');
+    }
+}
