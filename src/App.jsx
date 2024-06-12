@@ -2,7 +2,6 @@ import './App.css'
 import Footer from "../src/componentes/footer";
 import Navbar from './componentes/Navbar';
 import { Route, Routes } from 'react-router-dom';
-// import Admin from './PageAdmin'
 import Juegos from './PageJuegos';
 import Home from './PageHome';
 import Torneos from './PageTorneos';
@@ -62,7 +61,6 @@ function App() {
       {/* Solamente actualizar una parte cuando recarga la navegación para mejorar rendimiento */}
       <Routes>
         <Route path='/' element={<Home/>}/>
-        {/* <Route path='/Administrador' element={<Admin/>}/> */}
         <Route path="/Juegos" element={<Juegos/>}/>
         <Route path="/Juegos/:id" element={<Torneos/>}/>
         <Route path="/Tienda" element={<Tienda/>}/>
