@@ -249,13 +249,13 @@ const Registro = () => {
             animate={(!formData.nombreIS || !formData.contraseñaIS)? '':'hover'}
             ></motion.hr>
             </motion.button>
-            {/* eres administrador */}
+            {/* eres administrador
             <Link to={'/Administrador'} style={{color:'#fff'}}>
               <p className='admin' 
               >
                 ¿ eres administrador ?
               </p>
-            </Link>
+            </Link> */}
             {/* no tienes cuenta */}
             <p className='recordatorio' 
             onMouseEnter={()=>setHover(true)}
