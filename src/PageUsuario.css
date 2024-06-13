@@ -2,6 +2,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("../src/img/lands.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
     gap: 30px;
 }
 .usuario-tarjeta{
@@ -24,7 +27,7 @@
     height: 500px;
     background-image: url("../src/img/bg-user.png");
     background-size: cover;
-    border-radius: 20px;
+    border-radius: 10px;
     clip-path: path("M 340,0 Q310,0  310,30 L310,50 Q310,65 290,70 L15,70 Q0,75 0,90 L0,500 L800,500 L800,0 Z");
     position: relative;
     display: flex;
@@ -103,8 +106,8 @@
     margin: 10px 30px;
 }
 .usuario-btn{
-    width: 120px;
-    height: 40px;
+    width: 150px;
+    height: 50px;
     border-radius: 10px;
     background: var(--main-color);
     font-size: 10px;

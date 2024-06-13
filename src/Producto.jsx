@@ -51,7 +51,7 @@ const Producto = (propsPerfil) => {
     const newResto=resto-producto.precio
     // asegurar que el usuario no consuma más de lo que tiene
     if (newResto < 0) {
-      setPobre("No tienes suficientes puntos para canejar. Pobrecito");
+      setPobre("No tienes suficientes puntos para canjear.");
       return;
   }
     setResto(newResto)

@@ -34,7 +34,7 @@ function Noticias() {
                     </div>
                 ))}
           </div>
-          <ScrollProps v={1} titulo={'Noticias 뉴스 News ニュース Notizie 新聞 Новини'}/>
+          
         </section>
       </main>
     )
