@@ -21,13 +21,13 @@ const Navbar = (propsNavbar) => {
     if (propsNavbar && contar < propsNavbar.ptos && !animaInicio) {
       const time = setTimeout(() => {
         setContar(contar + 1);
-      }, 50);
+      }, 2);
       return () => clearTimeout(time);
     } else if (resultaPtos >= 0 && contar > resultaPtos) {
       iniciarAnima(true);
       const time = setTimeout(() => {
         setContar(contar - 1);
-      }, 200);
+      }, 2);
       return () => clearTimeout(time);
     }
   }, [animaInicio, contar, propsNavbar, resultaPtos]);

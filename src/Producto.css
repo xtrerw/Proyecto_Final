@@ -52,7 +52,7 @@
     color: var(--default-color3);
     margin: 20px 0 10px 0;
 }
-.btn-canejar{
+.btn-canjear{
     width: 150px;
     height: 50px;
     background: var(--main-color);
@@ -63,7 +63,7 @@
     right: 40px;
     bottom: 40px;
 }
-.btn-canejar:hover{
+.btn-canjear:hover{
     background: var(--main-color2);
     transition: 0.5s ease-in-out;
     text-decoration: underline;
@@ -174,7 +174,7 @@
         font-size: 10px;
         margin: 10px 0 5px 0;
     }
-    .btn-canejar{
+    .btn-canjear{
         width: 100px;
         height: 30px;
         font-size: 8px;

@@ -39,7 +39,7 @@ const Producto = (propsPerfil) => {
     setClickIndex(apartado); 
   };//
 
-  //canejar los premios
+  //canjear los premios
   //realizar canejo y actualiza de los datos en node js 
   const [resto,setResto]=useState(propsPerfil.ptos);
   //no tiene suficientes ptos
@@ -47,11 +47,11 @@ const Producto = (propsPerfil) => {
   //sale factura
   const [factura,setFactura]=useState(false);
   //para actualizar los puntos en bd
-  const canejar=async()=>{
+  const canjear=async()=>{
     const newResto=resto-producto.precio
     // asegurar que el usuario no consuma más de lo que tiene
     if (newResto < 0) {
-      setPobre("No tienes suficientes puntos para canejar. Pobrecito");
+      setPobre("No tienes suficientes puntos para canjear. Pobrecito");
       return;
   }
     setResto(newResto)
@@ -195,10 +195,10 @@ const Producto = (propsPerfil) => {
         <p>Clasificación: {producto.clasificacion}</p>
         <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
         {/* realiza canejo */}
-        <button className='btn-canejar' onClick={()=>{
-          canejar();
+        <button className='btn-canjear' onClick={()=>{
+          canjear();
           setFactura(false);
-        }}>Canejar ahora</button>
+        }}>Canjear ahora</button>
         <motion.p
         className='pobre'
         animate={{
