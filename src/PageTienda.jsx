@@ -8,7 +8,7 @@
   import {Observer} from "gsap/Observer";
   import TopPremio from './componentes_paginas/TopPremio';
   const Tienda = () => {
-      const state={img:'src/img/bg2.png',title:"Tienda",description:"Nuestros regalos van más allá tu pensamiento"};
+      const state={img:'src/img/bg2.png',title:"Tienda",description:"Lleva tu juego al siguiente nivel"};
 
       const [tienda, setProducto]=useState([]);
       useEffect(()=>{

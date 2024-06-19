@@ -161,7 +161,7 @@ const Registro = () => {
         const result=await respone.json();
         if (respone.ok) {
           console.log('Registro con éxito'+result);
-          setMessage2('Ya registra usted');
+          setMessage2('Se ha registrado con exito');
         }else{
           console.error('Error en la verificación'+result);
           setMessage2('Existe error de registro');
@@ -359,7 +359,7 @@ const Registro = () => {
                     exit='nosvamos'
                     > 
                       <label htmlFor="fecha">
-                        <p>fecha del nacimiento</p>
+                        <p>fecha de nacimiento</p>
                         <input type="date" name='fechaN' value={formData.fechaN} placeholder='Introduce la fecha de nacimiento' onChange={handleChange}/>
                       </label>
                       <label htmlFor="nombreUser">
