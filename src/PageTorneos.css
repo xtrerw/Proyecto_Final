@@ -51,3 +51,11 @@ aside>div>h3{
     border: 1px solid #ffffff;
   } 
   
+  /* Administrador */
+  .admin,.add-equipo{
+    border: 2px solid #fff;
+  }
+  .admin>button,.add-equipo>button{
+    color: #fff;
+    background-color: var(--main-color);
+  }

@@ -9,26 +9,140 @@ import { useParams } from "react-router-dom";
 const Torneos = () => {
     const state={img:'../src/img/bg3.png',title:"Torneos",description:"Alcanza la victoria"};
     const [equipos, setEquipos]=useState([]);
-    const [torneos, setTorneos]=useState({});
+    //lista equipo para agregar
+    const [listaEquipo, setLista]=useState([]);
+    //add equipo
+    const [isAdd,addEquipo]=useState(false);
+    const handleClick = () => {
+        addEquipo(true);
+    };
+    //confirmar administrador
+    const [isAdmin,setAdmin] = useState(false);
     //conseguir juego que user elegir
     const {id}=useParams();
-
+    const quitaClick = () => {
+        addEquipo(false);
+        setAdmin(false);
+    };
+    //equipos que hay en torneos
     useEffect(()=>{
         fetch('http://localhost:3001/torneos')
         .then(response=>response.json())
         .then((data)=>{
-            const nombres = data.find(torneo => torneo.tipoJuego.toString() === id); // conseguir los nombre de equipos
+            const nombres = data.find(torneo => torneo.tipoJuego.toString() == id); // conseguir los nombre de equipos
             if (nombres) {
-                setTorneos(nombres); 
                 setEquipos(nombres.equipos); 
             }
           })
         .catch((error)=>console.error("Error de conseguir los datos "+error));
       },[id])
 
+       //lista de equipos que puede elegir
+    useEffect(() => {
+        fetch('http://localhost:3001/equipos')
+            .then(response => response.json())
+            .then((data) => {
+                //equipos.some es para que filtra los equipos que no está en torneo y los pueda elegir
+                const nombres = data.filter(equipo => equipo.tipoJuego.toString() === id && !equipos.some(e => e === equipo.equipo)).map(equipo => equipo.equipo); 
+                setLista(nombres);
+            })
+            .catch((error) => console.error("Error de agregar equipos:" + error))
+    }, [id])
+    //iniciar sesión con administrador
+    const [formData,setFormData]=useState({
+        user:'',
+        pwd:'',
+        eqElegido:[],
+    });
+    const handleChange = (e) => {
+        //conseguir los elementos de formulario,name se refiere a "administrador","contraseña", value se refiere a los valores que introduce
+          const { name, value } = e.target;
+          //actualizar los valores de formData
+          setFormData({
+              ...formData,
+              [name]: value,
+          });
+      };
+    //confirmar admin
+    const confirmaAdmin = async (e) => {
+        e.preventDefault()
+         // verificar si rellenar el formulario de admin
+        if (!formData.user || !formData.pwd) {
+            console.error('Por favor, introduce usuario y contraseña.');
+            return;
+        }
+        //si no introduce los datos o introduce sin válidos, no va a envivar los datos
+          
+          try {
+              //manda nombre y contrase;a de administrador que iniciar sesi'on
+              //conecta el servidor virtual que creamos
+              const response = await fetch(`http://localhost:3001/admin`,{
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  user:formData.user,
+                  pwd:formData.pwd,
+                }),
+  
+              });
+  
+              const result=await response.json()
+              //si la verificacion bien, se sale la msg con 'exito, o sea el código response es 200
+              if (response.ok) {
+                //la verificacion correcta, isAdmin es true 
+                setAdmin(true)
+            } else {
+                setAdmin(false)
+                console.error('Error en la verificación', result);
+            }
+         } catch (error) {
+             console.error('Error:', 'Enviar erro '+error);
+          }
+      };
+      //agregar equipos
+      //conseguir equipos elegidos
+      const handleCheckboxChange = (e) => {
+        const { value, checked } = e.target;
+        setFormData(prevState => {
+            if (checked) {
+                return {
+                    ...prevState,
+                    eqElegido: [...prevState.eqElegido, value]
+                };
+            } else {
+                return {
+                    ...prevState,
+                    eqElegido: prevState.eqElegido.filter(eq => eq !== value)
+                };
+            }
+        });
+    };
+
+      const agregarEq=async(e)=>{
+
+        try {
+            const response=await fetch(`http://localhost:3001/agregarEquipos`,{
+                method:'POST',
+                headers:{'Content-Type': 'application/json'},
+                body:JSON.stringify({
+                    tipoJuego:id,
+                    eqElegido: formData.eqElegido,
+                }),
+            })
+            if (!response.ok) {
+                console.log(`HTTP error! status: ${response.status}`);
+            }
+    
+        } catch (error) {
+            console.error('Error:', error);
+        }
+      }
+      
     //animaci'on de click la carta de adiministrador
     const [click, setClick]=useState(equipos[0]);
-    console.log(click);
+    
     gsap.registerPlugin(ScrollTrigger);
     useEffect(()=>{
         if(equipos.length>0){
@@ -90,7 +204,40 @@ const Torneos = () => {
                     whileHover={{
                         backgroundColor:'var(--main-color2)'
                     }}
+                    // agregar los equipos
+                    onClick={handleClick}
                     >unirte con tu equipo</motion.div>
+                   
+                    {isAdd && !isAdmin?
+                    <form action="" className="admin" onSubmit={confirmaAdmin}>
+                        <i className='bx bx-x-circle' onClick={quitaClick}></i>
+                        <h3>Adiministrador</h3>
+                        <label>
+                            usuario
+                            <input type="text" value={formData.user} name="user" onChange={handleChange} placeholder="Introduce su usuario de administrador "/>
+                        </label>
+                        <label>
+                            contraseña
+                            <input type="password" value={formData.pwd} name="pwd" onChange={handleChange} placeholder="Introduce su contraseña"/>
+                        </label>
+                        <button type="submit">Iniciar Sesión</button>
+                    </form>
+                    :isAdd && isAdmin?
+                    <form action="" className="add-equipo" onSubmit={agregarEq}>
+                        <i className='bx bx-x-circle' onClick={quitaClick}></i>
+                        <h3>Lista de Equipos</h3>
+                        {listaEquipo==null?
+                        listaEquipo.map((equipos, index) => (
+                            <label htmlFor={`equipo-${index}`} key={index}>
+                                <input type="checkbox" id={`equipo-${index}`} name="equipos" value={equipos} onChange={handleCheckboxChange} />
+                                {equipos}
+                            </label>  
+                        )):<h4>Todos los equipos ya elegido</h4>}
+                        <button type="submit">agregar equipos</button>
+                    </form>
+                    :null
+                    }
+                    
                 </article>
                  <aside className="grafico-partido">
                    {/* Cuadros de los partidos */}

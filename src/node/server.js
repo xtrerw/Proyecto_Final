@@ -1,7 +1,7 @@
 // Importa mongoose y otras dependencias necesarias
 import mongoose from 'mongoose';
 import { createHash } from "crypto";
-
+import { Buffer } from 'safe-buffer'; 
 
 // Conexión a la base de datos MongoDB Atlas
 const user = encodeURIComponent("root"); // Usuario de MongoDB Atlas
@@ -10,7 +10,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url, {
+mongoose.connect(url2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -111,6 +111,12 @@ const juegoSchema = new mongoose.Schema({
 });
 const JuegoModelo = mongoose.model('Juego', juegoSchema);
 
+// Administrator
+const adminSchema = new mongoose.Schema({
+    usuario: String,
+    password: String,
+});
+const AdminModelo = mongoose.model('Administrador', adminSchema);
 // Ejemplo de uso para todas las colecciones
 
 // Array de documentos a agregar para Jugadores
@@ -120,6 +126,53 @@ const hashpwd=(pwd)=>{
     return createHash('sha256').update(pwd).digest('hex')
 }
 //ejemplo de contraseña
+//tipo de juegos
+//si quieres añadir mas cosas la añades al array wei
+
+const nuevosAdmin=[
+    {
+        usuario:"root",
+        password:hashpwd("root"),
+    }
+];
+nuevosAdmin.forEach((admin)=>{
+    agregarDocumentoSiNoExiste(AdminModelo, admin)
+})
+
+const nuevosJuegos = [
+    {
+        nombre: 'Dota 2',
+        imagen: 'src/img/dota.png',
+    },
+    {
+        nombre: 'Free Fire',
+        imagen: 'src/img/ff.png',
+    },
+    {
+        nombre: 'League of Legends',
+        imagen: 'src/img/lol.png',
+    },
+    {
+        nombre: 'Valorant',
+        imagen: 'src/img/valorant.png',
+    },
+    {
+        nombre: 'TFT',
+        imagen: 'src/img/tft.png',
+    },
+    {
+        nombre: 'Rainbow Six',
+        imagen: 'src/img/rainbow.png',
+    },
+    // Agrega más juegos aquí si es necesario
+];
+
+// Agregar múltiples juegos
+nuevosJuegos.forEach((juego) => {
+    agregarDocumentoSiNoExiste(JuegoModelo, juego);
+});
+
+
 const nuevosJugadores = [
     {
         nombreUsuario: 'NoobGG',
@@ -336,138 +389,154 @@ const nuevosJugadores = [
 
 
 // Agregar múltiples jugadores
-nuevosJugadores.forEach((jugador) => {
-    agregarDocumentoSiNoExiste(JugadorModulo, jugador);
-});
+const nuevosEquipos = async () => {
+    try {
+        const juegos = await JuegoModelo.find({}); // 获取所有游戏
 
-const nuevosEquipos = [
-    {
-        equipo: 'Team Phoenix',
-        jugador: [nuevosJugadores[3].nombreUsuario, nuevosJugadores[4].nombreUsuario],
-        tipoJuego: 'TFT',
-        img: 'src/img/equipo1.png',
-    },
-    {
-        equipo: 'Team Thunder',
-        jugador: [nuevosJugadores[0].nombreUsuario, nuevosJugadores[1].nombreUsuario],
-        tipoJuego: 'TFT',
-        img: 'src/img/equipo2.png',
-    },
-    {
-        equipo: 'Team Eclipse',
-        jugador: [nuevosJugadores[2].nombreUsuario, nuevosJugadores[5].nombreUsuario],
-        tipoJuego: 'TFT',
-        img: 'src/img/equipo3.png',
-    },
-    {
-        equipo: 'Team Titan',
-        jugador: [nuevosJugadores[6].nombreUsuario, nuevosJugadores[8].nombreUsuario],
-        tipoJuego: 'TFT',
-        img: 'src/img/equipo4.png',
-    },
-    {
-        equipo: 'Team Floria',
-        jugador: [
-            nuevosJugadores[6].nombreUsuario,
-            nuevosJugadores[8].nombreUsuario,
-            nuevosJugadores[16].nombreUsuario,
-            nuevosJugadores[18].nombreUsuario,
-            nuevosJugadores[19].nombreUsuario
-        ],
-        tipoJuego: 'League of Legends',
-        img: 'src/img/equipo5.png'
-    },
-    {
-        equipo: 'Team Nova',
-        jugador: [
-            nuevosJugadores[0].nombreUsuario,
-            nuevosJugadores[2].nombreUsuario,
-            nuevosJugadores[7].nombreUsuario,
-            nuevosJugadores[9].nombreUsuario,
-            nuevosJugadores[10].nombreUsuario
-        ],
-        tipoJuego: 'League of Legends',
-        img: 'src/img/equipo6.png'
-    },
-    {
-        equipo: 'Team Vortex',
-        jugador: [
-            nuevosJugadores[4].nombreUsuario,
-            nuevosJugadores[5].nombreUsuario,
-            nuevosJugadores[13].nombreUsuario,
-            nuevosJugadores[15].nombreUsuario,
-            nuevosJugadores[17].nombreUsuario
-        ],
-        tipoJuego: 'League of Legends',
-        img: 'src/img/equipo7.png'
-    },
-    {
-        equipo: 'Team Inferno',
-        jugador: [
-            nuevosJugadores[1].nombreUsuario,
-            nuevosJugadores[3].nombreUsuario,
-            nuevosJugadores[11].nombreUsuario,
-            nuevosJugadores[12].nombreUsuario,
-            nuevosJugadores[14].nombreUsuario
-        ],
-        tipoJuego: 'League of Legends',
-        img: 'src/img/equipo8.png'
-    },
-    {
-        equipo: 'Team Valor',
-        jugador: [
-            nuevosJugadores[3].nombreUsuario,
-            nuevosJugadores[4].nombreUsuario,
-            nuevosJugadores[7].nombreUsuario,
-            nuevosJugadores[9].nombreUsuario,
-            nuevosJugadores[11].nombreUsuario
-        ],
-        tipoJuego: 'Valorant',
-        img: 'src/img/defecto-team.png'
-    },
-    {
-        equipo: 'Team Vanguard',
-        jugador: [
-            nuevosJugadores[0].nombreUsuario,
-            nuevosJugadores[2].nombreUsuario,
-            nuevosJugadores[10].nombreUsuario,
-            nuevosJugadores[12].nombreUsuario,
-            nuevosJugadores[14].nombreUsuario
-        ],
-        tipoJuego: 'Valorant',
-        img: 'src/img/defecto-team.png'
-    },
-    {
-        equipo: 'Team Fury',
-        jugador: [
-            nuevosJugadores[2].nombreUsuario,
-            nuevosJugadores[5].nombreUsuario,
-            nuevosJugadores[13].nombreUsuario,
-            nuevosJugadores[15].nombreUsuario,
-            nuevosJugadores[17].nombreUsuario
-        ],
-        tipoJuego: 'Valorant',
-        img: 'src/img/defecto-team.png'
-    },
-    {
-        equipo: 'Team Blaze',
-        jugador: [
-            nuevosJugadores[6].nombreUsuario,
-            nuevosJugadores[8].nombreUsuario,
-            nuevosJugadores[16].nombreUsuario,
-            nuevosJugadores[18].nombreUsuario,
-            nuevosJugadores[19].nombreUsuario
-        ],
-        tipoJuego: 'Valorant',
-        img: 'src/img/defecto-team.png'
-    },
-    // Agrega más equipos aquí si es necesario
-];
+        const getJuegoId = (nombre) => {
+            const juego = juegos.find(juego => juego.nombre === nombre);
+            if (!juego) {
+                throw new Error(`Juego with name "${nombre}" not found`);
+            }
+            return juego._id;
+        };
 
-// Agregar múltiples equipos
-nuevosEquipos.forEach((equipo) => {
-    agregarDocumentoSiNoExiste(EquiposModulo, equipo);
-});
+        const equipos = [
+            {
+                equipo: 'Team Phoenix',
+                jugador: [nuevosJugadores[3].nombreUsuario, nuevosJugadores[4].nombreUsuario],
+                tipoJuego: getJuegoId('TFT'),
+                img: 'src/img/equipo1.png',
+            },
+            {
+                equipo: 'Team Thunder',
+                jugador: [nuevosJugadores[0].nombreUsuario, nuevosJugadores[1].nombreUsuario],
+                tipoJuego: getJuegoId('TFT'),
+                img: 'src/img/equipo2.png',
+            },
+            {
+                equipo: 'Team Eclipse',
+                jugador: [nuevosJugadores[2].nombreUsuario, nuevosJugadores[5].nombreUsuario],
+                tipoJuego: getJuegoId('TFT'),
+                img: 'src/img/equipo3.png',
+            },
+            {
+                equipo: 'Team Titan',
+                jugador: [nuevosJugadores[6].nombreUsuario, nuevosJugadores[8].nombreUsuario],
+                tipoJuego: getJuegoId('TFT'),
+                img: 'src/img/equipo4.png',
+            },
+            {
+                equipo: 'Team Floria',
+                jugador: [
+                    nuevosJugadores[6].nombreUsuario,
+                    nuevosJugadores[8].nombreUsuario,
+                    nuevosJugadores[16].nombreUsuario,
+                    nuevosJugadores[18].nombreUsuario,
+                    nuevosJugadores[19].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('League of Legends'),
+                img: 'src/img/equipo5.png'
+            },
+            {
+                equipo: 'Team Nova',
+                jugador: [
+                    nuevosJugadores[0].nombreUsuario,
+                    nuevosJugadores[2].nombreUsuario,
+                    nuevosJugadores[7].nombreUsuario,
+                    nuevosJugadores[9].nombreUsuario,
+                    nuevosJugadores[10].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('League of Legends'),
+                img: 'src/img/equipo6.png'
+            },
+            {
+                equipo: 'Team Vortex',
+                jugador: [
+                    nuevosJugadores[4].nombreUsuario,
+                    nuevosJugadores[5].nombreUsuario,
+                    nuevosJugadores[13].nombreUsuario,
+                    nuevosJugadores[15].nombreUsuario,
+                    nuevosJugadores[17].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('League of Legends'),
+                img: 'src/img/equipo7.png'
+            },
+            {
+                equipo: 'Team Inferno',
+                jugador: [
+                    nuevosJugadores[1].nombreUsuario,
+                    nuevosJugadores[3].nombreUsuario,
+                    nuevosJugadores[11].nombreUsuario,
+                    nuevosJugadores[12].nombreUsuario,
+                    nuevosJugadores[14].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('League of Legends'),
+                img: 'src/img/equipo8.png'
+            },
+            {
+                equipo: 'Team Valor',
+                jugador: [
+                    nuevosJugadores[3].nombreUsuario,
+                    nuevosJugadores[4].nombreUsuario,
+                    nuevosJugadores[7].nombreUsuario,
+                    nuevosJugadores[9].nombreUsuario,
+                    nuevosJugadores[11].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('Valorant'),
+                img: 'src/img/defecto-team.png'
+            },
+            {
+                equipo: 'Team Vanguard',
+                jugador: [
+                    nuevosJugadores[0].nombreUsuario,
+                    nuevosJugadores[2].nombreUsuario,
+                    nuevosJugadores[10].nombreUsuario,
+                    nuevosJugadores[12].nombreUsuario,
+                    nuevosJugadores[14].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('Valorant'),
+                img: 'src/img/defecto-team.png'
+            },
+            {
+                equipo: 'Team Fury',
+                jugador: [
+                    nuevosJugadores[2].nombreUsuario,
+                    nuevosJugadores[5].nombreUsuario,
+                    nuevosJugadores[13].nombreUsuario,
+                    nuevosJugadores[15].nombreUsuario,
+                    nuevosJugadores[17].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('Valorant'),
+                img: 'src/img/defecto-team.png'
+            },
+            {
+                equipo: 'Team Blaze',
+                jugador: [
+                    nuevosJugadores[6].nombreUsuario,
+                    nuevosJugadores[8].nombreUsuario,
+                    nuevosJugadores[16].nombreUsuario,
+                    nuevosJugadores[18].nombreUsuario,
+                    nuevosJugadores[19].nombreUsuario
+                ],
+                tipoJuego: getJuegoId('Valorant'),
+                img: 'src/img/defecto-team.png'
+            }
+        ];
+
+        equipos.forEach((equipo) => {
+            try {
+                agregarDocumentoSiNoExiste(EquiposModulo, equipo);
+            } catch (error) {
+                console.error(`Error adding team ${equipo.equipo}:`, error);
+            }
+        });
+    } catch (error) {
+        console.error("Error creating teams:", error);
+    }
+};
+
+nuevosEquipos();
 
 
 // Array de documentos a agregar para Noticias
@@ -652,39 +721,7 @@ nuevosProductos.forEach((producto) => {
     agregarDocumentoSiNoExiste(TiendaModulo, producto);
 });
 
-//si quieres añadir mas cosas la añades al array wei
-const nuevosJuegos = [
-    {
-        nombre: 'Dota 2',
-        imagen: 'src/img/dota.png',
-    },
-    {
-        nombre: 'Free Fire',
-        imagen: 'src/img/ff.png',
-    },
-    {
-        nombre: 'League of Legends',
-        imagen: 'src/img/lol.png',
-    },
-    {
-        nombre: 'Valorant',
-        imagen: 'src/img/valorant.png',
-    },
-    {
-        nombre: 'TFT',
-        imagen: 'src/img/tft.png',
-    },
-    {
-        nombre: 'Rainbow Six',
-        imagen: 'src/img/rainbow.png',
-    },
-    // Agrega más juegos aquí si es necesario
-];
 
-// Agregar múltiples juegos
-nuevosJuegos.forEach((juego) => {
-    agregarDocumentoSiNoExiste(JuegoModelo, juego);
-});
 
 const crearTorneosPorCadaJuego = async () => {
     try {
@@ -697,10 +734,11 @@ const crearTorneosPorCadaJuego = async () => {
         for (const juego of juegos) {
             const torneoExistente = await TorneosModulo.findOne({ tipoJuego: juego._id });
             //agregar equipos
-            const equipos = await EquiposModulo.find({ tipoJuego: juego.nombre });
+            // const equipos = await EquiposModulo.find({ tipoJuego: juego.nombre });
             if (!torneoExistente) {
                 const nuevoTorneo = {
-                    equipos: equipos.map(team => team.equipo), // Inicialmente sin equipos
+                    // equipos: equipos.map(team => team.equipo), // Inicialmente sin equipos
+                    equipos:[],
                     tipoJuego: juego._id, // Referencia al ID del juego
                     fecha: new Date().toISOString().split('T')[0], // Fecha actual
                     tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto, puedes cambiarlo si es necesario
@@ -743,7 +781,9 @@ const agregarEquipoATorneo = async (torneoId, equipoId) => {
 };
 
 // Exportar modelos si es necesario
-export default { JugadorModulo, 
+export default { 
+    AdminModelo,
+    JugadorModulo, 
     EquiposModulo, 
     NoticiasModulo, 
     TorneosModulo, 

@@ -231,6 +231,54 @@ app.use(session({
   app.route("/sinEquipos")
   .get(conseguirEquipos)
   .put(actualizarEquipos)
+
+  app.get('/equipos', async (req, res) => {
+    try {
+        const equipos=await ServerMod.EquiposModulo.find({});
+        res.status(200).json(equipos) 
+    } catch (error) {
+        res.status(500).json(console.error(error));
+    }
+    //verificar administrador
+    app.post('/admin',async(req,res)=>{
+        try {
+            //conseguir los datos de enviar
+            const {user,pwd}=req.body;
+            const confirmar = await ServerMod.AdminModelo.findOne({
+                usuario:user,
+                password:hashpwd(pwd),
+            })
+            if (confirmar) {
+                res.status(200).json("éxito");
+            } else {
+                res.status(401).json("usuario o contraseña incorrectos");
+            }
+        } catch (error) {
+            res.status(500).json(console.error(error));
+        }
+    })
+    //agregar los equipos al torneo
+    app.post('/agregarEquipos',async(req,res)=>{
+        try {
+            //conseguir el cuerpo de petición
+            const{tipoJuego,eqElegido}=req.body;
+            //actualizar los datos de usuarios
+            const actualiza=await ServerMod.TorneosModulo.findOneAndUpdate(
+                {tipoJuego:tipoJuego},
+                { $addToSet: { equipos: { $each: eqElegido } } },
+                { new: true } 
+            )
+            if (actualiza) {
+                res.status(200).send(actualiza)
+            }else{
+                res.status(401).send("actualizar fallado")
+            }
+        } catch (error) {
+            res.status(500).send('error de servidor')
+        }
+      })
+});
+
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3001;//configurar el n'umero de puerto. Intenta obtener el número puerto. Si no, se utilizará el puerto 3001
 app.listen(PORT, () => console.log(`Ya está realizando en el puerto de servidor ${PORT}`));//comprobar que servidor si está ejecutando bien.
