@@ -26,8 +26,7 @@ function OurGames() {
                 key={index}
                 src={src}
                 style={{
-                  transform: `translateX(${index-img==2 ? 100*(index-images.length) : 
-                    index-img==-2 ? 100*(index+1):100 * (index-img)}%) 
+                  transform: `translateX(${index-img==2 ? 100*(index-images.length) : index-img==-2 ? 100*(index+1):100 * (index-img)}%) 
                   scale(${index == img ? 1.2 : 1})`,
                   zIndex: index>img ? -2: index<img ? -3:-1,
                   opacity: index==img ? 1:0.2,
