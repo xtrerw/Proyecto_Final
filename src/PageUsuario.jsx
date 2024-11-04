@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./PageUsuario.css"
-import { color, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { actualizarDatos} from './actions/action'
 import { useDispatch } from 'react-redux'
 const PageUsuario = (propsUser) => {
@@ -20,6 +20,7 @@ const PageUsuario = (propsUser) => {
         email:propsUser.email,
         pwd: null,
         pwdConfirma: null,
+        direccion: null,
     })
     //introduce input
     const handleChange = (e) => {
@@ -33,10 +34,9 @@ const PageUsuario = (propsUser) => {
     //funcion de submit
     //si encuentra los error
     const [error,setError]=useState(false)
-    // pondrá los borders rojo de input
-    const errorBorder={
+    //los msgs errores
+    const errorMSG={
         tieneError:{
-            border:error? '2px solid var(--hoverbtn)':'none',
             color:error? 'var(--hoverbtn)':'none',
         }
     } 
@@ -45,6 +45,10 @@ const PageUsuario = (propsUser) => {
     const submitUser = async(e)=>{
         e.preventDefault();
         setError(false)
+        if (!form.direccion?.trim()) {
+            setError(true)
+            return
+        }
         //si condiciones de modificar los datos sin válida
         if (form.pwd!=form.pwdConfirma)  {
             return setError(true);
@@ -55,6 +59,7 @@ const PageUsuario = (propsUser) => {
         const param = {
             id: propsUser.id, 
             email: form.email, 
+            direccion: form.direccion, 
         };
         //manda la contraseña en caso de que ya la completa 
         if (form.pwd !== null && form.pwd !== '') {
@@ -87,67 +92,65 @@ const PageUsuario = (propsUser) => {
         window.location.href = '/Registro'; // Asegúrate de tener la ruta '/login' configurada en tu enrutador
     };
     //lista de equipos
-    //muestra equipos
-    const[sinEquipos,setSinEquipos]=useState([])
-    useEffect(()=>{
-        fetch("http://localhost:3001/sinEquipos")
-        .then(response => response.json())
-        .then(data=>{setSinEquipos(data)})
-        .catch(error => console.error(error))
-    },[])
-    //elegir equipos
-    const[elegir,setElegirEquipo]=useState([]);
-    const addEquipo = (element) => {
-        setElegirEquipo([...elegir, element]);
-    };
-    console.log(elegir);
-    //enviar los equipos elegidos
-    const enviarEquiposElegidos=async(e)=>{
-        e.preventDefault();
-        try {
-            const response=await fetch('http://localhost:3001/sinEquipos',{
-                method: 'PUT',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    userId: propsUser.id,
-                    equipos: elegir,
-                })
-            }) 
-            const resulta=await response.json();
-            if (response.ok) {
-                alert(resulta);
-            }
-        } catch (error) {
-            console.error('error', error)
-        }
+    // //muestra equipos
+    // const[sinEquipos,setSinEquipos]=useState([])
+    // useEffect(()=>{
+    //     fetch("http://localhost:3001/sinEquipos")
+    //     .then(response => response.json())
+    //     .then(data=>{setSinEquipos(data)})
+    //     .catch(error => console.error(error))
+    // },[])
+    // //elegir equipos
+    // const[elegir,setElegirEquipo]=useState([]);
+    // const addEquipo = (element) => {
+    //     setElegirEquipo([...elegir, element]);
+    // };
+    // //enviar los equipos elegidos
+    // const enviarEquiposElegidos=async(e)=>{
+    //     e.preventDefault();
+    //     try {
+    //         const response=await fetch('http://localhost:3001/sinEquipos',{
+    //             method: 'PUT',
+    //             headers: {'Content-Type': 'application/json'},
+    //             body: JSON.stringify({
+    //                 userId: propsUser.id,
+    //                 equipos: elegir,
+    //             })
+    //         }) 
+    //         const resulta=await response.json();
+    //         if (response.ok) {
+    //             alert(resulta);
+    //         }
+    //     } catch (error) {
+    //         console.error('error', error)
+    //     }
         
-    }
-    //item de menu
-    const itemMenu=['mis datos','contraseña','mis equipos']
-    const [menu,setItem]=useState(itemMenu[0])
-    //variantes de item derecho
-    //padre variantes
-    const container={
-        aparece:{
-            opacity:[0,1],
-            transition:{
-                delayChildren:1,
-                staggerChildren:0.5,
-            }
-        }
-    }
-    //hijo variantes
-    const itemRight={
-        aparece:{
-            scale:[0.5,1],
-            opacity:[0,1],
-            transition:{
-                duration:2,
-                ease:"backInOut"
-            }
-        },
-    }
-    console.log(equipos);
+    // }
+    // //item de menu
+    // const itemMenu=['mis datos','contraseña','mis equipos']
+    // const [menu,setItem]=useState(itemMenu[0])
+    // //variantes de item derecho
+    // //padre variantes
+    // const container={
+    //     aparece:{
+    //         opacity:[0,1],
+    //         transition:{
+    //             delayChildren:1,
+    //             staggerChildren:0.5,
+    //         }
+    //     }
+    // }
+    // //hijo variantes
+    // const itemRight={
+    //     aparece:{
+    //         scale:[0.5,1],
+    //         opacity:[0,1],
+    //         transition:{
+    //             duration:2,
+    //             ease:"backInOut"
+    //         }
+    //     },
+    // }
   return (
     <main className='usuario'>
         <section className='usuario-tarjeta'>
@@ -221,60 +224,55 @@ const PageUsuario = (propsUser) => {
                             </div>
                             <div className='usuario-iniciar'>
                                 <i className='bx bx-envelope'></i>
-                                <input type="email" name='email' value={form.email} onChange={handleChange}/>
+                                <input type="email" name='email' value={form.email} onChange={handleChange} placeholder='Correo'/>
+                            </div>
+                            <div className='usuario-iniciar'>
+                                <i className='bx bx-home-alt-2'></i>
+                                <input type="text" placeholder='Dirección'/>
                             </div>
                         </div> :
-                        menu=='contraseña'?
                         <div className='item-usuario'>
                              <h2>
                                 {menu}
                             </h2>
-                            <motion.div className='usuario-iniciar'
-                             // si hay error, llamará a variente de estilo de error
-                                variants={errorBorder}
-                                animate='tieneError'
-                            >
+                            <div className='usuario-iniciar'>
                                 <i className='bx bx-lock'></i>
                                 <input type='password' name='pwd' value={form.pwd} onChange={handleChange} placeholder='Estabelece tu contraseña nueva'/>
-                            </motion.div>
-                            <motion.div className='usuario-iniciar'
-                            // si hay error, llamará a variente de estilo de error
-                                variants={errorBorder}
-                                animate='tieneError'
-                            >
+                            </div>
+                            <div className='usuario-iniciar'>
                                 <i className='bx bx-lock'></i>
                                 <input type='password' name='pwdConfirma' value={form.pwdConfirma} onChange={handleChange} placeholder='Confirma tu contraseña'
                                 />
-                            </motion.div>
-                        </div> :
-                         menu=='mis equipos'?
-                         <div className='item-usuario'>
-                             <h2>
-                                {menu}
-                            </h2>
-                            {equipos.map((t,index)=>
-                            <motion.div key={index} className='usuario-iniciar'
-                                whileHover={{
-                                    cursor: 'pointer',
-                                    color: '#fff',
-                                    backgroundColor:team==t.equipo?  'var(--main-color)':'var(--hoverbtn)',
-                                }}
-                                onClick={()=>{
-                                    if (team==t.equipo) {
-                                        setTeam(null)
-                                    }else{
-                                        setTeam(t.equipo); 
-                                    }
-                                }}
-                                animate={{
-                                    color:team==t.equipo? '#fff':'var(--hoverbtn)',
-                                    backgroundColor:team==t.equipo? 'var(--hoverbtn)':'#fff',
-                                }}
-                            >
-                                <i className='bx bx-group'></i>
-                                {t.equipo}
-                            </motion.div>)}
-                        </div> : null}
+                            </div>
+                        </div>}
+                          {/* menu=='mis equipos'?
+                          <div className='item-usuario'>
+                              <h2>
+                                 {menu}
+                             </h2>
+                             {equipos.map((t,index)=>
+                             <motion.div key={index} className='usuario-iniciar'
+                                 whileHover={{
+                                     cursor: 'pointer',
+                                     color: '#fff',
+                                     backgroundColor:team==t.equipo?  'var(--main-color)':'var(--hoverbtn)',
+                                 }}
+                                 onClick={()=>{
+                                     if (team==t.equipo) {
+                                         setTeam(null)
+                                     }else{
+                                         setTeam(t.equipo); 
+                                     }
+                                 }}
+                                 animate={{
+                                     color:team==t.equipo? '#fff':'var(--hoverbtn)',
+                                     backgroundColor:team==t.equipo? 'var(--hoverbtn)':'#fff',
+                                 }}
+                             >
+                                 <i className='bx bx-group'></i>
+                                 {t.equipo}
+                             </motion.div>)}
+                         </div> : null */}
                     
                     <div className='usuario-btns'>
                         <button type="submit" className='usuario-btn'>Guardar</button>
@@ -293,7 +291,7 @@ const PageUsuario = (propsUser) => {
                     duration:3,                  
                 }}
                 ></motion.div>
-                {equipos.length>0?
+                {/* {equipos.length>0?
                 //si teienes equipos, se sale equipos
                 equipos.map((eq,index)=>
                     <motion.div className='equipo-img' key={index}
@@ -339,10 +337,10 @@ const PageUsuario = (propsUser) => {
                     </div> 
                     <button type='submit' className='usuario-btn'>Confirma unirse</button>
                 </form> 
-                }
+                } */}
             </motion.div>
         </section>
-        <motion.section className='usuario-infor2'
+        {/* <motion.section className='usuario-infor2'
         variants={container}
         animate='aparece'
         >
@@ -368,7 +366,7 @@ const PageUsuario = (propsUser) => {
                 opacity:0
             }}
             ></motion.div>
-        </motion.section>
+        </motion.section> */}
     </main>
   )
 }
