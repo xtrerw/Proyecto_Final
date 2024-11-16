@@ -80,17 +80,15 @@ app.post('/unirseTorneo', async (req, res) => {
 app.post('/registro', async (req, res) => {
     try {
         //conseguir los datos de la cuerpo de petición enviado desde la pageRegistro
-        const { nombreUsuario, nombre, apellidos, fechaN, correo, contraseña,img,ptos} = req.body
+        const { nombreUsuario, correo, contraseña,img,ptos} = req.body
         //crear nuevo modelo por el de los jugadores
         const nuevoJugador=new ServerMod.JugadorModulo({
             nombreUsuario,
-            nombre,
-            apellidos,
-            fechaN,
             correo,
             contraseña:hashpwd(contraseña),
             img,
-            ptos
+            ptos,
+            dir:"",
         })
 
         await nuevoJugador.save()//guardar los datos a modelo de los jugadores
@@ -168,13 +166,14 @@ app.use(session({
   app.put('/modifica',async(req,res)=>{
     try {
         //conseguir el cuerpo de petición
-        const{id,email,user,pwd}=req.body;
+        const{id,direccion,email,user,pwd}=req.body;
         //actualizar los datos de usuarios
         const actualiza=await ServerMod.JugadorModulo.findByIdAndUpdate(
             id,
             {
                 correo:email,
                 nombreUsuario:user,
+                dir:direccion,
                 contraseña:hashpwd(pwd),
             },
             {new:true},

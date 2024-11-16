@@ -46,11 +46,7 @@ const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
 // Jugadores
 const jugadoresSchema = new mongoose.Schema({
     nombreUsuario:String,
-    nombre: String,
-    apellidos: String,
-    fechaN: {
-        format: Date,
-    },//fecha de nacimiento
+    dir:String,
     correo: String,
     contraseña: String,
     ptos:Number,
@@ -176,9 +172,7 @@ nuevosJuegos.forEach((juego) => {
 const nuevosJugadores = [
     {
         nombreUsuario: 'NoobGG',
-        nombre: 'Luis',
-        apellidos: 'Garcia',
-        fechaN: new Date(1985, 3, 7),  // 1985-04-07
+        dir:"CALLE XXXXX",
         correo: 'noob@gmail.es',
         contraseña: hashpwd('12345'),
         img:'src/img/jugador1.png',
@@ -186,9 +180,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'ProGamer21',
-        nombre: 'Javier',
-        apellidos: 'Martinez',
-        fechaN: new Date(1993, 9, 15),  // 1993-10-15
+        dir:"CALLE XXXXX",
         correo: 'javier@gmail.es',
         contraseña: hashpwd('12345'),
         img:'src/img/jugador2.png',
@@ -196,9 +188,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: '23333',
-        nombre: 'Maria',
-        apellidos: 'Lopez',
-        fechaN: new Date(1987, 6, 22),  // 1987-07-22
+        dir:"CALLE XXXXX",
         correo: 'maria@gmail.es',
         contraseña: hashpwd('12345'),
         img:'src/img/jugador3.png',
@@ -206,9 +196,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'ChiefNoob',
-        nombre: 'Juan',
-        apellidos: 'Hernandez',
-        fechaN: new Date(1992, 11, 10),  // 1992-12-10
+        dir:"CALLE XXXXX",
         correo: 'juan@gmail.es',
         contraseña: hashpwd('12345'),
         img:'src/img/jugador4.png',
@@ -216,9 +204,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'nooblol',
-        nombre: 'Katyusha',
-        apellidos: 'Katherin',
-        fechaN: new Date(1989, 2, 28),  // 1989-03-28
+        dir:"CALLE XXXXX",
         correo: 'kat@gmail.es',
         contraseña: hashpwd('12345'),
         img:'src/img/jugador5.png',
@@ -226,9 +212,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'CuteBunny',
-        nombre: 'Sara',
-        apellidos: 'Rocio',
-        fechaN: new Date(1996, 7, 14),  // 1996-08-14
+        dir:"CALLE XXXXX",
         correo: 'sara@gmail.es',
         contraseña: hashpwd('12345'),
         img:'src/img/jugador6.png',
@@ -236,9 +220,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'SpeedyGonzales',
-        nombre: 'Carlos',
-        apellidos: 'Perez',
-        fechaN: new Date(1990, 4, 3),  // 1990-05-03
+        dir:"CALLE XXXXX",
         correo: 'carlos@gmail.es',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -246,9 +228,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'SilentKiller',
-        nombre: 'Ana',
-        apellidos: 'Sanchez',
-        fechaN: new Date(1988, 1, 25),  // 1988-02-25
+        dir:"CALLE XXXXX",
         correo: 'ana@gmail.es',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -256,9 +236,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'MasterMind',
-        nombre: 'Fernando',
-        apellidos: 'Rodriguez',
-        fechaN: new Date(1984, 11, 13),  // 1984-12-13
+        dir:"CALLE XXXXX",
         correo: 'fernando@gmail.es',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -266,9 +244,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'HappyFeet',
-        nombre: 'Gloria',
-        apellidos: 'Mendoza',
-        fechaN: new Date(1991, 5, 20),  // 1991-06-20
+        dir:"CALLE XXXXX",
         correo: 'gloria@gmail.es',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -276,9 +252,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'TechGuru',
-        nombre: 'Miguel',
-        apellidos: 'Silva',
-        fechaN: new Date(1995, 10, 5),  // 1995-11-05
+        dir:"CALLE XXXXX",
         correo: 'miguel@gmail.es',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -286,9 +260,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'GamingQueen',
-        nombre: 'Sophia',
-        apellidos: 'Smith',
-        fechaN: new Date(1994, 2, 12),  // 1994-03-12
+        dir:"CALLE XXXXX",
         correo: 'sophia@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -296,9 +268,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'CyberWarrior',
-        nombre: 'James',
-        apellidos: 'Johnson',
-        fechaN: new Date(1992, 6, 19),  // 1992-07-19
+        dir:"CALLE XXXXX",
         correo: 'james@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -306,9 +276,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'PixelMaster',
-        nombre: 'Emma',
-        apellidos: 'Williams',
-        fechaN: new Date(1985, 8, 30),  // 1985-09-30
+        dir:"CALLE XXXXX",
         correo: 'emma@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -316,9 +284,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'DragonSlayer',
-        nombre: 'Liam',
-        apellidos: 'Brown',
-        fechaN: new Date(1991, 10, 8),  // 1991-11-08
+        dir:"CALLE XXXXX",
         correo: 'liam@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -326,9 +292,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'MagicWand',
-        nombre: 'Olivia',
-        apellidos: 'Jones',
-        fechaN: new Date(1986, 4, 21),  // 1986-05-21
+        dir:"CALLE XXXXX",
         correo: 'olivia@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -336,9 +300,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'StormBringer',
-        nombre: 'Noah',
-        apellidos: 'Garcia',
-        fechaN: new Date(1993, 11, 14),  // 1993-12-14
+        dir:"CALLE XXXXX",
         correo: 'noah@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -346,9 +308,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'CyberPunk',
-        nombre: 'Isabella',
-        apellidos: 'Miller',
-        fechaN: new Date(1995, 5, 2),  // 1995-06-02
+        dir:"CALLE XXXXX",
         correo: 'isabella@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -356,9 +316,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'NeoNinja',
-        nombre: 'Ethan',
-        apellidos: 'Davis',
-        fechaN: new Date(1989, 6, 25),  // 1989-07-25
+        dir:"CALLE XXXXX",
         correo: 'ethan@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -366,9 +324,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'StarGazer',
-        nombre: 'Ava',
-        apellidos: 'Martinez',
-        fechaN: new Date(1997, 8, 17),  // 1997-09-17
+        dir:"CALLE XXXXX",
         correo: 'ava@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -376,9 +332,7 @@ const nuevosJugadores = [
     },
     {
         nombreUsuario: 'QuantumLeap',
-        nombre: 'Alexander',
-        apellidos: 'Hernandez',
-        fechaN: new Date(1990, 9, 29),  // 1990-10-29
+        dir:"CALLE XXXXX",
         correo: 'alexander@gmail.com',
         contraseña: hashpwd('12345'),
         img: 'src/img/defecto.png',
@@ -386,7 +340,9 @@ const nuevosJugadores = [
     }
 ];
 
-
+nuevosJugadores.forEach((player)=>{
+    agregarDocumentoSiNoExiste(JugadorModulo,player)
+})
 
 // Agregar múltiples jugadores
 const nuevosEquipos = async () => {

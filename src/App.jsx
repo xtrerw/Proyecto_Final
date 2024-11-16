@@ -66,7 +66,7 @@ function App() {
         <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/> 
-        <Route path="/modifica" element={<Usuario id={perfil._id} nombre={perfil.nombreUsuario} apellidos={perfil.apellidos} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} equipos={equiposTienen}/>}/>  
+        <Route path="/modifica" element={<Usuario id={perfil._id} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} direccion={perfil.dir}/>}/>  
         <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombreUsuario} />}/>       
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
       </Routes>
