@@ -15,7 +15,7 @@
     align-items: center;
     clip-path: path('M 20,0 0,50 L 0,700 L 760,700 800,500 800,0 Z');
     background: #252525;
-
+    position: relative;
 }
 .tabla-seleccion{
     width: 100%;
@@ -53,11 +53,13 @@
 .tabla-user{
     width: 100%;
     height: 100%;
+    position: relative;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 .tabla-user>div{
+    position: absolute;
+    top: 60px;
     text-align: center;
 }
 .tabla-user>div>label{
@@ -77,24 +79,34 @@
     font-size: 30px;
     padding: 5px 10px;
 }
-/* ojos */
-/* .tabla-user input[type="password"]{
-    position: relative;
-} */
-.ojo{
-    cursor: pointer;
-    height: 30px;
-    width: 30px;
-}
 /* tienes cuentas y eres administrador */
-.recordatorio{
+.admin,.recordatorio{
     font-size: 12px;
     cursor: pointer;
     width: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.admin{
+    margin-top: 25px;
+}
+.recordatorio{
     margin-top: 5px;
+}
+/* pto de carrusel */
+.ptos{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    bottom: 70px;
+}
+.pto-usuario{
+
+    width: 50px;
+    height: 3px;
+    background: #fff;
 }
 .registro{
     width: 200px;
@@ -110,7 +122,26 @@
     background: #fff;
     color: var(--hoverbtn);
 }
-
+.under-linea,.up-linea,.left-linea,.right-linea{
+    background: goldenrod;
+    position: absolute;
+    border: none;
+}
+.under-linea{
+    bottom: -5px;
+}
+.up-linea{
+    top: -5px;
+    right: 5px;
+}
+.left-linea{
+    bottom: -5px;
+    left: 5px;
+}
+.right-linea{
+    top: -5px;
+    right: 5px;
+}
 .advertencia{
     font-size: 10px;
     color: red;
@@ -213,10 +244,17 @@
     .under-linea,.up-linea,.left-linea,.right-linea{
         display: none;
     }
+    .pto-usuario{
+        width: 20px;
+        height: 2px;
+    }
     .tabla-seleccion{
         width: 100%;
         height: 30px;
         position: relative;
+    }
+    .ptos{
+        bottom: 10%;
     }
     .advertencia{
         width: 250px;
