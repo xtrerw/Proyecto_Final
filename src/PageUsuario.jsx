@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "./PageUsuario.css"
 import { color, motion } from 'framer-motion'
 import { actualizarDatos} from './actions/action'
 import { useDispatch } from 'react-redux'
 const PageUsuario = (propsUser) => {
-    //conseguir los quipos que user tiene
-    const[equipos,setEquipos]=useState([])
-    useEffect(()=>{
-        if (Array.isArray(propsUser.equipos)) {
-            setEquipos(propsUser.equipos)
-        }else {
-            setEquipos([]); 
-        }
-    },[propsUser])
-    //cambiar los icones a lo largo de elegir el equipo
-    const[team,setTeam]=useState()
+    //aparece la contraseña
+    const[lock1,setLock1]=useState(true)
+    const[lock2,setLock2]=useState(true)
     //introduce informaciones de nuevo
     const[form,setForma]=useState({
         email:propsUser.email,
+<<<<<<< HEAD
         pwd: null,
         pwdConfirma: null,
+=======
+        pwd: "",
+        pwdConfirma: "",
+        direccion: propsUser.direccion,
+>>>>>>> tryAgain
     })
     //introduce input
     const handleChange = (e) => {
@@ -32,34 +30,57 @@ const PageUsuario = (propsUser) => {
     }
     //funcion de submit
     //si encuentra los error
+<<<<<<< HEAD
     const [error,setError]=useState(false)
     // pondrá los borders rojo de input
     const errorBorder={
         tieneError:{
             border:error? '2px solid var(--hoverbtn)':'none',
             color:error? 'var(--hoverbtn)':'none',
+=======
+    const [error,setError]=useState(null)
+    //los msgs errores
+    const errorMSG={
+        tieneError:{
+            display:error==null?'none':'block',
+            color:error==null? 'none':'var(--hoverbtn)',
+>>>>>>> tryAgain
         }
     } 
     //REDUX desp'ues de importar acción
     const dispatch=useDispatch()
     const submitUser = async(e)=>{
         e.preventDefault();
+<<<<<<< HEAD
         setError(false)
+=======
+        setError(null)
+        if (!form.direccion?.trim()) {
+            setError("Introduce tu dirección")
+            return
+        }
+        if (!form.pwd?.trim()) {
+            setError("Introduce tu contraseña nueva")
+            return
+        }
+>>>>>>> tryAgain
         //si condiciones de modificar los datos sin válida
         if (form.pwd!=form.pwdConfirma)  {
-            return setError(true);
+            return setError("La contraseña confirmada no es correcto");
         } else if (!form.email) {
             return console.log('error email')
         }
         //si no rellenar contraseña,solo manda correo
         const param = {
             id: propsUser.id, 
+            user:propsUser.user,
             email: form.email, 
+<<<<<<< HEAD
+=======
+            direccion: form.direccion, 
+            pwd:form.pwd
+>>>>>>> tryAgain
         };
-        //manda la contraseña en caso de que ya la completa 
-        if (form.pwd !== null && form.pwd !== '') {
-            param.pwd = form.pwd;
-        }
         //actualizar perfil
         try {
             const response=await fetch('http://localhost:3001/modifica',{
@@ -86,6 +107,7 @@ const PageUsuario = (propsUser) => {
         // Redirigir a la página de inicio o de login
         window.location.href = '/Registro'; // Asegúrate de tener la ruta '/login' configurada en tu enrutador
     };
+<<<<<<< HEAD
     //lista de equipos
     //muestra equipos
     const[sinEquipos,setSinEquipos]=useState([])
@@ -148,6 +170,11 @@ const PageUsuario = (propsUser) => {
         },
     }
     console.log(equipos);
+=======
+
+
+
+>>>>>>> tryAgain
   return (
     <main className='usuario'>
         <section className='usuario-tarjeta'>
@@ -162,7 +189,7 @@ const PageUsuario = (propsUser) => {
                     ease:"anticipate"
                 }}
             >
-                {propsUser.nombre} {propsUser.apellidos} 
+                {propsUser.user}
             </motion.div>
             <motion.div className='usuario-infor'
             animate={{
@@ -173,39 +200,9 @@ const PageUsuario = (propsUser) => {
                 duration:2,
                 ease:"backInOut"
             }}>
-                <div className='menu'>
-                    {equipos.length>0?
-                    itemMenu.map((item,index)=>(
-                        <motion.div key={index} className='item' onClick={()=>{setItem(item)}}
-                        animate={{
-                            background: menu==item? 'var(--main-color)':'var(--default-color2)',
-                            color:menu==item?  '#fff':'var(--hoverbtn)',
-                        }}
-                        whileHover={{
-                            background: menu==item? 'var(--main-color2)':'var(--main-color)',
-                            color: '#fff'
-                        }}
-                        >
-                            {item}
-                        </motion.div>
-                        )): itemMenu.map((item,index)=>
-                            index<2 &&
-                            
-                            (<motion.div key={index} className='item' onClick={()=>{setItem(item)}}
-                            animate={{
-                                background: menu==item? 'var(--main-color)':'var(--default-color2)',
-                                color:menu==item?  '#fff':'var(--hoverbtn)',
-                            }}
-                            whileHover={{
-                                background: menu==item? 'var(--main-color2)':'var(--main-color)',
-                                color: '#fff'
-                            }}
-                            >
-                                {item}
-                            </motion.div> ))}
-                </div>
                 {/* formulario de modifica */}
                 <form className='tus-datos' onSubmit={submitUser}>
+<<<<<<< HEAD
                     
                     {menu=='mis datos'? 
                         <div className='item-usuario'>
@@ -279,6 +276,52 @@ const PageUsuario = (propsUser) => {
                     <div className='usuario-btns'>
                         <button type="submit" className='usuario-btn'>Guardar</button>
                         <button type="button" className='usuario-btn'onClick={handleLogout}>cerrar sesión</button>
+=======
+                    <div className='item-usuario'>
+                        <div className='usuario-iniciar'>
+                            <i className='bx bx-user' ></i>
+                            <input type="text" name='user'value={propsUser.user} style={{
+                                color:"#000",
+                                backgroundColor:"#fff",                                  
+                            }} disabled />
+                        </div>
+                        <div className='usuario-iniciar'>
+                            <i className='bx bx-envelope'></i>
+                            <input type="email" name='email' value={form.email} onChange={handleChange} placeholder='Correo'/>
+                        </div>
+                        <div className='usuario-iniciar'>
+                            <i className='bx bx-home-alt-2'></i>
+                            <input type="text" name='direccion' placeholder='Dirección' value={form.direccion} onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className='item-usuario'>
+                        <div className='usuario-iniciar'>
+                            <i style={{ cursor:'pointer'}} 
+                            className={
+                                lock1? 'bx bx-lock':'bx bx-lock-open'
+                            } 
+                            onClick={()=>setLock1(!lock1)}></i>
+                            <input type={
+                                lock1? 'password':'text'
+                            } name='pwd' value={form.pwd} onChange={handleChange} placeholder='Estabelece tu contraseña nueva'/>
+                        </div>
+                        <div className='usuario-iniciar'>
+                            <i style={{ cursor:'pointer'}} 
+                            className={
+                                lock2? 'bx bx-lock':'bx bx-lock-open'
+                            } 
+                            onClick={()=>setLock2(!lock2)}></i>
+                            <input type={
+                                lock2? 'password':'text'
+                            } name='pwdConfirma' value={form.pwdConfirma} onChange={handleChange} placeholder='Confirma tu contraseña'
+                            />
+                        </div>
+                        <div className='usuario-btns'>
+                            <button type="submit" className='usuario-btn'>Guardar</button>
+                            <button type="button" className='usuario-btn'onClick={handleLogout}>cerrar sesión</button>
+                        </div>
+                        <p className='error-modifica' style={errorMSG.tieneError}>{error}</p>
+>>>>>>> tryAgain
                     </div>
                 </form>
                 <motion.div className='usuario-img' 
@@ -293,6 +336,7 @@ const PageUsuario = (propsUser) => {
                     duration:3,                  
                 }}
                 ></motion.div>
+<<<<<<< HEAD
                 {equipos.length>0?
                 //si teienes equipos, se sale equipos
                 equipos.map((eq,index)=>
@@ -369,6 +413,10 @@ const PageUsuario = (propsUser) => {
             }}
             ></motion.div>
         </motion.section>
+=======
+            </motion.div>
+        </section>
+>>>>>>> tryAgain
     </main>
   )
 }

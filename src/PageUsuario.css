@@ -36,8 +36,7 @@
 /* correo, pwd, username */
 .tus-datos{
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    
 }
 .item-usuario{
     display: flex;
@@ -198,6 +197,10 @@
 }
 .usuario-ptos>p{
     color: #fff;
+}
+/* mensaje de errror */
+.error-modifica{
+    font-size: 1rem;
 }
 /* responsive */
 @media (max-width: 1400px) {
