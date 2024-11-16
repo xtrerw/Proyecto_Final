@@ -58,7 +58,7 @@ const Admin = () => {
             
                 <source src="../src/img/bg-admin.mp4" type="video/mp4"/>
         </motion.video>
-         <form className="admin-form" onSubmit={submitAdmin}>
+         <form className="admin-form" >
             {/* border de form */}
             <motion.svg className='admin-border' fill='#fff'
             >
