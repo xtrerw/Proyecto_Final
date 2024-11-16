@@ -191,6 +191,7 @@ const Registro = () => {
             >
               ¿ no tienes cuenta ?
             </p>
+            <Link to={"/Administrador"} className='recordatorio'>eres administrador ?</Link>
             </div>
           </form>: 
         // mensaje de iniciar con 'existos
