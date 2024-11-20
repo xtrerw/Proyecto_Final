@@ -1,0 +1,84 @@
+/* TorneoDetalles.css */
+
+/* Estilo del contenedor principal */
+.torneo-container {
+    background-color: #1a1a1a; /* Fondo negro */
+    color: white; /* Texto blanco para resaltar sobre el fondo oscuro */
+    padding: 80px;
+    border-radius: 10px;
+    max-width: 100%;
+    height: 100%;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil para dar profundidad */
+  }
+  
+  /* Títulos */
+  .torneo-container h1, .torneo-container h2 {
+    color: #ff3b3b; /* Rojo brillante para los títulos */
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* Texto de la fecha y tipo de torneo */
+  .torneo-container p {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #ccc; /* Color gris claro para el texto, para que no sea demasiado brillante */
+  }
+  
+  /* Estilo de la lista de equipos */
+  .equipos-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .equipos-list li {
+    background-color: #333; /* Fondo gris oscuro para los elementos de la lista */
+    color: #ff3b3b; /* Rojo brillante para los nombres de los equipos */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .equipos-list li:hover {
+    background-color: #444; /* Fondo gris más claro cuando se pasa el mouse */
+    cursor: pointer;
+  }
+  
+  /* Mensaje de error */
+  .error-message {
+    color: red; /* Rojo para el mensaje de error */
+    background-color: #f8d7da;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+  }
+  
+  /* Espaciado y diseño para los botones */
+  button {
+    background-color: #ff3b3b; /* Rojo para los botones */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+  }
+  
+  button:hover {
+    background-color: #e02f2f; /* Rojo más oscuro cuando se pasa el mouse */
+  }
+  
+  button:focus {
+    outline: none; /* Elimina el borde de enfoque predeterminado */
+  }
+  
+  /* Si deseas que el contenedor tenga un fondo más claro o diferenciado de otras secciones, puedes usar: */
+  .torneo-container {
+    background-color: #262626; /* Cambio a un tono más oscuro de gris si prefieres algo menos oscuro */
+  }
+  

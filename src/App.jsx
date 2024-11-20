@@ -8,12 +8,14 @@ import Torneos from './PageTorneos';
 import Tienda from './PageTienda';
 import Noticias from './PageNoticias';
 import Registro from './PageRegistro';
-import Admin from './PageAdmin'
+import Admin from './PageAdmin';
+import Dashboard from './pageDashboard';
 import Usuario from './PageUsuario';
 import Producto from './Producto';
 import ContenidoNoticia from './ContenidoNoticia';
 import ScrollToTop from './ScrollToTop';
 import { useLocation } from 'react-router-dom';
+import TorneoDetalles from "./TorneoDetalles"; // Página para los detalles de torneos
 import { useEffect, useState } from 'react';
 //hook de redux
 import { useSelector } from "react-redux";
@@ -68,9 +70,12 @@ function App() {
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/>
         <Route path='/Administrador' element={<Admin/>}/>
+        <Route path='/Dashboard' element={<Dashboard/>}/>
         <Route path="/modifica" element={<Usuario id={perfil._id} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} direccion={perfil.dir}/>}/>  
-        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombreUsuario} />}/>       
-        <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>            
+        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombreUsuario} />}/> 
+        <Route path="/torneo/:id" element={<TorneoDetalles />} />
+        <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>  
+                
       </Routes>
       <Footer/>
     </>

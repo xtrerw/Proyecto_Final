@@ -1,0 +1,188 @@
+/* Estilos generales para la página */
+.torneos-activos {
+    display: flex;
+    flex-wrap: wrap; /* Permite que las cartas se ajusten a nuevas filas si es necesario */
+    gap: 1rem;
+    justify-content: center;
+    padding: 1rem;
+    color: black;
+    margin-bottom: 3rem; /* Asegura que el contenido tenga espacio debajo */
+    overflow-y: auto; /* Permite que el contenido sea desplazable si excede el espacio disponible */
+    max-height: calc(100vh - 10rem); /* Limita la altura de la sección para que no se desborde */
+  }
+  
+  .titulo-torneos {
+    margin-top: 20px;
+    color: black;
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .torneo-card {
+    background-color: #b4b0b0;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    width: 250px;
+    padding: 1rem;
+    box-sizing: border-box; /* Incluye el padding en el tamaño total */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-height: 10rem; /* Limitar la altura */
+    overflow: hidden; /* Evitar que el texto se salga */
+  }
+  
+  .torneo-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .torneo-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #343a40;
+    word-wrap: break-word; /* Asegura que las palabras largas se ajusten */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Agrega puntos suspensivos cuando el texto es demasiado largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+  }
+  
+  .torneo-card p {
+    margin: 0.5rem 0;
+    color: #6c757d;
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Texto truncado si es demasiado largo */
+    display: -webkit-box;
+    -webkit-line-clamp: 2; /* Limita el número de líneas a 2 */
+    -webkit-box-orient: vertical;
+  }
+  
+  .crear-torneo-btn {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #a7241bd5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative; /* Para asegurarse de que el botón siempre se vea en su lugar */
+    z-index: 10; /* Asegura que el botón esté por encima de las cartas */
+  }
+  
+  .crear-torneo-btn:hover {
+    background-color: #fc1212;
+    transform: scale(1.05);
+  }
+  
+  .crear-torneo-btn:active {
+    transform: scale(0.95);
+  }
+  
+  /* Estilos para el Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal {
+    background-color: #0a010184;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .modal h2 {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-group label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  button {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    background-color: #000000ae;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ff0000;
+  }
+  
+  button:active {
+    transform: scale(0.95);
+  }
+  
+  .cerrar-modal-btn {
+    background-color: #dc3545;
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .cerrar-modal-btn:hover {
+    background-color: #c82333;
+  }
+  
+ /* Animación para el popup de éxito */
+.success-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 128, 0, 0.9);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    z-index: 2000;
+  }
+  
+  .success-popup.show {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .success-popup.hide {
+    opacity: 0;
+    visibility: hidden;
+  }

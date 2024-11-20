@@ -10,7 +10,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url2, {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -54,24 +54,33 @@ const jugadoresSchema = new mongoose.Schema({
 });
 const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 
-// Equipos
-const equiposSchemas = new mongoose.Schema({
-    equipo: String,
-    jugador: [String],
-    tipoJuego: String,
-    img: String,
-});
-const EquiposModulo = mongoose.model("equipos", equiposSchemas);
+// Esquema de Equipos
+const equiposSchema = new mongoose.Schema({
+    equipo: String, // Nombre del equipo
+    jugador: [String], // Jugadores del equipo
+    tipoJuego: { type: mongoose.Schema.Types.ObjectId, ref: 'Juego' }, // Referencia a la colección de Juegos
+    img: String, // Imagen del equipo
+  });
+  
+  const EquiposModulo = mongoose.model('Equipo', equiposSchema);
+
 
 // Torneos
-const torneosSchemas = new mongoose.Schema({
-    // equipos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'equipos' }],
-    equipos:[String],
-    tipoJuego: { type: mongoose.Schema.Types.ObjectId, ref: 'Juego' }, // Referencia a la colección de juegos
-    fecha: String,
-    tipoTorneo: String
-});
-const TorneosModulo = mongoose.model("torneos", torneosSchemas);
+// Definición del esquema de Torneo con relación a Equipos y Puntos
+// Esquema de Torneo
+const torneoSchema = new mongoose.Schema({
+    tipoTorneo: String,
+    fecha: Date,
+    equipos: [
+      {
+        equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipo' }, // Referencia al modelo Equipos
+        puntos: { type: Number, default: 0 }, // Puntos del equipo en este torneo
+      }
+    ]
+  });
+  
+  const TorneosModulo = mongoose.model("Torneo", torneoSchema);
+
 
 // Noticias
 const noticiasSchemas = new mongoose.Schema({
@@ -129,6 +138,10 @@ const nuevosAdmin=[
     {
         usuario:"root",
         password:hashpwd("root"),
+    },
+    {
+        usuario: "dazz",
+        imagen: "dazz",
     }
 ];
 nuevosAdmin.forEach((admin)=>{
@@ -689,15 +702,21 @@ const crearTorneosPorCadaJuego = async () => {
 
         for (const juego of juegos) {
             const torneoExistente = await TorneosModulo.findOne({ tipoJuego: juego._id });
-            //agregar equipos
-            // const equipos = await EquiposModulo.find({ tipoJuego: juego.nombre });
+
             if (!torneoExistente) {
+                // Buscar equipos asociados a este juego
+                const equipos = await EquiposModulo.find({ tipoJuego: juego._id });
+                if (equipos.length === 0) {
+                    console.log(`No hay equipos disponibles para el juego ${juego.nombre}.`);
+                    continue;
+                }
+
+                // Crear el nuevo torneo con los equipos asociados
                 const nuevoTorneo = {
-                    // equipos: equipos.map(team => team.equipo), // Inicialmente sin equipos
-                    equipos:[],
+                    equipos: equipos.map((equipo) => equipo._id), // Usar los IDs de los equipos
                     tipoJuego: juego._id, // Referencia al ID del juego
                     fecha: new Date().toISOString().split('T')[0], // Fecha actual
-                    tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto, puedes cambiarlo si es necesario
+                    tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto
                 };
 
                 await TorneosModulo.create(nuevoTorneo);
@@ -737,12 +756,13 @@ const agregarEquipoATorneo = async (torneoId, equipoId) => {
 };
 
 // Exportar modelos si es necesario
+
 export default { 
     AdminModelo,
     JugadorModulo, 
     EquiposModulo, 
     NoticiasModulo, 
-    TorneosModulo, 
+    TorneosModulo,
     TiendaModulo, 
     JuegoModelo,
     agregarDocumentoSiNoExiste,
