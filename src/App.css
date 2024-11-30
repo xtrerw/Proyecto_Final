@@ -28,3 +28,18 @@ a{
     font-size: 18px;
   }
 }
+.not-found{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;  
+}
+.not-found>h1{
+  color: var(--main-color);
+  text-transform: uppercase;
+}
+.not-found>p{
+  color: var(--default-color3);
+  text-transform: lowercase;
+}

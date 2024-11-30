@@ -71,8 +71,18 @@ function App() {
         <Route path="/Registro" element={<Registro/>}/>
         <Route path='/Administrador' element={<Admin/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
-        <Route path="/modifica" element={<Usuario id={perfil._id} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} direccion={perfil.dir}/>}/>  
-        <Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombreUsuario} />}/> 
+        <Route path="/modifica" element={<Usuario id={perfil._id} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} direccion={perfil.dir}/>}/> 
+         {!perfil.dir? 
+         (<Route 
+          path="*" 
+          element={
+            <main className='not-found'>
+              <h1>404 Not Found</h1>
+              <p>No puede comprar sin su dirección</p>
+            </main>
+          } 
+        />):(<Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombreUsuario} />}/>)}
+
         <Route path="/torneo/:id" element={<TorneoDetalles />} />
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>  
                 
