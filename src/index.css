@@ -3,6 +3,7 @@
   --main-color:#BE1717;
   --main-color2:#841111;
   --secondary-color:#000000;
+  --secondary-color2:#282828;
   --default-color: #fff;
   --gradiented-color:linear-gradient(to top,var(--secondary-color),var(--main-color));
   --default-color2:#F8F9FA;

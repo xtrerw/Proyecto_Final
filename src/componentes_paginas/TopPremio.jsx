@@ -60,8 +60,8 @@ const topPremio = () => {
               </Link>))}
         </div>
         <div className='btn-top'>
-            <button onClick={back} className="btn-top-back"><i className='bx bxs-chevron-left' ></i></button>
-            <button onClick={next} className="btn-top-next"><i className='bx bxs-chevron-right' ></i></button>
+            <div onClick={back} className="btn-top-back"><i className='bx bxs-chevron-left' ></i></div>
+            <div onClick={next} className="btn-top-next"><i className='bx bxs-chevron-right' ></i></div>
           </div>
       </main>
   )

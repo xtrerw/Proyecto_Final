@@ -79,8 +79,8 @@ const Navbar = (propsNavbar) => {
           </li>
         ) : (
           <li>
-            <Link to={"/Registro"}>
-              <Button>SIGN UP</Button>
+            <Link to={"/Registro"} className="nav-links btn btn-primary">
+              sign up
             </Link>
           </li>
         )}

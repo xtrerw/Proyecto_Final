@@ -1,13 +1,94 @@
 .page-tienda{
     height: auto;
-    padding: 100px 0;
+
     display: flex;
     justify-content: center;
+    position: relative;
 }
+/* carrito*/
+.bx-cart,.bxs-cart {
+    font-size: 50px;
+    color: var(--main-color);
+    cursor: pointer;
+    position: absolute;
+    top: 30px;
+    left: 30px;
+}
+/* factura desp'ues de comprar */
+.factura-maquina{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #0000008e;
+    z-index: 100;
+}
+.factura{
+    width: 400px;
+    min-height: 320px;
+    background-color: var(--secondary-color);
+    border-top: 10px solid var(--main-color);
+    /* clip-path: path("M 0,0 L 0,320 L 30,310 L 60,320 L 90,310 L 120,320 L 150,310 L 180,320 L 210,310 L 240,320 L 270,310 L 300,320 L 300,0 Z"); */
+    position: relative;
+    
+}
+.factura>.bx-x-circle{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    font-weight: bolder;
+    cursor: pointer;
+}
+.factura>.bx-x-circle:hover{
+    color: var(--main-color);
+}
+.factura-contenido{
+    margin: 20px;
+    margin-bottom: 100px;
+    text-transform: capitalize;
+    color: var(--default-color4);
+}
+.factura-contenido>hr{
+    background: var(--default-color4);
+    height: 3px;
+    border: none;
+}
+.factura-titulo{
+    font-size: 25px;
+    margin-bottom: 20px;
+    color: var(--default-color);
+}
+.factura-infor{
+    font-size: 15px;
+}
+.factura-nombre{
+    width: 200px;
+}
+.factura-total{
+    color: var(--default-color);
+}
+.factura-advi{
+    text-transform: uppercase;
+    color: var(--hoverbtn);
+    font-size: 16px;
+    margin-top: 40px;
+}
+.btn-compra{
+    text-transform: uppercase;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+}
+/* productos */
 .productos{
     display: grid;
     grid-template-columns: repeat(5,auto);
     gap: 30px;
+    margin: 100px 0;
 }
 .producto{
     opacity: 0;
@@ -23,7 +104,6 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* padding: 20px 10px; */
 
     position: relative;
     overflow: hidden;

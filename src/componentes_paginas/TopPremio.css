@@ -28,9 +28,15 @@
     top: 50%;
     font-size: 64px;
     color: var(--default-color3);
+
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10px;
 }
 .btn-top-back:hover,.btn-top-next:hover{
-    color: var(--main-color);
+    color: var(--default-color);
+    background-color: var(--main-color);
 }
 .btn-top-back{
     left: 40px;

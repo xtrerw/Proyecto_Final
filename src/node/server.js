@@ -51,6 +51,12 @@ const jugadoresSchema = new mongoose.Schema({
     contraseña: String,
     ptos:Number,
     img: String,
+    carrito: [{
+        productoNombre: String,
+        cantidad: Number,
+        precio: Number,
+        total: Number
+    }]
 });
 const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 

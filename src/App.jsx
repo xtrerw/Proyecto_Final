@@ -56,6 +56,27 @@ function App() {
   //     setPerfil(resultaActualizaDatos)
   //   }
   // }, [resultaActualizaDatos]);
+
+  //los datos de carrito
+  const [cartItems, setCartItems] = useState([]);
+  const handleAddToCart = (item) => {
+    setCartItems((prevCart) => {
+      // si existe producto en el carrito
+      const existingItem = prevCart.find((cartItem) => cartItem._id === item._id);
+      if (existingItem) {
+        // actualizar la cantidad del producto
+        return prevCart.map((cartItem) =>
+          cartItem._id === item._id
+            ? { ...cartItem, cantidad: cartItem.cantidad + item.cantidad }
+            : cartItem
+        );
+      }
+      // agregar nuevo producto al carrito
+      return [...prevCart, item];
+    });
+  };
+
+
   return (
     <>
       <ScrollToTop/>
@@ -66,22 +87,18 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path="/Juegos" element={<Juegos/>}/>
         <Route path="/Juegos/:id" element={<Torneos/>}/>
-        <Route path="/Tienda" element={<Tienda/>}/>
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/>
         <Route path='/Administrador' element={<Admin/>}/>
         <Route path='/Dashboard' element={<Dashboard/>}/>
         <Route path="/modifica" element={<Usuario id={perfil._id} img={perfil.img} email={perfil.correo} user={perfil.nombreUsuario} pwd={perfil.contraseña} ptos={perfil.ptos} direccion={perfil.dir}/>}/> 
-         {!perfil.dir? 
-         (<Route 
-          path="*" 
-          element={
-            <main className='not-found'>
-              <h1>404 Not Found</h1>
-              <p>No puede comprar sin su dirección</p>
-            </main>
-          } 
-        />):(<Route path="/Tienda/:id" element={<Producto ptos={perfil.ptos} id={perfil._id} nombre={perfil.nombreUsuario} />}/>)}
+
+        {/* actulaizar carrito */}
+        <Route path="/Tienda" element={<Tienda cartItems={cartItems}  propsPerfil={perfil} setCartItems={setCartItems}/>}/>
+        <Route path="/Tienda/:id" element={<Producto 
+        // utilzar metodo handleAddToCart para agregar productos al carrito
+        addToCart={handleAddToCart}
+        />}/>
 
         <Route path="/torneo/:id" element={<TorneoDetalles />} />
         <Route path="/Noticias/:id" element={<ContenidoNoticia/>}/>  

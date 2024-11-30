@@ -6,18 +6,17 @@ import { useGSAP } from '@gsap/react'
 import gsap from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 import { AnimatePresence } from 'framer-motion'
-//hook redux y metodo de action
-import { useDispatch } from 'react-redux'
-import { enviarPtos } from './actions/action'
+import { Link } from 'react-router-dom'
 
-const Producto = (propsPerfil) => {
-  //Redux
-  const dispatch = useDispatch();
+const Producto = ({ addToCart }) => {
   //conseguir id de producto
   const {id}=useParams();
   const[producto, setProducto]=useState([]);
   const [imgParte, setImg]=useState();//la imagen se muestra cuando elegido la imagen del menú
   const [clickIndex, setClickIndex]=useState();//agregar diseño de la figura elegido actualmente
+    // añadir el producto
+  const [cantidad, contar]=useState(0);
+
   useEffect(()=>{
     fetch('http://localhost:3001/tienda')
       .then(response => response.json())
@@ -39,50 +38,14 @@ const Producto = (propsPerfil) => {
     setClickIndex(apartado); 
   };//
 
-  //canjear los premios
-  //realizar canejo y actualiza de los datos en node js 
-  const [resto,setResto]=useState(propsPerfil.ptos);
-  //no tiene suficientes ptos
-  const [pobre,setPobre]=useState('')
-  //sale factura
-  const [factura,setFactura]=useState(false);
-  //para actualizar los puntos en bd
-  const canjear=async()=>{
-    const newResto=resto-producto.precio
-    // asegurar que el usuario no consuma más de lo que tiene
-    if (newResto < 0) {
-      setPobre("No tienes suficientes puntos para canjear. Pobrecito");
-      return;
-  }
-    setResto(newResto)
-    //metodo put para actualizar
-    try {
-      const response = await fetch(`http://localhost:3001/`,{
-        method: 'PUT',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          id:propsPerfil.id,
-          ptos:newResto,
-        }),
-      })
-      const resulta= await response.json()
-      if (response.ok) {
-        console.log('actualiza éxito'+resulta.ptos);
-        setResto(newResto);
-        //tramitar las acciones de enviar ptos de resto
-        dispatch(enviarPtos(newResto))
-        //luego vam a navbar
-        //sale factura
-        setFactura(true);
-      }else{
-        console.log('No encuentro usuario');
-      }
-
-    } catch (error) {
-      console.error('Error actualizar los puntos'+error)
+  //enviar la cantidad al carrito
+  const handleAddToCart = () => {
+    if (cantidad > 0) {
+      addToCart({ ...producto, cantidad });
+      alert("Producto añadido al carrito");
+      contar(0);
     }
-  }
-
+  };
   
 
   //animacion de exhibición de las imagenes
@@ -136,142 +99,101 @@ const Producto = (propsPerfil) => {
   return (
     <>
       <main className='detalle'>
-      <div className='producto-conjunto' >
-        {apartados.map((apartado,index)=>(
-          <motion.div onClick={()=>{yaClick(apartado)}} key={index} className="producto-apartado"
-          animate={{
-            backgroundImage: `url(../${apartado})`,
-            boxShadow: apartado==clickIndex ? "0px 0px 1px 2px var(--main-color)" : "none",
-            }}//si ya ha elegido elemento actual , pues aparezca la animación
-            >
-          </motion.div>
-        ))}
-      </div>
-      <div className='producto-img'>
-        <AnimatePresence>
-          <motion.div 
-            initial={{
-              y:20,
-              opacity:0,
-            }}
+        {/* btn back */}
+        <Link to={"/Tienda"}>
+          <i className='bx bx-arrow-back' ></i>
+        </Link>
+        <div className='producto-conjunto' >
+          {apartados.map((apartado,index)=>(
+            <motion.div onClick={()=>{yaClick(apartado)}} key={index} className="producto-apartado"
             animate={{
-              opacity:1,
-              y:0,
-              backgroundImage: imgParte?  `url(../${imgParte})`:'none'
-            }} 
-            exit={{
-              opacity:0,
-              y:-20
-            }}
-            transition={{
-              duration:1,
-              ease: 'easeInOut',
-            }}
-            className='producto-img'
-            key={imgParte? imgParte:""}//cambiar la imagen por elegir elemento de menu
-          ></motion.div>
-        </AnimatePresence>
-      </div>
-      <motion.div className='producto-detalle' 
-      initial={{
-        opacity:0,
-        x:30
-      }}
-      animate={{
-        opacity:1,
-        x:0,
-      }}
-      transition={{
-        delay:1,
-        duration:1
-      }}
-      >
-        <h2>{producto.nombre}</h2>
-        <h3>Descripción</h3>
-        <hr />
-        <p>Precio: {producto.precio} ptos</p>
-        <p>Características: {producto.caracteristica}</p>
-        <p>Tipo de Juego: {producto.tipoJuego}</p>
-        <p>Clasificación: {producto.clasificacion}</p>
-        <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
-        {/* realiza canejo */}
-        <button className='btn-canjear' onClick={()=>{
-          canjear();
-          setFactura(false);
-        }}>Canjear ahora</button>
-        <motion.p
-        className='pobre'
+              backgroundImage: `url(../${apartado})`,
+              boxShadow: apartado==clickIndex ? "0px 0px 1px 2px var(--main-color)" : "none",
+              }}//si ya ha elegido elemento actual , pues aparezca la animación
+              >
+            </motion.div>
+          ))}
+        </div>
+        <div className='producto-img'>
+          <AnimatePresence>
+            <motion.div 
+              initial={{
+                y:20,
+                opacity:0,
+              }}
+              animate={{
+                opacity:1,
+                y:0,
+                backgroundImage: imgParte?  `url(../${imgParte})`:'none'
+              }} 
+              exit={{
+                opacity:0,
+                y:-20
+              }}
+              transition={{
+                duration:1,
+                ease: 'easeInOut',
+              }}
+              className='producto-img'
+              key={imgParte? imgParte:""}//cambiar la imagen por elegir elemento de menu
+            ></motion.div>
+          </AnimatePresence>
+        </div>
+        <motion.div className='producto-detalle' 
+        initial={{
+          opacity:0,
+          x:30
+        }}
         animate={{
           opacity:1,
-          color:'var(--main-color)',
-          y:0,
-          fontSize:"10px",
-        }}
-        >{pobre}</motion.p>
-      </motion.div>
-      {factura? 
-      <motion.div className='factura-maquina'
-      animate={{
-        opacity:[0,1],
-      }}
-      transition={{
-        duration:1,
-        ease:'anticipate',
-      }}
-      >
-        <motion.div className='factura'
-        animate={{
-          opacity:[0,1],
-          y:[10,0]
+          x:0,
         }}
         transition={{
-          duration:1,
-          ease:'anticipate',
+          delay:1,
+          duration:1
         }}
         >
-          <i className='bx bx-x-circle' onClick={()=>{setFactura(false)}} ></i>
-          <div className='factura-contenido'>
-            <h1 className='factura-titulo'>Factura de Premio</h1>
-            <p className='factura-infor'>Usuario: {propsPerfil.nombre}</p>
-            <hr />
-            <p className='factura-infor'>Premio:</p>
-            <section className='factura-flex'>
-              <p className='factura-infor factura-nombre'>{producto.nombre }</p>
-              <p className='factura-infor'>{producto.precio} ptos</p>
-            </section>
-            <hr />
-            <section className='factura-flex'>
-              <p className='factura-infor'>Tus puntos actuales:</p>
-              <p className='factura-infor'>{resto} ptos</p>
-            </section>
+          <h2>{producto.nombre}</h2>
+          <h3>Descripción</h3>
+          <hr />
+          <p>Precio: {producto.precio} ptos</p>
+          <p>Características: {producto.caracteristica}</p>
+          <p>Tipo de Juego: {producto.tipoJuego}</p>
+          <p>Clasificación: {producto.clasificacion}</p>
+          <p>Dimensiones: {producto.altura} x {producto.anchura} x {producto.profundidad}</p>
+          {/* añadir productos */}
+          <div className='add-productos'>
+            <button disabled={cantidad<=0} onClick={()=>{contar(cantidad-1)}}>-</button>
+            <p>{cantidad}</p>
+            <button onClick={()=>{contar(cantidad+1)}}>+</button>
+            <button className='btn-canjear' onClick={handleAddToCart}>
+              <i className='bx bx-cart-add' ></i>
+            </button>
           </div>
-        </motion.div> 
-      </motion.div>
-      :''}
-      
-    </main>
-    <main className='exhibicion'>
-      <div className='exhibicion-set scroll-left'>
-      {apartados.map((apartado,index)=>(
-          <div  key={index} className="exhibicion-img " 
-          style={{
-            backgroundImage: `url(../${apartado})`,
-            }}>
-          </div>
-        ))}
-      </div>
-      <div className='exhibicion-set scroll-right'>
-      {apartados.map((apartado,index)=>(
-          <div  key={index} className="exhibicion-img" 
-          style={{
-            backgroundImage: `url(../${apartado})`,
-            }}>
-          </div>
-        ))}
-      </div>
-    </main>
+        </motion.div>
+      </main>
+      <main className='exhibicion'>
+        <div className='exhibicion-set scroll-left'>
+        {apartados.map((apartado,index)=>(
+            <div  key={index} className="exhibicion-img " 
+            style={{
+              backgroundImage: `url(../${apartado})`,
+              }}>
+            </div>
+          ))}
+        </div>
+        <div className='exhibicion-set scroll-right'>
+        {apartados.map((apartado,index)=>(
+            <div  key={index} className="exhibicion-img" 
+            style={{
+              backgroundImage: `url(../${apartado})`,
+              }}>
+            </div>
+          ))}
+        </div>
+      </main>
     </>
   )
 }
 
-export default Producto
+export default Producto;

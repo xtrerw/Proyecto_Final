@@ -33,6 +33,7 @@
 
 .nav-menu {
   display: flex;
+  align-items: center;
   gap: 20px;
   list-style: none;
   text-align: center;
@@ -66,7 +67,8 @@
 }
 
 .nav-links {
-  color: #fff;
+  color: var(--default-color);
+  text-transform: capitalize;
   text-decoration: none;
   padding: 0.5rem 1rem;
 }
