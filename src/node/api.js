@@ -186,14 +186,14 @@ app.put('/torneo/:torneoId/equipos/:equipoId/puntos', async (req, res) => {
 app.get('/torneo/:id', async (req, res) => {
     try {
       const torneo = await TorneosModulo.findById(req.params.id)
-        .populate('equipos.equipo')  // Esto hace el populate de los equipos
+        .populate('equipos.equipo')  // Si los equipos son una referencia a otros documentos
         .exec();
   
       if (!torneo) {
-        return res.status(404).json({ message: 'Torneo no encontrado' });
+        return res.status(404).json({ error: 'Torneo no encontrado' });
       }
   
-      res.json(torneo);  // Devolver los detalles del torneo
+      res.json(torneo);  // Responde con el torneo encontrado
     } catch (error) {
       console.error('Error al obtener el torneo:', error);
       res.status(500).json({ message: 'Error al obtener los detalles del torneo' });
