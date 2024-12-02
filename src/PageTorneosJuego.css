@@ -1,0 +1,82 @@
+/* Reset general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+div.torneos {
+margin-top: 90px;
+margin-left: 20px;
+margin-right: 20px;
+padding: 30px;
+}
+
+/* Encabezado del juego */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+/* Subtítulo */
+h2 {
+  text-align: center;
+  color: #d90d0d;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Lista de torneos */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0;
+}
+
+li:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+li{
+ 
+}
+li strong {
+  color: #34495e;
+  font-size: 1.2rem;
+}
+
+span{
+  color: black;
+}
+
+/* Cargando y error */
+div.loading,
+div.error {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #e74c3c;
+  padding: 1rem;
+  background: #fbeaea;
+  border: 1px solid #e0b4b4;
+  border-radius: 8px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  div {
+      padding: 1.5rem;
+  }
+  h1 {
+      font-size: 2rem;
+  }
+  h2 {
+      font-size: 1.5rem;
+  }
+  li {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+}

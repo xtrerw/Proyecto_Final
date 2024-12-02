@@ -106,7 +106,7 @@ app.get('/torneos/:juegoId', async (req, res) => {
     }
 });
 
-
+// ruta para crear torneo
 app.post('/crearTorneo', async (req, res) => {
     try {
         console.log('Datos recibidos en el backend:', req.body); // Log para ver los datos recibidos
@@ -137,7 +137,7 @@ app.post('/crearTorneo', async (req, res) => {
 
         const nuevoTorneo = new ServerMod.TorneosModulo({
             tipoTorneo,
-            tipoJuego: juego._id, // Asignar el ObjectId del juego encontrado
+            tipojuego: juego._id, // Asignar el ObjectId del juego encontrado
             fecha: fechaConvertida, // Usa el objeto Date
         });
 

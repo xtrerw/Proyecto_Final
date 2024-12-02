@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./PageUsuario.css";
+import "./PageTorneosJuego.css";
 
 const PageTorneosJuego = () => {
   const { juegoId } = useParams(); // Obtén el ID del juego desde la URL
@@ -54,7 +54,8 @@ const PageTorneosJuego = () => {
   }
 
   return (
-    <div>
+    <main>
+    <div className="torneos">
       <h1>{juego.nombre}</h1> {/* Nombre del juego */}
       <h2>Torneos disponibles</h2>
       {torneos.length === 0 ? (
@@ -63,12 +64,13 @@ const PageTorneosJuego = () => {
         <ul>
           {torneos.map((torneo) => (
             <li key={torneo._id}>
-              <strong>{torneo.tipoTorneo}</strong> - Fecha: {new Date(torneo.fecha).toLocaleDateString()}
+              <strong>{torneo.tipoTorneo}</strong> - <span>Fecha: {new Date(torneo.fecha).toLocaleDateString()}</span>
             </li>
           ))}
         </ul>
       )}
     </div>
+    </main>
   );
 };
 
