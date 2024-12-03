@@ -55,7 +55,7 @@
 
 
 /* For screens smaller than 992px */
-@media (max-width: 1024px) {
+@media (max-width: 1280px) {
     .proceso {
       width: 300px;
     }
@@ -74,9 +74,9 @@
   }
   
   /* For screens smaller than 768px */
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .proceso {
-      width: 300px;
+      width: 250px;
     }
   
     .proceso > img {

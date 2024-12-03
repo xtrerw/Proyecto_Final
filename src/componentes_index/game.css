@@ -55,3 +55,18 @@
         height: 30px;
     }
 }
+@media (max-width:900px) {
+    .games{
+        width: 250px;
+        height: 150px;
+    }
+    .games>img{
+        width: 250px;
+        height: 150px;
+    }
+    .back,.next{
+        font-size: 1rem;
+        width: 20px;
+        height: 20px;
+    }
+}
