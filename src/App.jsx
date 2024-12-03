@@ -4,7 +4,9 @@ import Navbar from './componentes/Navbar';
 import { Route, Routes } from 'react-router-dom';
 import Juegos from './PageJuegos';
 import Home from './PageHome';
-import Torneos from './PageTorneos';
+import Torneos from './PageTorneosJuego';
+import PageTorneosJuego from './PageTorneosJuego';
+import PageDetallesTorneo from './pageDetallesTorneo';
 import Tienda from './PageTienda';
 import Noticias from './PageNoticias';
 import Registro from './PageRegistro';
@@ -87,6 +89,8 @@ function App() {
         <Route path='/' element={<Home/>}/>
         <Route path="/Juegos" element={<Juegos/>}/>
         <Route path="/Juegos/:id" element={<Torneos/>}/>
+        <Route path="/torneos/:juegoId" element={<PageTorneosJuego />} />
+        <Route path="/torneos/:torneoId" element={<PageDetallesTorneo />} />
         <Route path="/Noticias" element={<Noticias/>}/>
         <Route path="/Registro" element={<Registro/>}/>
         <Route path='/Administrador' element={<Admin/>}/>

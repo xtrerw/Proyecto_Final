@@ -59,13 +59,13 @@ const Juegos = () => {
   const listToShow = () => {
     if (juegosFiltrados.length > 0) {
       return juegosFiltrados.map((juego, index) => (
-        <Link to={`${juego._id}`} key={index} className="card">
-          <img src={`../${juego.imagen}`} alt="Card" />
+        <Link to={`/torneos/${juego._id}`} key={index} className="card">
+         <img src={`../${juego.imagen}`} alt="Card" />
         </Link>
       ));
     } else {
       return juegos.map((juego, index) => (
-        <Link to={`${juego._id}`} key={index} className="card">
+        <Link to={`/torneos/${juego._id}`} key={index} className="card">
           <img src={`../${juego.imagen}`} alt="Card" />
         </Link>
       ));

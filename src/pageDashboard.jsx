@@ -125,7 +125,7 @@ const Juegos = () => {
             >
               <div className="torneo-card">
                 <h3>{torneo.tipoTorneo}</h3>
-                <p>Juego: {torneo.tipoJuego}</p>
+                <p>Juego: {torneo.tipojuego}</p>
                 <p>Fecha: {new Date(torneo.fecha).toLocaleDateString()}</p>
               </div>
             </Link>

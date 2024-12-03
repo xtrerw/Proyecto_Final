@@ -10,7 +10,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url2, {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -77,15 +77,16 @@ const equiposSchema = new mongoose.Schema({
 const torneoSchema = new mongoose.Schema({
     tipoTorneo: String,
     fecha: Date,
+    tipojuego: { type: mongoose.Schema.Types.ObjectId, ref: 'Juego' }, // Referencia al juego
     equipos: [
-      {
-        equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipo' }, // Referencia al modelo Equipos
-        puntos: { type: Number, default: 0 }, // Puntos del equipo en este torneo
-      }
-    ]
-  });
-  
-  const TorneosModulo = mongoose.model("Torneo", torneoSchema);
+        {
+            equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipo' },
+            puntos: { type: Number, default: 0 },
+        },
+    ],
+});
+
+const TorneosModulo = mongoose.model("Torneo", torneoSchema);
 
 
 // Noticias
@@ -720,7 +721,7 @@ const crearTorneosPorCadaJuego = async () => {
                 // Crear el nuevo torneo con los equipos asociados
                 const nuevoTorneo = {
                     equipos: equipos.map((equipo) => equipo._id), // Usar los IDs de los equipos
-                    tipoJuego: juego._id, // Referencia al ID del juego
+                    tipojuego: juego._id, // Referencia al ID del juego
                     fecha: new Date().toISOString().split('T')[0], // Fecha actual
                     tipoTorneo: 'Torneo Estándar', // Tipo de torneo por defecto
                 };

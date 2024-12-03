@@ -5,6 +5,8 @@ import cors from "cors";
 import session from "express-session";
 import { createHash } from "crypto";
 import models from './server.js';
+import mongoose from 'mongoose';
+
 const { TorneosModulo } = models;
 const { EquiposModulo } = models;
 const hashpwd=(pwd)=>{
@@ -55,7 +57,56 @@ app.get('/torneos', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+app.get('/juegos/:juegoId', async (req, res) => {
+    const { juegoId } = req.params;  // Captura el juegoId desde la URL
+    try {
+        // Buscar el juego por su ID
+        const juego = await ServerMod.JuegoModelo.findById(juegoId);
 
+        if (!juego) {
+            return res.status(404).json({ error: 'Juego no encontrado' });
+        }
+
+        res.json(juego);  // Responde con el juego encontrado
+    } catch (error) {
+        console.error('Error al obtener el juego:', error);
+        res.status(500).json({ error: 'Error en el servidor al obtener el juego' });
+    }
+});
+
+// Ruta para obtener los torneos de un juego específico
+// Ruta para obtener los torneos de un juego específico
+app.get('/torneos/:juegoId', async (req, res) => {
+    const { juegoId } = req.params;
+    console.log("ID del juego recibido:", juegoId);
+
+    try {
+        // Verificar si el juegoId es un ObjectId válido
+        if (!mongoose.Types.ObjectId.isValid(juegoId)) {
+            return res.status(400).json({ error: 'ID de juego inválido' });
+        }
+
+        // Convertir el juegoId a ObjectId
+        const objectId = new mongoose.Types.ObjectId(juegoId);
+
+        // Buscar los torneos cuyo tipoJuego coincide con juegoId
+        const torneos = await TorneosModulo.find({ tipojuego: objectId })  // Aquí se usa 'tipojuego'
+            .populate('tipojuego', 'nombre');  // Aquí también se usa 'tipojuego'
+
+        console.log('Torneos encontrados:', torneos); // Verifica los torneos encontrados
+
+        if (!torneos || torneos.length === 0) {
+            return res.status(404).json({ error: 'No se encontraron torneos para este juego' });
+        }
+
+        res.json(torneos);
+    } catch (error) {
+        console.error('Error al obtener los torneos:', error);
+        res.status(500).json({ error: 'Error en el servidor al obtener torneos' });
+    }
+});
+
+// ruta para crear torneo
 app.post('/crearTorneo', async (req, res) => {
     try {
         console.log('Datos recibidos en el backend:', req.body); // Log para ver los datos recibidos
@@ -86,7 +137,7 @@ app.post('/crearTorneo', async (req, res) => {
 
         const nuevoTorneo = new ServerMod.TorneosModulo({
             tipoTorneo,
-            tipoJuego: juego._id, // Asignar el ObjectId del juego encontrado
+            tipojuego: juego._id, // Asignar el ObjectId del juego encontrado
             fecha: fechaConvertida, // Usa el objeto Date
         });
 
@@ -135,19 +186,20 @@ app.put('/torneo/:torneoId/equipos/:equipoId/puntos', async (req, res) => {
 app.get('/torneo/:id', async (req, res) => {
     try {
       const torneo = await TorneosModulo.findById(req.params.id)
-        .populate('equipos.equipo')  // Esto hace el populate de los equipos
+        .populate('equipos.equipo')  // Si los equipos son una referencia a otros documentos
         .exec();
   
       if (!torneo) {
-        return res.status(404).json({ message: 'Torneo no encontrado' });
+        return res.status(404).json({ error: 'Torneo no encontrado' });
       }
   
-      res.json(torneo);  // Devolver los detalles del torneo
+      res.json(torneo);  // Responde con el torneo encontrado
     } catch (error) {
       console.error('Error al obtener el torneo:', error);
       res.status(500).json({ message: 'Error al obtener los detalles del torneo' });
     }
   });
+  
   
 // Ruta para eliminar un equipo de un torneo
 app.delete('/torneo/:torneoId/equipos/:equipoId', async (req, res) => {
