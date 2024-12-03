@@ -28,6 +28,17 @@ a{
     font-size: 18px;
   }
 }
+@media (max-width: 900px ) {
+  h1{
+    font-size: 30px;
+  }
+  h2{
+    font-size: 20px;
+  }
+  p{
+    font-size: 10px;
+  }
+}
 .not-found{
   display: flex;
   flex-direction: column;

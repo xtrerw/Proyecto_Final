@@ -49,3 +49,12 @@
         width: 400px;
     }
 }
+@media (max-width:900px) {
+    .top-premio>img{
+        width: 250px;
+    }
+    .btn-top-back,.btn-top-next{
+        top: 52%;
+        font-size: 40px;
+    }
+}
