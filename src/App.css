@@ -36,10 +36,10 @@ a{
     font-size: 20px;
   }
   p{
-    font-size: 10px;
+    font-size: 20px;
   }
 }
-.not-found{
+/* .not-found{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,4 +53,4 @@ a{
 .not-found>p{
   color: var(--default-color3);
   text-transform: lowercase;
-}
+} */

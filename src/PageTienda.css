@@ -133,6 +133,11 @@
     font-size: 15px;
     color: #fff;
 }
+@media (max-width:1700px) {
+    .productos{
+        grid-template-columns: repeat(4,auto);
+    }
+}
 @media (max-width:1300px) {
     .productos{
         grid-template-columns: repeat(3,auto);
