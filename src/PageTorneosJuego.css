@@ -13,7 +13,7 @@ padding: 30px;
 }
 
 /* Encabezado del juego */
-h1 {
+.torneos>h1 {
   text-align: center;
   color: #2c3e50;
   font-size: 2.5rem;
@@ -22,7 +22,7 @@ h1 {
 }
 
 /* Subtítulo */
-h2 {
+.torneos>h2 {
   text-align: center;
   color: #d90d0d;
   font-size: 1.8rem;
@@ -48,9 +48,9 @@ li strong {
   font-size: 1.2rem;
 }
 
-span{
+/* span{
   color: black;
-}
+} */
 
 .boton {
   color: white;
