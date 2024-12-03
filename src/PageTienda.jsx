@@ -85,6 +85,12 @@ import { enviarPtos } from './actions/action'
                 body: JSON.stringify({
                   id: propsPerfil._id,
                   ptos: newResto,
+                  carrito: cartItems.map(item => ({
+                    id: item._id,
+                    nombre: item.nombre,
+                    precio: item.precio,
+                    cantidad: item.cantidad,
+                  }))
                 }),
               });
         

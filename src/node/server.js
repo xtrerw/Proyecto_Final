@@ -10,7 +10,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url, {
+mongoose.connect(url2, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -51,12 +51,7 @@ const jugadoresSchema = new mongoose.Schema({
     contraseña: String,
     ptos:Number,
     img: String,
-    carrito: [{
-        productoNombre: String,
-        cantidad: Number,
-        precio: Number,
-        total: Number
-    }]
+    carrito: []
 });
 const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 

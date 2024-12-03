@@ -311,11 +311,11 @@ app.use(session({
   const actualizarPtos= async(req,res)=>{
     try {
         //conseguir cuerpo de peticiones
-        const {id,ptos}=req.body
+        const {id,ptos,carrito}=req.body
         //actualizar objetivo correspondiente por id
         const actualiza= await ServerMod.JugadorModulo.findByIdAndUpdate(
             id,
-            {ptos: ptos},
+            { ptos, carrito }, 
             {new :true}
         );
         if (actualiza) {
