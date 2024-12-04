@@ -24,7 +24,8 @@ import { enviarPtos } from './actions/action'
         const [pobre,setPobre]=useState('')
         //para actualizar los puntos en bd
         const [total,setTotal]=useState(0)
-
+        //lista de los productos
+        const [pedido,setPedido]=useState([]);
 
         useEffect(()=>{
             fetch('http://localhost:3001/tienda')
@@ -97,7 +98,7 @@ import { enviarPtos } from './actions/action'
               const result = await response.json();
         
               if (response.ok) {
-                console.log("Actualización exitosa:", result.ptos);
+                setPedido(result.carrito)
                 setResto(newResto);
                 dispatch(enviarPtos(newResto)); // actualizar redux
                 setTotal(0);
@@ -165,13 +166,20 @@ import { enviarPtos } from './actions/action'
                   <p className='factura-infor'>El carrito está vacío</p>
                 )}
                 <p className='factura-advi'>{pobre}</p>
+                <div className='lista-pedido'>
+                    {pedido.map((item, index)=>(
+                        <p key={index} >Ya compras {item.cantidad} {item.nombre} </p>
+                      ))}
+                 </div>
             </div>
             <button className='btn-compra btn btn-primary'
             onClick={canjear}
             >canjear</button> 
+            
             </motion.div>
         </motion.div>
         :null}
+
 
 
 

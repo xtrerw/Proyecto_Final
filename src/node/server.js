@@ -633,7 +633,7 @@ const nuevosProductos = [
         nombre: 'Secretlab TITAN Evo',
         img: 'src/img/producto6.png',
         precio: 200,
-        caracteristica: 'Más comodidad. Mayor personalización. Durabilidad excepcional. Con innovaciones de diseño respaldadas por la investigación y pensadas para un rendimiento sin igual, la Secretlab TITAN Evo es la primera silla gamer de su clase. Mejore su experiencia gaming con una ergonomía de nivel profesional: la elección de los mejores gamers y profesionales de todo el mundo.',
+        caracteristica: 'Más comodidad. Mayor personalización. Durabilidad excepcional.',
         tipoJuego: 'League of Legends',
         clasificacion: 'Periféricos',
         altura: 160,

@@ -133,6 +133,12 @@
     font-size: 15px;
     color: #fff;
 }
+/* lista de pedido  */
+.lista-pedido,.lista-pedido>p{
+    color: var(--exito-color);
+    font-size: 10px;
+    text-transform: capitalize;
+}
 @media (max-width:1700px) {
     .productos{
         grid-template-columns: repeat(4,auto);
