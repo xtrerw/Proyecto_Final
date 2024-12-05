@@ -198,15 +198,15 @@ const PageUsuario = (propsUser) => {
                 }}
                 ></motion.div>
             </motion.div>
-            <button onClick={obtenerPedido}>
+                <button className='btn-ver' onClick={obtenerPedido}>
                     ver pedido
                 </button>
                 {pedido.map((item, index) => (
-                <li key={index}>
+                <div key={index} className='ver-pedido'>
                     <p>Nombre: {item.nombre}</p>
                     <p>Precio: {item.precio}</p>
                     <p>Cantidad: {item.cantidad}</p>
-                </li>
+                </div>
             ))}
         </section>
     </main>
