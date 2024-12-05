@@ -424,6 +424,31 @@ app.use(session({
         res.status(500).json({ error: 'Error del servidor' });
     }
   }
+  //conseguir carrito de usuario
+  app.get('/', async (req, res) => {
+    try {
+        const { id } = req.query; // consulta id del servidor
+
+        if (!id) {
+            return res.status(400).json({ error: "El ID del usuario es requerido" });
+        }
+
+        // conseguir carrito
+        const user = await ServerMod.JugadorModulo.findById(id).select('carrito');
+
+        // si no tiene usuario
+        if (!user) {
+            return res.status(404).json({ error: "Usuario no encontrado" });
+        }
+
+        // devolver los datos
+        res.status(200).json(user.carrito);
+    } catch (error) {
+        console.error("Error en el servidor:", error);
+        res.status(500).json({ error: "Error del servidor" });
+    }
+});
+
   //construye route para que no crea api repetidamente
   app.route('/')
     .post(iniciar)

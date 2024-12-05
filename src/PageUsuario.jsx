@@ -6,11 +6,22 @@ import { actualizarDatos } from './actions/action'
 import axios from 'axios'
 
 const PageUsuario = (propsUser) => {
+<<<<<<< HEAD
     const [lock1, setLock1] = useState(true)
     const [lock2, setLock2] = useState(true)
 
     const [form, setForma] = useState({
         email: propsUser.email,
+=======
+    //aparece la contraseña
+    const[lock1,setLock1]=useState(true)
+    const[lock2,setLock2]=useState(true)
+    //conseguir los pedidios del usuario
+    const [pedido,setPedido]=useState([]);
+    //introduce informaciones de nuevo
+    const[form,setForma]=useState({
+        email:propsUser.email,
+>>>>>>> 74b216d666a8aa01e5f1fb08dc3290ac83127deb
         pwd: "",
         pwdConfirma: "",
         direccion: propsUser.direccion,
@@ -81,6 +92,7 @@ const PageUsuario = (propsUser) => {
         window.location.href = '/Registro';
     };
 
+<<<<<<< HEAD
     // Nuevo estado para los equipos
     const [equipos, setEquipos] = useState([])
     const [equipoActual, setEquipoActual] = useState(null)
@@ -97,6 +109,30 @@ const PageUsuario = (propsUser) => {
                 console.error('Error al obtener equipos:', error)
             }
         }
+=======
+    const obtenerPedido = async()=>{
+        console.log(propsUser.id);
+        
+        try {
+           
+           
+            //metodo get
+            const response = await fetch(`http://localhost:3001/?id=${propsUser.id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const result= await response.json()
+           
+                setPedido(result)
+           
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
+>>>>>>> 74b216d666a8aa01e5f1fb08dc3290ac83127deb
 
         fetchEquipos()
     }, [propsUser.id])
@@ -211,6 +247,7 @@ const PageUsuario = (propsUser) => {
                             <p>Estás en el equipo: <strong>{equipoActual.equipo}</strong></p>
                             <img src={equipoActual.img} alt={equipoActual.equipo} width="100" />
                         </div>
+<<<<<<< HEAD
                     ) : (
                         <p>No estás en ningún equipo.</p>
                     )}
@@ -233,6 +270,64 @@ const PageUsuario = (propsUser) => {
             </section>
         </main>
     )
+=======
+                    </div>
+                    <div className='item-usuario'>
+                        <div className='usuario-iniciar'>
+                            <i style={{ cursor:'pointer'}} 
+                            className={
+                                lock1? 'bx bx-lock':'bx bx-lock-open'
+                            } 
+                            onClick={()=>setLock1(!lock1)}></i>
+                            <input type={
+                                lock1? 'password':'text'
+                            } name='pwd' value={form.pwd} onChange={handleChange} placeholder='Estabelece tu contraseña nueva'/>
+                        </div>
+                        <div className='usuario-iniciar'>
+                            <i style={{ cursor:'pointer'}} 
+                            className={
+                                lock2? 'bx bx-lock':'bx bx-lock-open'
+                            } 
+                            onClick={()=>setLock2(!lock2)}></i>
+                            <input type={
+                                lock2? 'password':'text'
+                            } name='pwdConfirma' value={form.pwdConfirma} onChange={handleChange} placeholder='Confirma tu contraseña'
+                            />
+                        </div>
+                        <div className='usuario-btns'>
+                            <button type="submit" className='usuario-btn'>Guardar</button>
+                            <button type="button" className='usuario-btn'onClick={handleLogout}>cerrar sesión</button>
+                        </div>
+                        <p className='error-modifica' style={errorMSG.tieneError}>{error}</p>
+                    </div>
+                </form>
+                <motion.div className='usuario-img' 
+                style={{
+                    backgroundImage: `url(${propsUser.img})`    
+                }}
+                animate={{
+                    boxShadow:["0px 0px 5px #fff","0px 0px 20px #fff","0px 0px 5px #fff"]
+                }}
+                transition={{
+                    repeat:Infinity,
+                    duration:3,                  
+                }}
+                ></motion.div>
+            </motion.div>
+                <button className='btn-ver' onClick={obtenerPedido}>
+                    ver pedido
+                </button>
+                {pedido.map((item, index) => (
+                <div key={index} className='ver-pedido'>
+                    <p>Nombre: {item.nombre}</p>
+                    <p>Precio: {item.precio}</p>
+                    <p>Cantidad: {item.cantidad}</p>
+                </div>
+            ))}
+        </section>
+    </main>
+  )
+>>>>>>> 74b216d666a8aa01e5f1fb08dc3290ac83127deb
 }
 
 export default PageUsuario;

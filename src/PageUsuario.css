@@ -268,8 +268,20 @@
 .error-modifica {
     font-size: 1rem;
 }
+<<<<<<< HEAD
 
 /* Responsivo */
+=======
+/* ver pedido */
+.btn-ver{
+    background-color: var(--main-color);
+    margin: 10px 0;
+}
+.ver-pedido>p{
+    font-size: 20px;
+}
+/* responsive */
+>>>>>>> 74b216d666a8aa01e5f1fb08dc3290ac83127deb
 @media (max-width: 1400px) {
     .usuario-infor {
         width: 550px;
