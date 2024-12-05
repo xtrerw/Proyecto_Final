@@ -7,6 +7,8 @@ const PageUsuario = (propsUser) => {
     //aparece la contraseña
     const[lock1,setLock1]=useState(true)
     const[lock2,setLock2]=useState(true)
+    //conseguir los pedidios del usuario
+    const [pedido,setPedido]=useState([]);
     //introduce informaciones de nuevo
     const[form,setForma]=useState({
         email:propsUser.email,
@@ -87,7 +89,28 @@ const PageUsuario = (propsUser) => {
         window.location.href = '/Registro'; // Asegúrate de tener la ruta '/login' configurada en tu enrutador
     };
 
-
+    const obtenerPedido = async()=>{
+        console.log(propsUser.id);
+        
+        try {
+           
+           
+            //metodo get
+            const response = await fetch(`http://localhost:3001/?id=${propsUser.id}`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+            const result= await response.json()
+           
+                setPedido(result)
+           
+        } catch (error) {
+            console.log(error);
+            
+        }
+    }
 
   return (
     <main className='usuario'>
@@ -175,6 +198,16 @@ const PageUsuario = (propsUser) => {
                 }}
                 ></motion.div>
             </motion.div>
+            <button onClick={obtenerPedido}>
+                    ver pedido
+                </button>
+                {pedido.map((item, index) => (
+                <li key={index}>
+                    <p>Nombre: {item.nombre}</p>
+                    <p>Precio: {item.precio}</p>
+                    <p>Cantidad: {item.cantidad}</p>
+                </li>
+            ))}
         </section>
     </main>
   )
