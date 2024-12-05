@@ -10,7 +10,7 @@ const nombreBD = "OnlyGG"; // Nombre de la base de datos
 const url= `mongodb+srv://root:root@cluster0.ympghld.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Daza
 const url2= `mongodb+srv://root:root@cluster0.3emmgzn.mongodb.net/${nombreBD}?retryWrites=true&w=majority&appName=Cluster0`;// para Wei
 
-mongoose.connect(url2, {
+mongoose.connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 }).then(() => {
@@ -45,14 +45,16 @@ const agregarDocumentoSiNoExiste = (Modelo, nuevoDocumento) => {
 
 // Jugadores
 const jugadoresSchema = new mongoose.Schema({
-    nombreUsuario:String,
-    dir:String,
-    correo: String,
-    contraseña: String,
-    ptos:Number,
-    img: String,
-    carrito: []
+  nombreUsuario: String,
+  dir: String,
+  correo: String,
+  contraseña: String,
+  ptos: Number,
+  img: String,
+  carrito: [],
+  equipo: { type: mongoose.Schema.Types.ObjectId, ref: 'Equipo' }, // Nueva referencia al equipo
 });
+
 const JugadorModulo = mongoose.model("jugadores", jugadoresSchema);
 
 // Esquema de Equipos

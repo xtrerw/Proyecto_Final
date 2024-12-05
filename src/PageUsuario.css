@@ -1,17 +1,26 @@
-.usuario{
+.usuario {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Se asegura de que los elementos estén en una columna */
+    justify-content: flex-start;
     align-items: center;
     background-image: url("../src/img/lands.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     gap: 30px;
+    padding: 20px; /* Agregar un poco de relleno para evitar que los elementos toquen los bordes */
+    max-width: 100%; /* Asegura que no se salga del contenedor */
+    box-sizing: border-box; /* Para que el padding no afecte el tamaño */
 }
-.usuario-tarjeta{
+
+.usuario-tarjeta {
     position: relative;
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos dentro se apilen verticalmente */
 }
-.usuario-nombre{
+
+.usuario-nombre {
     width: 300px;
+    margin-top: 50%;
     height: 60px;
     background: var(--main-color);
     border-radius: 15px;
@@ -21,37 +30,75 @@
     justify-content: center;
     font-size: 30px;
 }
-/* container de usuario-iniciar y usuario-img */
-.usuario-infor{
-    width: 800px;
-    height: 500px;
+/* contenedor de usuario-equipos */
+.usuario-equipos {
+    width: 800px; /* O el tamaño que se ajuste al diseño */
+    max-height: 400px; /* Definir una altura máxima */
+    overflow-y: auto; /* Activa el scroll vertical */
+    margin-top: 20px; /* Separa un poco del contenido superior */
+    background-color: #cdc0c0;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px #3e3e3e;
+    padding: 10px; /* Espacio interno para que no se vea apretado */
+}
+
+/* Estilo de la lista de equipos dentro de usuario-equipos */
+.lista-equipos {
+    display: flex;
+    flex-direction: column; /* Para que cada equipo esté en su propia fila */
+    gap: 10px; /* Separación entre los equipos */
+    color: var(--hoverbtn);
+    cursor: pointer;
+}
+
+/* Item de cada equipo */
+.lista-equipos > .lista-equipo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 10px; /* Opcional, para hacer los elementos más agradables */
+    background-color: #f4f4f4; /* Fondo suave para cada equipo */
+}
+
+.lista-equipo > img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.bx-right-arrow-alt {
+    font-size: 20px;
+}
+
+/* Ajustes para la parte de usuario-infor */
+.usuario-infor {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 50%;
+    height: auto; /* Deja que la altura se ajuste automáticamente */
     background-image: url("../src/img/bg-user.png");
     background-size: cover;
     border-radius: 10px;
     clip-path: path("M 340,0 Q310,0  310,30 L310,50 Q310,65 290,70 L15,70 Q0,75 0,90 L0,500 L800,500 L800,0 Z");
     position: relative;
     display: flex;
+    flex-direction: column; /* Esto asegura que los elementos dentro de infor se apilen correctamente */
+    justify-content: center;
     align-items: center;
+    overflow: hidden; /* Oculta cualquier desbordamiento interno */
 }
-/* correo, pwd, username */
-.tus-datos{
-    display: flex;
-    
-}
-.item-usuario{
+
+
+/* Tus datos */
+.tus-datos {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    gap: 10px;
 }
-.item-usuario>h2{
-    color: var(--hoverbtn);
-    filter: drop-shadow(0 0 1px);
-    font-weight: bolder;
-    text-transform: uppercase;
-    font-size: 20px;
-}
+
 /* menu */
-.menu{
+.menu {
     position: absolute;
     top: 15px;
     right: 170px;
@@ -60,13 +107,13 @@
     border-radius: 10px;
     background: #fff;
     box-shadow: 0px 0px 5px #3e3e3e;
-
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
+
 /* item */
-.item{
+.item {
     width: 80px;
     height: 30px;
     border-radius: 5px;
@@ -78,33 +125,37 @@
     justify-content: center;
     cursor: pointer;
 }
-/* estabelecer nueva contraseña */
-.usuario-iniciar{
+
+/* Input para cambiar la contraseña */
+.usuario-iniciar {
+   
     width: 300px;
     height: 50px;
     background: #fff;
     margin: 10px 30px;
     border-radius: 10px;
     color: #08213b;
-
     display: flex;
     align-items: center;
     gap: 10px;
     padding: 0 10px;
 }
-.usuario-iniciar>input{
+
+.usuario-iniciar>input {
     outline: none;
     border: none;
     width: 100%;
     font-size: 15px;
 }
+
 /* btn submit */
-.usuario-btns{
+.usuario-btns {
     display: flex;
     gap: 30px;
     margin: 10px 30px;
 }
-.usuario-btn{
+
+.usuario-btn {
     width: 150px;
     height: 50px;
     border-radius: 10px;
@@ -113,15 +164,18 @@
     color: #fff;
     text-transform: capitalize;
 }
-.usuario-btn:hover{
+
+.usuario-btn:hover {
     background: var(--hoverbtn);
 }
-.usuario-btn:active{
+
+.usuario-btn:active {
     background: var(--default-color2);
     color: var(--hoverbtn);
 }
+
 /* img de perfil */
-.usuario-img{
+.usuario-img {
     width: 100px;
     height: 100px;
     background-size: cover;
@@ -131,10 +185,11 @@
     top: 15px;
     border-radius: 20px;
     border: 5px solid #fff;
-    box-shadow:0px 0px 5px #fff;
+    box-shadow: 0px 0px 5px #fff;
 }
+
 /* img de equipos */
-.equipo-img{
+.equipo-img {
     width: 100px;
     height: 100px;
     background-size: cover;
@@ -143,26 +198,31 @@
     margin: 10px;
     box-shadow: 0 0 5px #000;
 }
-.equipo-img>p{
+
+.equipo-img>p {
     font-size: 10px;
     color: darkcyan;
 }
-/* no tienes equipos */
-.sin-equipo{
+
+/* No tienes equipos */
+.sin-equipo {
     display: flex;
     flex-direction: column;
     gap: 10px;
     align-items: center;
 }
-.elegir-equipo{
-   overflow: scroll;
-   width: 270px;
-   height: 300px;
-   background-color: #fff;
-   border-radius: 20px;
-   box-shadow: 0px 0px 5px #3e3e3e;
+
+/* Elegir equipo */
+.elegir-equipo {
+    overflow-y: auto; /* Añadimos scroll vertical */
+    width: 270px;
+    height: 300px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0px 0px 5px #3e3e3e;
 }
-.lista-equipo{
+
+.lista-equipo {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -170,22 +230,26 @@
     color: var(--hoverbtn);
     cursor: pointer;
 }
-.lista-equipo>img{
+
+.lista-equipo>img {
     height: 40px;
     width: 40px;
     border-radius: 50%;
 }
-.bx-right-arrow-alt{
+
+.bx-right-arrow-alt {
     font-size: 20px;
 }
-/* item derecha */
-.usuario-infor2{
+
+/* Contenedor de puntos */
+.usuario-infor2 {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     gap: 10px;
 }
-.usuario-ptos{
+
+.usuario-ptos {
     width: 150px;
     height: 150px;
     background: #08213b;
@@ -195,75 +259,46 @@
     text-align: center;
     box-shadow: 2px 2px 4px var(--default-color4);
 }
-.usuario-ptos>p{
+
+.usuario-ptos>p {
     color: #fff;
 }
-/* mensaje de errror */
-.error-modifica{
+
+/* Mensaje de error */
+.error-modifica {
     font-size: 1rem;
 }
-/* responsive */
+
+/* Responsivo */
 @media (max-width: 1400px) {
-    /* tarjeta */
-    .usuario-infor{
+    .usuario-infor {
         width: 550px;
-        height: 300px;
+        height: auto; /* Ajustamos la altura */
         clip-path: path("M 230,0 Q210,0 210,30 L210,30 Q210,45 195,50 L25,50 Q0,55 0,90 L0,500 L800,500 L800,0 Z");
     }
-    .usuario-nombre{
+
+    .usuario-nombre {
         font-size: 20px;
         width: 200px;
         height: 40px;
     }
-    /* titulo */
-    .item-usuario>h2{
-        font-size: 10px;
-    }
-    /* input */
-    .usuario-iniciar{
-        width: 150px;
-        height: 30px;
-        font-size: 10px;
-        margin: 5px 30px;
-    }
-    .usuario-iniciar>input{
-        font-size: 10px;
-    }
-    /* btn de modificar perfil */
-    .usuario-btn{
-        width: 70px;
-        height: 20px;
-        font-size: 6px;
-        border-radius: 5px;
-    }
-    /* menu y item de menu*/
-    .menu{
-        width: 200px;
-        height: 30px;
-        border-radius: 5px;
-        right: 120px;
-    }
-    .item{
-        width: 60px;
-        height: 25px;
-        font-size: 7px;
-    }
-    /* img de usuario */
-    .usuario-img{
+
+    .usuario-img {
         width: 50px;
         height: 50px;
     }
-    /* img de equipos */
-    .equipo-img{
+
+    .equipo-img {
         width: 50px;
         height: 50px;
     }
-    /* item de derecho */
-    .usuario-ptos{
+
+    .usuario-ptos {
         width: 80px;
         height: 80px;
     }
-    .usuario-ptos>p{
+
+    .usuario-ptos>p {
         font-size: 10px;
     }
 }

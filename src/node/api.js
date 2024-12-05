@@ -57,6 +57,7 @@ app.get('/torneos', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+
 app.get('/juegos/:juegoId', async (req, res) => {
     const { juegoId } = req.params;  // Captura el juegoId desde la URL
     try {
@@ -226,28 +227,79 @@ app.delete('/torneo/:torneoId/equipos/:equipoId', async (req, res) => {
     }
   });
 
-// API para unirse a un torneo
+// Unirse al torneo (el equipo del jugador se unirá al torneo)
 app.post('/unirseTorneo', async (req, res) => {
+    const { torneoId, jugadorId, equipoId } = req.body;
+  
     try {
-        const { torneoId, userId } = req.body;
-        const torneo = await ServerMod.TorneosModulo.findById(torneoId);
-        const user = await ServerMod.JugadorModulo.findById(userId);
-
-        if (!torneo || !user) {
-            return res.status(404).send('Torneo o usuario no encontrado');
-        }
-
-        if (!torneo.participantes.includes(userId)) {
-            torneo.participantes.push(userId);
-            await torneo.save();
-        }
-
-        res.status(200).send('Unido al torneo con éxito');
+      // Validar que todos los datos estén presentes
+      if (!torneoId || !jugadorId || !equipoId) {
+        return res.status(400).json({ error: 'Datos incompletos: torneoId, jugadorId y equipoId son necesarios.' });
+      }
+  
+      // Verificar que el jugador pertenece al equipo enviado
+      const equipo = await EquiposModulo.findById(equipoId);
+      if (!equipo || !equipo.jugador.includes(jugadorId)) {
+        return res.status(400).json({ error: 'El jugador no pertenece al equipo indicado.' });
+      }
+  
+      // Agregar el equipo al torneo si no está ya registrado
+      const torneo = await TorneosModulo.findById(torneoId);
+      if (!torneo) {
+        return res.status(404).json({ error: 'Torneo no encontrado.' });
+      }
+  
+      // Comprobar si el equipo ya está registrado
+      const equipoYaRegistrado = torneo.equipos.some(e => e.equipo.toString() === equipoId);
+      if (equipoYaRegistrado) {
+        return res.status(400).json({ error: 'El equipo ya está registrado en este torneo.' });
+      }
+  
+      // Agregar el equipo al torneo
+      torneo.equipos.push({ equipo: equipoId, puntos: 0 });
+      await torneo.save();
+  
+      res.json({ message: 'Equipo unido al torneo exitosamente.', torneo });
     } catch (error) {
-        console.error('Error al unirse al torneo:', error);
-        res.status(500).json({ error: 'Error en el servidor' });
+      console.error('Error al unirse al torneo:', error);
+      res.status(500).json({ error: 'Error interno del servidor.' });
     }
-});
+  });
+// Ruta para unir equipo a un torneo
+app.post("/unirEquipoTorneo", async (req, res) => {
+    const { torneoId, equipoId } = req.body;
+  
+    try {
+      // Buscar el torneo por ID
+      const torneo = await TorneosModulo.findById(torneoId).populate('equipos.equipo');
+  
+      if (!torneo) {
+        return res.status(404).json({ error: "Torneo no encontrado." });
+      }
+  
+      // Buscar el equipo por ID
+      const equipo = await EquiposModulo.findById(equipoId);
+  
+      if (!equipo) {
+        return res.status(404).json({ error: "Equipo no encontrado." });
+      }
+  
+      // Verificar si el equipo ya está inscrito en el torneo
+      if (torneo.equipos.some((e) => e.equipo.toString() === equipoId)) {
+        return res.status(400).json({ error: "El equipo ya está inscrito en este torneo." });
+      }
+  
+      // Unir el equipo al torneo
+      torneo.equipos.push({ equipo: equipoId, puntos: 0 });
+      await torneo.save();
+  
+      // Responder con el torneo actualizado
+      res.json(torneo);
+    } catch (err) {
+      console.error("Error al unir equipo al torneo:", err);
+      res.status(500).json({ error: "Hubo un error al procesar la solicitud." });
+    }
+  });
 // API de tramito del registro
 app.post('/registro', async (req, res) => {
     try {
@@ -272,6 +324,48 @@ app.post('/registro', async (req, res) => {
         res.status(500).json({ error: 'Error en el servidor' });
     }
 });
+// Ruta para unirse a un equipo
+app.post('/unirseEquipo', async (req, res) => {
+    const { jugadorId, equipoId } = req.body;
+
+    try {
+        // Verificar que los datos sean correctos
+        if (!jugadorId || !equipoId) {
+            return res.status(400).json({ error: 'Datos incompletos: jugadorId y equipoId son necesarios.' });
+        }
+
+        // Verificar si el jugador existe
+        const jugador = await ServerMod.JugadorModulo.findById(jugadorId);
+        if (!jugador) {
+            return res.status(404).json({ error: 'Jugador no encontrado.' });
+        }
+
+        // Verificar si el equipo existe
+        const equipo = await ServerMod.EquiposModulo.findById(equipoId);
+        if (!equipo) {
+            return res.status(404).json({ error: 'Equipo no encontrado.' });
+        }
+
+        // Verificar si el jugador ya está en el equipo
+        if (equipo.jugador.includes(jugadorId)) {
+            return res.status(400).json({ error: 'El jugador ya pertenece a este equipo.' });
+        }
+
+        // Agregar el jugador al equipo
+        equipo.jugador.push(jugadorId);
+        await equipo.save();
+
+        // Asignar el equipo al jugador
+        jugador.equipo = equipoId;
+        await jugador.save();
+
+        res.json({ message: 'Jugador unido al equipo exitosamente.', equipo });
+    } catch (error) {
+        console.error('Error al unirse al equipo:', error);
+        res.status(500).json({ error: 'Error en el servidor al unirse al equipo.' });
+    }
+});
+
 //session
 app.use(session({
     secret:'12345',//para guardar id de usuario verificado

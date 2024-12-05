@@ -14,6 +14,11 @@ const Juegos = () => {
     juego: "",
   });
   const [successMessage, setSuccessMessage] = useState("");
+  
+  // Paginación
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5; // Definir cuántos torneos mostrar por página
+
   const state = {
     img: "src/img/bg1.png",
     title: "Dashboard",
@@ -50,6 +55,15 @@ const Juegos = () => {
     fetchTorneos();
     fetchJuegos();
   }, []);
+
+  // Paginación: calcular los torneos que deben mostrarse en la página actual
+  const indexOfLastTorneo = currentPage * itemsPerPage;
+  const indexOfFirstTorneo = indexOfLastTorneo - itemsPerPage;
+  const currentTorneos = torneos.slice(indexOfFirstTorneo, indexOfLastTorneo);
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -108,16 +122,19 @@ const Juegos = () => {
     }
   };
 
+  // Calcular el total de páginas
+  const totalPages = Math.ceil(torneos.length / itemsPerPage);
+
   return (
     <>
-     <TituloPaginas
+      <TituloPaginas
         img={state.img}
         titulo={state.title}
         des={state.description}
       />
       <div className="torneos-activos">
-        {torneos.length > 0 ? (
-          torneos.map((torneo) => (
+        {currentTorneos.length > 0 ? (
+          currentTorneos.map((torneo) => (
             <Link
               key={torneo._id}
               to={`/torneo/${torneo._id}`}
@@ -136,6 +153,31 @@ const Juegos = () => {
         <button className="crear-torneo-btn" onClick={handleOpenModal}>
           Crear Torneo
         </button>
+
+        {/* Paginación */}
+        <div className="pagination">
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            Anterior
+          </button>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={currentPage === index + 1 ? "active" : ""}
+            >
+              {index + 1}
+            </button>
+          ))}
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            Siguiente
+          </button>
+        </div>
       </div>
 
       {isModalOpen && (
